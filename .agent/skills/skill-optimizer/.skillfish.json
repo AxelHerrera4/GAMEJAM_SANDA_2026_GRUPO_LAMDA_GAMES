@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "skill-optimizer",
+  "owner": "miles990",
+  "repo": "claude-domain-skills",
+  "path": "methodology/skill-optimizer/skills/skill-optimizer",
+  "branch": "main",
+  "sha": "c0faf6346f289ead3608caad3b95cfdf7b72a49c",
+  "source": "manual"
+}

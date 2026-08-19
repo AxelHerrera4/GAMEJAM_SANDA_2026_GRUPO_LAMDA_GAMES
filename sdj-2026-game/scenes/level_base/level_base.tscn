@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dfv3el8yufriw"]
+
+[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="1_myc1q"]
+
+[node name="LevelBase" type="Node" unique_id=1588378039]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1063548539]
+
+[node name="GameHud" parent="CanvasLayer" unique_id=155175906 instance=ExtResource("1_myc1q")]

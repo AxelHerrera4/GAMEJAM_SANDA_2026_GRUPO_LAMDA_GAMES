@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://5b7hnaeeb4ni"]
+
+[ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="1_hyk8p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ln6rh"]
+font = ExtResource("1_hyk8p")
+font_size = 48
+
+[node name="Main" type="Control" unique_id=847508946]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=981542302]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -11.5
+offset_right = 43.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "TitleGame"
+label_settings = SubResource("LabelSettings_ln6rh")
