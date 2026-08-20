@@ -22,6 +22,16 @@ shape = SubResource("CircleShape2D_2vina")
 avoidance_enabled = true
 debug_enabled = true
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1558652835]
+[node name="PlayerDetect" type="RayCast2D" parent="." unique_id=634563224]
+scale = Vector2(1.1160451, 3.606442)
+target_position = Vector2(400, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2004232349]
+
+[node name="DebugLabel" type="Label" parent="CanvasLayer" unique_id=709889220]
+top_level = true
+offset_right = 104.0
+offset_bottom = 23.0
+text = "wdaddadawd"
 
 [connection signal="velocity_computed" from="NavAgent" to="." method="_on_nav_agent_velocity_computed"]
