@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dehtibkxxvwjx"]
+
+[ext_resource type="Script" uid="uid://bsx1cri7nx4p5" path="res://scenes/npc/npc.gd" id="1_pcwmf"]
+[ext_resource type="Texture2D" uid="uid://d1txkd4q0gs4a" path="res://assets/for_test/images/soldier1_gun.png" id="1_sspvn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2vina"]
+radius = 15.112448
+
+[node name="Npc" type="Area2D" unique_id=1290929920]
+collision_layer = 2
+script = ExtResource("1_pcwmf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1341454003]
+texture = ExtResource("1_sspvn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1059482276]
+position = Vector2(-7, 0)
+scale = Vector2(1.324893, 1.400001)
+shape = SubResource("CircleShape2D_2vina")
+
+[node name="NavAgent" type="NavigationAgent2D" parent="." unique_id=1306274218]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1558652835]
+
+[connection signal="velocity_computed" from="NavAgent" to="." method="_on_nav_agent_velocity_computed"]
