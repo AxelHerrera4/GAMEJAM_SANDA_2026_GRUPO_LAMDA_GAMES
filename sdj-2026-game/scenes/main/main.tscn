@@ -1,10 +1,24 @@
 [gd_scene format=3 uid="uid://5b7hnaeeb4ni"]
 
 [ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="1_hyk8p"]
+[ext_resource type="Script" uid="uid://ddrcf57lumi6m" path="res://scenes/main/menu.gd" id="1_k2fmo"]
+[ext_resource type="Texture2D" uid="uid://ds5e0d26tuxtk" path="res://assets/Menu/fontMenu.jpg" id="2_l3cfh"]
+[ext_resource type="AudioStream" uid="uid://cxpyyxaa4af5e" path="res://assets/Music/themeMenu.ogg" id="4_l3cfh"]
+[ext_resource type="AudioStream" uid="uid://bbrppterd3xn7" path="res://assets/SFX/MoveMenu/stepsGlass.ogg" id="5_6q06x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ln6rh"]
 font = ExtResource("1_hyk8p")
 font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_q8iyx"]
+font = ExtResource("1_hyk8p")
+
+[sub_resource type="LabelSettings" id="LabelSettings_gandw"]
+font = ExtResource("1_hyk8p")
+
+[sub_resource type="LabelSettings" id="LabelSettings_n7o7v"]
+font = ExtResource("1_hyk8p")
+font_size = 50
 
 [node name="Main" type="Control" unique_id=847508946]
 layout_mode = 3
@@ -13,19 +27,158 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_k2fmo")
 
-[node name="Label" type="Label" parent="." unique_id=981542302]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2041153587]
+layout_mode = 0
+offset_right = 2816.0
+offset_bottom = 1578.0488
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("2_l3cfh")
+
+[node name="title" type="Label" parent="." unique_id=981542302]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -43.5
-offset_top = -11.5
-offset_right = 43.5
-offset_bottom = 11.5
+offset_left = -317.0
+offset_top = -309.0
+offset_right = 308.0
+offset_bottom = -253.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "TitleGame"
+text = "FRAGMENTADO THE GAME"
 label_settings = SubResource("LabelSettings_ln6rh")
+
+[node name="Button_Play" type="Button" parent="." unique_id=1334373781]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 189.0
+offset_right = 254.0
+offset_bottom = 241.0
+theme_override_fonts/font = ExtResource("1_hyk8p")
+theme_override_font_sizes/font_size = 38
+text = "PLAY"
+
+[node name="Button_Options" type="Button" parent="." unique_id=706581723]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 315.0
+offset_right = 273.0
+offset_bottom = 369.0
+theme_override_fonts/font = ExtResource("1_hyk8p")
+theme_override_font_sizes/font_size = 32
+text = "OPTIONS"
+
+[node name="Button_Credits" type="Button" parent="." unique_id=252954376]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 433.0
+offset_right = 278.0
+offset_bottom = 507.0
+theme_override_fonts/font = ExtResource("1_hyk8p")
+theme_override_font_sizes/font_size = 33
+text = "CREDITS"
+
+[node name="Panel_Credits" type="Panel" parent="." unique_id=1991476954]
+visible = false
+layout_mode = 0
+offset_left = 3.0
+offset_top = 6.0
+offset_right = 1150.0
+offset_bottom = 644.0
+
+[node name="devs" type="Label" parent="Panel_Credits" unique_id=427964542]
+layout_mode = 0
+offset_left = 418.0
+offset_top = 131.0
+offset_right = 720.0
+offset_bottom = 232.0
+text = "DEVELOPERS
+LEONARDO YARANGA
+AXEL HERRERA
+"
+label_settings = SubResource("LabelSettings_q8iyx")
+horizontal_alignment = 1
+
+[node name="others" type="Label" parent="Panel_Credits" unique_id=26810997]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 239.0
+offset_right = 662.0
+offset_bottom = 352.0
+text = "GAME DESIGN
+DELIOS
+
+ART
+MACH21
+
+MUSIC
+ANDY"
+label_settings = SubResource("LabelSettings_gandw")
+horizontal_alignment = 1
+
+[node name="Button_CloseCredits" type="Button" parent="Panel_Credits" unique_id=1027554362]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 544.0
+offset_right = 668.0
+offset_bottom = 602.0
+theme_override_fonts/font = ExtResource("1_hyk8p")
+theme_override_font_sizes/font_size = 33
+text = "CLOSE X"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=2126545304]
+stream = ExtResource("4_l3cfh")
+autoplay = true
+
+[node name="Panel_Options" type="Panel" parent="." unique_id=1161588105]
+visible = false
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 648.0
+
+[node name="Volume" type="Label" parent="Panel_Options" unique_id=575264581]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 81.0
+offset_right = 674.0
+offset_bottom = 162.0
+text = "VOLUME"
+label_settings = SubResource("LabelSettings_n7o7v")
+
+[node name="Button_CloseOptions" type="Button" parent="Panel_Options" unique_id=1269937525]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 543.0
+offset_right = 681.0
+offset_bottom = 613.0
+theme_override_fonts/font = ExtResource("1_hyk8p")
+theme_override_font_sizes/font_size = 24
+text = "CLOSE OPTIONS"
+
+[node name="Slider_Volume" type="HSlider" parent="Panel_Options" unique_id=1797774222]
+layout_mode = 0
+offset_left = 336.99997
+offset_top = 119.00001
+offset_right = 512.67566
+offset_bottom = 202.0
+scale = Vector2(2.8, 2.8)
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Audio_Hover" type="AudioStreamPlayer" parent="." unique_id=2124302440]
+stream = ExtResource("5_6q06x")
+
+[connection signal="mouse_entered" from="Button_Play" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="Button_Play" to="." method="_on_button_play_pressed"]
+[connection signal="mouse_entered" from="Button_Options" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="Button_Options" to="." method="_on_button_options_pressed"]
+[connection signal="mouse_entered" from="Button_Credits" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="Button_Credits" to="." method="_on_button_credits_pressed"]
+[connection signal="pressed" from="Panel_Credits/Button_CloseCredits" to="." method="_on_button_close_credits_pressed"]
+[connection signal="pressed" from="Panel_Options/Button_CloseOptions" to="." method="_on_button_close_options_pressed"]
+[connection signal="value_changed" from="Panel_Options/Slider_Volume" to="." method="_on_slider_volume_value_changed"]

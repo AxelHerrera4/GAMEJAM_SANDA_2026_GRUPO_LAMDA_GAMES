@@ -7,3 +7,7 @@
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1063548539]
 
 [node name="GameHud" parent="CanvasLayer" unique_id=155175906 instance=ExtResource("1_myc1q")]
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 2.0
+offset_bottom = -1.0
