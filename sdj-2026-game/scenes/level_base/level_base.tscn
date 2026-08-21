@@ -44,9 +44,11 @@ position = Vector2(856, 565)
 patrol_points = NodePath("../PatrolPoints")
 
 [node name="Player" parent="." unique_id=1768624832 instance=ExtResource("4_ncu3c")]
-position = Vector2(1071, 585)
+position = Vector2(856, 847)
+speed = 300.0
 
 [node name="PatrolPoints" type="Node2D" parent="." unique_id=816083946]
+position = Vector2(330, -194)
 
 [node name="Marker2D" type="Marker2D" parent="PatrolPoints" unique_id=728292019]
 position = Vector2(862, 569)
