@@ -6,6 +6,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ln6rh"]
 radius = 18.248287
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_intr1"]
+radius = 40.0
+
 [node name="Player" type="CharacterBody2D" unique_id=1768624832 groups=["player"]]
 script = ExtResource("1_dovo2")
 
@@ -17,3 +20,14 @@ texture = ExtResource("1_8afob")
 shape = SubResource("CircleShape2D_ln6rh")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=900572512]
+
+[node name="InteractZone" type="Area2D" parent="." unique_id=118344201]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone" unique_id=118344202]
+shape = SubResource("CircleShape2D_intr1")
+
+[connection signal="area_entered" from="InteractZone" to="." method="_on_interact_zone_area_entered"]
+[connection signal="area_exited" from="InteractZone" to="." method="_on_interact_zone_area_exited"]
+[connection signal="body_entered" from="InteractZone" to="." method="_on_interact_zone_body_entered"]
+[connection signal="body_exited" from="InteractZone" to="." method="_on_interact_zone_body_exited"]
