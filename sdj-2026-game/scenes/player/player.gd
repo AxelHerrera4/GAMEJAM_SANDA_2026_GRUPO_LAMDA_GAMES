@@ -1,15 +1,9 @@
 class_name Player
 extends CharacterBody2D
 
-## Se emite cuando cambia el objeto con el que se puede interactuar.
-## El HUD puede escucharlo para mostrar el aviso de "Pulsa F".
-signal interactable_changed(interactable: Node)
-
 @export var speed: float = 120.0
 
-## Objetos dentro de la zona de interaccion (grupo "interactable").
 var _nearby_interactables: Array[Node] = []
-## El mas cercano de todos, al que apunta la tecla de interactuar.
 var _current_interactable: Node = null
 
 
@@ -21,7 +15,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact"):
+	if event.is_action_pressed("interact") and _current_interactable != null:
+		get_viewport().set_input_as_handled()
 		try_interact()
 
 
@@ -38,7 +33,6 @@ func get_current_interactable() -> Node:
 	return _current_interactable
 
 
-## Elige el interactuable mas cercano y avisa si cambio.
 func _update_current_interactable() -> void:
 	var closest: Node = null
 	var closest_dist: float = INF
@@ -55,7 +49,7 @@ func _update_current_interactable() -> void:
 
 	if closest != _current_interactable:
 		_current_interactable = closest
-		interactable_changed.emit(_current_interactable)
+		SignalHub.interactable_changed.emit(_current_interactable)
 
 
 func _add_interactable(node: Node) -> void:

@@ -1,7 +1,25 @@
 extends Node2D
 
-var pistas_encontradas = 0
 
-func registrar_pista():
-	pistas_encontradas += 1
-	print("Pistas encontradas: ", pistas_encontradas, "/2")
+@export var reward_fragment: StringName = &"hack"
+
+var _clues: Array[Clue] = []
+var _inspected_ids: Dictionary = {}
+
+
+func _ready() -> void:
+	for node in find_children("*", "Clue", true, false):
+		var clue: Clue = node
+		_clues.append(clue)
+		clue.inspected.connect(_on_clue_inspected)
+
+	SignalHub.clues_progress.emit(0, _clues.size())
+
+
+func _on_clue_inspected(clue: Clue) -> void:
+	_inspected_ids[clue.clue_id] = true
+	SignalHub.clues_progress.emit(_inspected_ids.size(), _clues.size())
+
+	if _inspected_ids.size() >= _clues.size():
+		SignalHub.all_clues_inspected.emit()
+		FragmentManager.grant(reward_fragment)

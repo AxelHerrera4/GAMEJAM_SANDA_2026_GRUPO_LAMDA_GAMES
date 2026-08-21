@@ -8,6 +8,7 @@ func _ready():
 	# Ocultamos los paneles al iniciar
 	panel_credits.hide()
 	panel_options.hide()
+	get_tree().paused = false
 
 func _on_button_hovered():
 	audio_hover.play()
@@ -15,7 +16,8 @@ func _on_button_hovered():
 # --- MAIN MENU BUTTONS ---
 
 func _on_button_play_pressed():
-	get_tree().change_scene_to_file("res://scenes/level_base/level_base.tscn")
+	FragmentManager.clear_all()
+	get_tree().change_scene_to_file("res://scenes/Level_Jail/level_Jail.tscn")
 
 func _on_button_options_pressed():
 	panel_options.show()

@@ -1,0 +1,137 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/hack_minigame.gd" id="1_hackpanel"]
+[ext_resource type="Script" path="res://scenes/ui/hack_board.gd" id="2_hackboard"]
+[ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="3_font"]
+[ext_resource type="AudioStream" path="res://assets/SFX/Interfaces/ShowHack.mp3" id="4_showhack"]
+[ext_resource type="AudioStream" path="res://assets/SFX/Interfaces/Hacker.ogg" id="5_hackerloop"]
+[ext_resource type="AudioStream" path="res://assets/SFX/Interfaces/SolveHack.ogg" id="6_solvehack"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hackpanel"]
+bg_color = Color(0.06666667, 0.07058824, 0.07058824, 0.972549)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.21568628, 0.22352941, 0.21568628, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hackbtn"]
+bg_color = Color(0.10980392, 0.11372549, 0.10980392, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.23529412, 0.24313726, 0.23529412, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hackbtn_hover"]
+bg_color = Color(0.16470589, 0.17254902, 0.16470589, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.34117648, 0.34901962, 0.33333334, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hackbtn_pressed"]
+bg_color = Color(0.07058824, 0.07450981, 0.07058824, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.19607843, 0.20392157, 0.19607843, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="HackMinigame" type="Panel"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -200.0
+offset_right = 280.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hackpanel")
+script = ExtResource("1_hackpanel")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.627451, 0.62352943, 0.5921569, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 18
+text = "CERRADURA ELECTRÓNICA"
+horizontal_alignment = 1
+
+[node name="Board" type="Control" parent="Margin/VBox"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_hackboard")
+
+[node name="Status" type="Label" parent="Margin/VBox"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6431373, 0.6392157, 0.6156863, 1)
+theme_override_font_sizes/font_size = 15
+text = "Conecta cada cable con su terminal."
+horizontal_alignment = 1
+clip_text = true
+
+[node name="CancelButton" type="Button" parent="Margin/VBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6901961, 0.68235296, 0.654902, 1)
+theme_override_colors/font_hover_color = Color(0.8509804, 0.84313726, 0.8117647, 1)
+theme_override_colors/font_pressed_color = Color(0.54901963, 0.54509807, 0.5254902, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_hackbtn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hackbtn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hackbtn_pressed")
+text = "Abortar"
+
+[node name="ShowSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_showhack")
+
+[node name="LoopSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_hackerloop")
+volume_db = -6.0
+
+[node name="SolveSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_solvehack")
+
+[connection signal="pressed" from="Margin/VBox/CancelButton" to="." method="_on_cancel_button_pressed"]
