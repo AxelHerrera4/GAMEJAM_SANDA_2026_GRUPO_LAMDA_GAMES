@@ -2,9 +2,18 @@
 
 [ext_resource type="Script" uid="uid://bsx1cri7nx4p5" path="res://scenes/npc/npc.gd" id="1_pcwmf"]
 [ext_resource type="Texture2D" uid="uid://d1txkd4q0gs4a" path="res://assets/for_test/images/soldier1_gun.png" id="1_sspvn"]
+[ext_resource type="AudioStream" uid="uid://bgskk1xbbuadw" path="res://assets/for_test/sounds/gasp1.wav" id="3_dpyoa"]
+[ext_resource type="AudioStream" uid="uid://csxrgdhrr17ra" path="res://assets/for_test/sounds/gasp2.wav" id="4_woxlu"]
+[ext_resource type="AudioStream" uid="uid://srm6hbqm6bf1" path="res://assets/for_test/sounds/gasp3.wav" id="5_ay68w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2vina"]
 radius = 15.112448
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dpyoa"]
+streams_count = 3
+stream_0/stream = ExtResource("3_dpyoa")
+stream_1/stream = ExtResource("4_woxlu")
+stream_2/stream = ExtResource("5_ay68w")
 
 [node name="Npc" type="Area2D" unique_id=1290929920]
 collision_layer = 2
@@ -33,5 +42,8 @@ top_level = true
 offset_right = 104.0
 offset_bottom = 23.0
 text = "wdaddadawd"
+
+[node name="GaspSound" type="AudioStreamPlayer2D" parent="." unique_id=1693627125]
+stream = SubResource("AudioStreamRandomizer_dpyoa")
 
 [connection signal="velocity_computed" from="NavAgent" to="." method="_on_nav_agent_velocity_computed"]
