@@ -8,7 +8,9 @@ extends Area2D
 
 var _velocity: Vector2 = Vector2.ZERO
 
-func setup(direction: Vector2) -> void:
+func setup(direction: Vector2, custom_damage: int = damage, custom_knockback: float = knockback_force) -> void:
+	damage = custom_damage
+	knockback_force = custom_knockback
 	_velocity = direction * speed
 	rotation = direction.angle()
 

@@ -12,4 +12,3 @@ stream = ExtResource("3_mgs33")
 
 [node name="AttackTimer" parent="." index="7" unique_id=739967964]
 wait_time = 2.0
-autostart = true

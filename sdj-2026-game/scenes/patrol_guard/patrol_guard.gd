@@ -14,6 +14,9 @@ enum EnemyState {Patrolling, Searching, Chasing}
 	EnemyState.Chasing: 120.0
 }
 @export var patrol_points: Node2D
+@export var damage: int = 20 # per bullet or per mer melee atack or per catch
+@export var knockback_force: float = 250.0
+@export var attack_cooldown: float = 1.2 # Segundos entre ataque
 
 @onready var nav_agent: NavigationAgent2D = $NavAgent
 @onready var player_detect: RayCast2D = $PlayerDetect
@@ -31,6 +34,7 @@ var _player_ref: Player
 
 func _ready() -> void:
 	#nav_agent.max_speed = speeds[_state] # DANGER: the nav_agent max_speed= is a security limit, doint this break the security
+	attack_timer.wait_time = attack_cooldown
 	if patrol_points:
 		for node in patrol_points.get_children():
 			if node is Marker2D:
@@ -118,6 +122,9 @@ func change_state(new_state: EnemyState) -> void:
 	
 	if _state == EnemyState.Chasing:
 		gasp_sound.play()
+		attack_timer.start(attack_cooldown)
+	else:
+		attack_timer.stop()
 	if _state == EnemyState.Patrolling:
 		return
 	if _state == EnemyState.Searching:
@@ -132,4 +139,5 @@ func _on_nav_agent_velocity_computed(safe_velocity: Vector2) -> void:
 
 
 func _on_attack_timer_timeout() -> void:
-	pass # Replace with function body.
+	attack_timer.wait_time = randf_range(attack_cooldown, attack_cooldown * 2.0)
+	print(attack_timer.wait_time)

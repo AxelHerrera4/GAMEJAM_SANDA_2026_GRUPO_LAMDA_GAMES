@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://b7fl1rstu380i"]
-
-[ext_resource type="PackedScene" uid="uid://dehtibkxxvwjx" path="res://scenes/patrol_guard/patrol_guard.tscn" id="1_o5ln5"]
-
-[node name="PatrolGuard" unique_id=1290929920 instance=ExtResource("1_o5ln5")]
