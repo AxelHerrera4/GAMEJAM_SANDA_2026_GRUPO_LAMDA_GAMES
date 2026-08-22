@@ -2,14 +2,73 @@ class_name Player
 extends CharacterBody2D
 
 @export var speed: float = 120.0
+@export var health: int = 100
+@export var max_health: int = 100
+@export var hurt_duration: float = 0.4
+@export var knockback_friction: float = 10.0
+
+@onready var hurt_timer: Timer = $HurtTimer
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 var _nearby_interactables: Array[Node] = []
 var _current_interactable: Node = null
+var _is_hurt: bool = false
+var _knockback_velocity: Vector2 = Vector2.ZERO
+
+var is_hurt: bool:
+	get: return _is_hurt
+
+var is_still: bool:
+	get: return is_zero_approx(velocity.length())
 
 
-func _physics_process(_delta: float) -> void:
-	var input: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	velocity = input * speed
+func _ready() -> void:
+	if hurt_timer:
+		hurt_timer.one_shot = true
+		hurt_timer.wait_time = hurt_duration
+	SignalHub.player_health_changed.emit(health, max_health)
+
+
+### Health
+func take_damage(amount: int, knockback_force: float, source_position: Vector2) -> void:
+	if _is_hurt or health <= 0:
+		return
+	
+	health = max(0, health - amount)
+	SignalHub.player_health_changed.emit(health, max_health)
+	
+	if health <= 0:
+		die()
+		return
+	
+	_is_hurt = true
+	var knockback_direction: Vector2 = (global_position - source_position).normalized()
+	if knockback_direction == Vector2.ZERO:
+		knockback_direction = Vector2.LEFT
+	
+	_knockback_velocity = knockback_direction * knockback_force
+	hurt_timer.start(hurt_duration)
+
+
+func die() -> void:
+	hide()
+	get_tree().paused = true
+	SignalHub.emit_on_game_over(false)
+
+
+func _on_hurt_timer_timeout() -> void:
+	_is_hurt = false
+### Health/
+
+
+func _physics_process(delta: float) -> void:
+	_knockback_velocity = _knockback_velocity.lerp(Vector2.ZERO, knockback_friction * delta)
+	
+	var input: Vector2 = Vector2.ZERO
+	if not _is_hurt:
+		input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	
+	velocity = (input * speed) + _knockback_velocity
 	if !is_zero_approx(velocity.length()):
 		rotation = velocity.angle()
 	move_and_slide()

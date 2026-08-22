@@ -17,6 +17,8 @@ func _on_button_hovered():
 
 func _on_button_play_pressed():
 	FragmentManager.clear_all()
+	get_tree().paused = false
+	#The change scene do with GameManager global script
 	get_tree().change_scene_to_file("res://scenes/Level_Jail/level_Jail.tscn")
 
 func _on_button_options_pressed():

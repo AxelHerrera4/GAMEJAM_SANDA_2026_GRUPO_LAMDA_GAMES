@@ -36,6 +36,7 @@ scale = Vector2(1.1160451, 3.606442)
 target_position = Vector2(400, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2004232349]
+visible = false
 
 [node name="DebugLabel" type="Label" parent="CanvasLayer" unique_id=709889220]
 top_level = true

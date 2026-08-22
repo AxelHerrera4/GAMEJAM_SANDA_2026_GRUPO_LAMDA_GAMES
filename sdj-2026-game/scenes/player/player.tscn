@@ -10,20 +10,137 @@ radius = 18.248287
 [sub_resource type="CircleShape2D" id="CircleShape2D_intr1"]
 radius = 40.0
 
+[sub_resource type="Animation" id="Animation_75vfm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.73333335, 0.73333335, 0.73333335, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gmlin"]
+resource_name = "hurt"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.46666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.8066635, 0.14320311, 0.20905071, 1), Color(1, 1, 1, 1), Color(0.8066635, 0.14320311, 0.20905071, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lvxji"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 0.4, 0.7977274),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.5534018, 0.96978086, 0.48129416, 1), Color(1, 1, 1, 1), Color(0.5534018, 0.96978086, 0.48129416, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_p47bc"]
+resource_name = "move"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45717713, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.5019608, 0.2784314, 0.90588236, 1), Color(1, 1, 1, 1), Color(0.5019608, 0.2784314, 0.90588236, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_75vfm"]
+_data = {
+&"RESET": SubResource("Animation_75vfm"),
+&"hurt": SubResource("Animation_gmlin"),
+&"idle": SubResource("Animation_lvxji"),
+&"move": SubResource("Animation_p47bc")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gmlin"]
+animation = &"hurt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lvxji"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p47bc"]
+animation = &"move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_75vfm"]
+advance_mode = 2
+advance_expression = "!is_still"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0owmy"]
+advance_mode = 2
+advance_expression = "is_still"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qek5x"]
+advance_mode = 2
+advance_expression = "is_hurt"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5gtgg"]
+advance_mode = 2
+advance_expression = "!is_hurt"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gmlin"]
+advance_mode = 2
+advance_expression = "is_hurt"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lvxji"]
+advance_mode = 2
+advance_expression = "!is_hurt"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p47bc"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mjdfx"]
+states/hurt/node = SubResource("AnimationNodeAnimation_gmlin")
+states/hurt/position = Vector2(427, 158)
+states/idle/node = SubResource("AnimationNodeAnimation_lvxji")
+states/idle/position = Vector2(363, 94)
+states/move/node = SubResource("AnimationNodeAnimation_p47bc")
+states/move/position = Vector2(545, 94)
+transitions = ["idle", "move", SubResource("AnimationNodeStateMachineTransition_75vfm"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_0owmy"), "idle", "hurt", SubResource("AnimationNodeStateMachineTransition_qek5x"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_5gtgg"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_gmlin"), "hurt", "move", SubResource("AnimationNodeStateMachineTransition_lvxji"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_p47bc")]
+
 [node name="Player" type="CharacterBody2D" unique_id=1768624832 groups=["player"]]
 script = ExtResource("1_dovo2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2117098846]
-modulate = Color(0.851769, 0.851769, 0.8517688, 1)
+modulate = Color(0.73333335, 0.73333335, 0.73333335, 1)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_8afob")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=456192581]
+visible = false
 shape = SubResource("CircleShape2D_ln6rh")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=900572512]
 
 [node name="InteractZone" type="Area2D" parent="." unique_id=118344201]
+visible = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone" unique_id=118344202]
@@ -34,7 +151,20 @@ shadow_enabled = true
 texture = ExtResource("3_gmlin")
 texture_scale = 1.8
 
+[node name="HurtTimer" type="Timer" parent="." unique_id=434758332]
+wait_time = 0.3
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1565565447]
+libraries/ = SubResource("AnimationLibrary_75vfm")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1854761066]
+tree_root = SubResource("AnimationNodeStateMachine_mjdfx")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+
 [connection signal="area_entered" from="InteractZone" to="." method="_on_interact_zone_area_entered"]
 [connection signal="area_exited" from="InteractZone" to="." method="_on_interact_zone_area_exited"]
 [connection signal="body_entered" from="InteractZone" to="." method="_on_interact_zone_body_entered"]
 [connection signal="body_exited" from="InteractZone" to="." method="_on_interact_zone_body_exited"]
+[connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]

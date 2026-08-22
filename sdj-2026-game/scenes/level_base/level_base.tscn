@@ -15,17 +15,10 @@ source_geometry_group_name = &"physic"
 
 [node name="LevelBase" type="Node" unique_id=1588378039]
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=139885719]
-visible = false
-position = Vector2(1596, 605)
-energy = 1.48
-max_distance = 10.0
-
 [node name="Obscure" type="CanvasModulate" parent="." unique_id=1671525806]
 color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1063548539]
-visible = false
 
 [node name="GameHud" parent="CanvasLayer" unique_id=155175906 instance=ExtResource("1_myc1q")]
 
@@ -54,7 +47,7 @@ position = Vector2(856, 565)
 patrol_points = NodePath("../PatrolPoints")
 
 [node name="Player" parent="." unique_id=1768624832 instance=ExtResource("4_ncu3c")]
-position = Vector2(-535, 644)
+position = Vector2(546, 1206)
 speed = 300.0
 
 [node name="PatrolPoints" type="Node2D" parent="." unique_id=816083946]
@@ -87,5 +80,5 @@ position = Vector2(1522, 1146)
 position = Vector2(2847, 624)
 
 [node name="PatrolGuard" parent="." unique_id=1219821214 node_paths=PackedStringArray("patrol_points") instance=ExtResource("5_kr674")]
-position = Vector2(1714, 1114)
+position = Vector2(1252, 1343)
 patrol_points = NodePath("../Node2D")

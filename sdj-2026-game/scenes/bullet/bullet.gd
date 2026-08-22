@@ -3,6 +3,9 @@ extends Area2D
 
 @export var speed: float = 300.0
 
+@export var damage: int = 25
+@export var knockback_force: float = 200.0
+
 var _velocity: Vector2 = Vector2.ZERO
 
 func setup(direction: Vector2) -> void:
@@ -15,6 +18,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	if body is Player:
+		body.take_damage(damage, knockback_force, global_position)
 	queue_free()
 
 
