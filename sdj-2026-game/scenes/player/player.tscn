@@ -163,8 +163,12 @@ tree_root = SubResource("AnimationNodeStateMachine_mjdfx")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 
+[node name="StaminaRegenTimer" type="Timer" parent="." unique_id=2117580822]
+one_shot = true
+
 [connection signal="area_entered" from="InteractZone" to="." method="_on_interact_zone_area_entered"]
 [connection signal="area_exited" from="InteractZone" to="." method="_on_interact_zone_area_exited"]
 [connection signal="body_entered" from="InteractZone" to="." method="_on_interact_zone_body_entered"]
 [connection signal="body_exited" from="InteractZone" to="." method="_on_interact_zone_body_exited"]
 [connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]
+[connection signal="timeout" from="StaminaRegenTimer" to="." method="_on_stamina_regen_timer_timeout"]

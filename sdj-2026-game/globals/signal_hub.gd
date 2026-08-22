@@ -29,12 +29,15 @@ signal hack_requested
 signal hack_finished(success: bool)
 
 
-
 signal player_health_changed(current_health: int, max_health: int)
+signal player_stamina_changed(current_stamina: float, max_stamina: float)
 signal game_over(won: bool)
 
 func emit_on_game_over(won: bool) -> void:
-	emit_signal("game_over", won)
+	game_over.emit(won)
 
 func emit_on_player_health_changed(current_health: int, max_health: int) -> void:
-	emit_signal("player_health_changed", current_health, max_health)
+	player_health_changed.emit(current_health, max_health)
+
+func emit_on_player_stamina_changed(current_stamina: float, max_stamina: float) -> void:
+	player_stamina_changed.emit(current_stamina, max_stamina)

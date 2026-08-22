@@ -7,9 +7,23 @@ extends CharacterBody2D
 @export var hurt_duration: float = 0.4
 @export var knockback_friction: float = 10.0
 
+###Stamina
+@export_group("Stamina")
+@export var stamina: float = 100.0
+@export var max_stamina: float = 100.0
+@export var stamina_regen_rate: float = 20.0
+@export var stamina_regen_delay: float = 1.0
+@export var sprint_cost: float = 25.0
+@export var sprint_speed_multiplier: float = 1.6
+
 @onready var hurt_timer: Timer = $HurtTimer
+@onready var stamina_regen_timer: Timer = $StaminaRegenTimer
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
+#stamina
+var _is_sprinting: bool = false
+var _is_regenerating_stamina: bool = false
+#stamina/
 var _nearby_interactables: Array[Node] = []
 var _current_interactable: Node = null
 var _is_hurt: bool = false
@@ -17,17 +31,51 @@ var _knockback_velocity: Vector2 = Vector2.ZERO
 
 var is_hurt: bool:
 	get: return _is_hurt
-
+var is_sprinting: bool:
+	get: return _is_sprinting
 var is_still: bool:
 	get: return is_zero_approx(velocity.length())
 
 
 func _ready() -> void:
 	if hurt_timer:
-		hurt_timer.one_shot = true
 		hurt_timer.wait_time = hurt_duration
+	if stamina_regen_timer:
+		stamina_regen_timer.wait_time = stamina_regen_delay
 	SignalHub.player_health_changed.emit(health, max_health)
+	SignalHub.player_stamina_changed.emit(stamina, max_stamina)
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact") and _current_interactable != null:
+		get_viewport().set_input_as_handled()
+		try_interact()
 
+
+###Stamina
+func _handle_stamina(delta: float) -> float:
+	var wants_to_sprint: bool = Input.is_action_pressed("sprint") and !is_still and not _is_hurt
+	
+	if wants_to_sprint and stamina > 0.0:
+		_is_sprinting = true
+		stamina = max(0.0, stamina - sprint_cost * delta)
+		_is_regenerating_stamina = false
+		stamina_regen_timer.stop()
+		SignalHub.player_stamina_changed.emit(stamina, max_stamina)
+		return speed * sprint_speed_multiplier
+	else:
+		_is_sprinting = false
+		# Iniciamos el temporizador de retraso solo si no está corriendo y no estamos regenerando ya
+		if stamina < max_stamina and !_is_regenerating_stamina and stamina_regen_timer.is_stopped():
+			stamina_regen_timer.start()
+		if _is_regenerating_stamina and stamina < max_stamina:
+			stamina = min(max_stamina, stamina + stamina_regen_rate * delta)
+			SignalHub.player_stamina_changed.emit(stamina, max_stamina)
+		return speed
+
+func _on_stamina_regen_timer_timeout() -> void:
+	_is_regenerating_stamina = true
+
+###Stamina/
 
 ### Health
 func take_damage(amount: int, knockback_force: float, source_position: Vector2) -> void:
@@ -68,18 +116,13 @@ func _physics_process(delta: float) -> void:
 	if not _is_hurt:
 		input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
-	velocity = (input * speed) + _knockback_velocity
+	var current_speed: float = _handle_stamina(delta)
+	
+	velocity = (input * current_speed) + _knockback_velocity
 	if !is_zero_approx(velocity.length()):
 		rotation = velocity.angle()
 	move_and_slide()
 	_update_current_interactable()
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact") and _current_interactable != null:
-		get_viewport().set_input_as_handled()
-		try_interact()
-
 
 func try_interact() -> void:
 	if _current_interactable == null:
