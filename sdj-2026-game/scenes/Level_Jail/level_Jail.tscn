@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://c2fu6diu3b6rw" path="res://scenes/Level_Jail/light_ceiling.gd" id="4_k1nnb"]
 [ext_resource type="Script" uid="uid://671keyoxsx52" path="res://scenes/Level_Jail/clue_photo.gd" id="5_txukc"]
 [ext_resource type="Script" uid="uid://dbxvn8p4pkrf6" path="res://scenes/Level_Jail/clue_note.gd" id="6_note"]
-[ext_resource type="PackedScene" path="res://scenes/ui/clue_ui.tscn" id="7_clueui"]
+[ext_resource type="PackedScene" uid="uid://sf4mivq05c3g" path="res://scenes/ui/clue_ui.tscn" id="7_clueui"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87syi"]
 texture = ExtResource("2_rr37k")
@@ -297,11 +297,9 @@ script = ExtResource("4_k1nnb")
 position = Vector2(768, 31)
 monitoring = false
 script = ExtResource("5_txukc")
+first_time_text = "Te recuerdo... cómo te extraño demasiado."
 clue_id = &"foto_chica"
 clue_title = "Foto"
-caption = ""
-speaker = "Eddy"
-first_time_text = "Te recuerdo... cómo te extraño demasiado."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Clue_Photo" unique_id=1735459763]
 shape = SubResource("RectangleShape2D_q8iyx")
@@ -310,13 +308,13 @@ shape = SubResource("RectangleShape2D_q8iyx")
 position = Vector2(412, 33)
 monitoring = false
 script = ExtResource("6_note")
-clue_id = &"escrito_pared"
-clue_title = "Escrito en la pared"
-speaker = "Eddy"
 lines = Array[String](["Yo soy Eddy y soy......", "Soy un experto en sistemas. Necesito irme de aquí."])
 shatter_after_line = 0
+clue_id = &"escrito_pared"
+clue_title = "Escrito en la pared"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Clue_WallWriting" unique_id=1501142234]
 shape = SubResource("RectangleShape2D_q8iyx")
 
 [node name="ClueUI" parent="." unique_id=1477203311 instance=ExtResource("7_clueui")]
+visible = false

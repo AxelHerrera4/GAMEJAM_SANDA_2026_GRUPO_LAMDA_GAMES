@@ -2,8 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="1_myc1q"]
 [ext_resource type="TileSet" uid="uid://up3vmhes72bi" path="res://resources/tile_level.tres" id="2_u6jkd"]
-[ext_resource type="PackedScene" uid="uid://dehtibkxxvwjx" path="res://scenes/npc/npc.tscn" id="3_3tlib"]
+[ext_resource type="PackedScene" uid="uid://dehtibkxxvwjx" path="res://scenes/patrol_guard/patrol_guard.tscn" id="3_3tlib"]
 [ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="4_ncu3c"]
+[ext_resource type="PackedScene" uid="uid://b4bhqbxy04qd5" path="res://scenes/patrol_guard/pistol_guard/pistol_guard.tscn" id="5_kr674"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3tlib"]
 vertices = PackedVector2Array(2250, -1034, 2053.3828, -1034, 4743.8203, -1068.8594, -869.1875, -996.1172, 1974, -1032.9688, 1974, -970, 1846, -970, 1846, -586, 1718, -586, 1418, -778, 1718, -522, 1462, -522, 1462, 54, 1418, 54, 1418, -74, 1354, -74, 1354, -266, 1290, -266, 1290, -310, 1354, -310, 1418, -502, 1354, -502, 1098, -778, 1098, -842, 246, -842, 246, -778, -394, -778, -394, -118, 438, -118, 438, 374, 310, 374, 310, 438, -118, 438, -118, 374, -394, 374, -394, 438, -778, 438, -778, 1738, 246, 1738, 246, 2186, -933.78906, 2280.9219, 1354, 2186, 1354, 2058, 2442, 2058, 2486, 2122, 2442, 1802, 2486, 1802, 3338, 1718, 3146, 1718, 3146, 1610, 4234, 1610, 4234, 1462, 4170, 1462, 4170, 630, 3466, 630, 3466, 566, 4106, 330, 3146, 566, 3146, 394, 3274, 394, 3274, 330, 4106, -54, 4170, -54, 4687.1563, 2240.0703, 4170, -138, 4106, -138, 4106, -778, 4042, -778, 4042, -842, 2998, -842, 2998, -778, 2678, -778, 2314, -970, 2678, -522, 2378, -522, 2378, -714, 2314, -714, 2250, -970, 3338, 2122, 2102, 310, 2058, 310, 2058, 266, 2102, 266, 1270, -586, 1270, -394, 1206, -394, 330, -438, 330, -522, 1078, -694, 2166, -886, 2230, -886, 2230, -630, 1546, 138, 1802, -438, 1930, -502, 2294, -630, 2294, -438, 1910, 182, 1782, 246, 2762, -438, 2762, -694, 3082, -694, 3254, 246, 3018, 246, 3082, -758, 3958, -758, 3958, -694, 4022, -694, 4022, 246, 3254, 310, 3018, 310, 2698, 246, 2698, 182, 1910, 246, 1782, 330, 1974, 330, 1974, 394, 1290, 458, 2186, 394, 2186, 330, 2934, 330, 2934, 394, 2422, 1654, 3062, 394, 3062, 650, 2570, 1654, 3382, 650, 3382, 714, 3062, 1526, 4086, 714, 4086, 1526, 3062, 1802, 3254, 1802, 3254, 2038, 2570, 2038, 2422, 1718, 2358, 1718, 1354, 1654, 2358, 1974, 1354, 1974, 1270, 1654, 1270, 2102, 330, 2102, 330, 1654, 438, 1162, 778, 1162, -694, 1654, -694, 522, -310, 522, -310, 458, -202, 458, -202, 522, 394, 522, 394, 458, 438, 458, 778, 458, 694, 374, 694, 1078, 522, 1078, 522, -202, -310, -202, -310, -694, 246, -438, 330, -694, 330, -758, 1078, -758, 1334, -694, 1334, -586, 246, -522, 1206, -182, 1270, -182, 1270, 10, 1334, 10, 1334, 118, 1270, 118, 1482, 202, 1482, 138, 1546, -438, 1802, -502, 1930, -886, 2058, -886, 2058, -950, 2166, -950, 1290, 374, 1270, 202)
@@ -13,6 +14,15 @@ source_geometry_mode = 2
 source_geometry_group_name = &"physic"
 
 [node name="LevelBase" type="Node" unique_id=1588378039]
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=139885719]
+visible = false
+position = Vector2(1596, 605)
+energy = 1.48
+max_distance = 10.0
+
+[node name="Obscure" type="CanvasModulate" parent="." unique_id=1671525806]
+color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1063548539]
 visible = false
@@ -44,7 +54,7 @@ position = Vector2(856, 565)
 patrol_points = NodePath("../PatrolPoints")
 
 [node name="Player" parent="." unique_id=1768624832 instance=ExtResource("4_ncu3c")]
-position = Vector2(856, 847)
+position = Vector2(-535, 644)
 speed = 300.0
 
 [node name="PatrolPoints" type="Node2D" parent="." unique_id=816083946]
@@ -67,3 +77,15 @@ position = Vector2(2256, -30)
 
 [node name="Marker2D6" type="Marker2D" parent="PatrolPoints" unique_id=1848795951]
 position = Vector2(2232, 514)
+
+[node name="Node2D" type="Node2D" parent="." unique_id=578565824]
+
+[node name="Marker2D" type="Marker2D" parent="Node2D" unique_id=2113674103]
+position = Vector2(1522, 1146)
+
+[node name="Marker2D2" type="Marker2D" parent="Node2D" unique_id=612383760]
+position = Vector2(2847, 624)
+
+[node name="PatrolGuard" parent="." unique_id=1219821214 node_paths=PackedStringArray("patrol_points") instance=ExtResource("5_kr674")]
+position = Vector2(1714, 1114)
+patrol_points = NodePath("../Node2D")

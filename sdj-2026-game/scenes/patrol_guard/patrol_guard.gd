@@ -1,4 +1,4 @@
-class_name Npc
+class_name PatrolGuard
 extends Area2D
 
 enum EnemyState {Patrolling, Searching, Chasing}
@@ -19,6 +19,7 @@ enum EnemyState {Patrolling, Searching, Chasing}
 @onready var player_detect: RayCast2D = $PlayerDetect
 @onready var debug_label: Label = $CanvasLayer/DebugLabel
 @onready var gasp_sound: AudioStreamPlayer2D = $GaspSound
+@onready var attack_timer: Timer = $AttackTimer
 
 var _patrol_points: Array[Vector2]
 var _state: EnemyState = EnemyState.Patrolling
@@ -128,3 +129,7 @@ func _on_nav_agent_velocity_computed(safe_velocity: Vector2) -> void:
  	#rotation = safe_velocity.angle()
 	if safe_velocity.length() > 0.01:
 		rotation = rotate_toward(rotation, safe_velocity.angle(), deg_to_rad(360) * _last_delta)
+
+
+func _on_attack_timer_timeout() -> void:
+	pass # Replace with function body.

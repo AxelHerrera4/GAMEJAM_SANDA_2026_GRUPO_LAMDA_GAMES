@@ -20,8 +20,8 @@ config/icon="res://icon.svg"
 GameManager="*uid://ci2pp7hpa22dm"
 ScoreManager="*uid://ddirxkhqwsk2j"
 SignalHub="*uid://b6rbnddfvp762"
-FragmentManager="*res://globals/fragment_manager.gd"
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
+FragmentManager="*res://globals/fragment_manager.gd"
 
 [display]
 

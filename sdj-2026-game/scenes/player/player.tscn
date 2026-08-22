@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bqrwcadmmmuwh" path="res://icon.svg" id="1_8afob"]
 [ext_resource type="Script" uid="uid://dig7b3coloxw3" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Texture2D" uid="uid://yu1nwsqbcxgv" path="res://assets/for_test/images/lights/shape_a.png" id="3_gmlin"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ln6rh"]
 radius = 18.248287
@@ -13,6 +14,7 @@ radius = 40.0
 script = ExtResource("1_dovo2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2117098846]
+modulate = Color(0.851769, 0.851769, 0.8517688, 1)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_8afob")
 
@@ -26,6 +28,11 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone" unique_id=118344202]
 shape = SubResource("CircleShape2D_intr1")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=176177808]
+shadow_enabled = true
+texture = ExtResource("3_gmlin")
+texture_scale = 1.8
 
 [connection signal="area_entered" from="InteractZone" to="." method="_on_interact_zone_area_entered"]
 [connection signal="area_exited" from="InteractZone" to="." method="_on_interact_zone_area_exited"]
