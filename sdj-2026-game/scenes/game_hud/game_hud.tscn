@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bn0gw2ttnvs75"]
 
 [ext_resource type="Script" uid="uid://bm3prtrdcq5xk" path="res://scenes/game_hud/game_hud.gd" id="1_7s1mr"]
+[ext_resource type="PackedScene" uid="uid://sf4mivq05c3g" path="res://scenes/ui/clue_ui/clue_ui.tscn" id="2_aiwwf"]
 [ext_resource type="Texture2D" uid="uid://dw50xxv407cn" path="res://assets/for_test/ui_bar/greenbar (3).png" id="2_under"]
 [ext_resource type="Texture2D" uid="uid://dk7046a11abjx" path="res://assets/for_test/ui_bar/greenbar (2).png" id="3_progress"]
 [ext_resource type="Texture2D" uid="uid://dph2s01u11kcv" path="res://assets/for_test/ui_bar/energy_bar_3_modes.png" id="4_energy"]
@@ -18,6 +19,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7s1mr")
+
+[node name="ClueUI" parent="." unique_id=1765662989 instance=ExtResource("2_aiwwf")]
 
 [node name="ColorRectGameOver" type="ColorRect" parent="." unique_id=2006786486]
 visible = false

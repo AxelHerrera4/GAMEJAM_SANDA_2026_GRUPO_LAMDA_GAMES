@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bqdad38lqlkq6"]
+
+[node name="Room" type="Node2D" unique_id=69708080]
+
+[node name="Tiles" type="Node2D" parent="." unique_id=213452734]
+
+[node name="Floor" type="TileMapLayer" parent="Tiles" unique_id=1690041257]
+
+[node name="Walls" type="TileMapLayer" parent="Tiles" unique_id=321007397]
+
+[node name="Furniture" type="TileMapLayer" parent="Tiles" unique_id=1546801700]
+
+[node name="Obscure" type="CanvasModulate" parent="." unique_id=2072011277]
+color = Color(0.5866749, 0.5866749, 0.5866749, 1)
+
+[node name="Collectibles" type="Node2D" parent="." unique_id=550994344]
+
+[node name="Interactives" type="Node2D" parent="." unique_id=828243168]
+
+[node name="Doors" type="Node2D" parent="." unique_id=1126311124]
+
+[node name="MeleeGuards" type="Node2D" parent="." unique_id=455768581]
+
+[node name="PistolGuards" type="Node2D" parent="." unique_id=83598530]

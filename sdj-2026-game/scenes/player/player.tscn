@@ -306,6 +306,7 @@ transitions = ["idle", "move", SubResource("AnimationNodeStateMachineTransition_
 
 [node name="Player" type="CharacterBody2D" unique_id=1768624832 groups=["player"]]
 script = ExtResource("1_dovo2")
+speed = 150.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2117098846]
 scale = Vector2(2, 2)
@@ -321,7 +322,6 @@ shape = SubResource("CircleShape2D_ln6rh")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=900572512]
 
 [node name="InteractZone" type="Area2D" parent="." unique_id=118344201]
-visible = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone" unique_id=118344202]

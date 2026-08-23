@@ -35,10 +35,16 @@ signal access_points_changed(done: int, total: int)
 
 @warning_ignore("unused_signal")
 signal hack_requested
+
+func emit_on_hack_requested() -> void:
+	hack_requested.emit()
+
 @warning_ignore("unused_signal")
 signal hack_finished(success: bool)
 
-
+func emit_on_hack_finished(success: bool) -> void:
+	hack_finished.emit(success)
+	
 signal player_health_changed(current_health: int, max_health: int)
 signal player_stamina_changed(current_stamina: float, max_stamina: float)
 signal game_over(won: bool)
