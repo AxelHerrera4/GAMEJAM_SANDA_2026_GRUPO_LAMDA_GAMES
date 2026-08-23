@@ -101,22 +101,29 @@ position = Vector2(1522, 1146)
 position = Vector2(2137, 364)
 
 [node name="PointLight2D_1" type="PointLight2D" parent="." unique_id=456115885]
-position = Vector2(556.5, 91.999954)
-scale = Vector2(17.453127, 17.218748)
+position = Vector2(801.50006, 82.000084)
+scale = Vector2(28.890627, 19.812504)
 energy = 0.55
 texture = SubResource("GradientTexture2D_0dgro")
 script = ExtResource("6_flicker")
 
 [node name="PointLight2D_2" type="PointLight2D" parent="." unique_id=428432782]
-position = Vector2(2731, -698)
-scale = Vector2(17.453127, 17.218748)
+position = Vector2(2674.75, -682.5)
+scale = Vector2(18.335938, 27.828125)
 energy = 0.45
 texture = SubResource("GradientTexture2D_0dgro")
 script = ExtResource("6_flicker")
 
 [node name="PointLight2D_3" type="PointLight2D" parent="." unique_id=621657044]
-position = Vector2(832.5, 1571.5)
-scale = Vector2(6.171877, 7.390624)
+position = Vector2(823, 1628)
+scale = Vector2(10.78125, 13.468749)
+energy = 0.23
+texture = SubResource("GradientTexture2D_0dgro")
+script = ExtResource("6_flicker")
+
+[node name="PointLight2D_8" type="PointLight2D" parent="." unique_id=214008689]
+position = Vector2(834.87506, 844)
+scale = Vector2(27.464844, 7.390624)
 energy = 0.23
 texture = SubResource("GradientTexture2D_0dgro")
 script = ExtResource("6_flicker")
@@ -129,22 +136,22 @@ texture = SubResource("GradientTexture2D_0dgro")
 script = ExtResource("6_flicker")
 
 [node name="PointLight2D_5" type="PointLight2D" parent="." unique_id=1090359571]
-position = Vector2(1802, 348.5)
+position = Vector2(1822.0001, 316)
 scale = Vector2(18.312504, 27.078125)
 energy = 0.48
 texture = SubResource("GradientTexture2D_0dgro")
 script = ExtResource("6_flicker")
 
 [node name="PointLight2D_6" type="PointLight2D" parent="." unique_id=441079177]
-position = Vector2(1099, -1096.5)
-scale = Vector2(34.84375, 8.328126)
+position = Vector2(1105, -1024)
+scale = Vector2(34.65625, 18.6875)
 energy = 0.48
 texture = SubResource("GradientTexture2D_0dgro")
 script = ExtResource("6_flicker")
 
 [node name="PointLight2D_7" type="PointLight2D" parent="." unique_id=1906761918]
-position = Vector2(2971, 861.5)
-scale = Vector2(9.687501, 27.515627)
+position = Vector2(2859.5, 1012.9999)
+scale = Vector2(17.203129, 32.25)
 energy = 0.48
 texture = SubResource("GradientTexture2D_0dgro")
 script = ExtResource("6_flicker")
