@@ -24,6 +24,12 @@ signal shatter_finished
 
 
 @warning_ignore("unused_signal")
+signal player_control_blocked(blocked: bool)
+@warning_ignore("unused_signal")
+signal pause_menu_toggled(open: bool)
+
+
+@warning_ignore("unused_signal")
 signal hack_requested
 @warning_ignore("unused_signal")
 signal hack_finished(success: bool)

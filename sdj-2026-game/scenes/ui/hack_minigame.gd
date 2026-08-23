@@ -86,6 +86,13 @@ func _on_solved() -> void:
 	finished.emit(true)
 
 
+func force_close() -> void:
+	loop_sfx.stop()
+	position.y = _rest_y
+	modulate.a = 1.0
+	finished.emit(false)
+
+
 func _on_cancel_button_pressed() -> void:
 	cancel_button.disabled = true
 	loop_sfx.stop()

@@ -28,6 +28,7 @@ var _nearby_interactables: Array[Node] = []
 var _current_interactable: Node = null
 var _is_hurt: bool = false
 var _knockback_velocity: Vector2 = Vector2.ZERO
+var _control_blocked: bool = false
 
 var is_hurt: bool:
 	get: return _is_hurt
@@ -44,8 +45,15 @@ func _ready() -> void:
 		stamina_regen_timer.wait_time = stamina_regen_delay
 	SignalHub.player_health_changed.emit(health, max_health)
 	SignalHub.player_stamina_changed.emit(stamina, max_stamina)
+	SignalHub.player_control_blocked.connect(_on_control_blocked)
 	
+func _on_control_blocked(blocked: bool) -> void:
+	_control_blocked = blocked
+
+
 func _unhandled_input(event: InputEvent) -> void:
+	if _control_blocked:
+		return
 	if event.is_action_pressed("interact") and _current_interactable != null:
 		get_viewport().set_input_as_handled()
 		try_interact()
@@ -53,7 +61,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ###Stamina
 func _handle_stamina(delta: float) -> float:
-	var wants_to_sprint: bool = Input.is_action_pressed("sprint") and !is_still and not _is_hurt
+	var wants_to_sprint: bool = not _control_blocked and Input.is_action_pressed("sprint") and !is_still and not _is_hurt
 	
 	if wants_to_sprint and stamina > 0.0:
 		_is_sprinting = true
@@ -113,7 +121,7 @@ func _physics_process(delta: float) -> void:
 	_knockback_velocity = _knockback_velocity.lerp(Vector2.ZERO, knockback_friction * delta)
 	
 	var input: Vector2 = Vector2.ZERO
-	if not _is_hurt:
+	if not _is_hurt and not _control_blocked:
 		input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
 	var current_speed: float = _handle_stamina(delta)

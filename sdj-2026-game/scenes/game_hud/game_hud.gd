@@ -5,10 +5,6 @@ extends Control
 @onready var color_rect_game_over: ColorRect = $ColorRectGameOver
 @onready var label_game_over: Label = $ColorRectGameOver/LabelGameOver
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("quit"):
-		GameManager.load_main()
-
 func _ready() -> void:
 	if color_rect_game_over:
 		color_rect_game_over.hide()

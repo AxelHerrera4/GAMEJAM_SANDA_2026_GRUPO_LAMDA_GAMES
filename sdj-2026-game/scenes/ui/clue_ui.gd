@@ -23,6 +23,7 @@ const BLACKOUT_OUT: float = 0.55
 
 var _input_guard: bool = false
 var _current_interactable: Node = null
+var _pause_menu_open: bool = false
 
 
 func _ready() -> void:
@@ -39,6 +40,8 @@ func _ready() -> void:
 	SignalHub.dialogue_requested.connect(_on_dialogue_requested)
 	SignalHub.hack_requested.connect(_on_hack_requested)
 	SignalHub.shatter_requested.connect(_on_shatter_requested)
+	SignalHub.game_over.connect(_on_game_over)
+	SignalHub.pause_menu_toggled.connect(_on_pause_menu_toggled)
 	FragmentManager.fragment_granted.connect(_on_fragment_granted)
 	hack_minigame.finished.connect(_on_hack_minigame_finished)
 
@@ -48,6 +51,8 @@ func _process(_delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _pause_menu_open:
+		return
 	if dialogue_box.visible and not _input_guard and event.is_action_pressed("interact"):
 		get_viewport().set_input_as_handled()
 		close_ui()
@@ -63,14 +68,17 @@ func close_ui() -> void:
 	photo_panel.hide()
 	dialogue_box.hide()
 	get_tree().paused = false
+	SignalHub.player_control_blocked.emit(false)
 	_refresh_prompt()
 	SignalHub.ui_closed.emit()
 
 
-func _open_ui() -> void:
+func _open_ui(freeze_world: bool) -> void:
 	_input_guard = true
 	interact_prompt.hide()
-	get_tree().paused = true
+	SignalHub.player_control_blocked.emit(true)
+	if freeze_world:
+		get_tree().paused = true
 
 
 func _on_photo_requested(title: String, texture: Texture2D, caption: String) -> void:
@@ -82,7 +90,7 @@ func _on_photo_requested(title: String, texture: Texture2D, caption: String) -> 
 	hack_minigame.hide()
 	photo_panel.show()
 	paper_sfx.play()
-	_open_ui()
+	_open_ui(true)
 
 
 func _on_dialogue_requested(speaker: String, text: String) -> void:
@@ -92,7 +100,7 @@ func _on_dialogue_requested(speaker: String, text: String) -> void:
 	photo_panel.hide()
 	hack_minigame.hide()
 	dialogue_box.show()
-	_open_ui()
+	_open_ui(true)
 
 
 func _on_hack_requested() -> void:
@@ -100,12 +108,12 @@ func _on_hack_requested() -> void:
 	dialogue_box.hide()
 	hack_minigame.start()
 	hack_minigame.show()
-	_open_ui()
+	_open_ui(false)
 
 
 func _on_hack_minigame_finished(success: bool) -> void:
 	hack_minigame.hide()
-	get_tree().paused = false
+	SignalHub.player_control_blocked.emit(false)
 	_refresh_prompt()
 	SignalHub.hack_finished.emit(success)
 
@@ -129,6 +137,18 @@ func _refresh_prompt() -> void:
 		label = _current_interactable.get_prompt_text()
 	interact_prompt.text = "[F] %s" % label
 	interact_prompt.show()
+
+
+func _on_pause_menu_toggled(open: bool) -> void:
+	_pause_menu_open = open
+
+
+func _on_game_over(_won: bool) -> void:
+	if hack_minigame.visible:
+		hack_minigame.force_close()
+	photo_panel.hide()
+	dialogue_box.hide()
+	interact_prompt.hide()
 
 
 func _on_shatter_requested() -> void:
@@ -165,3 +185,4 @@ func play_shatter() -> void:
 
 	blackout.hide()
 	get_tree().paused = false
+	SignalHub.player_control_blocked.emit(false)

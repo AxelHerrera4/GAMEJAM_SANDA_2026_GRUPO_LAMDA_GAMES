@@ -132,6 +132,7 @@ theme_override_font_sizes/font_size = 33
 text = "CLOSE X"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=2126545304]
+bus = &"Music"
 stream = ExtResource("4_l3cfh")
 autoplay = true
 
