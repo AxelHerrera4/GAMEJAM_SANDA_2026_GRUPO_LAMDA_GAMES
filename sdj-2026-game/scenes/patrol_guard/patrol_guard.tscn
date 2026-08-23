@@ -28,7 +28,7 @@ scale = Vector2(1.324893, 1.400001)
 shape = SubResource("CircleShape2D_2vina")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="." unique_id=1306274218]
-target_desired_distance = 20.0
+target_desired_distance = 40.0
 avoidance_enabled = true
 debug_enabled = true
 

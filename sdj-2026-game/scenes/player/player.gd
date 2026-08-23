@@ -19,6 +19,9 @@ extends CharacterBody2D
 @onready var hurt_timer: Timer = $HurtTimer
 @onready var stamina_regen_timer: Timer = $StaminaRegenTimer
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animation_tree: AnimationTree = $AnimationTree
+
+var facing_direction: Vector2 = Vector2.DOWN
 
 #stamina
 var _is_sprinting: bool = false
@@ -42,6 +45,9 @@ func _ready() -> void:
 		hurt_timer.wait_time = hurt_duration
 	if stamina_regen_timer:
 		stamina_regen_timer.wait_time = stamina_regen_delay
+	if animation_tree:
+		animation_tree.set("parameters/idle/blend_position", facing_direction)
+		animation_tree.set("parameters/move/blend_position", facing_direction)
 	SignalHub.player_health_changed.emit(health, max_health)
 	SignalHub.player_stamina_changed.emit(stamina, max_stamina)
 	
@@ -116,11 +122,15 @@ func _physics_process(delta: float) -> void:
 	if not _is_hurt:
 		input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
+	if input != Vector2.ZERO:
+		facing_direction = input
+		if animation_tree:
+			animation_tree.set("parameters/idle/blend_position", facing_direction)
+			animation_tree.set("parameters/move/blend_position", facing_direction)
+	
 	var current_speed: float = _handle_stamina(delta)
 	
 	velocity = (input * current_speed) + _knockback_velocity
-	if !is_zero_approx(velocity.length()):
-		rotation = velocity.angle()
 	move_and_slide()
 	_update_current_interactable()
 
