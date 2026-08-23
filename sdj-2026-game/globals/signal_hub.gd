@@ -34,6 +34,10 @@ signal access_points_changed(done: int, total: int)
 
 
 @warning_ignore("unused_signal")
+signal ending_requested
+
+
+@warning_ignore("unused_signal")
 signal hack_requested
 
 func emit_on_hack_requested() -> void:

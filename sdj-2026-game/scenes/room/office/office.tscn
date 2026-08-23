@@ -2,9 +2,123 @@
 
 [ext_resource type="PackedScene" uid="uid://bqdad38lqlkq6" path="res://scenes/room/room.tscn" id="1_27onf"]
 [ext_resource type="TileSet" uid="uid://up3vmhes72bi" path="res://resources/tile_level.tres" id="2_s687s"]
+[ext_resource type="Texture2D" uid="uid://berr4y55fqoqj" path="res://assets/tilesets/Room3/OfficeDecoTileSet/OfficeDecoTileSet.png" id="3_idga6"]
 [ext_resource type="PackedScene" uid="uid://da2xnmdt412vn" path="res://scenes/room/office/computer/computer.tscn" id="3_vfjp2"]
 [ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="4_xw3s0"]
 [ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="5_sq7xd"]
+[ext_resource type="PackedScene" path="res://scenes/doors/ending_door/ending_door.tscn" id="6_ending"]
+[ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="7_music"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ee5rl"]
+texture = ExtResource("3_idga6")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:0/0 = 0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:1/0 = 0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:2/0 = 0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:2/0 = 0
+7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.9575691, -5.484251, 8, -5.6583557, 8, 8, -1.1316719, 8)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6.180665, 2.0021877, -6.354768, 2.1762905, 8, -8, 8)
+4:3/0 = 0
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.9575691, -5.484251, 8, -5.6583557, 8, 8, -1.1316719, 8)
+5:3/0 = 0
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5.6583557, 2.1762905, -5.484251, 2.1762905, 8, -8, 8)
+6:3/0 = 0
+7:3/0 = 0
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.26115608, -8, 8, -8, 8, 4.4396324, -0.43525887, 4.613737)
+3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 0.78346443, -8, 0.43525696, 4.78784, -8, 4.78784)
+4:4/0 = 0
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.828085, -8, 8, -8, 8, 3.917324, -2.0021877, 3.917324)
+5:4/0 = 0
+5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 0.78346443, -8, 0.43525696, 4.78784, -8, 4.78784)
+6:4/0 = 0
+7:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_q8iyx"]
+physics_layer_0/collision_layer = 1
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_ee5rl")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ri5ts"]
+texture = ExtResource("3_idga6")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gandw"]
+sources/0 = SubResource("TileSetAtlasSource_ri5ts")
 
 [node name="Room" unique_id=69708080 instance=ExtResource("1_27onf")]
 
@@ -16,11 +130,22 @@ tile_set = ExtResource("2_s687s")
 tile_map_data = PackedByteArray("AAACAAAACgAJAAMAAAADAAAACgAKAAMAAAAEAAAACgAJAAMAAAAFAAAACgAJAAMAAAAGAAAACgAKAAMAAAAHAAAACgAJAAMAAAAIAAAACgAKAAMAAAAJAAAACgAJAAMAAAAKAAAACgAKAAMAAAALAAAACgAJAAMAAAAMAAAACgAKAAMAAAANAAAACgAJAAMAAAAOAAAACgAKAAMAAAAPAAAACgAJAAMAAAAQAAAACgAKAAMAAAARAAAACgAJAAMAAAASAAEACgADAAIAAAASAAIACgAEAAEAAAASAAMACgAEAAIAAAASAAQACgAEAAMAAAASAAUACgADAAIAAAASAAYACgADAAIAAAASAAcACgAEAAEAAAASAAgACgAEAAIAAAASAAkACgAEAAMAAAABAAEACgABAAIAAAABAAIACgABAAIAAAABAAMACgABAAIAAAABAAQACgAAAAEAAAABAAUACgAAAAIAAAABAAYACgAAAAIAAAABAAcACgAAAAMAAAABAAgACgABAAIAAAABAAkACgABAAIAAAABAAoACgABAAIAAAASAAoACgADAAIAAAABAAAACgABAAIAAAACAP//CgAJAAIAAAADAP//CgAKAAIAAAAEAP//CgAJAAIAAAAFAP//CgAJAAIAAAAGAP//CgAKAAIAAAAHAP//CgAJAAIAAAAIAP//CgAKAAIAAAAJAP//CgAJAAIAAAAKAP//CgAKAAIAAAALAP//CgAJAAIAAAAMAP//CgAKAAIAAAANAP//CgAJAAIAAAAOAP//CgAKAAIAAAAPAP//CgAJAAIAAAAQAP//CgAKAAIAAAARAP//CgAJAAIAAAASAAAACgADAAIAAAASAP//CgADAAIAAAABAP//CgABAAIAAAACAAsACgACAAMAAAADAAsACgACAAMAAAAEAAsACgACAAMAAAAFAAsACgACAAMAAAAGAAsACgACAAMAAAAHAAsACgACAAMAAAAIAAsACgACAAMAAAAJAAsACgACAAMAAAAKAAsACgACAAMAAAALAAsACgACAAMAAAAMAAsACgACAAMAAAANAAsACgACAAMAAAAOAAsACgACAAMAAAAPAAsACgACAAMAAAAQAAsACgACAAMAAAARAAsACgACAAMAAAABAAsACgABAAMAAAASAAsACgADAAMAAAACAP7/CgACAAEAAAADAP7/CgACAAEAAAAEAP7/CgACAAEAAAAFAP7/CgACAAEAAAAGAP7/CgACAAEAAAAHAP7/CgACAAEAAAAIAP7/CgACAAEAAAAJAP7/CgACAAEAAAAKAP7/CgACAAEAAAALAP7/CgACAAEAAAAMAP7/CgACAAEAAAANAP7/CgACAAEAAAAOAP7/CgACAAEAAAAPAP7/CgACAAEAAAAQAP7/CgACAAEAAAARAP7/CgACAAEAAAASAP7/CgAEAAAAAAABAP7/CgAAAAAAAAA=")
 tile_set = ExtResource("2_s687s")
 
-[node name="Obscure" parent="." index="1" unique_id=2072011277]
-visible = false
+[node name="Objetcs" type="TileMapLayer" parent="Tiles" parent_id_path=PackedInt32Array(213452734) index="3" unique_id=982400795]
+scale = Vector2(2.56, 2.56)
+tile_map_data = PackedByteArray("AAATAAAAAAACAAAAAAATAAEAAAACAAEAAAATAAIAAAACAAIAAAAUAAAAAAADAAAAAAAUAAEAAAADAAEAAAAUAAIAAAADAAIAAAAVAAAAAAAEAAAAAAAVAAEAAAAEAAEAAAAVAAIAAAAEAAIAAAAWAAAAAAAFAAAAAAAWAAEAAAAFAAEAAAAWAAIAAAAFAAIAAAAIAAAAAAACAAAAAAAIAAEAAAACAAEAAAAIAAIAAAACAAIAAAAJAAAAAAADAAAAAAAJAAEAAAADAAEAAAAJAAIAAAADAAIAAAAKAAAAAAAEAAAAAAAKAAEAAAAEAAEAAAAKAAIAAAAEAAIAAAALAAAAAAAFAAAAAAALAAEAAAAFAAEAAAALAAIAAAAFAAIAAAADAP//AAAGAAAAAAADAAAAAAAGAAEAAAADAAEAAAAGAAIAAAAEAP//AAAHAAAAAAAEAAAAAAAHAAEAAAAEAAEAAAAHAAIAAAAFAP//AAAGAAAAAAAFAAAAAAAGAAEAAAAFAAEAAAAGAAIAAAAGAP//AAAHAAAAAAAGAAAAAAAHAAEAAAAGAAEAAAAHAAIAAAANAP//AAAGAAAAAAANAAAAAAAGAAEAAAANAAEAAAAGAAIAAAAOAP//AAAHAAAAAAAOAAAAAAAHAAEAAAAOAAEAAAAHAAIAAAAPAP//AAAGAAAAAAAPAAAAAAAGAAEAAAAPAAEAAAAGAAIAAAAQAP//AAAHAAAAAAAQAAAAAAAHAAEAAAAQAAEAAAAHAAIAAAARAP//AAAGAAAAAAARAAAAAAAGAAEAAAARAAEAAAAGAAIAAAASAP//AAAHAAAAAAASAAAAAAAHAAEAAAASAAEAAAAHAAIAAAAXAP//AAAGAAAAAAAXAAAAAAAGAAEAAAAXAAEAAAAGAAIAAAAYAP//AAAHAAAAAAAYAAAAAAAHAAEAAAAYAAEAAAAHAAIAAAAZAP//AAAGAAAAAAAZAAAAAAAGAAEAAAAZAAEAAAAGAAIAAAAaAP//AAAHAAAAAAAaAAAAAAAHAAEAAAAaAAEAAAAHAAIAAAAWAAMAAAAEAAMAAAAWAAQAAAAEAAQAAAAXAAMAAAAFAAMAAAAXAAQAAAAFAAQAAAAGAAMAAAACAAMAAAAGAAQAAAACAAQAAAAHAAMAAAADAAMAAAAHAAQAAAADAAQAAAAEAAIAAAAHAAMAAAAaAAIAAAAGAAMAAAAbAAEAAAAHAAQAAAA=")
+tile_set = SubResource("TileSet_q8iyx")
+
+[node name="othersObjects" type="TileMapLayer" parent="Tiles" parent_id_path=PackedInt32Array(213452734) index="4" unique_id=1448198690]
+scale = Vector2(2.56, 2.56)
+tile_map_data = PackedByteArray("AAAUAAAAAAAAAAIAAAAUAAEAAAAAAAMAAAAVAAAAAAABAAIAAAAVAAEAAAABAAMAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAEAAAAKAAAAAAABAAAAAAAKAAEAAAABAAEAAAALAAEAAAAHAAMAAAATAAEAAAAHAAQAAAA=")
+tile_set = SubResource("TileSet_gandw")
 
 [node name="Computer" parent="Interactives" parent_id_path=PackedInt32Array(828243168) index="0" unique_id=418358465 instance=ExtResource("3_vfjp2")]
-position = Vector2(924, 227)
+position = Vector2(862, 65)
+
+[node name="ExitOffice" parent="Doors" parent_id_path=PackedInt32Array(1126311124) index="0" unique_id=1044820371 instance=ExtResource("6_ending")]
+position = Vector2(122, 389)
+message = "Ya no queda nada para mí aquí."
 
 [node name="Player2" parent="." index="7" unique_id=1768624832 instance=ExtResource("4_xw3s0")]
 position = Vector2(428, 297)
@@ -28,3 +153,14 @@ position = Vector2(428, 297)
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="8" unique_id=317986294]
 
 [node name="GameHud" parent="CanvasLayer" index="0" unique_id=155175906 instance=ExtResource("5_sq7xd")]
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 2.0
+offset_bottom = 3.0
+
+[node name="AmbientMusic" type="AudioStreamPlayer" parent="." index="9" unique_id=1204483966]
+process_mode = 3
+stream = ExtResource("7_music")
+volume_db = -12.0
+autoplay = true
+bus = &"Music"

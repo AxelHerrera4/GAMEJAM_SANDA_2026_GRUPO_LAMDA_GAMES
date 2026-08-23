@@ -2,11 +2,16 @@ extends Node
 
 
 const HACK: StringName = &"hack"
+const WEAPONS: StringName = &"weapons"
 
 const CATALOG: Dictionary = {
 	HACK: {
 		"name": "Fragmento de Hackeo",
 		"description": "Un retazo de código capaz de forzar cerraduras electrónicas.",
+	},
+	WEAPONS: {
+		"name": "Experto en Armas",
+		"description": "El adiestramiento de un capitán de las fuerzas armadas, intacto bajo la anestesia.",
 	},
 }
 

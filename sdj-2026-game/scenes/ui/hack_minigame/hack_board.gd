@@ -18,9 +18,10 @@ signal wire_failed
 @export var wire_width: float = 6.0
 @export var side_margin: float = 36.0
 
-const BG_COLOR: Color = Color(0.031372551, 0.03529412, 0.031372551, 1)
-const BG_BORDER: Color = Color(0.13725491, 0.14509805, 0.13725491, 1)
-const RAIL_COLOR: Color = Color(0.09019608, 0.09411765, 0.09019608, 1)
+@export_group("Fondo")
+@export var background_color: Color = Color(0.031372551, 0.03529412, 0.031372551, 1)
+@export var border_color: Color = Color(0.13725491, 0.14509805, 0.13725491, 1)
+@export var rail_color: Color = Color(0.09019608, 0.09411765, 0.09019608, 1)
 
 var _right_order: Array[int] = []
 var _links: Dictionary = {}
@@ -136,11 +137,14 @@ func _release_at(point: Vector2) -> void:
 
 func _draw() -> void:
 	var board := Rect2(Vector2.ZERO, size)
-	draw_rect(board, BG_COLOR)
-	draw_rect(board, BG_BORDER, false, 2.0)
+	if background_color.a > 0.0:
+		draw_rect(board, background_color)
+	if border_color.a > 0.0:
+		draw_rect(board, border_color, false, 2.0)
 
-	for i in wire_colors.size():
-		draw_line(_left_pos(i), Vector2(size.x - side_margin, _row_y(i)), RAIL_COLOR, 2.0, true)
+	if rail_color.a > 0.0:
+		for i in wire_colors.size():
+			draw_line(_left_pos(i), Vector2(size.x - side_margin, _row_y(i)), rail_color, 2.0, true)
 
 	for plug in _links.keys():
 		var color: Color = wire_colors[plug]

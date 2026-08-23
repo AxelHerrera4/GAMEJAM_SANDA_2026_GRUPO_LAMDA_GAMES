@@ -10,6 +10,7 @@ size = Vector2(72, 72)
 script = ExtResource("1_lwedf")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2128124616]
+visible = false
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_2er0l")
 

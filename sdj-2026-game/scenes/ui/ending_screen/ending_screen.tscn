@@ -1,0 +1,73 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/ending_screen/ending_screen.gd" id="1_ending"]
+[ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="2_font"]
+
+[node name="EndingScreen" type="CanvasLayer"]
+process_mode = 3
+layer = 150
+script = ExtResource("1_ending")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="ToBeContinued" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 52
+text = "To be continued..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = 10
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "DEVELOPERS
+LEONARDO YARANGA
+AXEL HERRERA
+
+GAME DESIGN
+DELIOS
+
+ART
+MACH21
+
+MUSIC
+ANDY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint" type="Label" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -90.0
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.54901963, 0.54509807, 0.5254902, 1)
+theme_override_font_sizes/font_size = 16
+text = "[F] Volver al menú"
+horizontal_alignment = 1
+vertical_alignment = 1

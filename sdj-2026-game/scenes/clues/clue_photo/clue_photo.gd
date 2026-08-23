@@ -5,7 +5,7 @@ extends Clue
 @export_multiline var caption: String = ""
 
 @export_group("Primera vez")
-@export var speaker: String = "Eddy"
+@export var speaker: String = "Paciente N° 6174"
 @export_multiline var first_time_text: String = ""
 
 

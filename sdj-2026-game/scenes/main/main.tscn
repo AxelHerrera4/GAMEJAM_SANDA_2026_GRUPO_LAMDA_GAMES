@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="1_hyk8p"]
 [ext_resource type="Script" uid="uid://ddrcf57lumi6m" path="res://scenes/main/menu.gd" id="1_k2fmo"]
 [ext_resource type="Texture2D" uid="uid://ds5e0d26tuxtk" path="res://assets/Menu/fontMenu.jpg" id="2_l3cfh"]
-[ext_resource type="AudioStream" uid="uid://cxpyyxaa4af5e" path="res://assets/Music/themeMenu.ogg" id="4_l3cfh"]
+[ext_resource type="AudioStream" uid="uid://tho7m3b1cod4" path="res://assets/Music/MenuTheme.ogg" id="4_6q06x"]
 [ext_resource type="AudioStream" uid="uid://bbrppterd3xn7" path="res://assets/SFX/MoveMenu/stepsGlass.ogg" id="5_6q06x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ln6rh"]
@@ -132,7 +132,7 @@ theme_override_font_sizes/font_size = 33
 text = "CLOSE X"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=2126545304]
-stream = ExtResource("4_l3cfh")
+stream = ExtResource("4_6q06x")
 autoplay = true
 
 [node name="Panel_Options" type="Panel" parent="." unique_id=1161588105]

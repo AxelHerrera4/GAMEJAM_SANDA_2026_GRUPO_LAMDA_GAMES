@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/doors/ending_door/ending_door.gd" id="1_ending"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ending"]
+size = Vector2(64, 96)
+
+[node name="EndingDoor" type="Area2D"]
+monitoring = false
+script = ExtResource("1_ending")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ending")

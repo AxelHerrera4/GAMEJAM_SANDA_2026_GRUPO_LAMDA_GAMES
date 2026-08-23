@@ -1,7 +1,7 @@
 class_name ClueNote
 extends Clue
 
-@export var speaker: String = "Eddy"
+@export var speaker: String = "Paciente N° 6174"
 @export var lines: Array[String] = ["..."]
 
 @export_group("Apagon")

@@ -3,7 +3,7 @@ extends Area2D
 
 signal hacked(point: HackPoint)
 
-@export var speaker: String = "Eddy"
+@export var speaker: String = "Paciente N° 6174"
 @export_multiline var success_text: String = "Punto de acceso asegurado."
 @export_multiline var already_done_text: String = "Este punto ya está bajo mi control."
 

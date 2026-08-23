@@ -11,7 +11,7 @@ extends Area2D
 @export_group("Prompts")
 @export var prompt_locked: String = "Hackear cerradura"
 @export var prompt_open: String = "Abrir puerta"
-@export var speaker_name: String = "Eddy"
+@export var speaker_name: String = "Paciente N° 6174"
 
 
 func _ready() -> void:

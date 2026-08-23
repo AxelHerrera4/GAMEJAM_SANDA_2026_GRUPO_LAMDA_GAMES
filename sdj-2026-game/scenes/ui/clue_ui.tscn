@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://sf4mivq05c3g"]
+[gd_scene format=3 uid="uid://cvt0asclfuwd0"]
 
-[ext_resource type="Script" uid="uid://bqrd52ngp1nx1" path="res://scenes/ui/clue_ui/clue_ui.gd" id="1_7d7x7"]
-[ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="2_ehmdd"]
-[ext_resource type="PackedScene" uid="uid://ppme5ug1gp15" path="res://scenes/ui/hack_minigame/hack_minigame.tscn" id="3_miaaq"]
-[ext_resource type="AudioStream" uid="uid://ckwooe6vtewic" path="res://assets/SFX/MoveMenu/TakePaper.ogg" id="4_yks4t"]
-[ext_resource type="AudioStream" uid="uid://dx26xmks4lalk" path="res://assets/SFX/Interfaces/brokenGlass.ogg" id="5_smtmn"]
+[ext_resource type="Script" uid="uid://bqrd52ngp1nx1" path="res://scenes/ui/clue_ui/clue_ui.gd" id="1_clueui"]
+[ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="2_font"]
+[ext_resource type="PackedScene" uid="uid://befdh4uvhklmx" path="res://scenes/ui/hack_minigame.tscn" id="3_hack"]
+[ext_resource type="AudioStream" uid="uid://ckwooe6vtewic" path="res://assets/SFX/MoveMenu/TakePaper.ogg" id="4_paper"]
+[ext_resource type="AudioStream" uid="uid://dx26xmks4lalk" path="res://assets/SFX/Interfaces/brokenGlass.ogg" id="5_glass"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toast"]
 bg_color = Color(0.07450981, 0.07450981, 0.06666667, 0.9607843)
@@ -77,10 +77,9 @@ corner_radius_bottom_left = 2
 [node name="ClueUI" type="CanvasLayer" unique_id=1765662989]
 process_mode = 3
 layer = 10
-script = ExtResource("1_7d7x7")
+script = ExtResource("1_clueui")
 
 [node name="InteractPrompt" type="Label" parent="." unique_id=1743346960]
-visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -95,14 +94,13 @@ grow_vertical = 0
 theme_override_colors/font_color = Color(0.7411765, 0.73333335, 0.7019608, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0.8)
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("2_ehmdd")
+theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 18
 text = "[F] Interactuar"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="FragmentToast" type="Panel" parent="." unique_id=925516734]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -139,13 +137,12 @@ horizontal_alignment = 1
 [node name="ToastName" type="Label" parent="FragmentToast/Margin/VBox" unique_id=1373349424]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7607843, 0.7529412, 0.7176471, 1)
-theme_override_fonts/font = ExtResource("2_ehmdd")
+theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 20
 text = "Fragmento"
 horizontal_alignment = 1
 
 [node name="DialogueBox" type="Panel" parent="." unique_id=1351374563]
-visible = false
 clip_contents = true
 anchors_preset = 12
 anchor_top = 1.0
@@ -178,9 +175,9 @@ theme_override_constants/separation = 8
 [node name="Speaker" type="Label" parent="DialogueBox/Margin/VBox" unique_id=1912231043]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5764706, 0.58431375, 0.5568628, 1)
-theme_override_fonts/font = ExtResource("2_ehmdd")
+theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 17
-text = "Paciente N° 6174"
+text = "Eddy"
 
 [node name="DialogueText" type="Label" parent="DialogueBox/Margin/VBox" unique_id=1260413316]
 layout_mode = 2
@@ -198,7 +195,6 @@ text = "[F] Cerrar"
 horizontal_alignment = 2
 
 [node name="PhotoPanel" type="Panel" parent="." unique_id=264506062]
-visible = false
 clip_contents = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -232,7 +228,7 @@ theme_override_constants/separation = 12
 [node name="PhotoTitle" type="Label" parent="PhotoPanel/Margin/VBox" unique_id=1107406668]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.627451, 0.62352943, 0.5921569, 1)
-theme_override_fonts/font = ExtResource("2_ehmdd")
+theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 20
 text = "Foto"
 horizontal_alignment = 1
@@ -261,15 +257,19 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.6901961, 0.68235296, 0.654902, 1)
 theme_override_colors/font_pressed_color = Color(0.54901963, 0.54509807, 0.5254902, 1)
 theme_override_colors/font_hover_color = Color(0.8509804, 0.84313726, 0.8117647, 1)
-theme_override_fonts/font = ExtResource("2_ehmdd")
+theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
 text = "Cerrar foto"
 
-[node name="HackMinigame" parent="." unique_id=1735186318 instance=ExtResource("3_miaaq")]
-visible = false
+[node name="HackMinigame" parent="." unique_id=1735186318 instance=ExtResource("3_hack")]
+clip_contents = false
+offset_left = -310.0
+offset_top = -230.0
+offset_right = 310.0
+offset_bottom = 230.0
 
 [node name="Blackout" type="ColorRect" parent="." unique_id=481147808]
 visible = false
@@ -282,9 +282,9 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
 [node name="PaperSfx" type="AudioStreamPlayer" parent="." unique_id=818408698]
-stream = ExtResource("4_yks4t")
+stream = ExtResource("4_paper")
 
 [node name="GlassSfx" type="AudioStreamPlayer" parent="." unique_id=1179879360]
-stream = ExtResource("5_smtmn")
+stream = ExtResource("5_glass")
 
 [connection signal="pressed" from="PhotoPanel/Margin/VBox/CloseButton" to="." method="_on_close_button_pressed"]

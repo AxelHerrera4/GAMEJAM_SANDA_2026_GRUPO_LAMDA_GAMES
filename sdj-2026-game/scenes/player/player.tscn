@@ -328,6 +328,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_intr1")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=176177808]
+visible = false
 shadow_enabled = true
 texture = ExtResource("3_gmlin")
 texture_scale = 1.8

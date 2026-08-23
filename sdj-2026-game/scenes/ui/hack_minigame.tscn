@@ -1,12 +1,11 @@
-[gd_scene format=3 uid="uid://ppme5ug1gp15"]
+[gd_scene format=3 uid="uid://befdh4uvhklmx"]
 
-[ext_resource type="Script" uid="uid://byiurvte77ju5" path="res://scenes/ui/hack_minigame/hack_minigame.gd" id="1_ul7mi"]
-[ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="2_npo8o"]
-[ext_resource type="Script" uid="uid://dwu5emrwq3oey" path="res://scenes/ui/hack_minigame/hack_board.gd" id="3_xtewg"]
-[ext_resource type="AudioStream" uid="uid://d2l0gr6q17wvg" path="res://assets/SFX/Interfaces/ShowHack.mp3" id="4_4qf1k"]
-[ext_resource type="AudioStream" uid="uid://csa55v7hdu765" path="res://assets/SFX/Interfaces/Hacker.ogg" id="5_06bx3"]
-[ext_resource type="AudioStream" uid="uid://bys7h0g07xfj3" path="res://assets/SFX/Interfaces/SolveHack.ogg" id="6_hc1m0"]
-[ext_resource type="Texture2D" uid="uid://dwgptpkgj7a8b" path="res://assets/tilesets/Things/PanelHack.png" id="7_panel"]
+[ext_resource type="Script" uid="uid://byiurvte77ju5" path="res://scenes/ui/hack_minigame/hack_minigame.gd" id="1_hackpanel"]
+[ext_resource type="Script" uid="uid://dwu5emrwq3oey" path="res://scenes/ui/hack_minigame/hack_board.gd" id="2_hackboard"]
+[ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="3_font"]
+[ext_resource type="AudioStream" uid="uid://d2l0gr6q17wvg" path="res://assets/SFX/Interfaces/ShowHack.mp3" id="4_showhack"]
+[ext_resource type="AudioStream" uid="uid://csa55v7hdu765" path="res://assets/SFX/Interfaces/Hacker.ogg" id="5_hackerloop"]
+[ext_resource type="AudioStream" uid="uid://bys7h0g07xfj3" path="res://assets/SFX/Interfaces/SolveHack.ogg" id="6_solvehack"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hackpanel"]
 bg_color = Color(0.06666667, 0.07058824, 0.07058824, 0.972549)
@@ -56,7 +55,7 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[node name="HackMinigame" type="Panel" unique_id=379792728]
+[node name="HackMinigame" type="Panel" unique_id=382852259]
 clip_contents = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -70,9 +69,9 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hackpanel")
-script = ExtResource("1_ul7mi")
+script = ExtResource("1_hackpanel")
 
-[node name="Margin" type="MarginContainer" parent="." unique_id=1622581225]
+[node name="Margin" type="MarginContainer" parent="." unique_id=1703130301]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,41 +83,25 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 16
 
-[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=1192215913]
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=24931318]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="Margin/VBox" unique_id=1712490356]
+[node name="Title" type="Label" parent="Margin/VBox" unique_id=1541971282]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.627451, 0.62352943, 0.5921569, 1)
-theme_override_fonts/font = ExtResource("2_npo8o")
+theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 18
 text = "CERRADURA ELECTRÓNICA"
 horizontal_alignment = 1
 
-[node name="Board" type="Control" parent="Margin/VBox" unique_id=1200285428]
+[node name="Board" type="Control" parent="Margin/VBox" unique_id=636395276]
 custom_minimum_size = Vector2(0, 220)
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("3_xtewg")
-background_color = Color(0, 0, 0, 0.35)
-rail_color = Color(0, 0, 0, 0)
+script = ExtResource("2_hackboard")
 
-[node name="Background" type="TextureRect" parent="Margin/VBox/Board" unique_id=1533017421]
-show_behind_parent = true
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("7_panel")
-expand_mode = 1
-stretch_mode = 0
-
-[node name="Status" type="Label" parent="Margin/VBox" unique_id=989096234]
+[node name="Status" type="Label" parent="Margin/VBox" unique_id=1315415520]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6431373, 0.6392157, 0.6156863, 1)
@@ -127,27 +110,27 @@ text = "Conecta cada cable con su terminal."
 horizontal_alignment = 1
 clip_text = true
 
-[node name="CancelButton" type="Button" parent="Margin/VBox" unique_id=80893700]
+[node name="CancelButton" type="Button" parent="Margin/VBox" unique_id=294185169]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6901961, 0.68235296, 0.654902, 1)
 theme_override_colors/font_pressed_color = Color(0.54901963, 0.54509807, 0.5254902, 1)
 theme_override_colors/font_hover_color = Color(0.8509804, 0.84313726, 0.8117647, 1)
-theme_override_fonts/font = ExtResource("2_npo8o")
+theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_hackbtn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_hackbtn_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_hackbtn_hover")
 text = "Abortar"
 
-[node name="ShowSfx" type="AudioStreamPlayer" parent="." unique_id=335756856]
-stream = ExtResource("4_4qf1k")
+[node name="ShowSfx" type="AudioStreamPlayer" parent="." unique_id=612088612]
+stream = ExtResource("4_showhack")
 
-[node name="LoopSfx" type="AudioStreamPlayer" parent="." unique_id=594068153]
-stream = ExtResource("5_06bx3")
+[node name="LoopSfx" type="AudioStreamPlayer" parent="." unique_id=1103742932]
+stream = ExtResource("5_hackerloop")
 volume_db = -6.0
 
-[node name="SolveSfx" type="AudioStreamPlayer" parent="." unique_id=1021708719]
-stream = ExtResource("6_hc1m0")
+[node name="SolveSfx" type="AudioStreamPlayer" parent="." unique_id=220107896]
+stream = ExtResource("6_solvehack")
 
 [connection signal="pressed" from="Margin/VBox/CancelButton" to="." method="_on_cancel_button_pressed"]

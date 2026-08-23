@@ -64,7 +64,7 @@ clue_title = "Foto"
 
 [node name="Clue_WallWriting" parent="." unique_id=749959514 instance=ExtResource("6_note")]
 position = Vector2(155, 28)
-lines = Array[String](["Yo soy Eddy y soy......", "Soy un experto en sistemas. Necesito irme de aquí."])
+lines = Array[String](["Yo soy el Paciente N° 6174 y soy......", "Soy un experto en sistemas. Necesito irme de aquí."])
 shatter_after_line = 0
 clue_id = &"escrito_pared"
 clue_title = "Escrito en la pared"
