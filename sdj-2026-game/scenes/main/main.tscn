@@ -44,13 +44,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -317.0
-offset_top = -309.0
-offset_right = 308.0
-offset_bottom = -253.0
+offset_left = -104.0
+offset_top = -299.0
+offset_right = 89.0
+offset_bottom = -243.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "FRAGMENTADO THE GAME"
+text = "I Am...?"
 label_settings = SubResource("LabelSettings_ln6rh")
 
 [node name="Button_Play" type="Button" parent="." unique_id=1334373781]
@@ -132,7 +132,6 @@ theme_override_font_sizes/font_size = 33
 text = "CLOSE X"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=2126545304]
-bus = &"Music"
 stream = ExtResource("4_l3cfh")
 autoplay = true
 

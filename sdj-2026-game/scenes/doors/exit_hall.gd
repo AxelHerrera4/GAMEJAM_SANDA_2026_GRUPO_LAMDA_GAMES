@@ -25,12 +25,13 @@ func get_prompt_text() -> String:
 
 func interact(_player: Node) -> void:
 	if not is_unlocked():
+		Transition.play_locked_door()
 		SignalHub.dialogue_requested.emit(speaker, "%s (%d/%d puntos)" % [locked_text, _done, _total])
 		return
 
 	SignalHub.dialogue_requested.emit(speaker, opened_text)
 	await SignalHub.ui_closed
-	get_tree().change_scene_to_file(next_scene)
+	Transition.change_scene(next_scene)
 
 
 func _on_access_points_changed(done: int, total: int) -> void:

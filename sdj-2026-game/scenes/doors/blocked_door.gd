@@ -11,4 +11,5 @@ func get_prompt_text() -> String:
 
 
 func interact(_player: Node) -> void:
+	Transition.play_locked_door()
 	SignalHub.dialogue_requested.emit(speaker, message)

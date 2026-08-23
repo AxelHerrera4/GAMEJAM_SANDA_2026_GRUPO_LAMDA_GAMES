@@ -16,6 +16,7 @@ func get_prompt_text() -> String:
 
 func interact(_player: Node) -> void:
 	if locked and not FragmentManager.has_fragment(required_fragment):
+		Transition.play_locked_door()
 		SignalHub.dialogue_requested.emit("Eddy", locked_text)
 		return
 
@@ -28,4 +29,4 @@ func interact(_player: Node) -> void:
 
 	SignalHub.dialogue_requested.emit("Eddy", hack_text)
 	await SignalHub.ui_closed
-	get_tree().change_scene_to_file(next_scene)
+	Transition.change_scene(next_scene)

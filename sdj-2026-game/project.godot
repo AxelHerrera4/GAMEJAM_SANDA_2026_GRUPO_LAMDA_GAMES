@@ -22,7 +22,12 @@ ScoreManager="*uid://ddirxkhqwsk2j"
 SignalHub="*uid://b6rbnddfvp762"
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 FragmentManager="*res://globals/fragment_manager.gd"
+Transition="*res://globals/transition.gd"
 PauseMenu="*res://scenes/ui/pause_menu.tscn"
+
+[audio]
+
+buses/default_bus_layout="res://default_bus_layout.tres"
 
 [display]
 
