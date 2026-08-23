@@ -147,10 +147,10 @@ position = Vector2(862, 65)
 position = Vector2(122, 389)
 message = "Ya no queda nada para mí aquí."
 
-[node name="Player2" parent="." index="7" unique_id=1768624832 instance=ExtResource("4_xw3s0")]
-position = Vector2(428, 297)
+[node name="Player" parent="." index="7" unique_id=1768624832 instance=ExtResource("4_xw3s0")]
+position = Vector2(212, 391)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="8" unique_id=317986294]
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="8" unique_id=1222029475]
 
 [node name="GameHud" parent="CanvasLayer" index="0" unique_id=155175906 instance=ExtResource("5_sq7xd")]
 offset_left = 2.0

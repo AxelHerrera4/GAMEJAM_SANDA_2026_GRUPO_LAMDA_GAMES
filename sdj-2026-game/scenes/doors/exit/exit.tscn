@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://blfwseil357xg"]
+
+[ext_resource type="Script" path="res://scenes/doors/exit/exit.gd" id="1_exitscript"]
+[ext_resource type="Texture2D" uid="uid://bqrwcadmmmuwh" path="res://icon.svg" id="1_q20up"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mjdfx"]
+size = Vector2(36, 42)
+
+[node name="Exit" type="Area2D" unique_id=1172061543]
+script = ExtResource("1_exitscript")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2087823340]
+modulate = Color(0.2159017, 0.21590173, 0.2159017, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_q20up")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1742131259]
+shape = SubResource("RectangleShape2D_mjdfx")
+
+[node name="Label" type="Label" parent="." unique_id=2007967852]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Exit"

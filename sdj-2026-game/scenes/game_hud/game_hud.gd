@@ -4,6 +4,9 @@ extends Control
 @onready var stamina_bar: TextureRect = $MC/StaminaBar
 @onready var color_rect_game_over: ColorRect = $ColorRectGameOver
 @onready var label_game_over: Label = $ColorRectGameOver/LabelGameOver
+@onready var fragment_label: Label = $MC/FragmentLabel
+
+var _faces: Array[CanvasItem] = []
 
 func _ready() -> void:
 	if color_rect_game_over:
@@ -11,6 +14,42 @@ func _ready() -> void:
 	SignalHub.player_health_changed.connect(_on_player_health_changed)
 	SignalHub.player_stamina_changed.connect(_on_player_stamina_changed)
 	SignalHub.game_over.connect(_on_game_over)
+	SignalHub.fragment_progress.connect(_on_fragment_progress)
+	_on_fragment_progress(FragmentManager.get_owned().size(), FragmentManager.CATALOG.size())
+	_collect_faces()
+	_update_face()
+
+func _collect_faces() -> void:
+	_faces.clear()
+
+	var found: Dictionary = {}
+	for node in find_children("*", "CanvasItem", true, false):
+		var lower_name: String = String(node.name).to_lower()
+		if not lower_name.begins_with("faceui"):
+			continue
+		var suffix: String = lower_name.substr(6)
+		if suffix.is_valid_int():
+			found[suffix.to_int()] = node
+
+	var numbers: Array = found.keys()
+	numbers.sort()
+	for number in numbers:
+		_faces.append(found[number])
+
+	if _faces.is_empty():
+		push_warning("GameHud: no encontre ningun nodo FaceUi1, FaceUi2, ...")
+
+func _update_face() -> void:
+	if _faces.is_empty():
+		return
+	var owned: int = clampi(FragmentManager.get_owned().size(), 0, _faces.size() - 1)
+	for i in _faces.size():
+		_faces[i].visible = (i == owned)
+
+func _on_fragment_progress(owned: int, total: int) -> void:
+	if fragment_label:
+		fragment_label.text = "Fragmentos: %d/%d" % [owned, total]
+	_update_face()
 
 func _on_player_health_changed(current_health: int, max_health: int) -> void:
 	if health_bar:

@@ -5,10 +5,15 @@
 [ext_resource type="Texture2D" uid="uid://dw50xxv407cn" path="res://assets/for_test/ui_bar/greenbar (3).png" id="2_under"]
 [ext_resource type="Texture2D" uid="uid://dk7046a11abjx" path="res://assets/for_test/ui_bar/greenbar (2).png" id="3_progress"]
 [ext_resource type="Texture2D" uid="uid://dph2s01u11kcv" path="res://assets/for_test/ui_bar/energy_bar_3_modes.png" id="4_energy"]
+[ext_resource type="Texture2D" uid="uid://c5itoipko4nsg" path="res://assets/UI/FaceUI1.png" id="5_3hirk"]
+[ext_resource type="Texture2D" uid="uid://byfj5x3b03r86" path="res://assets/UI/FaceUI2.png" id="6_7qc2a"]
+[ext_resource type="Texture2D" uid="uid://dhnxtm81h56so" path="res://assets/UI/FaceUI3.png" id="7_r5rb7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_stamina"]
 atlas = ExtResource("4_energy")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q8iyx"]
 
 [node name="GameHud" type="Control" unique_id=155175906]
 process_mode = 3
@@ -19,8 +24,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7s1mr")
-
-[node name="ClueUI" parent="." unique_id=1765662989 instance=ExtResource("2_aiwwf")]
 
 [node name="ColorRectGameOver" type="ColorRect" parent="." unique_id=2006786486]
 visible = false
@@ -53,6 +56,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 13.0
+offset_right = -11.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 10
@@ -81,3 +88,37 @@ offset_transform_position = Vector2(75, 20)
 offset_transform_scale = Vector2(5, 2)
 texture = SubResource("AtlasTexture_stamina")
 stretch_mode = 2
+
+[node name="Fragment" type="TextureRect" parent="MC" unique_id=1870068704]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(75, 20)
+offset_transform_scale = Vector2(5, 2)
+texture = SubResource("CanvasTexture_q8iyx")
+stretch_mode = 2
+
+[node name="FragmentLabel" type="Label" parent="MC" unique_id=1847291045]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 18
+text = "Fragmentos: 0/2"
+
+[node name="FaceUi1" type="Sprite2D" parent="MC" unique_id=1993717807]
+position = Vector2(-36.190002, 36.809998)
+scale = Vector2(1.71, 1.71)
+texture = ExtResource("5_3hirk")
+
+[node name="FaceUi2" type="Sprite2D" parent="MC" unique_id=1150444555]
+position = Vector2(-35.190002, 36.809998)
+scale = Vector2(1.71, 1.71)
+texture = ExtResource("6_7qc2a")
+
+[node name="FaceUi3" type="Sprite2D" parent="MC" unique_id=804491004]
+position = Vector2(-34.190002, 36.809998)
+scale = Vector2(1.71, 1.71)
+texture = ExtResource("7_r5rb7")
+
+[node name="ClueUI" parent="." unique_id=1765662989 instance=ExtResource("2_aiwwf")]

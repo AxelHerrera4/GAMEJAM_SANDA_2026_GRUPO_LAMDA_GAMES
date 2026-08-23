@@ -3,7 +3,7 @@ extends Area2D
 
 @export var speaker: String = "Paciente N° 6174"
 @export var prompt_text: String = "Abrir puerta"
-@export_file("*.tscn") var next_scene: String = "res://scenes/level_base/level_base.tscn"
+@export_file("*.tscn") var next_scene: String = "res://scenes/room/office/office.tscn"
 @export_multiline var locked_text: String = "Está trancada desde el otro lado. Primero necesito desbloquearla: hace falta acceso de tres puntos."
 @export_multiline var opened_text: String = "Los tres puntos responden a la vez. Los cerrojos ceden."
 

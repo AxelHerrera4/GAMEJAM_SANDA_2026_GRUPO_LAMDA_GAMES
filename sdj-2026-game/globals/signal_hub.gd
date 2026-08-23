@@ -61,3 +61,8 @@ func emit_on_player_health_changed(current_health: int, max_health: int) -> void
 
 func emit_on_player_stamina_changed(current_stamina: float, max_stamina: float) -> void:
 	player_stamina_changed.emit(current_stamina, max_stamina)
+
+@warning_ignore("unused_signal")
+signal fragment_progress(owned: int, total: int)
+@warning_ignore("unused_signal")
+signal all_fragments_collected

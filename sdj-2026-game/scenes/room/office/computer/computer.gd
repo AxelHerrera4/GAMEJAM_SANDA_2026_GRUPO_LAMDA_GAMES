@@ -2,7 +2,7 @@ class_name Computer
 extends Area2D
 
 @export var speaker: String = "Paciente N° 6174"
-@export var reward_fragment: StringName = &"weapons"
+@export var reward_fragment: StringName = &"attack"
 @export_multiline var memory_text: String = "Con que esto era antes... un capitán de las fuerzas armadas. Creo que ya voy entendiendo quién soy."
 @export_multiline var leave_text: String = "Es hora de salir de aquí..."
 
