@@ -1,7 +1,6 @@
 class_name Clue
 extends Area2D
 
-
 signal inspected(clue: Clue)
 
 @export var clue_id: StringName = &""
@@ -11,6 +10,7 @@ var _already_inspected: bool = false
 
 
 func _ready() -> void:
+	add_to_group("interactable")
 	if clue_id == &"":
 		clue_id = StringName(name)
 

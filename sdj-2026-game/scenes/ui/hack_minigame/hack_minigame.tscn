@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene format=3 uid="uid://ppme5ug1gp15"]
 
-[ext_resource type="Script" path="res://scenes/ui/hack_minigame.gd" id="1_hackpanel"]
-[ext_resource type="Script" path="res://scenes/ui/hack_board.gd" id="2_hackboard"]
-[ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="3_font"]
-[ext_resource type="AudioStream" path="res://assets/SFX/Interfaces/ShowHack.mp3" id="4_showhack"]
-[ext_resource type="AudioStream" path="res://assets/SFX/Interfaces/Hacker.ogg" id="5_hackerloop"]
-[ext_resource type="AudioStream" path="res://assets/SFX/Interfaces/SolveHack.ogg" id="6_solvehack"]
+[ext_resource type="Script" uid="uid://byiurvte77ju5" path="res://scenes/ui/hack_minigame/hack_minigame.gd" id="1_ul7mi"]
+[ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="2_npo8o"]
+[ext_resource type="Script" uid="uid://dwu5emrwq3oey" path="res://scenes/ui/hack_minigame/hack_board.gd" id="3_xtewg"]
+[ext_resource type="AudioStream" uid="uid://d2l0gr6q17wvg" path="res://assets/SFX/Interfaces/ShowHack.mp3" id="4_4qf1k"]
+[ext_resource type="AudioStream" uid="uid://csa55v7hdu765" path="res://assets/SFX/Interfaces/Hacker.ogg" id="5_06bx3"]
+[ext_resource type="AudioStream" uid="uid://bys7h0g07xfj3" path="res://assets/SFX/Interfaces/SolveHack.ogg" id="6_hc1m0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hackpanel"]
 bg_color = Color(0.06666667, 0.07058824, 0.07058824, 0.972549)
@@ -31,18 +31,6 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hackbtn_hover"]
-bg_color = Color(0.16470589, 0.17254902, 0.16470589, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.34117648, 0.34901962, 0.33333334, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hackbtn_pressed"]
 bg_color = Color(0.07058824, 0.07450981, 0.07058824, 1)
 border_width_left = 1
@@ -55,9 +43,20 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[node name="HackMinigame" type="Panel"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hackbtn_hover"]
+bg_color = Color(0.16470589, 0.17254902, 0.16470589, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.34117648, 0.34901962, 0.33333334, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="HackMinigame" type="Panel" unique_id=379792728]
 clip_contents = true
-layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -70,9 +69,9 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hackpanel")
-script = ExtResource("1_hackpanel")
+script = ExtResource("1_ul7mi")
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="." unique_id=1622581225]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,25 +83,25 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 16
 
-[node name="VBox" type="VBoxContainer" parent="Margin"]
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=1192215913]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="Margin/VBox"]
+[node name="Title" type="Label" parent="Margin/VBox" unique_id=1712490356]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.627451, 0.62352943, 0.5921569, 1)
-theme_override_fonts/font = ExtResource("3_font")
+theme_override_fonts/font = ExtResource("2_npo8o")
 theme_override_font_sizes/font_size = 18
 text = "CERRADURA ELECTRÓNICA"
 horizontal_alignment = 1
 
-[node name="Board" type="Control" parent="Margin/VBox"]
+[node name="Board" type="Control" parent="Margin/VBox" unique_id=1200285428]
 custom_minimum_size = Vector2(0, 220)
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("2_hackboard")
+script = ExtResource("3_xtewg")
 
-[node name="Status" type="Label" parent="Margin/VBox"]
+[node name="Status" type="Label" parent="Margin/VBox" unique_id=989096234]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6431373, 0.6392157, 0.6156863, 1)
@@ -111,27 +110,27 @@ text = "Conecta cada cable con su terminal."
 horizontal_alignment = 1
 clip_text = true
 
-[node name="CancelButton" type="Button" parent="Margin/VBox"]
+[node name="CancelButton" type="Button" parent="Margin/VBox" unique_id=80893700]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6901961, 0.68235296, 0.654902, 1)
-theme_override_colors/font_hover_color = Color(0.8509804, 0.84313726, 0.8117647, 1)
 theme_override_colors/font_pressed_color = Color(0.54901963, 0.54509807, 0.5254902, 1)
-theme_override_fonts/font = ExtResource("3_font")
+theme_override_colors/font_hover_color = Color(0.8509804, 0.84313726, 0.8117647, 1)
+theme_override_fonts/font = ExtResource("2_npo8o")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_hackbtn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_hackbtn_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_hackbtn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hackbtn_hover")
 text = "Abortar"
 
-[node name="ShowSfx" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_showhack")
+[node name="ShowSfx" type="AudioStreamPlayer" parent="." unique_id=335756856]
+stream = ExtResource("4_4qf1k")
 
-[node name="LoopSfx" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_hackerloop")
+[node name="LoopSfx" type="AudioStreamPlayer" parent="." unique_id=594068153]
+stream = ExtResource("5_06bx3")
 volume_db = -6.0
 
-[node name="SolveSfx" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_solvehack")
+[node name="SolveSfx" type="AudioStreamPlayer" parent="." unique_id=1021708719]
+stream = ExtResource("6_hc1m0")
 
 [connection signal="pressed" from="Margin/VBox/CancelButton" to="." method="_on_cancel_button_pressed"]

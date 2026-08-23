@@ -3,15 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="1_gra7w"]
 [ext_resource type="Script" uid="uid://dmud040qi3r5o" path="res://scenes/Level_Jail/level_jail.gd" id="1_rr37k"]
 [ext_resource type="TileSet" uid="uid://up3vmhes72bi" path="res://resources/tile_level.tres" id="2_tlogj"]
-[ext_resource type="Script" uid="uid://c7flusxcbmykr" path="res://scenes/Level_Jail/interact_zone_exit.gd" id="3_njpst"]
+[ext_resource type="PackedScene" uid="uid://y8mad2cf77cg" path="res://scenes/doors/door/door.tscn" id="3_door"]
 [ext_resource type="Script" uid="uid://c2fu6diu3b6rw" path="res://scenes/Level_Jail/light_ceiling.gd" id="4_k1nnb"]
-[ext_resource type="Script" uid="uid://671keyoxsx52" path="res://scenes/Level_Jail/clue_photo.gd" id="5_txukc"]
-[ext_resource type="Script" uid="uid://dbxvn8p4pkrf6" path="res://scenes/Level_Jail/clue_note.gd" id="6_note"]
-[ext_resource type="PackedScene" uid="uid://sf4mivq05c3g" path="res://scenes/ui/clue_ui.tscn" id="7_clueui"]
+[ext_resource type="PackedScene" path="res://scenes/clues/clue_photo/clue_photo.tscn" id="5_photo"]
+[ext_resource type="PackedScene" path="res://scenes/clues/clue_note/clue_note.tscn" id="6_note"]
 [ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="8_music"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0dgro"]
-size = Vector2(115, 201.5)
+[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="9_tlogj"]
 
 [sub_resource type="Gradient" id="Gradient_txukc"]
 offsets = PackedFloat32Array(0, 0.001572327, 0.014150944, 0.995283, 0.9984277, 1)
@@ -22,9 +19,6 @@ gradient = SubResource("Gradient_txukc")
 fill = 1
 fill_from = Vector2(0.5, 0.51706487)
 fill_to = Vector2(0.49317408, 0.011945393)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q8iyx"]
-size = Vector2(82.125, 174.5)
 
 [node name="LevelJail" type="Node2D" unique_id=938509139]
 script = ExtResource("1_rr37k")
@@ -48,15 +42,9 @@ scale = Vector2(0.66504335, 0.81626743)
 build_mode = 1
 polygon = PackedVector2Array(1148.9927, 10.350525, 1148.9927, 655.3506, -6.007324, 655.3506, -4.007324, 8.350525)
 
-[node name="InteractZone_Exit" type="Area2D" parent="." unique_id=259502840 groups=["interactable"]]
-position = Vector2(582.5, 32.5)
-monitoring = false
-script = ExtResource("3_njpst")
+[node name="Door" parent="." unique_id=259502840 instance=ExtResource("3_door")]
+position = Vector2(386, 28)
 next_scene = "res://scenes/Level_Hallway/level_Hallway.tscn"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone_Exit" unique_id=253674866]
-position = Vector2(-197, -54.25)
-shape = SubResource("RectangleShape2D_0dgro")
 
 [node name="Obscure" type="CanvasModulate" parent="." unique_id=168834361]
 color = Color(0.5866749, 0.5866749, 0.5866749, 1)
@@ -68,36 +56,26 @@ energy = 0.75
 texture = SubResource("GradientTexture2D_0dgro")
 script = ExtResource("4_k1nnb")
 
-[node name="Clue_Photo" type="Area2D" parent="." unique_id=1902462583 groups=["interactable"]]
-position = Vector2(768, 31)
-monitoring = false
-script = ExtResource("5_txukc")
+[node name="Clue_Photo" parent="." unique_id=1902462583 instance=ExtResource("5_photo")]
+position = Vector2(576, 22)
 first_time_text = "Te recuerdo... cómo te extraño demasiado."
 clue_id = &"foto_chica"
 clue_title = "Foto"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Clue_Photo" unique_id=1735459763]
-position = Vector2(-224, -35)
-shape = SubResource("RectangleShape2D_q8iyx")
-
-[node name="Clue_WallWriting" type="Area2D" parent="." unique_id=749959514 groups=["interactable"]]
-position = Vector2(412, 33)
-monitoring = false
-script = ExtResource("6_note")
+[node name="Clue_WallWriting" parent="." unique_id=749959514 instance=ExtResource("6_note")]
+position = Vector2(155, 28)
 lines = Array[String](["Yo soy Eddy y soy......", "Soy un experto en sistemas. Necesito irme de aquí."])
 shatter_after_line = 0
 clue_id = &"escrito_pared"
 clue_title = "Escrito en la pared"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Clue_WallWriting" unique_id=1501142234]
-position = Vector2(-256, -45)
-shape = SubResource("RectangleShape2D_q8iyx")
-
-[node name="ClueUI" parent="." unique_id=1477203311 instance=ExtResource("7_clueui")]
-
 [node name="AmbientMusic" type="AudioStreamPlayer" parent="." unique_id=1317054388]
-bus = &"Music"
 process_mode = 3
 stream = ExtResource("8_music")
 volume_db = -12.0
 autoplay = true
+bus = &"Music"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1262294279]
+
+[node name="GameHud" parent="CanvasLayer" unique_id=155175906 instance=ExtResource("9_tlogj")]

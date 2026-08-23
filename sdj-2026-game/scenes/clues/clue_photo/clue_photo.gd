@@ -1,7 +1,6 @@
 class_name CluePhoto
 extends Clue
 
-
 @export var photo: Texture2D
 @export_multiline var caption: String = ""
 

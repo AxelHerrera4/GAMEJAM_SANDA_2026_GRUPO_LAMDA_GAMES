@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bk7nwyjx4q2pa"]
+
+[ext_resource type="Script" uid="uid://jjo36l68r5tw" path="res://scenes/doors/exit_hall/exit_hall.gd" id="1_exithall"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+size = Vector2(64, 96)
+
+[node name="ExitHall" type="Area2D" unique_id=1929661986 groups=["interactable"]]
+monitoring = false
+script = ExtResource("1_exithall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1513162977]
+shape = SubResource("RectangleShape2D_exit")

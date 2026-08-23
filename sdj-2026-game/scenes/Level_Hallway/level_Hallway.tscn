@@ -9,9 +9,9 @@
 [ext_resource type="Script" uid="uid://cex123wyjhlma" path="res://scenes/lighting/flicker_light.gd" id="6_flicker"]
 [ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="7_music"]
 [ext_resource type="Script" uid="uid://civdhlritifuc" path="res://scenes/Level_Hallway/level_hallway.gd" id="8_level"]
-[ext_resource type="PackedScene" uid="uid://sf4mivq05c3g" path="res://scenes/ui/clue_ui.tscn" id="9_clueui"]
-[ext_resource type="PackedScene" path="res://scenes/doors/blocked_door.tscn" id="10_blocked"]
-[ext_resource type="PackedScene" path="res://scenes/doors/exit_hall.tscn" id="11_exithall"]
+[ext_resource type="PackedScene" uid="uid://sf4mivq05c3g" path="res://scenes/ui/clue_ui/clue_ui.tscn" id="9_clueui"]
+[ext_resource type="PackedScene" uid="uid://bsy7j3uvanrfh" path="res://scenes/doors/blocked_door/blocked_door.tscn" id="10_blocked"]
+[ext_resource type="PackedScene" uid="uid://bk7nwyjx4q2pa" path="res://scenes/doors/exit_hall/exit_hall.tscn" id="11_exithall"]
 [ext_resource type="PackedScene" path="res://scenes/hack_point/hack_point.tscn" id="12_hackpoint"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_8lak0"]
@@ -346,11 +346,11 @@ texture = SubResource("GradientTexture2D_0dgro")
 script = ExtResource("6_flicker")
 
 [node name="AmbientMusic" type="AudioStreamPlayer" parent="." unique_id=1872121378]
-bus = &"Music"
 process_mode = 3
 stream = ExtResource("7_music")
 volume_db = -12.0
 autoplay = true
+bus = &"Music"
 
 [node name="Doors" type="Node2D" parent="." unique_id=1491587768]
 

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bsy7j3uvanrfh"]
+
+[ext_resource type="Script" uid="uid://der6r733wtdfd" path="res://scenes/doors/blocked_door/blocked_door.gd" id="1_blocked"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(64, 96)
+
+[node name="BlockedDoor" type="Area2D" unique_id=153647292 groups=["interactable"]]
+monitoring = false
+script = ExtResource("1_blocked")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1289702850]
+shape = SubResource("RectangleShape2D_door")

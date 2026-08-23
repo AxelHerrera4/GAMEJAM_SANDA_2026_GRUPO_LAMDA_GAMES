@@ -8,3 +8,12 @@ func load_level() -> void:
 
 func load_main() -> void:
 	get_tree().change_scene_to_packed(MAIN)
+
+func change_scene(scene_path: String) -> void:
+	if scene_path.is_empty():
+		push_warning("GameManager: Intento de cambiar a una ruta de escena vacía.")
+		return
+	if ResourceLoader.exists(scene_path):
+		get_tree().change_scene_to_file(scene_path)
+	else:
+		push_error("GameManager: La escena '%s' no existe." % scene_path)
