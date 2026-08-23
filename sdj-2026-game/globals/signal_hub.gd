@@ -30,6 +30,10 @@ signal pause_menu_toggled(open: bool)
 
 
 @warning_ignore("unused_signal")
+signal access_points_changed(done: int, total: int)
+
+
+@warning_ignore("unused_signal")
 signal hack_requested
 @warning_ignore("unused_signal")
 signal hack_finished(success: bool)

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/doors/blocked_door.gd" id="1_blocked"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(64, 96)
+
+[node name="BlockedDoor" type="Area2D" groups=["interactable"]]
+monitoring = false
+script = ExtResource("1_blocked")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_door")
