@@ -3,10 +3,16 @@ extends Node
 
 const HACK: StringName = &"hack"
 
+const ATTACK: StringName = &"attack"
+
 const CATALOG: Dictionary = {
 	HACK: {
 		"name": "Fragmento de Hackeo",
 		"description": "Un retazo de código capaz de forzar cerraduras electrónicas.",
+	},
+	ATTACK: {
+		"name": "Fragmento de Ataque",
+		"description": "Código de combate desbloqueado. Ahora puedes defenderte.",
 	},
 }
 
@@ -23,6 +29,9 @@ func grant(fragment_id: StringName) -> bool:
 		return false
 	_owned[fragment_id] = true
 	fragment_granted.emit(fragment_id)
+	SignalHub.fragment_progress.emit(_owned.size(), CATALOG.size())
+	if _owned.size() >= CATALOG.size():
+		SignalHub.all_fragments_collected.emit()
 	return true
 
 

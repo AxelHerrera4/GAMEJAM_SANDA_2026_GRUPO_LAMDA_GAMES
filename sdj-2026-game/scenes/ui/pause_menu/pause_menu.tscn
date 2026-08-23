@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene format=3 uid="uid://dmfo0bsul1oqy"]
 
-[ext_resource type="Script" path="res://scenes/ui/pause_menu.gd" id="1_pause"]
+[ext_resource type="Script" uid="uid://c8gg5dlnqn3d8" path="res://scenes/ui/pause_menu/pause_menu.gd" id="1_rbnsh"]
 [ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="2_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pausepanel"]
@@ -27,18 +27,6 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pausebtn_hover"]
-bg_color = Color(0.16470589, 0.17254902, 0.16470589, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.34117648, 0.34901962, 0.33333334, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pausebtn_pressed"]
 bg_color = Color(0.07058824, 0.07450981, 0.07058824, 1)
 border_width_left = 1
@@ -46,6 +34,18 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.19607843, 0.20392157, 0.19607843, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pausebtn_hover"]
+bg_color = Color(0.16470589, 0.17254902, 0.16470589, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.34117648, 0.34901962, 0.33333334, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
@@ -83,12 +83,12 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="PauseMenu" type="CanvasLayer"]
+[node name="PauseMenu" type="CanvasLayer" unique_id=629769221]
 process_mode = 3
 layer = 100
-script = ExtResource("1_pause")
+script = ExtResource("1_rbnsh")
 
-[node name="Backdrop" type="ColorRect" parent="."]
+[node name="Backdrop" type="ColorRect" parent="." unique_id=1727381175]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -96,7 +96,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.6666667)
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1018995197]
 clip_contents = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -111,7 +111,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pausepanel")
 
-[node name="Margin" type="MarginContainer" parent="Panel"]
+[node name="Margin" type="MarginContainer" parent="Panel" unique_id=2089858832]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -123,11 +123,11 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 24
 
-[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin" unique_id=1638582529]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Title" type="Label" parent="Panel/Margin/VBox"]
+[node name="Title" type="Label" parent="Panel/Margin/VBox" unique_id=1835317008]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.627451, 0.62352943, 0.5921569, 1)
@@ -137,36 +137,36 @@ text = "PAUSA"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResumeButton" type="Button" parent="Panel/Margin/VBox"]
+[node name="ResumeButton" type="Button" parent="Panel/Margin/VBox" unique_id=524401910]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6901961, 0.68235296, 0.654902, 1)
-theme_override_colors/font_hover_color = Color(0.8509804, 0.84313726, 0.8117647, 1)
 theme_override_colors/font_focus_color = Color(0.8509804, 0.84313726, 0.8117647, 1)
 theme_override_colors/font_pressed_color = Color(0.54901963, 0.54509807, 0.5254902, 1)
+theme_override_colors/font_hover_color = Color(0.8509804, 0.84313726, 0.8117647, 1)
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_pausebtn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_pausebtn_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_pausebtn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pausebtn_hover")
 theme_override_styles/focus = SubResource("StyleBoxFlat_pausebtn_hover")
 text = "Continuar"
 
-[node name="Separator" type="HSeparator" parent="Panel/Margin/VBox"]
+[node name="Separator" type="HSeparator" parent="Panel/Margin/VBox" unique_id=1402870230]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="MusicHeader" type="HBoxContainer" parent="Panel/Margin/VBox"]
+[node name="MusicHeader" type="HBoxContainer" parent="Panel/Margin/VBox" unique_id=2005438727]
 layout_mode = 2
 
-[node name="MusicLabel" type="Label" parent="Panel/Margin/VBox/MusicHeader"]
+[node name="MusicLabel" type="Label" parent="Panel/Margin/VBox/MusicHeader" unique_id=291941863]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.6431373, 0.6392157, 0.6156863, 1)
 theme_override_font_sizes/font_size = 16
 text = "Música de fondo"
 
-[node name="MusicValue" type="Label" parent="Panel/Margin/VBox/MusicHeader"]
+[node name="MusicValue" type="Label" parent="Panel/Margin/VBox/MusicHeader" unique_id=1507301489]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.48235294, 0.47058824, 0.42352942, 1)
@@ -174,31 +174,31 @@ theme_override_font_sizes/font_size = 16
 text = "100%"
 horizontal_alignment = 2
 
-[node name="MusicSlider" type="HSlider" parent="Panel/Margin/VBox"]
+[node name="MusicSlider" type="HSlider" parent="Panel/Margin/VBox" unique_id=519556542]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxFlat_slider")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_grabber_area")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_grabber_hl")
 max_value = 1.0
 step = 0.01
 value = 1.0
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_grabber_area")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_grabber_hl")
-theme_override_styles/slider = SubResource("StyleBoxFlat_slider")
 
-[node name="Filler" type="Control" parent="Panel/Margin/VBox"]
+[node name="Filler" type="Control" parent="Panel/Margin/VBox" unique_id=2089674905]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="QuitButton" type="Button" parent="Panel/Margin/VBox"]
+[node name="QuitButton" type="Button" parent="Panel/Margin/VBox" unique_id=1885285012]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6901961, 0.68235296, 0.654902, 1)
-theme_override_colors/font_hover_color = Color(0.8509804, 0.84313726, 0.8117647, 1)
 theme_override_colors/font_focus_color = Color(0.8509804, 0.84313726, 0.8117647, 1)
 theme_override_colors/font_pressed_color = Color(0.54901963, 0.54509807, 0.5254902, 1)
+theme_override_colors/font_hover_color = Color(0.8509804, 0.84313726, 0.8117647, 1)
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_pausebtn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_pausebtn_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_pausebtn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pausebtn_hover")
 theme_override_styles/focus = SubResource("StyleBoxFlat_pausebtn_hover")
 text = "Salir al menú"

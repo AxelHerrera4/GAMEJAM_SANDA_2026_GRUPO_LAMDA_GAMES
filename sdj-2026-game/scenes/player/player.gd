@@ -32,6 +32,7 @@ var _current_interactable: Node = null
 var _is_hurt: bool = false
 var _knockback_velocity: Vector2 = Vector2.ZERO
 var _control_blocked: bool = false
+var _can_attack: bool = false
 
 var is_hurt: bool:
 	get: return _is_hurt
@@ -52,7 +53,14 @@ func _ready() -> void:
 	SignalHub.player_health_changed.emit(health, max_health)
 	SignalHub.player_stamina_changed.emit(stamina, max_stamina)
 	SignalHub.player_control_blocked.connect(_on_control_blocked)
-	
+	# Habilitar ataque si el fragmento ya fue obtenido antes de cargar esta escena
+	_can_attack = FragmentManager.has_fragment(FragmentManager.ATTACK)
+	FragmentManager.fragment_granted.connect(_on_fragment_granted)
+
+func _on_fragment_granted(fragment_id: StringName) -> void:
+	if fragment_id == FragmentManager.ATTACK:
+		_can_attack = true
+
 func _on_control_blocked(blocked: bool) -> void:
 	_control_blocked = blocked
 
@@ -63,6 +71,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and _current_interactable != null:
 		get_viewport().set_input_as_handled()
 		try_interact()
+	if _can_attack and event.is_action_pressed("attack"):
+		get_viewport().set_input_as_handled()
+		# TODO: lógica de ataque
 
 
 ###Stamina

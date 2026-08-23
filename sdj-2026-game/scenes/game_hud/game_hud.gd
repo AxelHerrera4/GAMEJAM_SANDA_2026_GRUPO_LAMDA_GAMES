@@ -4,6 +4,7 @@ extends Control
 @onready var stamina_bar: TextureRect = $MC/StaminaBar
 @onready var color_rect_game_over: ColorRect = $ColorRectGameOver
 @onready var label_game_over: Label = $ColorRectGameOver/LabelGameOver
+@onready var fragment_label: Label = $MC/FragmentLabel
 
 func _ready() -> void:
 	if color_rect_game_over:
@@ -11,6 +12,12 @@ func _ready() -> void:
 	SignalHub.player_health_changed.connect(_on_player_health_changed)
 	SignalHub.player_stamina_changed.connect(_on_player_stamina_changed)
 	SignalHub.game_over.connect(_on_game_over)
+	SignalHub.fragment_progress.connect(_on_fragment_progress)
+	_on_fragment_progress(FragmentManager.get_owned().size(), FragmentManager.CATALOG.size())
+
+func _on_fragment_progress(owned: int, total: int) -> void:
+	if fragment_label:
+		fragment_label.text = "Fragmentos: %d/%d" % [owned, total]
 
 func _on_player_health_changed(current_health: int, max_health: int) -> void:
 	if health_bar:

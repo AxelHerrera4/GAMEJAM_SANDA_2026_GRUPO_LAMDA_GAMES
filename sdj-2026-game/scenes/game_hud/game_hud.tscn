@@ -20,8 +20,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7s1mr")
 
-[node name="ClueUI" parent="." unique_id=1765662989 instance=ExtResource("2_aiwwf")]
-
 [node name="ColorRectGameOver" type="ColorRect" parent="." unique_id=2006786486]
 visible = false
 layout_mode = 1
@@ -81,3 +79,12 @@ offset_transform_position = Vector2(75, 20)
 offset_transform_scale = Vector2(5, 2)
 texture = SubResource("AtlasTexture_stamina")
 stretch_mode = 2
+
+[node name="FragmentLabel" type="Label" parent="MC" unique_id=1847291045]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 18
+text = "Fragmentos: 0/2"
+
+[node name="ClueUI" parent="." unique_id=1765662989 instance=ExtResource("2_aiwwf")]

@@ -21,5 +21,4 @@ func interact(_player: Player) -> void:
 	var success: bool = await SignalHub.hack_finished
 	if success:
 		is_hacked = true
-		print("¡Computadora hackeada con éxito!")
-		# Aquí puedes añadir efectos visuales o abrir puertas
+		FragmentManager.grant(FragmentManager.ATTACK)

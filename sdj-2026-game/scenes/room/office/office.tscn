@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://da2xnmdt412vn" path="res://scenes/room/office/computer/computer.tscn" id="3_vfjp2"]
 [ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="4_xw3s0"]
 [ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="5_sq7xd"]
+[ext_resource type="PackedScene" uid="uid://blfwseil357xg" path="res://scenes/doors/exit/exit.tscn" id="6_i1ath"]
 
 [node name="Room" unique_id=69708080 instance=ExtResource("1_27onf")]
 
@@ -22,9 +23,16 @@ visible = false
 [node name="Computer" parent="Interactives" parent_id_path=PackedInt32Array(828243168) index="0" unique_id=418358465 instance=ExtResource("3_vfjp2")]
 position = Vector2(924, 227)
 
-[node name="Player2" parent="." index="7" unique_id=1768624832 instance=ExtResource("4_xw3s0")]
-position = Vector2(428, 297)
+[node name="Exit" parent="." index="7" unique_id=1172061543 instance=ExtResource("6_i1ath")]
+position = Vector2(1127, 544)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="8" unique_id=317986294]
+[node name="Player" parent="." index="8" unique_id=1768624832 instance=ExtResource("4_xw3s0")]
+position = Vector2(374, 279)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="9" unique_id=1222029475]
 
 [node name="GameHud" parent="CanvasLayer" index="0" unique_id=155175906 instance=ExtResource("5_sq7xd")]
+offset_left = -9.0
+offset_top = -3.0
+offset_right = -9.0
+offset_bottom = -3.0
