@@ -7,6 +7,9 @@
 [node name="PatrolGuard" unique_id=1290929920 instance=ExtResource("1_2f6u4")]
 script = ExtResource("2_uhu6p")
 
+[node name="CanvasLayer" parent="." index="4" unique_id=2004232349]
+visible = true
+
 [node name="LaserSound" type="AudioStreamPlayer2D" parent="." index="6" unique_id=1191295834]
 stream = ExtResource("3_mgs33")
 

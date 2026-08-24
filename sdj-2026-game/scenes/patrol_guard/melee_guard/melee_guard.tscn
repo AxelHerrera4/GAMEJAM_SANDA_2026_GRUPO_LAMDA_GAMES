@@ -4,15 +4,17 @@
 [ext_resource type="Script" uid="uid://dv14rxxrmv471" path="res://scenes/patrol_guard/melee_guard/melee_guard.gd" id="2_wo5yb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjdfx"]
-size = Vector2(32, 38)
+size = Vector2(89, 49)
 
 [node name="PatrolGuard" unique_id=1290929920 instance=ExtResource("1_roiwv")]
 script = ExtResource("2_wo5yb")
 
 [node name="MeleeHitbox" type="Area2D" parent="." index="7" unique_id=869682246]
+collision_layer = 128
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeHitbox" index="0" unique_id=639239795]
-position = Vector2(7, 0)
 shape = SubResource("RectangleShape2D_mjdfx")
 
+[connection signal="area_entered" from="MeleeHitbox" to="." method="_on_melee_hitbox_area_entered"]
 [connection signal="body_entered" from="MeleeHitbox" to="." method="_on_melee_hitbox_body_entered"]

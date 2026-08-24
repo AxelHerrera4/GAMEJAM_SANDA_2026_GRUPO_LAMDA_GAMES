@@ -8,6 +8,8 @@ radius = 3.0
 height = 6.0
 
 [node name="Bullet" type="Area2D" unique_id=553278921]
+collision_layer = 128
+collision_mask = 9
 script = ExtResource("1_83itf")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=592344420]
@@ -22,5 +24,6 @@ shape = SubResource("CapsuleShape2D_mjdfx")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=741265826]
 rect = Rect2(-5, -3, 10, 6)
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

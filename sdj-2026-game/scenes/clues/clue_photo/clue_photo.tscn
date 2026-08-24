@@ -6,6 +6,8 @@
 size = Vector2(64, 64)
 
 [node name="CluePhoto" type="Area2D" groups=["interactable"]]
+collision_layer = 32
+collision_mask = 0
 script = ExtResource("1_script")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

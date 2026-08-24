@@ -5,7 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://yu1nwsqbcxgv" path="res://assets/for_test/images/lights/shape_a.png" id="3_gmlin"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ln6rh"]
-radius = 17.0
+radius = 13.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player_hurtbox"]
+radius = 14.0
+height = 48.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_intr1"]
 radius = 40.0
@@ -304,7 +308,13 @@ states/move/node = SubResource("AnimationNodeBlendSpace2D_move")
 states/move/position = Vector2(545, 94)
 transitions = ["idle", "move", SubResource("AnimationNodeStateMachineTransition_75vfm"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_0owmy"), "idle", "hurt", SubResource("AnimationNodeStateMachineTransition_qek5x"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_5gtgg"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_gmlin"), "hurt", "move", SubResource("AnimationNodeStateMachineTransition_lvxji"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_p47bc")]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mjdfx"]
+radius = 37.01351
+
 [node name="Player" type="CharacterBody2D" unique_id=1768624832 groups=["player"]]
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_dovo2")
 speed = 150.0
 
@@ -315,13 +325,25 @@ hframes = 8
 vframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=456192581]
-position = Vector2(0, 10)
-scale = Vector2(1, 1.64)
+position = Vector2(0, 24.000002)
+scale = Vector2(1, 0.95999986)
 shape = SubResource("CircleShape2D_ln6rh")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=987654321]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=987654322]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_player_hurtbox")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=900572512]
 
 [node name="InteractZone" type="Area2D" parent="." unique_id=118344201]
+visible = false
+collision_layer = 0
+collision_mask = 32
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone" unique_id=118344202]
@@ -349,6 +371,14 @@ parameters/move/blend_position = Vector2(0, 0)
 
 [node name="StaminaRegenTimer" type="Timer" parent="." unique_id=2117580822]
 one_shot = true
+
+[node name="MeleeArea" type="Area2D" parent="." unique_id=2141435769]
+collision_layer = 64
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea" unique_id=1784100936]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_mjdfx")
 
 [connection signal="area_entered" from="InteractZone" to="." method="_on_interact_zone_area_entered"]
 [connection signal="area_exited" from="InteractZone" to="." method="_on_interact_zone_area_exited"]

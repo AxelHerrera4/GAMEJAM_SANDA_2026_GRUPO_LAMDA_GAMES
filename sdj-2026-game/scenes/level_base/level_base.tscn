@@ -16,7 +16,7 @@ source_geometry_group_name = &"physic"
 [node name="LevelBase" type="Node" unique_id=1588378039]
 
 [node name="Obscure" type="CanvasModulate" parent="." unique_id=1671525806]
-color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+color = Color(0.19076231, 0.19076234, 0.19076225, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1063548539]
 

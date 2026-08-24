@@ -7,6 +7,8 @@
 size = Vector2(72, 72)
 
 [node name="Computer" type="Area2D" unique_id=418358465 groups=["interactable"]]
+collision_layer = 32
+collision_mask = 0
 script = ExtResource("1_lwedf")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2128124616]

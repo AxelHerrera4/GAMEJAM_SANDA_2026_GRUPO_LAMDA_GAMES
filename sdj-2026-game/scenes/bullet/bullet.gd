@@ -25,5 +25,12 @@ func _on_body_entered(body: Node2D) -> void:
 	queue_free()
 
 
+func _on_area_entered(area: Area2D) -> void:
+	var player: Player = area.owner as Player if (area.owner is Player) else (area.get_parent() as Player)
+	if player:
+		player.take_damage(damage, knockback_force, global_position)
+	queue_free()
+
+
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()

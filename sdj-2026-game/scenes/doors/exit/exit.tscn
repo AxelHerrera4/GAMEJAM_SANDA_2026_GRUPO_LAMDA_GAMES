@@ -6,7 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjdfx"]
 size = Vector2(36, 42)
 
-[node name="Exit" type="Area2D" unique_id=1172061543]
+[node name="Exit" type="Area2D" unique_id=1172061543 groups=["interactable"]]
+collision_layer = 32
+collision_mask = 0
 script = ExtResource("1_exitscript")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2087823340]

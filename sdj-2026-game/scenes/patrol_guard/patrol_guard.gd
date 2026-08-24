@@ -13,28 +13,37 @@ enum EnemyState {Patrolling, Searching, Chasing}
 	EnemyState.Searching: 90.0,
 	EnemyState.Chasing: 120.0
 }
+@export var view_distance: float = 400.0
+
 @export var patrol_points: Node2D
 @export var damage: int = 20 # per bullet or per mer melee atack or per catch
 @export var knockback_force: float = 250.0
 @export var attack_cooldown: float = 1.2 # Segundos entre ataque
 
+
+
 @onready var nav_agent: NavigationAgent2D = $NavAgent
 @onready var player_detect: RayCast2D = $PlayerDetect
-@onready var debug_label: Label = $CanvasLayer/DebugLabel
+@onready var debug_label: Label = $DebugLabel
 @onready var gasp_sound: AudioStreamPlayer2D = $GaspSound
 @onready var attack_timer: Timer = $AttackTimer
+@onready var animation_tree: AnimationTree = $AnimationTree
 
 var _patrol_points: Array[Vector2]
 var _state: EnemyState = EnemyState.Patrolling
 var _patrol_idx: int = 0
 var _last_delta: float = 0.0
-
 var _player_ref: Player
+var facing_direction: Vector2 = Vector2.DOWN
+var is_moving: bool = false
 
 
 func _ready() -> void:
 	#nav_agent.max_speed = speeds[_state] # DANGER: the nav_agent max_speed= is a security limit, doint this break the security
 	attack_timer.wait_time = attack_cooldown
+	if animation_tree:
+		animation_tree.set("parameters/idle/blend_position", facing_direction)
+		animation_tree.set("parameters/move/blend_position", facing_direction)
 	if patrol_points:
 		for node in patrol_points.get_children():
 			if node is Marker2D:
@@ -57,9 +66,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	update_raycast()
 	detect_player()
 	process_behavior()
-	update_raycast()
 	update_movement(delta)
 	debug_label.text = "SeePlayer: %s \n" % can_see_player()
 	debug_label.text += "FOV: %.2f\n" % fov_angle()
@@ -75,11 +84,20 @@ func update_movement(delta: float) -> void:
 	nav_agent.set_velocity(new_vel)
 
 func can_see_player() -> bool:
-	return player_detect.get_collider() is Player and abs(fov_angle()) < angles_of_view[_state]
+	if !_player_ref:
+		return false
+	var dist: float = global_position.distance_to(_player_ref.global_position)
+	if dist > view_distance:
+		return false
+	var collider: Object = player_detect.get_collider()
+	var is_player_hit: bool = collider is Player or (collider is Node and (collider.get_parent() is Player or collider.owner is Player))
+	return is_player_hit and abs(fov_angle()) < angles_of_view[_state]
 
 func fov_angle() -> float:
+	if !_player_ref:
+		return 180.0
 	var dir_to_player: Vector2 = global_position.direction_to(_player_ref.global_position)
-	var angle_to_player: float = rad_to_deg(transform.x.angle_to(dir_to_player))
+	var angle_to_player: float = rad_to_deg(facing_direction.angle_to(dir_to_player))
 	return angle_to_player
 
 func detect_player() -> void:
@@ -89,7 +107,11 @@ func detect_player() -> void:
 		change_state(EnemyState.Searching)
 
 func update_raycast() -> void:
+	if !_player_ref:
+		return
 	player_detect.look_at(_player_ref.global_position)
+	player_detect.target_position = Vector2(view_distance, 0)
+	player_detect.force_raycast_update()
 
 func navigate_to_patrol_point() -> void:
 	if _patrol_points.size() == 0: return
@@ -133,9 +155,14 @@ func change_state(new_state: EnemyState) -> void:
 
 func _on_nav_agent_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position += safe_velocity * _last_delta
- 	#rotation = safe_velocity.angle()
 	if safe_velocity.length() > 0.01:
-		rotation = rotate_toward(rotation, safe_velocity.angle(), deg_to_rad(360) * _last_delta)
+		is_moving = true
+		facing_direction = safe_velocity.normalized()
+		if animation_tree:
+			animation_tree.set("parameters/idle/blend_position", facing_direction)
+			animation_tree.set("parameters/move/blend_position", facing_direction)
+	else:
+		is_moving = false
 
 
 func _on_attack_timer_timeout() -> void:

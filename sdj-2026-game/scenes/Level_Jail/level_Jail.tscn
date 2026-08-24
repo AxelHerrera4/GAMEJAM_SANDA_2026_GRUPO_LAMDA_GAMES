@@ -11,9 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="9_tlogj"]
 [ext_resource type="Texture2D" uid="uid://sqhreikxrnxh" path="res://assets/UI/Photo/Photo.png" id="10_photo"]
 
-[sub_resource type="TileSet" id="TileSet_0dgro"]
-tile_size = Vector2i(173, 64)
-
 [sub_resource type="Gradient" id="Gradient_txukc"]
 offsets = PackedFloat32Array(0, 0.001572327, 0.014150944, 0.995283, 0.9984277, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.5882353, 0.5882353, 0.5882353, 0.03137255, 1, 1, 1, 0.7137255, 0.14044744, 0.14044747, 0.14044738, 0.5934474, 0.2, 0.2, 0.2, 0.5882353, 0.032967977, 0.032967992, 0.03296798, 1)
@@ -36,18 +33,10 @@ tile_map_data = PackedByteArray("AAAAAP7/CAACAAIAAAAAAP//CAACAAIAAAAAAAAACAACAAI
 tile_set = ExtResource("2_tlogj")
 
 [node name="objects" type="TileMapLayer" parent="." unique_id=2000679903]
-tile_set = SubResource("TileSet_0dgro")
+tile_set = ExtResource("2_tlogj")
 
 [node name="Player" parent="." unique_id=1768624832 instance=ExtResource("1_gra7w")]
 position = Vector2(576, 328)
-
-[node name="InvisibleWalls" type="StaticBody2D" parent="." unique_id=2093579060]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InvisibleWalls" unique_id=1573095789]
-position = Vector2(1.4326591, 53.62126)
-scale = Vector2(0.66504335, 0.81626743)
-build_mode = 1
-polygon = PackedVector2Array(1148.9927, 10.350525, 1148.9927, 655.3506, -6.007324, 655.3506, -4.007324, 8.350525)
 
 [node name="Door" parent="." unique_id=259502840 instance=ExtResource("3_door")]
 position = Vector2(386, 28)
