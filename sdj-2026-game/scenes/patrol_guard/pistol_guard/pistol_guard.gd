@@ -5,6 +5,7 @@ const BULLET = preload("uid://ceoopnav21q5a")
 
 func shoot() -> void:
 	if _state != EnemyState.Chasing: return
+	if not is_instance_valid(_player_ref): return
 	laser_sound.play()
 	var new_bullet: Bullet = BULLET.instantiate()
 	new_bullet.position = global_position

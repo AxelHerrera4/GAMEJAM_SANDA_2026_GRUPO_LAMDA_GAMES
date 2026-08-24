@@ -50,15 +50,9 @@ func _ready() -> void:
 				_patrol_points.append(node.global_position)
 
 		if _patrol_points.size() < 2:
-			queue_free()
-			print("Npc: Not enough patrol points (%d), removing npc" % _patrol_points.size())
-			return
+			print("Npc: Advertencia: menos de 2 puntos de patrullaje (%d)" % _patrol_points.size())
 
-		_player_ref = get_tree().get_first_node_in_group("player")
-		if !_player_ref:
-			queue_free()
-			print("Npc: No player found, removing npc")
-			return
+	_player_ref = get_tree().get_first_node_in_group("player") as Player
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("set_target"):
@@ -66,13 +60,17 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if not is_instance_valid(_player_ref):
+		_player_ref = get_tree().get_first_node_in_group("player") as Player
+
 	update_raycast()
 	detect_player()
 	process_behavior()
 	update_movement(delta)
-	debug_label.text = "SeePlayer: %s \n" % can_see_player()
-	debug_label.text += "FOV: %.2f\n" % fov_angle()
-	debug_label.text += "\nState: %s" % EnemyState.keys()[_state]
+	if debug_label:
+		debug_label.text = "SeePlayer: %s \n" % can_see_player()
+		debug_label.text += "FOV: %.2f\n" % fov_angle()
+		debug_label.text += "\nState: %s" % EnemyState.keys()[_state]
 
 func update_movement(delta: float) -> void:
 	_last_delta = delta
@@ -84,7 +82,7 @@ func update_movement(delta: float) -> void:
 	nav_agent.set_velocity(new_vel)
 
 func can_see_player() -> bool:
-	if !_player_ref:
+	if not is_instance_valid(_player_ref):
 		return false
 	var dist: float = global_position.distance_to(_player_ref.global_position)
 	if dist > view_distance:
@@ -94,7 +92,7 @@ func can_see_player() -> bool:
 	return is_player_hit and abs(fov_angle()) < angles_of_view[_state]
 
 func fov_angle() -> float:
-	if !_player_ref:
+	if not is_instance_valid(_player_ref):
 		return 180.0
 	var dir_to_player: Vector2 = global_position.direction_to(_player_ref.global_position)
 	var angle_to_player: float = rad_to_deg(facing_direction.angle_to(dir_to_player))
@@ -107,7 +105,7 @@ func detect_player() -> void:
 		change_state(EnemyState.Searching)
 
 func update_raycast() -> void:
-	if !_player_ref:
+	if not is_instance_valid(_player_ref):
 		return
 	player_detect.look_at(_player_ref.global_position)
 	player_detect.target_position = Vector2(view_distance, 0)
@@ -127,6 +125,9 @@ func process_searching() -> void:
 		change_state(EnemyState.Patrolling)
 
 func process_chasing() -> void:
+	if not is_instance_valid(_player_ref):
+		change_state(EnemyState.Searching)
+		return
 	nav_agent.target_position = _player_ref.global_position
 
 func process_behavior() -> void:

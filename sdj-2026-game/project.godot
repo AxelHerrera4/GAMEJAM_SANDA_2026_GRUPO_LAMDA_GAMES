@@ -20,11 +20,11 @@ config/icon="res://icon.svg"
 GameManager="*uid://ci2pp7hpa22dm"
 ScoreManager="*uid://ddirxkhqwsk2j"
 SignalHub="*uid://b6rbnddfvp762"
-_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 FragmentManager="*res://globals/fragment_manager.gd"
 PauseMenu="*res://scenes/ui/pause_menu/pause_menu.tscn"
 Transition="*res://globals/transition.gd"
 Ending="*res://scenes/ui/ending_screen/ending_screen.tscn"
+_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 
 [display]
 
@@ -111,6 +111,7 @@ attack={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

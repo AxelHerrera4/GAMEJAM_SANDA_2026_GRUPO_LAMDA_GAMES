@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="1_hyk8p"]
 [ext_resource type="Script" uid="uid://ddrcf57lumi6m" path="res://scenes/main/menu.gd" id="1_k2fmo"]
-[ext_resource type="Texture2D" uid="uid://ds5e0d26tuxtk" path="res://assets/Menu/fontMenu.jpg" id="2_l3cfh"]
+[ext_resource type="Texture2D" uid="uid://oi0hre241mgu" path="res://assets/MainMenu.png" id="2_6q06x"]
 [ext_resource type="AudioStream" uid="uid://tho7m3b1cod4" path="res://assets/Music/MenuTheme.ogg" id="4_6q06x"]
 [ext_resource type="AudioStream" uid="uid://bbrppterd3xn7" path="res://assets/SFX/MoveMenu/stepsGlass.ogg" id="5_6q06x"]
 
@@ -35,7 +35,7 @@ layout_mode = 0
 offset_right = 2816.0
 offset_bottom = 1578.0488
 scale = Vector2(0.41, 0.41)
-texture = ExtResource("2_l3cfh")
+texture = ExtResource("2_6q06x")
 
 [node name="title" type="Label" parent="." unique_id=981542302]
 layout_mode = 1

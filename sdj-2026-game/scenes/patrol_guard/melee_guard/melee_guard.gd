@@ -5,7 +5,7 @@ extends PatrolGuard
 var _can_attack: bool = true
 
 func attack() -> void:
-	if _player_ref == null: return
+	if not is_instance_valid(_player_ref): return
 	_can_attack = false
 	attack_timer.start() #using the timer defined by the randf or the @export
 	# Hace daño al jugador
@@ -13,19 +13,21 @@ func attack() -> void:
 	print("MeleeGuard asestó un golpe al jugador!")
 	
 func _on_melee_hitbox_body_entered(body: Node2D) -> void:
-	if body == _player_ref and _can_attack:
+	if is_instance_valid(_player_ref) and body == _player_ref and _can_attack:
 		attack()
 
 func _on_melee_hitbox_area_entered(area: Area2D) -> void:
 	var player: Player = area.owner as Player if (area.owner is Player) else (area.get_parent() as Player)
-	if player == _player_ref and _can_attack:
+	if is_instance_valid(_player_ref) and player == _player_ref and _can_attack:
 		attack()
 
 func _on_attack_timer_timeout() -> void:
 	super()
 	_can_attack = true
-	var player_hurtbox = _player_ref.get_node_or_null("Hurtbox") if _player_ref else null
-	if player_hurtbox == null and _player_ref:
+	if not is_instance_valid(_player_ref):
+		return
+	var player_hurtbox = _player_ref.get_node_or_null("Hurtbox")
+	if player_hurtbox == null:
 		player_hurtbox = _player_ref.get_node_or_null("Hitbox")
-	if _player_ref != null and (melee_hitbox.overlaps_body(_player_ref) or (player_hurtbox != null and melee_hitbox.overlaps_area(player_hurtbox))):
+	if melee_hitbox.overlaps_body(_player_ref) or (player_hurtbox != null and melee_hitbox.overlaps_area(player_hurtbox)):
 		attack()
