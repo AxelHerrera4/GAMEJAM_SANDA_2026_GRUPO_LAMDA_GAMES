@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bqdad38lqlkq6"]
 
-[node name="Room" type="Node2D" unique_id=69708080]
+[node name="Room2" type="Node2D" unique_id=69708080]
 
 [node name="Tiles" type="Node2D" parent="." unique_id=213452734]
 
@@ -22,3 +22,5 @@ color = Color(0.5866749, 0.5866749, 0.5866749, 1)
 [node name="MeleeGuards" type="Node2D" parent="." unique_id=455768581]
 
 [node name="PistolGuards" type="Node2D" parent="." unique_id=83598530]
+
+[node name="PlayerPos" type="Marker2D" parent="." unique_id=1605110160]

@@ -3,6 +3,9 @@ extends Node
 const OPEN_DOOR_PATH: String = "res://assets/SFX/Things/OpenDoor.ogg"
 const DOOR_CLOSE_PATH: String = "res://assets/SFX/Things/DoorClose.ogg"
 
+const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
+const GAME_HUD_SCENE: PackedScene = preload("res://scenes/game_hud/game_hud.tscn")
+
 const FADE_IN_TIME: float = 0.4
 const BLACK_HOLD: float = 0.35
 const FADE_OUT_TIME: float = 0.5
@@ -72,6 +75,8 @@ func change_scene(path: String) -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 
+	_setup_scene_entities(get_tree().current_scene)
+
 	get_tree().paused = false
 	SignalHub.player_control_blocked.emit(false)
 
@@ -81,3 +86,41 @@ func change_scene(path: String) -> void:
 
 	_fade.hide()
 	_busy = false
+
+
+func _setup_scene_entities(scene: Node) -> void:
+	if not scene:
+		return
+
+	# Si la escena es un menú o pantalla de final, no spawnear HUD ni Player
+	if scene is Control:
+		return
+
+	# 1. Asegurar GameHud
+	var existing_hud: Node = scene.find_child("GameHud", true, false)
+	if existing_hud == null:
+		var canvas_layer := CanvasLayer.new()
+		canvas_layer.name = "HudCanvasLayer"
+		var hud := GAME_HUD_SCENE.instantiate()
+		canvas_layer.add_child(hud)
+		scene.add_child(canvas_layer)
+
+	# 2. Asegurar Player
+	var existing_player: Player = scene.find_child("Player", true, false) as Player
+	if existing_player == null:
+		var player_node: Node = get_tree().get_first_node_in_group("player")
+		if player_node is Player:
+			existing_player = player_node
+
+	var spawn_pos: Marker2D = scene.find_child("PlayerPos", true, false) as Marker2D
+	if spawn_pos == null:
+		spawn_pos = scene.get_node_or_null("PlayerPos") as Marker2D
+
+	if existing_player == null:
+		var new_player := PLAYER_SCENE.instantiate() as Player
+		if spawn_pos:
+			new_player.global_position = spawn_pos.global_position
+		scene.add_child(new_player)
+	else:
+		if spawn_pos:
+			existing_player.global_position = spawn_pos.global_position

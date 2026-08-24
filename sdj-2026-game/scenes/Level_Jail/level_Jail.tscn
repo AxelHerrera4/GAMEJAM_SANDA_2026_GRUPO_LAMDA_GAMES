@@ -37,7 +37,9 @@ tile_set = ExtResource("2_tlogj")
 
 [node name="Player" parent="." unique_id=1768624832 instance=ExtResource("1_gra7w")]
 position = Vector2(576, 328)
-speed = 300.0
+
+[node name="PlayerPos" type="Marker2D" parent="." unique_id=1605110160]
+position = Vector2(576, 328)
 
 [node name="Door" parent="." unique_id=259502840 instance=ExtResource("3_door")]
 position = Vector2(386, 28)

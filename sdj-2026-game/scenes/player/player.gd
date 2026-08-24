@@ -43,6 +43,7 @@ var is_still: bool:
 
 
 func _ready() -> void:
+	_setup_spawn_position()
 	if hurt_timer:
 		hurt_timer.wait_time = hurt_duration
 	if stamina_regen_timer:
@@ -56,6 +57,13 @@ func _ready() -> void:
 	# Habilitar ataque si el fragmento ya fue obtenido antes de cargar esta escena
 	_can_attack = FragmentManager.has_fragment(FragmentManager.ATTACK)
 	FragmentManager.fragment_granted.connect(_on_fragment_granted)
+
+func _setup_spawn_position() -> void:
+	var spawn: Node2D = get_parent().get_node_or_null("PlayerPos") if get_parent() else null
+	if spawn == null and get_tree().current_scene:
+		spawn = get_tree().current_scene.find_child("PlayerPos", true, false) as Node2D
+	if spawn:
+		global_position = spawn.global_position
 
 func _on_fragment_granted(fragment_id: StringName) -> void:
 	if fragment_id == FragmentManager.ATTACK:
