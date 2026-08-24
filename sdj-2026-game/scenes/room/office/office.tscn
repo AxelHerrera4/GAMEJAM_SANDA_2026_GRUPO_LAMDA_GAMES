@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://da2xnmdt412vn" path="res://scenes/room/office/computer/computer.tscn" id="3_vfjp2"]
 [ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="4_xw3s0"]
 [ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="5_sq7xd"]
-[ext_resource type="PackedScene" path="res://scenes/doors/ending_door/ending_door.tscn" id="6_ending"]
+[ext_resource type="PackedScene" uid="uid://blfwseil357xg" path="res://scenes/doors/exit/exit.tscn" id="6_ee5rl"]
 [ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="7_music"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ee5rl"]
@@ -143,9 +143,8 @@ tile_set = SubResource("TileSet_gandw")
 [node name="Computer" parent="Interactives" parent_id_path=PackedInt32Array(828243168) index="0" unique_id=418358465 instance=ExtResource("3_vfjp2")]
 position = Vector2(862, 65)
 
-[node name="ExitOffice" parent="Doors" parent_id_path=PackedInt32Array(1126311124) index="0" unique_id=1044820371 instance=ExtResource("6_ending")]
-position = Vector2(122, 389)
-message = "Ya no queda nada para mí aquí."
+[node name="Exit" parent="Doors" parent_id_path=PackedInt32Array(1126311124) index="0" unique_id=1172061543 instance=ExtResource("6_ee5rl")]
+position = Vector2(142, 392)
 
 [node name="Player" parent="." index="7" unique_id=1768624832 instance=ExtResource("4_xw3s0")]
 position = Vector2(212, 391)
@@ -153,10 +152,10 @@ position = Vector2(212, 391)
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="8" unique_id=1222029475]
 
 [node name="GameHud" parent="CanvasLayer" index="0" unique_id=155175906 instance=ExtResource("5_sq7xd")]
-offset_left = 2.0
-offset_top = 3.0
-offset_right = 2.0
-offset_bottom = 3.0
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 3.0
+offset_bottom = 5.0
 
 [node name="AmbientMusic" type="AudioStreamPlayer" parent="." index="9" unique_id=1204483966]
 process_mode = 3
