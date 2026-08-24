@@ -312,6 +312,7 @@ transitions = ["idle", "move", SubResource("AnimationNodeStateMachineTransition_
 radius = 37.01351
 
 [node name="Player" type="CharacterBody2D" unique_id=1768624832 groups=["player"]]
+scale = Vector2(1.745, 1.745)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_dovo2")
