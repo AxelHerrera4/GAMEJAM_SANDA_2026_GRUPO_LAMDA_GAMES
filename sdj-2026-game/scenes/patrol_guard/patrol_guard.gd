@@ -4,12 +4,12 @@ extends Area2D
 enum EnemyState {Patrolling, Searching, Chasing}
 
 @export var speeds: Dictionary[EnemyState, float] = {
-	EnemyState.Patrolling: 100.0,
-	EnemyState.Searching: 120.0,
-	EnemyState.Chasing: 150.0
+	EnemyState.Patrolling: 150.0,
+	EnemyState.Searching: 170.0,
+	EnemyState.Chasing: 200.0
 }
 @export var angles_of_view: Dictionary[EnemyState, float] = {
-	EnemyState.Patrolling: 60.0,
+	EnemyState.Patrolling: 70.0,
 	EnemyState.Searching: 90.0,
 	EnemyState.Chasing: 120.0
 }

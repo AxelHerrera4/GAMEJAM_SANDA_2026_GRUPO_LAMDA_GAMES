@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="8_music"]
 [ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="9_tlogj"]
 [ext_resource type="Texture2D" uid="uid://sqhreikxrnxh" path="res://assets/UI/Photo/Photo.png" id="10_photo"]
+[ext_resource type="Texture2D" uid="uid://dwgptpkgj7a8b" path="res://assets/tilesets/Things/PanelHack.png" id="11_lk3sa"]
 
 [sub_resource type="Gradient" id="Gradient_txukc"]
 offsets = PackedFloat32Array(0, 0.001572327, 0.014150944, 0.995283, 0.9984277, 1)
@@ -86,3 +87,8 @@ offset_right = 2.0
 position = Vector2(575, -21)
 scale = Vector2(0.21484375, 0.22121212)
 texture = ExtResource("10_photo")
+
+[node name="Circuit" type="Sprite2D" parent="." unique_id=1227951561]
+position = Vector2(155, -22)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_lk3sa")

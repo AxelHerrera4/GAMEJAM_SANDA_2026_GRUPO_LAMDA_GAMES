@@ -300,6 +300,7 @@ collision_mask = 9
 collide_with_areas = true
 
 [node name="DebugLabel" type="Label" parent="." unique_id=709889220]
+visible = false
 top_level = true
 offset_right = 104.0
 offset_bottom = 23.0
