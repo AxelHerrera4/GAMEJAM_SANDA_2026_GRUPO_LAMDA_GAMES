@@ -269,6 +269,11 @@ scale = Vector2(1.7, 1.7)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_kjgb1")
+angles_of_view = Dictionary[int, float]({
+0: 130.0,
+1: 160.0,
+2: 185.0
+})
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1341454003]
 scale = Vector2(2, 2)

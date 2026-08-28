@@ -32,7 +32,7 @@ tile_set = ExtResource("2_7tmjv")
 
 [node name="Door" parent="Doors" parent_id_path=PackedInt32Array(1126311124) index="0" unique_id=760215513 instance=ExtResource("3_as8ea")]
 position = Vector2(386, 28)
-next_scene = "res://scenes/Level_Hallway/level_Hallway.tscn"
+next_scene = "uid://d01v73p550bug"
 
 [node name="Light_Ceiling" parent="LightPoints" parent_id_path=PackedInt32Array(762074607) index="0" unique_id=39666186 instance=ExtResource("5_k2hrs")]
 position = Vector2(379, 308.00003)

@@ -6,12 +6,23 @@
 
 [node name="PatrolGuard" unique_id=1290929920 instance=ExtResource("1_2f6u4")]
 script = ExtResource("2_uhu6p")
-
-[node name="CanvasLayer" parent="." index="4" unique_id=2004232349]
-visible = true
+speeds = Dictionary[int, float]({
+0: 170.0,
+1: 200.0,
+2: 300.0
+})
+angles_of_view = Dictionary[int, float]({
+0: 120.0,
+1: 150.0,
+2: 175.0
+})
+view_distance = 500.0
+damage = 25
+knockback_force = 200.0
+attack_cooldown = 1.0
 
 [node name="LaserSound" type="AudioStreamPlayer2D" parent="." index="6" unique_id=1191295834]
 stream = ExtResource("3_mgs33")
 
-[node name="AttackTimer" parent="." index="7" unique_id=739967964]
+[node name="AttackTimer" parent="." index="8" unique_id=739967964]
 wait_time = 2.0

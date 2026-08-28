@@ -6,8 +6,16 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjdfx"]
 size = Vector2(89, 49)
 
-[node name="PatrolGuard" unique_id=1290929920 instance=ExtResource("1_roiwv")]
+[node name="MeleeGuard" unique_id=1290929920 instance=ExtResource("1_roiwv")]
 script = ExtResource("2_wo5yb")
+speeds = Dictionary[int, float]({
+0: 200.0,
+1: 250.0,
+2: 310.0
+})
+damage = 50
+knockback_force = 450.0
+attack_cooldown = 1.5
 
 [node name="MeleeHitbox" type="Area2D" parent="." index="7" unique_id=869682246]
 collision_layer = 128
