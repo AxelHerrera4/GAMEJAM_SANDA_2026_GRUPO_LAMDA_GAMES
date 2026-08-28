@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://bgskk1xbbuadw" path="res://assets/for_test/sounds/gasp1.wav" id="3_1s1ds"]
 [ext_resource type="AudioStream" uid="uid://csxrgdhrr17ra" path="res://assets/for_test/sounds/gasp2.wav" id="4_ey0lc"]
 [ext_resource type="AudioStream" uid="uid://srm6hbqm6bf1" path="res://assets/for_test/sounds/gasp3.wav" id="5_405hv"]
+[ext_resource type="Script" uid="uid://i58a6d6b6bk1" path="res://scenes/patrol_guard/vision_cone.gd" id="6_vcone"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2vina"]
 radius = 12.0415945
@@ -320,6 +321,15 @@ advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/move/blend_position = Vector2(0, 0)
+
+[node name="VisionCone" type="PointLight2D" parent="." unique_id=1477203311]
+position = Vector2(14.705882, 5.2941175)
+color = Color(1, 0.95, 0.78, 1)
+energy = 0.9
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 3.0
+script = ExtResource("6_vcone")
 
 [connection signal="velocity_computed" from="NavAgent" to="." method="_on_nav_agent_velocity_computed"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

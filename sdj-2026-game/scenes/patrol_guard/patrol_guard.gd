@@ -28,6 +28,7 @@ enum EnemyState {Patrolling, Searching, Chasing}
 @onready var gasp_sound: AudioStreamPlayer2D = $GaspSound
 @onready var attack_timer: Timer = $AttackTimer
 @onready var animation_tree: AnimationTree = $AnimationTree
+@onready var vision_cone: VisionCone = $VisionCone
 
 var _patrol_points: Array[Vector2]
 var _state: EnemyState = EnemyState.Patrolling
@@ -53,6 +54,7 @@ func _ready() -> void:
 			print("Npc: Advertencia: menos de 2 puntos de patrullaje (%d)" % _patrol_points.size())
 
 	_player_ref = get_tree().get_first_node_in_group("player") as Player
+	_sync_vision_cone_shape()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("set_target"):
@@ -67,6 +69,7 @@ func _physics_process(delta: float) -> void:
 	detect_player()
 	process_behavior()
 	update_movement(delta)
+	update_vision_cone()
 	if debug_label:
 		debug_label.text = "SeePlayer: %s \n" % can_see_player()
 		debug_label.text += "FOV: %.2f\n" % fov_angle()
@@ -80,6 +83,26 @@ func update_movement(delta: float) -> void:
 	var npp: Vector2 = nav_agent.get_next_path_position()
 	var new_vel: Vector2 = global_position.direction_to(npp) * speeds[_state]
 	nav_agent.set_velocity(new_vel)
+
+## Apunta el cono hacia donde mira el guardia. Barato: solo cambia la rotacion.
+func update_vision_cone() -> void:
+	if not is_instance_valid(vision_cone):
+		return
+	vision_cone.rotation = facing_direction.angle()
+
+
+## Ajusta apertura/alcance/color del cono para que coincida con la deteccion real.
+## OJO: can_see_player() usa abs(fov_angle()) < angles_of_view, o sea que
+## angles_of_view es MEDIO cono -> la apertura visual es el doble.
+func _sync_vision_cone_shape() -> void:
+	if not is_instance_valid(vision_cone):
+		return
+	# view_distance se compara en GLOBAL (global_position.distance_to), pero el
+	# largo del cono es LOCAL y el guardia tiene scale 1.7 -> hay que dividir,
+	# si no el cono se dibuja 1.7x mas largo de lo que el guardia ve de verdad.
+	var world_scale: float = maxf(vision_cone.global_scale.x, 0.001)
+	vision_cone.configure(angles_of_view[_state] * 2.0, view_distance / world_scale)
+
 
 func can_see_player() -> bool:
 	if not is_instance_valid(_player_ref):
@@ -142,6 +165,7 @@ func process_behavior() -> void:
 func change_state(new_state: EnemyState) -> void:
 	if _state == new_state: return
 	_state = new_state
+	_sync_vision_cone_shape()
 	
 	if _state == EnemyState.Chasing:
 		gasp_sound.play()
