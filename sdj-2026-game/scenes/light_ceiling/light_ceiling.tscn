@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ct7ncev44u1hw"]
+
+[ext_resource type="Script" uid="uid://c2fu6diu3b6rw" path="res://scenes/light_ceiling/light_ceiling.gd" id="1_j5cu5"]
+
+[sub_resource type="Gradient" id="Gradient_txukc"]
+offsets = PackedFloat32Array(0, 0.001572327, 0.014150944, 0.995283, 0.9984277, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.5882353, 0.5882353, 0.5882353, 0.03137255, 1, 1, 1, 0.7137255, 0.14044744, 0.14044747, 0.14044738, 0.5934474, 0.2, 0.2, 0.2, 0.5882353, 0.032967977, 0.032967992, 0.03296798, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_poh3d"]
+gradient = SubResource("Gradient_txukc")
+fill = 1
+fill_from = Vector2(0.5, 0.51706487)
+fill_to = Vector2(0.49317408, 0.011945393)
+
+[node name="Light_Ceiling" type="PointLight2D" unique_id=39666186]
+scale = Vector2(11.328125, 8.703125)
+energy = 0.75
+texture = SubResource("GradientTexture2D_poh3d")
+script = ExtResource("1_j5cu5")

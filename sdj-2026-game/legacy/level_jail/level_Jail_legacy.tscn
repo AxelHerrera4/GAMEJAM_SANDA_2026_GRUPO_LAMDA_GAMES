@@ -1,48 +1,48 @@
 [gd_scene format=4 uid="uid://bca28ljn5wbfe"]
 
-[ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="1_gra7w"]
-[ext_resource type="Script" uid="uid://dmud040qi3r5o" path="res://scenes/Level_Jail/level_jail.gd" id="1_rr37k"]
-[ext_resource type="TileSet" uid="uid://up3vmhes72bi" path="res://resources/tile_level.tres" id="2_tlogj"]
-[ext_resource type="PackedScene" uid="uid://y8mad2cf77cg" path="res://scenes/doors/door/door.tscn" id="3_door"]
-[ext_resource type="Script" uid="uid://c2fu6diu3b6rw" path="res://scenes/Level_Jail/light_ceiling.gd" id="4_k1nnb"]
-[ext_resource type="PackedScene" path="res://scenes/clues/clue_photo/clue_photo.tscn" id="5_photo"]
-[ext_resource type="PackedScene" path="res://scenes/clues/clue_note/clue_note.tscn" id="6_note"]
-[ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="8_music"]
-[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="9_tlogj"]
-[ext_resource type="Texture2D" uid="uid://sqhreikxrnxh" path="res://assets/UI/Photo/Photo.png" id="10_photo"]
-[ext_resource type="Texture2D" uid="uid://dwgptpkgj7a8b" path="res://assets/tilesets/Things/PanelHack.png" id="11_lk3sa"]
+[ext_resource type="Script" uid="uid://dmud040qi3r5o" path="res://scenes/room/jail/level_jail.gd" id="1_jpjff"]
+[ext_resource type="TileSet" uid="uid://up3vmhes72bi" path="res://resources/tile_level.tres" id="2_0q7m5"]
+[ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="3_itvse"]
+[ext_resource type="PackedScene" uid="uid://y8mad2cf77cg" path="res://scenes/doors/door/door.tscn" id="4_o8xco"]
+[ext_resource type="Script" uid="uid://c2fu6diu3b6rw" path="res://scenes/light_ceiling/light_ceiling.gd" id="5_yf6c1"]
+[ext_resource type="PackedScene" path="res://scenes/clues/clue_photo/clue_photo.tscn" id="6_hebvn"]
+[ext_resource type="Texture2D" uid="uid://sqhreikxrnxh" path="res://assets/UI/Photo/Photo.png" id="7_8poyf"]
+[ext_resource type="PackedScene" path="res://scenes/clues/clue_note/clue_note.tscn" id="8_fu3cq"]
+[ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="9_7ghec"]
+[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="10_wpw2c"]
+[ext_resource type="Texture2D" uid="uid://dwgptpkgj7a8b" path="res://assets/tilesets/Things/PanelHack.png" id="11_t87hp"]
 
-[sub_resource type="Gradient" id="Gradient_txukc"]
+[sub_resource type="Gradient" id="Gradient_nbsab"]
 offsets = PackedFloat32Array(0, 0.001572327, 0.014150944, 0.995283, 0.9984277, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.5882353, 0.5882353, 0.5882353, 0.03137255, 1, 1, 1, 0.7137255, 0.14044744, 0.14044747, 0.14044738, 0.5934474, 0.2, 0.2, 0.2, 0.5882353, 0.032967977, 0.032967992, 0.03296798, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_0dgro"]
-gradient = SubResource("Gradient_txukc")
+gradient = SubResource("Gradient_nbsab")
 fill = 1
 fill_from = Vector2(0.5, 0.51706487)
 fill_to = Vector2(0.49317408, 0.011945393)
 
 [node name="LevelJail" type="Node2D" unique_id=938509139]
-script = ExtResource("1_rr37k")
+script = ExtResource("1_jpjff")
 
-[node name="TileMapLayer_Floor" type="TileMapLayer" parent="." unique_id=1086913040]
+[node name="Floor" type="TileMapLayer" parent="." unique_id=1086913040]
 tile_map_data = PackedByteArray("AAAAAAEACAAGAAEAAAAAAAIACAAIAAAAAAAAAAMACAAFAAAAAAAAAAQACAAHAAAAAAAAAAUACAAIAAEAAAAAAAYACAAHAAAAAAAAAAcACAAGAAEAAAAAAAgACAAFAAEAAAABAAEACAAHAAEAAAABAAIACAAIAAEAAAABAAMACAAFAAEAAAABAAQACAAFAAEAAAABAAUACAAIAAAAAAABAAYACAAIAAEAAAABAAcACAAHAAEAAAABAAgACAAIAAAAAAACAAEACAAIAAEAAAACAAIACAAIAAEAAAACAAMACAAGAAAAAAACAAQACAAFAAEAAAACAAUACAAGAAAAAAACAAYACAAGAAEAAAACAAcACAAGAAAAAAACAAgACAAGAAAAAAADAAEACAAFAAEAAAADAAIACAAIAAEAAAADAAMACAAHAAAAAAADAAQACAAGAAAAAAADAAUACAAFAAAAAAADAAYACAAGAAEAAAADAAcACAAGAAEAAAADAAgACAAIAAEAAAAEAAEACAAHAAAAAAAEAAIACAAIAAAAAAAEAAMACAAIAAAAAAAEAAQACAAIAAEAAAAEAAUACAAFAAEAAAAEAAYACAAIAAEAAAAEAAcACAAHAAEAAAAEAAgACAAHAAEAAAAFAAEACAAIAAAAAAAFAAIACAAFAAAAAAAFAAMACAAFAAAAAAAFAAQACAAHAAEAAAAFAAUACAAHAAAAAAAFAAYACAAGAAAAAAAFAAcACAAHAAEAAAAFAAgACAAGAAEAAAAGAAEACAAFAAEAAAAGAAIACAAIAAAAAAAGAAMACAAHAAAAAAAGAAQACAAGAAEAAAAGAAUACAAIAAEAAAAGAAYACAAFAAAAAAAGAAcACAAHAAEAAAAGAAgACAAGAAAAAAAHAAEACAAFAAAAAAAHAAIACAAGAAEAAAAHAAMACAAGAAAAAAAHAAQACAAIAAAAAAAHAAUACAAFAAEAAAAHAAYACAAFAAEAAAAHAAcACAAIAAAAAAAHAAgACAAGAAEAAAAIAAEACAAGAAEAAAAIAAIACAAFAAAAAAAIAAMACAAGAAEAAAAIAAQACAAFAAAAAAAIAAUACAAIAAEAAAAIAAYACAAIAAAAAAAIAAcACAAHAAAAAAAIAAgACAAHAAEAAAAJAAEACAAFAAAAAAAJAAIACAAGAAEAAAAJAAMACAAGAAEAAAAJAAQACAAIAAAAAAAJAAUACAAGAAEAAAAJAAYACAAHAAEAAAAJAAcACAAHAAAAAAAJAAgACAAIAAEAAAAKAAEACAAGAAAAAAAKAAIACAAGAAAAAAAKAAMACAAGAAEAAAAKAAQACAAFAAEAAAAKAAUACAAIAAAAAAAKAAYACAAFAAAAAAAKAAcACAAFAAEAAAAKAAgACAAFAAEAAAALAAEACAAHAAEAAAALAAIACAAFAAAAAAALAAMACAAHAAEAAAALAAQACAAHAAAAAAALAAUACAAFAAAAAAALAAYACAAFAAAAAAALAAcACAAHAAAAAAALAAgACAAGAAEAAAA=")
-tile_set = ExtResource("2_tlogj")
+tile_set = ExtResource("2_0q7m5")
 
-[node name="TileMapLayer_Walls" type="TileMapLayer" parent="." unique_id=894192278 groups=["physic"]]
+[node name="Walls" type="TileMapLayer" parent="." unique_id=894192278 groups=["physic"]]
 tile_map_data = PackedByteArray("AAAAAP7/CAACAAIAAAAAAP//CAACAAIAAAAAAAAACAACAAIAAAABAP7/CAACAAIAAAABAP//CAACAAIAAAABAAAACAACAAIAAAACAP7/CAACAAIAAAACAP//CAACAAIAAAACAAAACAACAAIAAAADAP7/CAACAAIAAAADAP//CAACAAIAAAADAAAACAACAAIAAAAEAP7/CAACAAIAAAAEAP//CAACAAIAAAAEAAAACAACAAIAAAAFAP7/CAAFAAIAAAAFAP//CAAFAAMAAAAFAAAACAAFAAQAAAAGAP7/CAAGAAIAAAAGAP//CAAGAAMAAAAGAAAACAAGAAQAAAAHAP7/CAACAAIAAAAHAP//CAACAAIAAAAHAAAACAACAAIAAAAIAP7/CAACAAIAAAAIAP//CAACAAIAAAAIAAAACAACAAIAAAAJAP7/CAACAAIAAAAJAP//CAACAAIAAAAJAAAACAACAAIAAAAKAP7/CAACAAIAAAAKAP//CAACAAIAAAAKAAAACAACAAIAAAALAP7/CAACAAIAAAALAP//CAACAAIAAAALAAAACAACAAIAAAAAAAkACAACAAIAAAAAAAoACAACAAIAAAABAAkACAACAAIAAAABAAoACAACAAIAAAACAAkACAACAAIAAAACAAoACAACAAIAAAADAAkACAACAAIAAAADAAoACAACAAIAAAAEAAkACAACAAIAAAAEAAoACAACAAIAAAAFAAkACAACAAIAAAAFAAoACAACAAIAAAAGAAkACAACAAIAAAAGAAoACAACAAIAAAAHAAkACAACAAIAAAAHAAoACAACAAIAAAAIAAkACAACAAIAAAAIAAoACAACAAIAAAAJAAkACAACAAIAAAAJAAoACAACAAIAAAAKAAkACAACAAIAAAAKAAoACAACAAIAAAALAAkACAACAAIAAAALAAoACAACAAIAAAD//wAACAABAAIAAAD//wEACAABAAIAAAD//wIACAABAAIAAAD//wMACAABAAIAAAD//wQACAABAAIAAAD//wUACAABAAIAAAD//wYACAABAAIAAAD//wcACAABAAIAAAD//wgACAABAAIAAAD//wkACAABAAIAAAD//woACAABAAIAAAD///7/CAABAAIAAAD/////CAABAAIAAAAMAP7/CAADAAIAAAAMAP//CAADAAIAAAAMAAAACAADAAIAAAAMAAEACAADAAIAAAAMAAIACAADAAIAAAAMAAMACAADAAIAAAAMAAQACAADAAIAAAAMAAUACAADAAIAAAAMAAYACAADAAIAAAAMAAcACAADAAIAAAAMAAgACAADAAIAAAAMAAkACAADAAIAAAAMAAoACAADAAIAAAAKAAEACAAJAAAAAAAKAAIACAAJAAEAAAAKAAMACAAJAAIAAAAKAAQACAAJAAMAAAALAAEACAAKAAAAAAALAAIACAAKAAEAAAALAAMACAAKAAIAAAALAAQACAAKAAMAAAA=")
-tile_set = ExtResource("2_tlogj")
+tile_set = ExtResource("2_0q7m5")
 
-[node name="objects" type="TileMapLayer" parent="." unique_id=2000679903]
-tile_set = ExtResource("2_tlogj")
+[node name="Furniture" type="TileMapLayer" parent="." unique_id=2000679903]
+tile_set = ExtResource("2_0q7m5")
 
-[node name="Player" parent="." unique_id=1768624832 instance=ExtResource("1_gra7w")]
+[node name="Player" parent="." unique_id=1768624832 instance=ExtResource("3_itvse")]
 position = Vector2(576, 328)
 
 [node name="PlayerPos" type="Marker2D" parent="." unique_id=1605110160]
 position = Vector2(576, 328)
 
-[node name="Door" parent="." unique_id=259502840 instance=ExtResource("3_door")]
+[node name="Door" parent="." unique_id=259502840 instance=ExtResource("4_o8xco")]
 position = Vector2(386, 28)
 next_scene = "res://scenes/Level_Hallway/level_Hallway.tscn"
 
@@ -54,16 +54,16 @@ position = Vector2(379, 308.00003)
 scale = Vector2(11.328125, 8.703125)
 energy = 0.75
 texture = SubResource("GradientTexture2D_0dgro")
-script = ExtResource("4_k1nnb")
+script = ExtResource("5_yf6c1")
 
-[node name="Clue_Photo" parent="." unique_id=1902462583 instance=ExtResource("5_photo")]
+[node name="Clue_Photo" parent="." unique_id=1902462583 instance=ExtResource("6_hebvn")]
 position = Vector2(576, 22)
-photo = ExtResource("10_photo")
+photo = ExtResource("7_8poyf")
 first_time_text = "Te recuerdo... cómo te extraño demasiado."
 clue_id = &"foto_chica"
 clue_title = "Foto"
 
-[node name="Clue_WallWriting" parent="." unique_id=749959514 instance=ExtResource("6_note")]
+[node name="Clue_WallWriting" parent="." unique_id=749959514 instance=ExtResource("8_fu3cq")]
 position = Vector2(155, 28)
 lines = Array[String](["Yo soy el Paciente N° 6174 y soy......", "Soy un experto en sistemas. Necesito irme de aquí."])
 shatter_after_line = 0
@@ -72,23 +72,23 @@ clue_title = "Escrito en la pared"
 
 [node name="AmbientMusic" type="AudioStreamPlayer" parent="." unique_id=1317054388]
 process_mode = 3
-stream = ExtResource("8_music")
+stream = ExtResource("9_7ghec")
 volume_db = -12.0
 autoplay = true
 bus = &"Music"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1262294279]
 
-[node name="GameHud" parent="CanvasLayer" unique_id=155175906 instance=ExtResource("9_tlogj")]
+[node name="GameHud" parent="CanvasLayer" unique_id=155175906 instance=ExtResource("10_wpw2c")]
 offset_left = 2.0
 offset_right = 2.0
 
 [node name="Photo" type="Sprite2D" parent="." unique_id=1504588815]
 position = Vector2(575, -21)
 scale = Vector2(0.21484375, 0.22121212)
-texture = ExtResource("10_photo")
+texture = ExtResource("7_8poyf")
 
 [node name="Circuit" type="Sprite2D" parent="." unique_id=1227951561]
 position = Vector2(155, -22)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("11_lk3sa")
+texture = ExtResource("11_t87hp")

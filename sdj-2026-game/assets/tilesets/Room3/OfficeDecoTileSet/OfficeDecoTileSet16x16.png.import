@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c22xnswiqtmib"
-path="res://.godot/imported/CorridorDecoTileSet.png-6194ad5e7cad43378d0d9fe023b4f098.ctex"
+uid="uid://berr4y55fqoqj"
+path="res://.godot/imported/OfficeDecoTileSet16x16.png-5a8806273a16a0f2cb6d7aa2099d189c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/Things/CorridorDecoTileSet.png"
-dest_files=["res://.godot/imported/CorridorDecoTileSet.png-6194ad5e7cad43378d0d9fe023b4f098.ctex"]
+source_file="res://assets/tilesets/Room3/OfficeDecoTileSet/OfficeDecoTileSet16x16.png"
+dest_files=["res://.godot/imported/OfficeDecoTileSet16x16.png-5a8806273a16a0f2cb6d7aa2099d189c.ctex"]
 
 [params]
 

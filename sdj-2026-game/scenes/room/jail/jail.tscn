@@ -1,0 +1,79 @@
+[gd_scene format=4 uid="uid://b6ooi2re1h8i"]
+
+[ext_resource type="PackedScene" uid="uid://bqdad38lqlkq6" path="res://scenes/room/room.tscn" id="1_c70yw"]
+[ext_resource type="TileSet" uid="uid://up3vmhes72bi" path="res://resources/tile_level.tres" id="2_7tmjv"]
+[ext_resource type="PackedScene" uid="uid://y8mad2cf77cg" path="res://scenes/doors/door/door.tscn" id="3_as8ea"]
+[ext_resource type="PackedScene" uid="uid://ct7ncev44u1hw" path="res://scenes/light_ceiling/light_ceiling.tscn" id="5_k2hrs"]
+[ext_resource type="Texture2D" uid="uid://sqhreikxrnxh" path="res://assets/UI/Photo/Photo.png" id="5_vsvih"]
+[ext_resource type="Texture2D" uid="uid://dwgptpkgj7a8b" path="res://assets/tilesets/Things/PanelHack.png" id="6_w0oy4"]
+[ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="7_ui3gy"]
+[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="8_jj3dn"]
+[ext_resource type="PackedScene" path="res://scenes/clues/clue_photo/clue_photo.tscn" id="9_jf2ap"]
+[ext_resource type="PackedScene" path="res://scenes/clues/clue_note/clue_note.tscn" id="10_x5f4m"]
+[ext_resource type="Script" uid="uid://dmud040qi3r5o" path="res://scenes/room/jail/level_jail.gd" id="11_rr37k"]
+[ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="12_music"]
+
+[node name="Jail" unique_id=69708080 instance=ExtResource("1_c70yw")]
+script = ExtResource("11_rr37k")
+
+[node name="Floor" parent="Tiles" parent_id_path=PackedInt32Array(213452734) index="0" unique_id=1690041257]
+z_index = -2
+tile_map_data = PackedByteArray("AAAAAAEACAAGAAEAAAAAAAIACAAIAAAAAAAAAAMACAAFAAAAAAAAAAQACAAHAAAAAAAAAAUACAAIAAEAAAAAAAYACAAHAAAAAAAAAAcACAAGAAEAAAAAAAgACAAFAAEAAAABAAEACAAHAAEAAAABAAIACAAIAAEAAAABAAMACAAFAAEAAAABAAQACAAFAAEAAAABAAUACAAIAAAAAAABAAYACAAIAAEAAAABAAcACAAHAAEAAAABAAgACAAIAAAAAAACAAEACAAIAAEAAAACAAIACAAIAAEAAAACAAMACAAGAAAAAAACAAQACAAFAAEAAAACAAUACAAGAAAAAAACAAYACAAGAAEAAAACAAcACAAGAAAAAAACAAgACAAGAAAAAAADAAEACAAFAAEAAAADAAIACAAIAAEAAAADAAMACAAHAAAAAAADAAQACAAGAAAAAAADAAUACAAFAAAAAAADAAYACAAGAAEAAAADAAcACAAGAAEAAAADAAgACAAIAAEAAAAEAAEACAAHAAAAAAAEAAIACAAIAAAAAAAEAAMACAAIAAAAAAAEAAQACAAIAAEAAAAEAAUACAAFAAEAAAAEAAYACAAIAAEAAAAEAAcACAAHAAEAAAAEAAgACAAHAAEAAAAFAAEACAAIAAAAAAAFAAIACAAFAAAAAAAFAAMACAAFAAAAAAAFAAQACAAHAAEAAAAFAAUACAAHAAAAAAAFAAYACAAGAAAAAAAFAAcACAAHAAEAAAAFAAgACAAGAAEAAAAGAAEACAAFAAEAAAAGAAIACAAIAAAAAAAGAAMACAAHAAAAAAAGAAQACAAGAAEAAAAGAAUACAAIAAEAAAAGAAYACAAFAAAAAAAGAAcACAAHAAEAAAAGAAgACAAGAAAAAAAHAAEACAAFAAAAAAAHAAIACAAGAAEAAAAHAAMACAAGAAAAAAAHAAQACAAIAAAAAAAHAAUACAAFAAEAAAAHAAYACAAFAAEAAAAHAAcACAAIAAAAAAAHAAgACAAGAAEAAAAIAAEACAAGAAEAAAAIAAIACAAFAAAAAAAIAAMACAAGAAEAAAAIAAQACAAFAAAAAAAIAAUACAAIAAEAAAAIAAYACAAIAAAAAAAIAAcACAAHAAAAAAAIAAgACAAHAAEAAAAJAAEACAAFAAAAAAAJAAIACAAGAAEAAAAJAAMACAAGAAEAAAAJAAQACAAIAAAAAAAJAAUACAAGAAEAAAAJAAYACAAHAAEAAAAJAAcACAAHAAAAAAAJAAgACAAIAAEAAAAKAAEACAAGAAAAAAAKAAIACAAGAAAAAAAKAAMACAAGAAEAAAAKAAQACAAFAAEAAAAKAAUACAAIAAAAAAAKAAYACAAFAAAAAAAKAAcACAAFAAEAAAAKAAgACAAFAAEAAAALAAEACAAHAAEAAAALAAIACAAFAAAAAAALAAMACAAHAAEAAAALAAQACAAHAAAAAAALAAUACAAFAAAAAAALAAYACAAFAAAAAAALAAcACAAHAAAAAAALAAgACAAGAAEAAAA=")
+tile_set = ExtResource("2_7tmjv")
+
+[node name="Walls" parent="Tiles" parent_id_path=PackedInt32Array(213452734) index="1" unique_id=321007397]
+tile_map_data = PackedByteArray("AAAAAP7/CAACAAIAAAAAAP//CAACAAIAAAAAAAAACAACAAIAAAABAP7/CAACAAIAAAABAP//CAACAAIAAAABAAAACAACAAIAAAACAP7/CAACAAIAAAACAP//CAACAAIAAAACAAAACAACAAIAAAADAP7/CAACAAIAAAADAP//CAACAAIAAAADAAAACAACAAIAAAAEAP7/CAACAAIAAAAEAP//CAACAAIAAAAEAAAACAACAAIAAAAFAP7/CAAFAAIAAAAFAP//CAAFAAMAAAAFAAAACAAFAAQAAAAGAP7/CAAGAAIAAAAGAP//CAAGAAMAAAAGAAAACAAGAAQAAAAHAP7/CAACAAIAAAAHAP//CAACAAIAAAAHAAAACAACAAIAAAAIAP7/CAACAAIAAAAIAP//CAACAAIAAAAIAAAACAACAAIAAAAJAP7/CAACAAIAAAAJAP//CAACAAIAAAAJAAAACAACAAIAAAAKAP7/CAACAAIAAAAKAP//CAACAAIAAAAKAAAACAACAAIAAAALAP7/CAACAAIAAAALAP//CAACAAIAAAALAAAACAACAAIAAAAAAAkACAACAAIAAAAAAAoACAACAAIAAAABAAkACAACAAIAAAABAAoACAACAAIAAAACAAkACAACAAIAAAACAAoACAACAAIAAAADAAkACAACAAIAAAADAAoACAACAAIAAAAEAAkACAACAAIAAAAEAAoACAACAAIAAAAFAAkACAACAAIAAAAFAAoACAACAAIAAAAGAAkACAACAAIAAAAGAAoACAACAAIAAAAHAAkACAACAAIAAAAHAAoACAACAAIAAAAIAAkACAACAAIAAAAIAAoACAACAAIAAAAJAAkACAACAAIAAAAJAAoACAACAAIAAAAKAAkACAACAAIAAAAKAAoACAACAAIAAAALAAkACAACAAIAAAALAAoACAACAAIAAAD//wAACAABAAIAAAD//wEACAABAAIAAAD//wIACAABAAIAAAD//wMACAABAAIAAAD//wQACAABAAIAAAD//wUACAABAAIAAAD//wYACAABAAIAAAD//wcACAABAAIAAAD//wgACAABAAIAAAD//wkACAABAAIAAAD//woACAABAAIAAAD///7/CAABAAIAAAD/////CAABAAIAAAAMAP7/CAADAAIAAAAMAP//CAADAAIAAAAMAAAACAADAAIAAAAMAAEACAADAAIAAAAMAAIACAADAAIAAAAMAAMACAADAAIAAAAMAAQACAADAAIAAAAMAAUACAADAAIAAAAMAAYACAADAAIAAAAMAAcACAADAAIAAAAMAAgACAADAAIAAAAMAAkACAADAAIAAAAMAAoACAADAAIAAAA=")
+tile_set = ExtResource("2_7tmjv")
+
+[node name="Furniture" parent="Tiles" parent_id_path=PackedInt32Array(213452734) index="2" unique_id=1546801700]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAKAAIACAAJAAAAAAA=")
+tile_set = ExtResource("2_7tmjv")
+
+[node name="Door" parent="Doors" parent_id_path=PackedInt32Array(1126311124) index="0" unique_id=760215513 instance=ExtResource("3_as8ea")]
+position = Vector2(386, 28)
+next_scene = "res://scenes/Level_Hallway/level_Hallway.tscn"
+
+[node name="Light_Ceiling" parent="LightPoints" parent_id_path=PackedInt32Array(762074607) index="0" unique_id=39666186 instance=ExtResource("5_k2hrs")]
+position = Vector2(379, 308.00003)
+
+[node name="PlayerPos" parent="." index="9" unique_id=1605110160]
+position = Vector2(576, 328)
+
+[node name="AmbientMusic" parent="." index="10" unique_id=1575166514]
+process_mode = 3
+stream = ExtResource("12_music")
+volume_db = -12.0
+
+[node name="Photo" type="Sprite2D" parent="." index="11" unique_id=607867912]
+position = Vector2(575, -21)
+scale = Vector2(0.21484375, 0.22121212)
+texture = ExtResource("5_vsvih")
+
+[node name="Circuit" type="Sprite2D" parent="." index="12" unique_id=752141735]
+position = Vector2(155, -22)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_w0oy4")
+
+[node name="Player" parent="." index="13" unique_id=1768624832 instance=ExtResource("7_ui3gy")]
+position = Vector2(576, 328)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="14" unique_id=132216591]
+
+[node name="GameHud" parent="CanvasLayer" index="0" unique_id=155175906 instance=ExtResource("8_jj3dn")]
+offset_left = 2.0
+offset_right = 2.0
+
+[node name="Clue_Photo" parent="." index="15" unique_id=1647775857 instance=ExtResource("9_jf2ap")]
+position = Vector2(576, 22)
+photo = ExtResource("5_vsvih")
+first_time_text = "Te recuerdo... cómo te extraño demasiado."
+clue_id = &"foto_chica"
+clue_title = "Foto"
+
+[node name="Clue_WallWriting" parent="." index="16" unique_id=1642929999 instance=ExtResource("10_x5f4m")]
+position = Vector2(155, 28)
+lines = Array[String](["Yo soy el Paciente N° 6174 y soy......", "Soy un experto en sistemas. Necesito irme de aquí."])
+shatter_after_line = 0
+clue_id = &"escrito_pared"
+clue_title = "Escrito en la pared"

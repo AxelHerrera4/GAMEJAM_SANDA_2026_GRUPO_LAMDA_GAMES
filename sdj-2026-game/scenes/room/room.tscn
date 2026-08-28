@@ -1,17 +1,24 @@
 [gd_scene format=3 uid="uid://bqdad38lqlkq6"]
 
-[node name="Room2" type="Node2D" unique_id=69708080]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_0c06q"]
+source_geometry_mode = 2
+source_geometry_group_name = &"physic"
+
+[node name="Room" type="Node2D" unique_id=69708080]
+
+[node name="Obscure" type="CanvasModulate" parent="." unique_id=2072011277]
+color = Color(0.5866749, 0.5866749, 0.5866749, 1)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1215749446]
+navigation_polygon = SubResource("NavigationPolygon_0c06q")
 
 [node name="Tiles" type="Node2D" parent="." unique_id=213452734]
 
 [node name="Floor" type="TileMapLayer" parent="Tiles" unique_id=1690041257]
 
-[node name="Walls" type="TileMapLayer" parent="Tiles" unique_id=321007397]
+[node name="Walls" type="TileMapLayer" parent="Tiles" unique_id=321007397 groups=["physic"]]
 
-[node name="Furniture" type="TileMapLayer" parent="Tiles" unique_id=1546801700]
-
-[node name="Obscure" type="CanvasModulate" parent="." unique_id=2072011277]
-color = Color(0.5866749, 0.5866749, 0.5866749, 1)
+[node name="Furniture" type="TileMapLayer" parent="Tiles" unique_id=1546801700 groups=["physic"]]
 
 [node name="Collectibles" type="Node2D" parent="." unique_id=550994344]
 
@@ -23,4 +30,10 @@ color = Color(0.5866749, 0.5866749, 0.5866749, 1)
 
 [node name="PistolGuards" type="Node2D" parent="." unique_id=83598530]
 
+[node name="LightPoints" type="Node2D" parent="." unique_id=762074607]
+
 [node name="PlayerPos" type="Marker2D" parent="." unique_id=1605110160]
+
+[node name="AmbientMusic" type="AudioStreamPlayer" parent="." unique_id=1575166514]
+autoplay = true
+bus = &"Music"
