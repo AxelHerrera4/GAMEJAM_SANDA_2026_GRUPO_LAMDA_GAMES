@@ -12,7 +12,7 @@ signal solved
 @export var hits_required: int = 3
 @export var max_misses: int = 3
 
-@export_group("Pista (alineada al recuadro azul del arte)")
+@export_group("Pista")
 @export_range(0.0, 0.5) var track_left_fraction: float = 0.10
 @export_range(0.0, 0.5) var track_right_fraction: float = 0.09
 @export_range(0.0, 1.0) var track_center_y_fraction: float = 0.196
