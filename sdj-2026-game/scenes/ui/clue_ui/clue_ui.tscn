@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bqrd52ngp1nx1" path="res://scenes/ui/clue_ui/clue_ui.gd" id="1_7d7x7"]
 [ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="2_ehmdd"]
 [ext_resource type="PackedScene" uid="uid://ppme5ug1gp15" path="res://scenes/ui/hack_minigame/hack_minigame.tscn" id="3_miaaq"]
+[ext_resource type="PackedScene" uid="uid://c4rivblkkgs0u" path="res://scenes/ui/precision_minigame/precision_minigame.tscn" id="4_ehmdd"]
 [ext_resource type="AudioStream" uid="uid://ckwooe6vtewic" path="res://assets/SFX/MoveMenu/TakePaper.ogg" id="4_yks4t"]
 [ext_resource type="AudioStream" uid="uid://dx26xmks4lalk" path="res://assets/SFX/Interfaces/brokenGlass.ogg" id="5_smtmn"]
 
@@ -269,6 +270,9 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
 text = "Cerrar foto"
 
 [node name="HackMinigame" parent="." unique_id=1735186318 instance=ExtResource("3_miaaq")]
+visible = false
+
+[node name="PrecisionMinigame" parent="." unique_id=2039603791 instance=ExtResource("4_ehmdd")]
 visible = false
 
 [node name="Blackout" type="ColorRect" parent="." unique_id=481147808]

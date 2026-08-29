@@ -14,7 +14,10 @@ const BLACKOUT_OUT: float = 0.55
 @onready var dialogue_box: Panel = $DialogueBox
 @onready var dialogue_speaker: Label = $DialogueBox/Margin/VBox/Speaker
 @onready var dialogue_text: Label = $DialogueBox/Margin/VBox/DialogueText
-@onready var hack_minigame: HackMinigame = $HackMinigame
+@onready var minigames: Array = [
+	$HackMinigame,
+	$PrecisionMinigame,
+]
 @onready var fragment_toast: Panel = $FragmentToast
 @onready var toast_name: Label = $FragmentToast/Margin/VBox/ToastName
 @onready var blackout: ColorRect = $Blackout
@@ -24,12 +27,14 @@ const BLACKOUT_OUT: float = 0.55
 var _input_guard: bool = false
 var _current_interactable: Node = null
 var _pause_menu_open: bool = false
-
+var _active_minigame: Node = null
 
 func _ready() -> void:
 	photo_panel.hide()
 	dialogue_box.hide()
-	hack_minigame.hide()
+	for mg in minigames:
+		mg.hide()
+		mg.finished.connect(_on_hack_minigame_finished)
 	fragment_toast.hide()
 	interact_prompt.hide()
 	blackout.hide()
@@ -43,7 +48,6 @@ func _ready() -> void:
 	SignalHub.game_over.connect(_on_game_over)
 	SignalHub.pause_menu_toggled.connect(_on_pause_menu_toggled)
 	FragmentManager.fragment_granted.connect(_on_fragment_granted)
-	hack_minigame.finished.connect(_on_hack_minigame_finished)
 
 
 func _process(_delta: float) -> void:
@@ -59,7 +63,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func is_ui_open() -> bool:
-	return photo_panel.visible or dialogue_box.visible or hack_minigame.visible
+	return photo_panel.visible or dialogue_box.visible or (_active_minigame != null and _active_minigame.visible)
 
 
 func close_ui() -> void:
@@ -87,7 +91,8 @@ func _on_photo_requested(title: String, texture: Texture2D, caption: String) -> 
 	photo_caption.text = caption
 	photo_caption.visible = not caption.is_empty()
 	dialogue_box.hide()
-	hack_minigame.hide()
+	if _active_minigame != null:
+		_active_minigame.hide()
 	photo_panel.show()
 	paper_sfx.play()
 	_open_ui(true)
@@ -98,7 +103,8 @@ func _on_dialogue_requested(speaker: String, text: String) -> void:
 	dialogue_speaker.visible = not speaker.is_empty()
 	dialogue_text.text = text
 	photo_panel.hide()
-	hack_minigame.hide()
+	if _active_minigame != null:
+		_active_minigame.hide()
 	dialogue_box.show()
 	_open_ui(true)
 
@@ -106,13 +112,15 @@ func _on_dialogue_requested(speaker: String, text: String) -> void:
 func _on_hack_requested() -> void:
 	photo_panel.hide()
 	dialogue_box.hide()
-	hack_minigame.start()
-	hack_minigame.show()
+	_active_minigame = minigames[randi() % minigames.size()]
+	_active_minigame.start()
+	_active_minigame.show()
 	_open_ui(false)
 
 
+
 func _on_hack_minigame_finished(success: bool) -> void:
-	hack_minigame.hide()
+	_active_minigame.hide()
 	SignalHub.player_control_blocked.emit(false)
 	_refresh_prompt()
 	SignalHub.hack_finished.emit(success)
@@ -144,8 +152,8 @@ func _on_pause_menu_toggled(open: bool) -> void:
 
 
 func _on_game_over(_won: bool) -> void:
-	if hack_minigame.visible:
-		hack_minigame.force_close()
+	if _active_minigame != null and _active_minigame.visible:
+		_active_minigame.force_close()
 	photo_panel.hide()
 	dialogue_box.hide()
 	interact_prompt.hide()

@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://c4rivblkkgs0u"]
+
+[ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="1_nliin"]
+[ext_resource type="Script" uid="uid://cpd88413ifj2y" path="res://scenes/ui/precision_minigame/precision_minigame.gd" id="1_o4n0m"]
+[ext_resource type="Script" uid="uid://c8memm71x21g0" path="res://scenes/ui/precision_minigame/precision_board.gd" id="2_o4n0m"]
+[ext_resource type="Texture2D" uid="uid://drd8r0m43feue" path="res://assets/UI/miniGames/MinigamePrecission.png" id="3_nliin"]
+[ext_resource type="AudioStream" uid="uid://d2l0gr6q17wvg" path="res://assets/SFX/Interfaces/ShowHack.mp3" id="4_hnxm7"]
+[ext_resource type="AudioStream" uid="uid://csa55v7hdu765" path="res://assets/SFX/Interfaces/Hacker.ogg" id="5_qh0cm"]
+[ext_resource type="AudioStream" uid="uid://bys7h0g07xfj3" path="res://assets/SFX/Interfaces/SolveHack.ogg" id="6_x2k6b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ht5q4"]
+bg_color = Color(0.10980392, 0.11372549, 0.10980392, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.23529412, 0.24313726, 0.23529412, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qi8jt"]
+bg_color = Color(0.07058824, 0.07450981, 0.07058824, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.19607843, 0.20392157, 0.19607843, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgccu"]
+bg_color = Color(0.16470589, 0.17254902, 0.16470589, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.34117648, 0.34901962, 0.33333334, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="PrecisionMinigame" type="Panel" unique_id=2039603791]
+clip_contents = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -200.0
+offset_right = 280.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o4n0m")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=1080447390]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 3.0
+offset_right = 2.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=1936732027]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Margin/VBox" unique_id=1345189304]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.627451, 0.62352943, 0.5921569, 1)
+theme_override_fonts/font = ExtResource("1_nliin")
+theme_override_font_sizes/font_size = 18
+text = "CERRADURA ELECTRÓNICA"
+horizontal_alignment = 1
+
+[node name="Board" type="Control" parent="Margin/VBox" unique_id=518373199]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_o4n0m")
+track_left_fraction = 0.08
+track_right_fraction = 0.08
+track_center_y_fraction = 0.683
+
+[node name="Background" type="TextureRect" parent="Margin/VBox/Board" unique_id=1825638846]
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 33.0
+offset_top = 6.0
+offset_right = -40.0
+offset_bottom = -13.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_nliin")
+expand_mode = 1
+
+[node name="SolvedLabel" type="Label" parent="Margin/VBox/Board" unique_id=1600000001]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.11
+anchor_top = 0.11
+anchor_right = 0.89
+anchor_bottom = 0.3
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.92156863, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_nliin")
+theme_override_font_sizes/font_size = 20
+text = "¡HACKEADO CORRECTAMENTE!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Status" type="Label" parent="Margin/VBox" unique_id=1371628956]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6431373, 0.6392157, 0.6156863, 1)
+theme_override_font_sizes/font_size = 15
+text = "Pulsa [ESPACIO] cuando el cursor pase por la zona verde."
+horizontal_alignment = 1
+clip_text = true
+
+[node name="CancelButton" type="Button" parent="Margin/VBox" unique_id=1249845372]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6901961, 0.68235296, 0.654902, 1)
+theme_override_colors/font_pressed_color = Color(0.54901963, 0.54509807, 0.5254902, 1)
+theme_override_colors/font_hover_color = Color(0.8509804, 0.84313726, 0.8117647, 1)
+theme_override_fonts/font = ExtResource("1_nliin")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_ht5q4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qi8jt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bgccu")
+text = "Abortar"
+
+[node name="ShowSfx" type="AudioStreamPlayer" parent="." unique_id=1702821971]
+stream = ExtResource("4_hnxm7")
+
+[node name="LoopSfx" type="AudioStreamPlayer" parent="." unique_id=1409071511]
+stream = ExtResource("5_qh0cm")
+volume_db = -6.0
+
+[node name="SolveSfx" type="AudioStreamPlayer" parent="." unique_id=96855067]
+stream = ExtResource("6_x2k6b")
+
+[connection signal="pressed" from="Margin/VBox/CancelButton" to="." method="_on_cancel_button_pressed"]
