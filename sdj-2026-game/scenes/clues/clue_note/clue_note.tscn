@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://da7dw48nnk4cw"]
 
-[ext_resource type="Script" path="res://scenes/clues/clue_note/clue_note.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bm3fnbd4dn654" path="res://scenes/clues/clue_note/clue_note.gd" id="1_script"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(64, 64)
 
-[node name="ClueNote" type="Area2D" groups=["interactable"]]
+[node name="ClueNote" type="Area2D" unique_id=210535223 groups=["interactable"]]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_script")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=877883346]
 shape = SubResource("RectangleShape2D_1")

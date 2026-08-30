@@ -3,8 +3,8 @@ extends Area2D
 
 @export_file("*.tscn") var next_scene: String = ""
 @export var prompt_text: String = "Salir"
-@export var speaker: String = "Paciente N° 6174"
-@export_multiline var message: String = ""
+@export_group("Dialogic")
+@export_file("*.dtl") var timeline_path: String = ""
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
@@ -50,8 +50,11 @@ func get_prompt_text() -> String:
 func interact(_player: Node) -> void:
 	Transition.play_open_door()
 
-	if not message.is_empty():
-		SignalHub.dialogue_requested.emit(speaker, message)
-		await SignalHub.ui_closed
+	if not timeline_path.is_empty() and is_instance_valid(Dialogic):
+		SignalHub.player_control_blocked.emit(true)
+		Dialogic.start(timeline_path)
+		await Dialogic.timeline_ended
+		SignalHub.player_control_blocked.emit(false)
 
 	SignalHub.ending_requested.emit()
+

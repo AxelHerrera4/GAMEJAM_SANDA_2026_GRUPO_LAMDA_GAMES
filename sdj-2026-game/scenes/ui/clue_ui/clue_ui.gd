@@ -120,10 +120,13 @@ func _on_hack_requested() -> void:
 
 
 func _on_hack_minigame_finished(success: bool) -> void:
-	_active_minigame.hide()
+	if _active_minigame != null:
+		_active_minigame.hide()
+		_active_minigame = null
 	SignalHub.player_control_blocked.emit(false)
 	_refresh_prompt()
 	SignalHub.hack_finished.emit(success)
+
 
 
 func _on_close_button_pressed() -> void:

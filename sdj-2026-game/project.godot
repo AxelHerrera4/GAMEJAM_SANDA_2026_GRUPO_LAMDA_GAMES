@@ -24,7 +24,68 @@ FragmentManager="*res://globals/fragment_manager.gd"
 PauseMenu="*res://scenes/ui/pause_menu/pause_menu.tscn"
 Transition="*res://globals/transition.gd"
 Ending="*res://scenes/ui/ending_screen/ending_screen.tscn"
+Dialogic="*uid://ds2q0uclmolvu"
+DialogicBridge="*res://globals/dialogic_bridge.gd"
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
+
+[dialogic]
+
+directories/dch_directory={
+"patient": "res://resources/dialogic/characters/patient.dch"
+}
+directories/dtl_directory={
+"blocked_door": "res://dialogues/doors/blocked_door.dtl",
+"computer_memory": "res://dialogues/office/computer_memory.dtl",
+"door_hacked": "res://dialogues/doors/door_hacked.dtl",
+"door_locked": "res://dialogues/doors/door_locked.dtl",
+"exit_hall_locked": "res://dialogues/doors/exit_hall_locked.dtl",
+"exit_hall_opened": "res://dialogues/doors/exit_hall_opened.dtl",
+"memorie_photo": "res://dialogues/jail/memorie_photo.dtl",
+"wall_writing": "res://dialogues/jail/wall_writing.dtl"
+}
+layout/default_style="res://resources/speaker_textbox_style.tres"
+layout/style_directory={
+"": "res://resources/speaker_textbox_style.tres",
+"speaker_textbox_style": "res://resources/speaker_textbox_style.tres",
+"visual_novel_textbox_style": "res://resources/visual_novel_textbox_style.tres"
+}
+layout/style_list=["res://resources/speaker_textbox_style.tres", "res://resources/visual_novel_textbox_style.tres"]
+glossary/default_case_sensitive=true
+text/letter_speed=0.01
+text/initial_text_reveal_skippable=true
+text/text_reveal_skip_delay=0.1
+text/advance_delay=0.1
+text/autoadvance_per_character_delay=0.1
+text/autoadvance_ignored_characters_enabled=true
+animations/join_default_length=0.5
+animations/join_default_wait=true
+animations/leave_default_length=0.5
+animations/leave_default_wait=true
+animations/cross_fade_default_length=0.5
+choices/autofocus_first=true
+choices/delay=0.2
+choices/reveal_delay=0
+choices/reveal_by_input=false
+save/autosave_delay=60.0
+save/encryption_on_exports_only=true
+text/input_action="dialogic_default_action"
+text/autopauses={}
+audio/channel_defaults={
+"": {
+"audio_bus": "",
+"fade_length": 0.0,
+"loop": false,
+"volume": 0.0
+},
+"music": {
+"audio_bus": "",
+"fade_length": 0.0,
+"loop": true,
+"volume": 0.0
+}
+}
+variables={}
+timer/process_in_physics=true
 
 [display]
 
@@ -32,7 +93,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_ai/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/godot_ai/plugin.cfg")
 
 [input]
 
@@ -91,6 +152,16 @@ sprint={
 attack={
 "deadzone": 0.2,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(126, 18),"global_position":Vector2(135, 66),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+dialogic_default_action={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194309,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":32,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":88,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":70,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 

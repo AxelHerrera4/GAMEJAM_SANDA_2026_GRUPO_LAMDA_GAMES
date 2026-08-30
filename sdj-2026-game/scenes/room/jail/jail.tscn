@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="7_ui3gy"]
 [ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="8_jj3dn"]
 [ext_resource type="PackedScene" path="res://scenes/clues/clue_photo/clue_photo.tscn" id="9_jf2ap"]
-[ext_resource type="PackedScene" path="res://scenes/clues/clue_note/clue_note.tscn" id="10_x5f4m"]
+[ext_resource type="PackedScene" uid="uid://da7dw48nnk4cw" path="res://scenes/clues/clue_note/clue_note.tscn" id="10_x5f4m"]
 [ext_resource type="Script" uid="uid://dmud040qi3r5o" path="res://scenes/room/jail/level_jail.gd" id="11_rr37k"]
 [ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="12_music"]
 
@@ -67,13 +67,12 @@ offset_right = 2.0
 [node name="Clue_Photo" parent="." index="15" unique_id=1647775857 instance=ExtResource("9_jf2ap")]
 position = Vector2(576, 22)
 photo = ExtResource("5_vsvih")
-first_time_text = "Te recuerdo... cómo te extraño demasiado."
+first_time_timeline = "uid://xk3od2s16l6u"
 clue_id = &"foto_chica"
 clue_title = "Foto"
 
 [node name="Clue_WallWriting" parent="." index="16" unique_id=1642929999 instance=ExtResource("10_x5f4m")]
 position = Vector2(155, 28)
-lines = Array[String](["Yo soy el Paciente N° 6174 y soy......", "Soy un experto en sistemas. Necesito irme de aquí."])
-shatter_after_line = 0
+timeline_path = "uid://cxqh22447h5r6"
 clue_id = &"escrito_pared"
 clue_title = "Escrito en la pared"

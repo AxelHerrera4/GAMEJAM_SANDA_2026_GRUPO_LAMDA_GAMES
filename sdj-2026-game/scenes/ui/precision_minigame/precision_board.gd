@@ -58,6 +58,8 @@ func _pick_new_zone() -> void:
 
 
 func _process(delta: float) -> void:
+	if not is_visible_in_tree():
+		return
 	var bounds: Vector3 = _track_bounds()
 	var left: float = bounds.x
 	var right: float = bounds.x + bounds.y
@@ -72,10 +74,11 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not visible:
+	if not is_visible_in_tree():
 		return
 	if event.is_action_pressed("ui_accept"):  # o una acción custom "interact"
 		try_hit()
+
 
 
 func try_hit() -> void:

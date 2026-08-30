@@ -1,19 +1,18 @@
 class_name ClueNote
 extends Clue
 
-@export var speaker: String = "Paciente N° 6174"
-@export var lines: Array[String] = ["..."]
+@export_group("Dialogic")
+@export_file("*.dtl") var timeline_path: String = ""
 
-@export_group("Apagon")
-@export var shatter_after_line: int = -1
-@export var shatter_only_once: bool = true
 
 
 func show_clue(first_time: bool) -> void:
-	for i in lines.size():
-		SignalHub.dialogue_requested.emit(speaker, lines[i])
-		await SignalHub.ui_closed
+	if not timeline_path.is_empty() and is_instance_valid(Dialogic):
+		await _show_with_dialogic()
+		return
 
-		if i == shatter_after_line and (first_time or not shatter_only_once):
-			SignalHub.shatter_requested.emit()
-			await SignalHub.shatter_finished
+func _show_with_dialogic() -> void:
+	SignalHub.player_control_blocked.emit(true)
+	Dialogic.start(timeline_path)
+	await Dialogic.timeline_ended
+	SignalHub.player_control_blocked.emit(false)

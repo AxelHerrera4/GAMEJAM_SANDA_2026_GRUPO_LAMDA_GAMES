@@ -1,10 +1,10 @@
 class_name Computer
 extends Area2D
 
-@export var speaker: String = "Paciente N° 6174"
 @export var reward_fragment: StringName = &"attack"
-@export_multiline var memory_text: String = "Con que esto era antes... un capitán de las fuerzas armadas. Creo que ya voy entendiendo quién soy."
-@export_multiline var leave_text: String = "Es hora de salir de aquí..."
+
+@export_group("Dialogic")
+@export_file("*.dtl") var timeline_path: String = "res://dialogues/office/computer_memory.dtl"
 
 var is_hacked: bool = false
 
@@ -30,13 +30,12 @@ func interact(_player: Player) -> void:
 
 	is_hacked = true
 
-	SignalHub.shatter_requested.emit()
-	await SignalHub.shatter_finished
-
-	SignalHub.dialogue_requested.emit(speaker, memory_text)
-	await SignalHub.ui_closed
+	if not timeline_path.is_empty() and is_instance_valid(Dialogic):
+		SignalHub.player_control_blocked.emit(true)
+		Dialogic.start(timeline_path)
+		await Dialogic.timeline_ended
+		FragmentManager.grant(reward_fragment)
+		SignalHub.player_control_blocked.emit(false)
+		return
 
 	FragmentManager.grant(reward_fragment)
-
-	SignalHub.dialogue_requested.emit(speaker, leave_text)
-	await SignalHub.ui_closed

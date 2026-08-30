@@ -4,17 +4,22 @@ extends Clue
 @export var photo: Texture2D
 @export_multiline var caption: String = ""
 
-@export_group("Primera vez")
-@export var speaker: String = "Paciente N° 6174"
-@export_multiline var first_time_text: String = ""
+#@export_group("Primera vez") #Ya no hay speaker ni texto de primera vez, ahora solo seria con el grupo de dialogic que tiene el path del timeline de el primer texto
+@export_group("Dialogic")
+@export_file("*.dtl") var first_time_timeline: String = ""
 
 
 func show_clue(first_time: bool) -> void:
 	SignalHub.photo_requested.emit(clue_title, photo, caption)
 
-	if not first_time or first_time_text.is_empty():
+	if not first_time or first_time_timeline.is_empty():
 		return
 
 	await SignalHub.ui_closed
-	SignalHub.dialogue_requested.emit(speaker, first_time_text)
-	await SignalHub.ui_closed
+
+	if !first_time_timeline.is_empty() and is_instance_valid(Dialogic):
+		SignalHub.player_control_blocked.emit(true)
+		Dialogic.start(first_time_timeline)
+		await Dialogic.timeline_ended
+		SignalHub.player_control_blocked.emit(false)
+		return

@@ -4,14 +4,14 @@ extends Area2D
 @export var locked: bool = true
 @export var required_fragment: StringName = &"hack"
 @export_file("*.tscn") var next_scene: String = ""
-@export_multiline var locked_text: String = "La puerta está sellada con una cerradura electrónica. Necesito algo con qué forzar el sistema."
-@export_multiline var hack_text: String = "Conectas el fragmento a la cerradura. El panel parpadea y los cerrojos ceden con un chasquido."
-@export_multiline var open_text: String = ""
+
+@export_group("Dialogic Timelines")
+@export_file("*.dtl") var locked_timeline: String = "res://dialogues/doors/door_locked.dtl"
+@export_file("*.dtl") var hack_timeline: String = "res://dialogues/doors/door_hacked.dtl"
 
 @export_group("Prompts")
 @export var prompt_locked: String = "Hackear cerradura"
 @export var prompt_open: String = "Abrir puerta"
-@export var speaker_name: String = "Paciente N° 6174"
 
 
 func _ready() -> void:
@@ -29,8 +29,11 @@ func get_prompt_text() -> String:
 func interact(_player: Node) -> void:
 	if locked and not FragmentManager.has_fragment(required_fragment):
 		Transition.play_locked_door()
-		if not locked_text.is_empty():
-			SignalHub.dialogue_requested.emit(speaker_name, locked_text)
+		if not locked_timeline.is_empty() and is_instance_valid(Dialogic):
+			SignalHub.player_control_blocked.emit(true)
+			Dialogic.start(locked_timeline)
+			await Dialogic.timeline_ended
+			SignalHub.player_control_blocked.emit(false)
 		return
 
 	if locked:
@@ -39,12 +42,12 @@ func interact(_player: Node) -> void:
 		if not success:
 			return
 		locked = false
-		if not hack_text.is_empty():
-			SignalHub.dialogue_requested.emit(speaker_name, hack_text)
-			await SignalHub.ui_closed
+		if not hack_timeline.is_empty() and is_instance_valid(Dialogic):
+			SignalHub.player_control_blocked.emit(true)
+			Dialogic.start(hack_timeline)
+			await Dialogic.timeline_ended
+			SignalHub.player_control_blocked.emit(false)
 
 	if not next_scene.is_empty():
-		#GameManager.change_scene(next_scene)
 		Transition.change_scene(next_scene)
-	elif not open_text.is_empty():
-		SignalHub.dialogue_requested.emit(speaker_name, open_text)
+
