@@ -28,19 +28,20 @@ func interact(_player: Node) -> void:
 	if not is_unlocked():
 		GameManager.play_locked_door()
 		if not locked_timeline.is_empty() and is_instance_valid(Dialogic):
-			SignalHub.player_control_blocked.emit(true)
+			SignalHub.emit_on_player_control_blocked(true)
 			Dialogic.start(locked_timeline)
 			await Dialogic.timeline_ended
-			SignalHub.player_control_blocked.emit(false)
+			SignalHub.emit_on_player_control_blocked(false)
 		return
 
 	if not opened_timeline.is_empty() and is_instance_valid(Dialogic):
-		SignalHub.player_control_blocked.emit(true)
+		SignalHub.emit_on_player_control_blocked(true)
 		Dialogic.start(opened_timeline)
 		await Dialogic.timeline_ended
-		SignalHub.player_control_blocked.emit(false)
+		SignalHub.emit_on_player_control_blocked(false)
 
 	GameManager.change_scene(next_scene)
+
 
 
 func _on_access_points_changed(done: int, total: int) -> void:

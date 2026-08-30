@@ -49,7 +49,7 @@ func open_menu() -> void:
 	_was_paused = get_tree().paused
 	get_tree().paused = true
 	visible = true
-	SignalHub.pause_menu_toggled.emit(true)
+	SignalHub.emit_on_pause_menu_toggled(true)
 	resume_button.grab_focus()
 
 
@@ -59,7 +59,7 @@ func close_menu() -> void:
 	_open = false
 	visible = false
 	get_tree().paused = _was_paused
-	SignalHub.pause_menu_toggled.emit(false)
+	SignalHub.emit_on_pause_menu_toggled(false)
 
 
 func _can_open() -> bool:
@@ -83,5 +83,6 @@ func _on_quit_pressed() -> void:
 	_open = false
 	visible = false
 	get_tree().paused = false
-	SignalHub.pause_menu_toggled.emit(false)
+	SignalHub.emit_on_pause_menu_toggled(false)
 	GameManager.load_main()
+

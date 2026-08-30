@@ -51,8 +51,8 @@ func _ready() -> void:
 	if animation_tree:
 		animation_tree.set("parameters/idle/blend_position", facing_direction)
 		animation_tree.set("parameters/move/blend_position", facing_direction)
-	SignalHub.player_health_changed.emit(health, max_health)
-	SignalHub.player_stamina_changed.emit(stamina, max_stamina)
+	SignalHub.emit_on_player_health_changed(health, max_health)
+	SignalHub.emit_on_player_stamina_changed(stamina, max_stamina)
 	SignalHub.player_control_blocked.connect(_on_control_blocked)
 	# Habilitar ataque si el fragmento ya fue obtenido antes de cargar esta escena
 	_can_attack = FragmentManager.has_fragment(FragmentManager.ATTACK)
@@ -93,7 +93,7 @@ func _handle_stamina(delta: float) -> float:
 		stamina = max(0.0, stamina - sprint_cost * delta)
 		_is_regenerating_stamina = false
 		stamina_regen_timer.stop()
-		SignalHub.player_stamina_changed.emit(stamina, max_stamina)
+		SignalHub.emit_on_player_stamina_changed(stamina, max_stamina)
 		return speed * sprint_speed_multiplier
 	else:
 		_is_sprinting = false
@@ -102,7 +102,7 @@ func _handle_stamina(delta: float) -> float:
 			stamina_regen_timer.start()
 		if _is_regenerating_stamina and stamina < max_stamina:
 			stamina = min(max_stamina, stamina + stamina_regen_rate * delta)
-			SignalHub.player_stamina_changed.emit(stamina, max_stamina)
+			SignalHub.emit_on_player_stamina_changed(stamina, max_stamina)
 		return speed
 
 func _on_stamina_regen_timer_timeout() -> void:
@@ -116,7 +116,7 @@ func take_damage(amount: int, knockback_force: float, source_position: Vector2) 
 		return
 	
 	health = max(0, health - amount)
-	SignalHub.player_health_changed.emit(health, max_health)
+	SignalHub.emit_on_player_health_changed(health, max_health)
 	
 	if health <= 0:
 		die()
@@ -190,7 +190,8 @@ func _update_current_interactable() -> void:
 
 	if closest != _current_interactable:
 		_current_interactable = closest
-		SignalHub.interactable_changed.emit(_current_interactable)
+		SignalHub.emit_on_interactable_changed(_current_interactable)
+
 
 
 func _add_interactable(node: Node) -> void:

@@ -67,15 +67,15 @@ func close_ui() -> void:
 		return
 	photo_panel.hide()
 	get_tree().paused = false
-	SignalHub.player_control_blocked.emit(false)
+	SignalHub.emit_on_player_control_blocked(false)
 	_refresh_prompt()
-	SignalHub.ui_closed.emit()
+	SignalHub.emit_on_ui_closed()
 
 
 func _open_ui(freeze_world: bool) -> void:
 	_input_guard = true
 	interact_prompt.hide()
-	SignalHub.player_control_blocked.emit(true)
+	SignalHub.emit_on_player_control_blocked(true)
 	if freeze_world:
 		get_tree().paused = true
 
@@ -106,9 +106,9 @@ func _on_hack_minigame_finished(success: bool) -> void:
 	if _active_minigame != null:
 		_active_minigame.hide()
 		_active_minigame = null
-	SignalHub.player_control_blocked.emit(false)
+	SignalHub.emit_on_player_control_blocked(false)
 	_refresh_prompt()
-	SignalHub.hack_finished.emit(success)
+	SignalHub.emit_on_hack_finished(success)
 
 
 
@@ -146,7 +146,7 @@ func _on_game_over(_won: bool) -> void:
 
 func _on_shatter_requested() -> void:
 	await play_shatter()
-	SignalHub.shatter_finished.emit()
+	SignalHub.emit_on_shatter_finished()
 
 
 func _on_fragment_granted(fragment_id: StringName) -> void:
@@ -178,4 +178,4 @@ func play_shatter() -> void:
 
 	blackout.hide()
 	get_tree().paused = false
-	SignalHub.player_control_blocked.emit(false)
+	SignalHub.emit_on_player_control_blocked(false)

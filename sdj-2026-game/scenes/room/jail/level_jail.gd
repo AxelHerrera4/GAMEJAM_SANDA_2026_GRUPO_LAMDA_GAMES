@@ -13,13 +13,14 @@ func _ready() -> void:
 		_clues.append(clue)
 		clue.inspected.connect(_on_clue_inspected)
 
-	SignalHub.clues_progress.emit(0, _clues.size())
+	SignalHub.emit_on_clues_progress(0, _clues.size())
 
 
 func _on_clue_inspected(clue: Clue) -> void:
 	_inspected_ids[clue.clue_id] = true
-	SignalHub.clues_progress.emit(_inspected_ids.size(), _clues.size())
+	SignalHub.emit_on_clues_progress(_inspected_ids.size(), _clues.size())
 
 	if _inspected_ids.size() >= _clues.size():
-		SignalHub.all_clues_inspected.emit()
+		SignalHub.emit_on_all_clues_inspected()
 		FragmentManager.grant(reward_fragment)
+

@@ -19,4 +19,5 @@ func _on_point_hacked(_point: HackPoint) -> void:
 
 
 func _emit_progress() -> void:
-	SignalHub.access_points_changed.emit(_done, _points.size())
+	SignalHub.emit_on_access_points_changed(_done, _points.size())
+

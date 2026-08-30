@@ -19,9 +19,10 @@ func interact(_player: Node) -> void:
 	GameManager.play_open_door()
 
 	if not timeline_path.is_empty() and is_instance_valid(Dialogic):
-		SignalHub.player_control_blocked.emit(true)
+		SignalHub.emit_on_player_control_blocked(true)
 		Dialogic.start(timeline_path)
 		await Dialogic.timeline_ended
-		SignalHub.player_control_blocked.emit(false)
+		SignalHub.emit_on_player_control_blocked(false)
 
-	SignalHub.ending_requested.emit()
+	SignalHub.emit_on_ending_requested()
+

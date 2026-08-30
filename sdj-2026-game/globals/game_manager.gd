@@ -49,7 +49,7 @@ func fade() -> void:
 
 func fade_in_out(action_during_black: Callable = Callable()) -> void:
 	_action_during_black = action_during_black
-	SignalHub.player_control_blocked.emit(true)
+	SignalHub.emit_on_player_control_blocked(true)
 	fade()
 
 
@@ -69,7 +69,7 @@ func change_to_next_scene() -> void:
 				get_tree().change_scene_to_file(scene_to_change)
 			else:
 				push_error("GameManager: La escena '%s' no existe." % scene_to_change)
-				SignalHub.player_control_blocked.emit(false)
+				SignalHub.emit_on_player_control_blocked(false)
 				return
 
 		await get_tree().process_frame
@@ -77,9 +77,9 @@ func change_to_next_scene() -> void:
 
 		_setup_scene_entities(get_tree().current_scene)
 		get_tree().paused = false
-		SignalHub.player_control_blocked.emit(false)
+		SignalHub.emit_on_player_control_blocked(false)
 	else:
-		SignalHub.player_control_blocked.emit(false)
+		SignalHub.emit_on_player_control_blocked(false)
 
 
 func _setup_scene_entities(scene: Node) -> void:
@@ -119,8 +119,9 @@ func _setup_scene_entities(scene: Node) -> void:
 
 func start_transition(to_scene: Variant) -> void:
 	next_scene = to_scene
-	SignalHub.player_control_blocked.emit(true)
+	SignalHub.emit_on_player_control_blocked(true)
 	fade()
+
 
 
 func change_scene(scene_path: String) -> void:

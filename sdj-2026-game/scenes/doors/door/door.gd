@@ -30,23 +30,24 @@ func interact(_player: Node) -> void:
 	if locked and not FragmentManager.has_fragment(required_fragment):
 		GameManager.play_locked_door()
 		if not locked_timeline.is_empty() and is_instance_valid(Dialogic):
-			SignalHub.player_control_blocked.emit(true)
+			SignalHub.emit_on_player_control_blocked(true)
 			Dialogic.start(locked_timeline)
 			await Dialogic.timeline_ended
-			SignalHub.player_control_blocked.emit(false)
+			SignalHub.emit_on_player_control_blocked(false)
 		return
 
 	if locked:
-		SignalHub.hack_requested.emit()
+		SignalHub.emit_on_hack_requested()
 		var success: bool = await SignalHub.hack_finished
 		if not success:
 			return
 		locked = false
 		if not hack_timeline.is_empty() and is_instance_valid(Dialogic):
-			SignalHub.player_control_blocked.emit(true)
+			SignalHub.emit_on_player_control_blocked(true)
 			Dialogic.start(hack_timeline)
 			await Dialogic.timeline_ended
-			SignalHub.player_control_blocked.emit(false)
+			SignalHub.emit_on_player_control_blocked(false)
 
 	if not next_scene.is_empty():
 		GameManager.change_scene(next_scene)
+

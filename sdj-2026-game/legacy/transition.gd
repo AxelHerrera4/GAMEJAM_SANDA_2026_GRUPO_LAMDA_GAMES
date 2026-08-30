@@ -59,7 +59,7 @@ func fade_in_out(action_during_black: Callable = Callable(), hold_time: float = 
 		return
 	_busy = true
 
-	SignalHub.player_control_blocked.emit(true)
+	SignalHub.emit_on_player_control_blocked(true)
 
 	_fade.color = Color(0.0, 0.0, 0.0, 0.0)
 	_fade.show()
@@ -74,7 +74,7 @@ func fade_in_out(action_during_black: Callable = Callable(), hold_time: float = 
 	if hold_time > 0.0:
 		await get_tree().create_timer(hold_time, true).timeout
 
-	SignalHub.player_control_blocked.emit(false)
+	SignalHub.emit_on_player_control_blocked(false)
 
 	var fade_out: Tween = create_tween()
 	fade_out.tween_property(_fade, "color:a", 0.0, FADE_OUT_TIME)
@@ -89,7 +89,7 @@ func change_scene(path: String) -> void:
 		return
 	_busy = true
 
-	SignalHub.player_control_blocked.emit(true)
+	SignalHub.emit_on_player_control_blocked(true)
 
 	_fade.color = Color(0.0, 0.0, 0.0, 0.0)
 	_fade.show()
@@ -108,7 +108,8 @@ func change_scene(path: String) -> void:
 	_setup_scene_entities(get_tree().current_scene)
 
 	get_tree().paused = false
-	SignalHub.player_control_blocked.emit(false)
+	SignalHub.emit_on_player_control_blocked(false)
+
 
 	var fade_out: Tween = create_tween()
 	fade_out.tween_property(_fade, "color:a", 0.0, FADE_OUT_TIME)

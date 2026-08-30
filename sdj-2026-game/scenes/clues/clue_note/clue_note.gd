@@ -12,7 +12,8 @@ func show_clue(first_time: bool) -> void:
 		return
 
 func _show_with_dialogic() -> void:
-	SignalHub.player_control_blocked.emit(true)
+	SignalHub.emit_on_player_control_blocked(true)
 	Dialogic.start(timeline_path)
 	await Dialogic.timeline_ended
-	SignalHub.player_control_blocked.emit(false)
+	SignalHub.emit_on_player_control_blocked(false)
+

@@ -10,7 +10,7 @@ extends Clue
 
 
 func show_clue(first_time: bool) -> void:
-	SignalHub.photo_requested.emit(clue_title, photo, caption)
+	SignalHub.emit_on_photo_requested(clue_title, photo, caption)
 
 	if not first_time or first_time_timeline.is_empty():
 		return
@@ -18,8 +18,9 @@ func show_clue(first_time: bool) -> void:
 	await SignalHub.ui_closed
 
 	if !first_time_timeline.is_empty() and is_instance_valid(Dialogic):
-		SignalHub.player_control_blocked.emit(true)
+		SignalHub.emit_on_player_control_blocked(true)
 		Dialogic.start(first_time_timeline)
 		await Dialogic.timeline_ended
-		SignalHub.player_control_blocked.emit(false)
+		SignalHub.emit_on_player_control_blocked(false)
 		return
+

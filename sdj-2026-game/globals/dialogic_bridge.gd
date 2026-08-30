@@ -15,8 +15,9 @@ func _on_dialogic_signal(argument: Variant) -> void:
 				return
 			_shattered = true
 			Dialogic.paused = true
-			SignalHub.shatter_requested.emit()
+			SignalHub.emit_on_shatter_requested()
 			await SignalHub.shatter_finished
+
 			Dialogic.paused = false
 		_:
 			pass

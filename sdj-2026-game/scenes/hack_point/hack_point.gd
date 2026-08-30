@@ -40,13 +40,13 @@ func get_prompt_text() -> String:
 func interact(_player: Node) -> void:
 	if _hacked:
 		if not already_done_timeline.is_empty() and is_instance_valid(Dialogic):
-			SignalHub.player_control_blocked.emit(true)
+			SignalHub.emit_on_player_control_blocked(true)
 			Dialogic.start(already_done_timeline)
 			await Dialogic.timeline_ended
-			SignalHub.player_control_blocked.emit(false)
+			SignalHub.emit_on_player_control_blocked(false)
 		return
 
-	SignalHub.hack_requested.emit()
+	SignalHub.emit_on_hack_requested()
 	var success: bool = await SignalHub.hack_finished
 	if not success:
 		return
@@ -56,10 +56,11 @@ func interact(_player: Node) -> void:
 	hacked.emit(self)
 
 	if not success_timeline.is_empty() and is_instance_valid(Dialogic):
-		SignalHub.player_control_blocked.emit(true)
+		SignalHub.emit_on_player_control_blocked(true)
 		Dialogic.start(success_timeline)
 		await Dialogic.timeline_ended
-		SignalHub.player_control_blocked.emit(false)
+		SignalHub.emit_on_player_control_blocked(false)
+
 
 
 func _on_access_points_changed(done: int, total: int) -> void:
