@@ -54,6 +54,36 @@ func play_open_door() -> void:
 		_open_sfx.play()
 
 
+func fade_in_out(action_during_black: Callable = Callable(), hold_time: float = BLACK_HOLD) -> void:
+	if _busy:
+		return
+	_busy = true
+
+	SignalHub.player_control_blocked.emit(true)
+
+	_fade.color = Color(0.0, 0.0, 0.0, 0.0)
+	_fade.show()
+
+	var fade_in: Tween = create_tween()
+	fade_in.tween_property(_fade, "color:a", 1.0, FADE_IN_TIME)
+	await fade_in.finished
+
+	if action_during_black.is_valid():
+		action_during_black.call()
+
+	if hold_time > 0.0:
+		await get_tree().create_timer(hold_time, true).timeout
+
+	SignalHub.player_control_blocked.emit(false)
+
+	var fade_out: Tween = create_tween()
+	fade_out.tween_property(_fade, "color:a", 0.0, FADE_OUT_TIME)
+	await fade_out.finished
+
+	_fade.hide()
+	_busy = false
+
+
 func change_scene(path: String) -> void:
 	if _busy:
 		return

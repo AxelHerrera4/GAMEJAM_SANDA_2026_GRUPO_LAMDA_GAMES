@@ -26,7 +26,7 @@ func get_prompt_text() -> String:
 
 func interact(_player: Node) -> void:
 	if not is_unlocked():
-		Transition.play_locked_door()
+		GameManager.play_locked_door()
 		if not locked_timeline.is_empty() and is_instance_valid(Dialogic):
 			SignalHub.player_control_blocked.emit(true)
 			Dialogic.start(locked_timeline)
@@ -40,10 +40,9 @@ func interact(_player: Node) -> void:
 		await Dialogic.timeline_ended
 		SignalHub.player_control_blocked.emit(false)
 
-	Transition.change_scene(next_scene)
+	GameManager.change_scene(next_scene)
 
 
 func _on_access_points_changed(done: int, total: int) -> void:
 	_done = done
 	_total = total
-

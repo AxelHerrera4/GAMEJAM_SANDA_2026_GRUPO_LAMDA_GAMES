@@ -28,7 +28,7 @@ func get_prompt_text() -> String:
 
 func interact(_player: Node) -> void:
 	if locked and not FragmentManager.has_fragment(required_fragment):
-		Transition.play_locked_door()
+		GameManager.play_locked_door()
 		if not locked_timeline.is_empty() and is_instance_valid(Dialogic):
 			SignalHub.player_control_blocked.emit(true)
 			Dialogic.start(locked_timeline)
@@ -49,5 +49,4 @@ func interact(_player: Node) -> void:
 			SignalHub.player_control_blocked.emit(false)
 
 	if not next_scene.is_empty():
-		Transition.change_scene(next_scene)
-
+		GameManager.change_scene(next_scene)

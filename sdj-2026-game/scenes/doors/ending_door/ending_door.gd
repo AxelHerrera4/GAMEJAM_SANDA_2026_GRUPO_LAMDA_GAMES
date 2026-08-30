@@ -16,7 +16,7 @@ func get_prompt_text() -> String:
 
 
 func interact(_player: Node) -> void:
-	Transition.play_open_door()
+	GameManager.play_open_door()
 
 	if not timeline_path.is_empty() and is_instance_valid(Dialogic):
 		SignalHub.player_control_blocked.emit(true)
@@ -25,4 +25,3 @@ func interact(_player: Node) -> void:
 		SignalHub.player_control_blocked.emit(false)
 
 	SignalHub.ending_requested.emit()
-
