@@ -34,6 +34,69 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dead"]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.16666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5707963267948966]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.16666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 30)]
+}
 
 [sub_resource type="Animation" id="Animation_idle_down"]
 resource_name = "idle_down"
@@ -182,6 +245,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_guard"]
 _data = {
 &"RESET": SubResource("Animation_reset"),
+&"dead": SubResource("Animation_dead"),
 &"idle_down": SubResource("Animation_idle_down"),
 &"idle_left": SubResource("Animation_idle_left"),
 &"idle_right": SubResource("Animation_idle_right"),
@@ -191,6 +255,9 @@ _data = {
 &"walk_right": SubResource("Animation_walk_right"),
 &"walk_up": SubResource("Animation_walk_up")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dead"]
+animation = &"dead"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_idledown"]
 animation = &"idle_down"
@@ -254,15 +321,26 @@ advance_expression = "is_moving"
 advance_mode = 2
 advance_expression = "!is_moving"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimTransition_start"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_javjj"]
+advance_mode = 2
+advance_expression = "is_dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1s1ds"]
+advance_mode = 2
+advance_expression = "is_dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ey0lc"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_guard"]
+states/Start/position = Vector2(148, 100)
+states/dead/node = SubResource("AnimationNodeAnimation_dead")
+states/dead/position = Vector2(300, 200)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_idle")
-states/idle/position = Vector2(200, 100)
+states/idle/position = Vector2(276, 100)
 states/move/node = SubResource("AnimationNodeBlendSpace2D_move")
-states/move/position = Vector2(400, 100)
-transitions = ["idle", "move", SubResource("AnimTransition_tomove"), "move", "idle", SubResource("AnimTransition_toidle"), "Start", "idle", SubResource("AnimTransition_start")]
+states/move/position = Vector2(422, 100)
+transitions = ["idle", "move", SubResource("AnimTransition_tomove"), "move", "idle", SubResource("AnimTransition_toidle"), "idle", "dead", SubResource("AnimationNodeStateMachineTransition_javjj"), "move", "dead", SubResource("AnimationNodeStateMachineTransition_1s1ds"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_ey0lc")]
 
 [node name="PatrolGuard" type="Area2D" unique_id=1290929920]
 scale = Vector2(1.7, 1.7)
@@ -290,7 +368,7 @@ collision_layer = 16
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1841420385]
+[node name="hitbox_collision_shape" type="CollisionShape2D" parent="Hitbox" unique_id=1841420385]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_kjgb1")
 

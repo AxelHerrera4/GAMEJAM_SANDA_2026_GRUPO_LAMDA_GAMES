@@ -21,7 +21,6 @@ enum EnemyState {Patrolling, Searching, Chasing}
 @export var attack_cooldown: float = 1.2 # Segundos entre ataque
 
 
-
 @onready var nav_agent: NavigationAgent2D = $NavAgent
 @onready var player_detect: RayCast2D = $PlayerDetect
 @onready var debug_label: Label = $DebugLabel
@@ -29,6 +28,8 @@ enum EnemyState {Patrolling, Searching, Chasing}
 @onready var attack_timer: Timer = $AttackTimer
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var vision_cone: VisionCone = $VisionCone
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/hitbox_collision_shape
 
 var _patrol_points: Array[Vector2]
 var _state: EnemyState = EnemyState.Patrolling
@@ -37,7 +38,7 @@ var _last_delta: float = 0.0
 var _player_ref: Player
 var facing_direction: Vector2 = Vector2.DOWN
 var is_moving: bool = false
-
+var is_dead: bool = false
 
 func _ready() -> void:
 	#nav_agent.max_speed = speeds[_state] # DANGER: the nav_agent max_speed= is a security limit, doint this break the security
@@ -62,6 +63,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
+
 	if not is_instance_valid(_player_ref):
 		_player_ref = get_tree().get_first_node_in_group("player") as Player
 
@@ -193,3 +197,24 @@ func _on_nav_agent_velocity_computed(safe_velocity: Vector2) -> void:
 func _on_attack_timer_timeout() -> void:
 	attack_timer.wait_time = randf_range(attack_cooldown, attack_cooldown * 2.0)
 	print(attack_timer.wait_time)
+
+func deactivate_guard() -> void:
+	if hitbox_collision_shape:
+		hitbox_collision_shape.set_deferred(&"disabled", true)
+	if collision_shape_2d:
+		collision_shape_2d.set_deferred(&"disabled", true)
+	if attack_timer:
+		attack_timer.stop.call_deferred()
+	if vision_cone:
+		vision_cone.hide.call_deferred()
+
+
+func dead() -> void:
+	if is_dead:
+		return
+
+	if not can_see_player():
+		GameManager.fade_in_out(func():
+			is_dead = true
+			deactivate_guard()
+		)
