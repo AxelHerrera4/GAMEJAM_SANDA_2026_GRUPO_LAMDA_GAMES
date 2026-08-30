@@ -145,59 +145,6 @@ theme_override_font_sizes/font_size = 20
 text = "Fragmento"
 horizontal_alignment = 1
 
-[node name="DialogueBox" type="Panel" parent="." unique_id=1351374563]
-visible = false
-clip_contents = true
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 48.0
-offset_top = -190.0
-offset_right = -48.0
-offset_bottom = -40.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
-
-[node name="Margin" type="MarginContainer" parent="DialogueBox" unique_id=467331001]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 18
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 14
-
-[node name="VBox" type="VBoxContainer" parent="DialogueBox/Margin" unique_id=1901134237]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="Speaker" type="Label" parent="DialogueBox/Margin/VBox" unique_id=1912231043]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.5764706, 0.58431375, 0.5568628, 1)
-theme_override_fonts/font = ExtResource("2_ehmdd")
-theme_override_font_sizes/font_size = 17
-text = "Paciente N° 6174"
-
-[node name="DialogueText" type="Label" parent="DialogueBox/Margin/VBox" unique_id=1260413316]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.7921569, 0.78431374, 0.7607843, 1)
-theme_override_font_sizes/font_size = 18
-text = "..."
-autowrap_mode = 3
-
-[node name="Hint" type="Label" parent="DialogueBox/Margin/VBox" unique_id=1333414681]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.38431373, 0.38431373, 0.36078432, 1)
-theme_override_font_sizes/font_size = 13
-text = "[F] Cerrar"
-horizontal_alignment = 2
-
 [node name="PhotoPanel" type="Panel" parent="." unique_id=264506062]
 visible = false
 clip_contents = true

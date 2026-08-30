@@ -11,9 +11,6 @@ const BLACKOUT_OUT: float = 0.55
 @onready var photo_title: Label = $PhotoPanel/Margin/VBox/PhotoTitle
 @onready var photo_image: TextureRect = $PhotoPanel/Margin/VBox/PhotoFrame/PhotoImage
 @onready var photo_caption: Label = $PhotoPanel/Margin/VBox/PhotoCaption
-@onready var dialogue_box: Panel = $DialogueBox
-@onready var dialogue_speaker: Label = $DialogueBox/Margin/VBox/Speaker
-@onready var dialogue_text: Label = $DialogueBox/Margin/VBox/DialogueText
 @onready var minigames: Array = [
 	$HackMinigame,
 	$PrecisionMinigame,
@@ -31,7 +28,6 @@ var _active_minigame: Node = null
 
 func _ready() -> void:
 	photo_panel.hide()
-	dialogue_box.hide()
 	for mg in minigames:
 		mg.hide()
 		mg.finished.connect(_on_hack_minigame_finished)
@@ -42,7 +38,6 @@ func _ready() -> void:
 
 	SignalHub.interactable_changed.connect(_on_interactable_changed)
 	SignalHub.photo_requested.connect(_on_photo_requested)
-	SignalHub.dialogue_requested.connect(_on_dialogue_requested)
 	SignalHub.hack_requested.connect(_on_hack_requested)
 	SignalHub.shatter_requested.connect(_on_shatter_requested)
 	SignalHub.game_over.connect(_on_game_over)
@@ -55,22 +50,22 @@ func _process(_delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _pause_menu_open:
+	if _pause_menu_open or not is_ui_open():
 		return
-	if dialogue_box.visible and not _input_guard and event.is_action_pressed("interact"):
+	if not _input_guard and event.is_action_pressed("interact"):
 		get_viewport().set_input_as_handled()
 		close_ui()
 
 
+
 func is_ui_open() -> bool:
-	return photo_panel.visible or dialogue_box.visible or (_active_minigame != null and _active_minigame.visible)
+	return photo_panel.visible or (_active_minigame != null and _active_minigame.visible)
 
 
 func close_ui() -> void:
 	if not is_ui_open():
 		return
 	photo_panel.hide()
-	dialogue_box.hide()
 	get_tree().paused = false
 	SignalHub.player_control_blocked.emit(false)
 	_refresh_prompt()
@@ -90,7 +85,6 @@ func _on_photo_requested(title: String, texture: Texture2D, caption: String) -> 
 	photo_image.texture = texture
 	photo_caption.text = caption
 	photo_caption.visible = not caption.is_empty()
-	dialogue_box.hide()
 	if _active_minigame != null:
 		_active_minigame.hide()
 	photo_panel.show()
@@ -98,20 +92,9 @@ func _on_photo_requested(title: String, texture: Texture2D, caption: String) -> 
 	_open_ui(true)
 
 
-func _on_dialogue_requested(speaker: String, text: String) -> void:
-	dialogue_speaker.text = speaker
-	dialogue_speaker.visible = not speaker.is_empty()
-	dialogue_text.text = text
-	photo_panel.hide()
-	if _active_minigame != null:
-		_active_minigame.hide()
-	dialogue_box.show()
-	_open_ui(true)
-
 
 func _on_hack_requested() -> void:
 	photo_panel.hide()
-	dialogue_box.hide()
 	_active_minigame = minigames[randi() % minigames.size()]
 	_active_minigame.start()
 	_active_minigame.show()
@@ -158,7 +141,6 @@ func _on_game_over(_won: bool) -> void:
 	if _active_minigame != null and _active_minigame.visible:
 		_active_minigame.force_close()
 	photo_panel.hide()
-	dialogue_box.hide()
 	interact_prompt.hide()
 
 

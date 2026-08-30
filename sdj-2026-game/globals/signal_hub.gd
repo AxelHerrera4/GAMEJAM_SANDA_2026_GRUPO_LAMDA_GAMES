@@ -13,8 +13,7 @@ signal all_clues_inspected
 
 @warning_ignore("unused_signal")
 signal photo_requested(title: String, texture: Texture2D, caption: String)
-@warning_ignore("unused_signal")
-signal dialogue_requested(speaker: String, text: String)
+
 @warning_ignore("unused_signal")
 signal ui_closed
 @warning_ignore("unused_signal")

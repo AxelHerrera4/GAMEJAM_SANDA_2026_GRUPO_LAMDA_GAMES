@@ -3,9 +3,11 @@ extends Area2D
 
 signal hacked(point: HackPoint)
 
-@export var speaker: String = "Paciente N° 6174"
-@export_multiline var success_text: String = "Punto de acceso asegurado."
-@export_multiline var already_done_text: String = "Este punto ya está bajo mi control."
+@export_group("Dialogic Timelines")
+@export_file("*.dtl") var success_timeline: String = "res://dialogues/hack_points/point_secured.dtl"
+@export_file("*.dtl") var already_done_timeline: String = "res://dialogues/hack_points/already_done.dtl"
+
+@export_group("Colores")
 @export var color_locked: Color = Color(0.694, 0.0, 0.043, 0.733)
 @export var color_hacked: Color = Color(0.0, 0.41, 0.076, 0.675)
 
@@ -37,7 +39,11 @@ func get_prompt_text() -> String:
 
 func interact(_player: Node) -> void:
 	if _hacked:
-		SignalHub.dialogue_requested.emit(speaker, already_done_text)
+		if not already_done_timeline.is_empty() and is_instance_valid(Dialogic):
+			SignalHub.player_control_blocked.emit(true)
+			Dialogic.start(already_done_timeline)
+			await Dialogic.timeline_ended
+			SignalHub.player_control_blocked.emit(false)
 		return
 
 	SignalHub.hack_requested.emit()
@@ -48,9 +54,15 @@ func interact(_player: Node) -> void:
 	_hacked = true
 	_update_light()
 	hacked.emit(self)
-	SignalHub.dialogue_requested.emit(speaker, "%s (%d/%d)" % [success_text, _done, _total])
+
+	if not success_timeline.is_empty() and is_instance_valid(Dialogic):
+		SignalHub.player_control_blocked.emit(true)
+		Dialogic.start(success_timeline)
+		await Dialogic.timeline_ended
+		SignalHub.player_control_blocked.emit(false)
 
 
 func _on_access_points_changed(done: int, total: int) -> void:
 	_done = done
 	_total = total
+
