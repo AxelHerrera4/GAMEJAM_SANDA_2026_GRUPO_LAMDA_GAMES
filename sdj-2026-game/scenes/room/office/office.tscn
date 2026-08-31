@@ -4,6 +4,8 @@
 [ext_resource type="TileSet" uid="uid://up3vmhes72bi" path="res://resources/tile_level.tres" id="2_s687s"]
 [ext_resource type="Texture2D" uid="uid://berr4y55fqoqj" path="res://assets/tilesets/Room3/OfficeDecoTileSet/OfficeDecoTileSet16x16.png" id="3_idga6"]
 [ext_resource type="PackedScene" uid="uid://da2xnmdt412vn" path="res://scenes/room/office/computer/computer.tscn" id="3_vfjp2"]
+[ext_resource type="Resource" uid="uid://dvi027yn0seif" path="res://dialogues/1th_time/office/computer_memory.dtl" id="5_ee5rl"]
+[ext_resource type="Resource" uid="uid://3at15fnag1xs" path="res://dialogues/1th_time/office/exit.dtl" id="6_2r2d0"]
 [ext_resource type="PackedScene" uid="uid://blfwseil357xg" path="res://scenes/doors/exit/exit.tscn" id="6_ee5rl"]
 [ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="7_music"]
 
@@ -140,9 +142,12 @@ tile_set = SubResource("TileSet_gandw")
 
 [node name="Computer" parent="Interactives" parent_id_path=PackedInt32Array(828243168) index="0" unique_id=418358465 instance=ExtResource("3_vfjp2")]
 position = Vector2(862, 65)
+timeline_path = ExtResource("5_ee5rl")
 
 [node name="Exit" parent="Doors" parent_id_path=PackedInt32Array(1126311124) index="0" unique_id=1172061543 instance=ExtResource("6_ee5rl")]
 position = Vector2(142, 392)
+next_scene_path = "res://scenes/room/jail/jail.tscn"
+timeline_path = ExtResource("6_2r2d0")
 
 [node name="PlayerPos" parent="." index="9" unique_id=1605110160]
 position = Vector2(1100, 539)

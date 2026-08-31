@@ -1,7 +1,7 @@
 extends Node
 
 const FADER = preload("res://scenes/fader/fader.tscn")
-const LEVEL_BASE = preload("uid://dfv3el8yufriw")
+const LEVEL_BASE = null
 const MAIN = preload("uid://5b7hnaeeb4ni")
 const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
 const GAME_HUD_SCENE: PackedScene = preload("res://scenes/game_hud/game_hud.tscn")
@@ -65,12 +65,11 @@ func change_to_next_scene() -> void:
 		if scene_to_change is PackedScene:
 			get_tree().change_scene_to_packed(scene_to_change)
 		elif scene_to_change is String:
-			if ResourceLoader.exists(scene_to_change):
-				get_tree().change_scene_to_file(scene_to_change)
-			else:
-				push_error("GameManager: La escena '%s' no existe." % scene_to_change)
-				SignalHub.emit_on_player_control_blocked(false)
-				return
+			get_tree().change_scene_to_file(scene_to_change)
+		else:
+			push_error("GameManager: La escena '%s' no es válida." % str(scene_to_change))
+			SignalHub.emit_on_player_control_blocked(false)
+			return
 
 		await get_tree().process_frame
 		await get_tree().process_frame
@@ -123,12 +122,14 @@ func start_transition(to_scene: Variant) -> void:
 	fade()
 
 
-
-func change_scene(scene_path: String) -> void:
-	if scene_path.is_empty():
-		push_warning("GameManager: Intento de cambiar a una ruta de escena vacía.")
+func change_scene(scene: Variant) -> void:
+	if scene == null:
+		push_warning("GameManager: Intento de cambiar a escena nula.")
 		return
-	start_transition(scene_path)
+	if scene is String and (scene as String).is_empty():
+		push_warning("GameManager: Intento de cambiar a ruta vacía.")
+		return
+	start_transition(scene)
 
 
 func change_scene_to_packed(scene: PackedScene) -> void:
@@ -136,6 +137,13 @@ func change_scene_to_packed(scene: PackedScene) -> void:
 		push_warning("GameManager: Intento de cambiar a PackedScene nula.")
 		return
 	start_transition(scene)
+
+
+func change_scene_to_file(path: String) -> void:
+	if path.is_empty():
+		push_warning("GameManager: Intento de cambiar a ruta vacía.")
+		return
+	start_transition(path)
 
 
 func load_level() -> void:

@@ -33,16 +33,18 @@ directories/dch_directory={
 "patient": "res://resources/dialogic/characters/patient.dch"
 }
 directories/dtl_directory={
-"already_done": "res://dialogues/hack_points/already_done.dtl",
-"blocked_door": "res://dialogues/doors/blocked_door.dtl",
-"computer_memory": "res://dialogues/office/computer_memory.dtl",
-"door_hacked": "res://dialogues/doors/door_hacked.dtl",
-"door_locked": "res://dialogues/doors/door_locked.dtl",
-"exit_hall_locked": "res://dialogues/doors/exit_hall_locked.dtl",
-"exit_hall_opened": "res://dialogues/doors/exit_hall_opened.dtl",
-"memorie_photo": "res://dialogues/jail/memorie_photo.dtl",
-"point_secured": "res://dialogues/hack_points/point_secured.dtl",
-"wall_writing": "res://dialogues/jail/wall_writing.dtl"
+"already_done": "res://dialogues/1th_time/hallway/hack_points/already_done.dtl",
+"awakening": "res://dialogues/1th_time/jail/awakening.dtl",
+"blocked_door": "res://dialogues/1th_time/hallway/doors/blocked_door.dtl",
+"computer_memory": "res://dialogues/1th_time/office/computer_memory.dtl",
+"door_hacked": "res://dialogues/1th_time/jail/door/door_hacked.dtl",
+"door_locked": "res://dialogues/1th_time/jail/door/door_locked.dtl",
+"exit": "res://dialogues/1th_time/office/exit.dtl",
+"exit_hall_locked": "res://dialogues/1th_time/hallway/doors/exit_hall_locked.dtl",
+"exit_hall_opened": "res://dialogues/1th_time/hallway/doors/exit_hall_opened.dtl",
+"memorie_photo": "res://dialogues/1th_time/jail/memorie_photo.dtl",
+"point_secured": "res://dialogues/1th_time/hallway/hack_points/point_secured.dtl",
+"wall_writing": "res://dialogues/1th_time/jail/wall_writing.dtl"
 }
 layout/default_style="res://resources/speaker_textbox_style.tres"
 layout/style_directory={

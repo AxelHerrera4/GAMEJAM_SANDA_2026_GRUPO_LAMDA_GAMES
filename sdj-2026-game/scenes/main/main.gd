@@ -1,8 +1,11 @@
 extends Control
 
+@export var jail : PackedScene
+
 @onready var panel_credits = $Panel_Credits
 @onready var panel_options = $Panel_Options
 @onready var audio_hover = $Audio_Hover
+
 
 func _ready():
 	# Ocultamos los paneles al iniciar
@@ -18,8 +21,7 @@ func _on_button_hovered():
 func _on_button_play_pressed():
 	FragmentManager.clear_all()
 	get_tree().paused = false
-	#The change scene do with GameManager global script
-	GameManager.change_scene("res://scenes/room/jail/jail.tscn")
+	GameManager.change_scene(jail)
 
 func _on_button_options_pressed():
 	panel_options.show()

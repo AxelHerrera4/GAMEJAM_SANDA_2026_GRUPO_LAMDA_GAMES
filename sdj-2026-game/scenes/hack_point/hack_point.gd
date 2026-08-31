@@ -3,9 +3,9 @@ extends Area2D
 
 signal hacked(point: HackPoint)
 
-@export_group("Dialogic Timelines")
-@export_file("*.dtl") var success_timeline: String = "res://dialogues/hack_points/point_secured.dtl"
-@export_file("*.dtl") var already_done_timeline: String = "res://dialogues/hack_points/already_done.dtl"
+@export_group("Dialogic")
+@export var success_timeline: DialogicTimeline
+@export var already_done_timeline: DialogicTimeline
 
 @export_group("Colores")
 @export var color_locked: Color = Color(0.694, 0.0, 0.043, 0.733)
@@ -39,7 +39,7 @@ func get_prompt_text() -> String:
 
 func interact(_player: Node) -> void:
 	if _hacked:
-		if not already_done_timeline.is_empty() and is_instance_valid(Dialogic):
+		if already_done_timeline != null  and is_instance_valid(Dialogic):
 			SignalHub.emit_on_player_control_blocked(true)
 			Dialogic.start(already_done_timeline)
 			await Dialogic.timeline_ended
@@ -55,7 +55,7 @@ func interact(_player: Node) -> void:
 	_update_light()
 	hacked.emit(self)
 
-	if not success_timeline.is_empty() and is_instance_valid(Dialogic):
+	if success_timeline != null and is_instance_valid(Dialogic):
 		SignalHub.emit_on_player_control_blocked(true)
 		Dialogic.start(success_timeline)
 		await Dialogic.timeline_ended
@@ -66,4 +66,3 @@ func interact(_player: Node) -> void:
 func _on_access_points_changed(done: int, total: int) -> void:
 	_done = done
 	_total = total
-

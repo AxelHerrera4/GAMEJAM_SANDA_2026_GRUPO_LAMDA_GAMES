@@ -25,4 +25,3 @@ func interact(_player: Node) -> void:
 		SignalHub.emit_on_player_control_blocked(false)
 
 	SignalHub.emit_on_ending_requested()
-

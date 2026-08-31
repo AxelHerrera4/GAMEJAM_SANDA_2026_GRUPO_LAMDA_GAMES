@@ -1,10 +1,11 @@
 class_name Exit
 extends Area2D
 
-@export_file("*.tscn") var next_scene: String = ""
+@export_file("*.tscn") var next_scene_path: String = ""
+@export var next_scene: PackedScene
 @export var prompt_text: String = "Salir"
 @export_group("Dialogic")
-@export_file("*.dtl") var timeline_path: String = ""
+@export var timeline_path: DialogicTimeline
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
@@ -47,14 +48,19 @@ func _on_all_fragments_collected() -> void:
 func get_prompt_text() -> String:
 	return prompt_text
 
+
 func interact(_player: Node) -> void:
 	GameManager.play_open_door()
 
-	if not timeline_path.is_empty() and is_instance_valid(Dialogic):
+	if timeline_path != null and is_instance_valid(Dialogic):
 		SignalHub.emit_on_player_control_blocked(true)
 		Dialogic.start(timeline_path)
 		await Dialogic.timeline_ended
 		SignalHub.emit_on_player_control_blocked(false)
-
-	SignalHub.emit_on_ending_requested()
-
+	
+	if not next_scene_path.is_empty():
+		GameManager.change_scene(next_scene_path)
+	elif next_scene != null:
+		GameManager.change_scene(next_scene)
+	else:
+		SignalHub.emit_on_ending_requested()

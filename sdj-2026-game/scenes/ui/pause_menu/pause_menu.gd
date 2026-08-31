@@ -1,11 +1,10 @@
 extends CanvasLayer
 
 const MUSIC_BUS: StringName = &"Music"
-const MAIN_SCENE: String = "res://scenes/main/main.tscn"
-
 @onready var resume_button: Button = $Panel/Margin/VBox/ResumeButton
 @onready var music_slider: HSlider = $Panel/Margin/VBox/MusicSlider
 @onready var music_value: Label = $Panel/Margin/VBox/MusicHeader/MusicValue
+@onready var quit_button: Button = $Panel/Margin/VBox/QuitButton
 
 var _open: bool = false
 var _was_paused: bool = false
@@ -18,7 +17,7 @@ func _ready() -> void:
 
 	music_slider.value_changed.connect(_on_music_slider_changed)
 	resume_button.pressed.connect(close_menu)
-	$Panel/Margin/VBox/QuitButton.pressed.connect(_on_quit_pressed)
+	quit_button.pressed.connect(_on_quit_pressed)
 
 	if _music_bus >= 0:
 		music_slider.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(_music_bus)))
@@ -64,7 +63,9 @@ func close_menu() -> void:
 
 func _can_open() -> bool:
 	var scene: Node = get_tree().current_scene
-	return scene != null and scene.scene_file_path != MAIN_SCENE
+	if scene == null:
+		return false
+	return scene.scene_file_path != GameManager.MAIN.resource_path
 
 
 func _on_music_slider_changed(value: float) -> void:
@@ -85,4 +86,3 @@ func _on_quit_pressed() -> void:
 	get_tree().paused = false
 	SignalHub.emit_on_pause_menu_toggled(false)
 	GameManager.load_main()
-

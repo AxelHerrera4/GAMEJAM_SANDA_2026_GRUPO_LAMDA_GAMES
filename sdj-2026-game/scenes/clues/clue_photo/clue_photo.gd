@@ -4,7 +4,6 @@ extends Clue
 @export var photo: Texture2D
 @export_multiline var caption: String = ""
 
-#@export_group("Primera vez") #Ya no hay speaker ni texto de primera vez, ahora solo seria con el grupo de dialogic que tiene el path del timeline de el primer texto
 @export_group("Dialogic")
 @export_file("*.dtl") var first_time_timeline: String = ""
 
@@ -23,4 +22,3 @@ func show_clue(first_time: bool) -> void:
 		await Dialogic.timeline_ended
 		SignalHub.emit_on_player_control_blocked(false)
 		return
-

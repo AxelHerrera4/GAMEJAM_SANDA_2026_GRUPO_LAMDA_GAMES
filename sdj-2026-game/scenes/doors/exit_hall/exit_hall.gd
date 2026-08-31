@@ -2,11 +2,12 @@ class_name ExitHall
 extends Area2D
 
 @export var prompt_text: String = "Abrir puerta"
-@export_file("*.tscn") var next_scene: String = "res://scenes/room/office/office.tscn"
+@export_file("*.tscn") var next_scene_path: String = ""
+@export var next_scene: PackedScene
 
 @export_group("Dialogic Timelines")
-@export_file("*.dtl") var locked_timeline: String = "res://dialogues/doors/exit_hall_locked.dtl"
-@export_file("*.dtl") var opened_timeline: String = "res://dialogues/doors/exit_hall_opened.dtl"
+@export var locked_timeline:DialogicTimeline
+@export var opened_timeline: DialogicTimeline
 
 var _done: int = 0
 var _total: int = 0
@@ -27,20 +28,23 @@ func get_prompt_text() -> String:
 func interact(_player: Node) -> void:
 	if not is_unlocked():
 		GameManager.play_locked_door()
-		if not locked_timeline.is_empty() and is_instance_valid(Dialogic):
+		if locked_timeline != null and is_instance_valid(Dialogic):
 			SignalHub.emit_on_player_control_blocked(true)
 			Dialogic.start(locked_timeline)
 			await Dialogic.timeline_ended
 			SignalHub.emit_on_player_control_blocked(false)
 		return
 
-	if not opened_timeline.is_empty() and is_instance_valid(Dialogic):
+	if opened_timeline != null and is_instance_valid(Dialogic):
 		SignalHub.emit_on_player_control_blocked(true)
 		Dialogic.start(opened_timeline)
 		await Dialogic.timeline_ended
 		SignalHub.emit_on_player_control_blocked(false)
 
-	GameManager.change_scene(next_scene)
+	if not next_scene_path.is_empty():
+		GameManager.change_scene(next_scene_path)
+	elif next_scene != null:
+		GameManager.change_scene(next_scene)
 
 
 

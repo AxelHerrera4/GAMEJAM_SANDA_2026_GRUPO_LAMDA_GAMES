@@ -4,7 +4,7 @@ extends Area2D
 @export var prompt_text: String = "Abrir puerta"
 
 @export_group("Dialogic")
-@export_file("*.dtl") var timeline_path: String = "res://dialogues/doors/blocked_door.dtl"
+@export var timeline_path: DialogicTimeline
 
 
 func get_prompt_text() -> String:
@@ -13,9 +13,8 @@ func get_prompt_text() -> String:
 
 func interact(_player: Node) -> void:
 	GameManager.play_locked_door()
-	if not timeline_path.is_empty() and is_instance_valid(Dialogic):
+	if timeline_path != null and is_instance_valid(Dialogic):
 		SignalHub.emit_on_player_control_blocked(true)
 		Dialogic.start(timeline_path)
 		await Dialogic.timeline_ended
 		SignalHub.emit_on_player_control_blocked(false)
-
