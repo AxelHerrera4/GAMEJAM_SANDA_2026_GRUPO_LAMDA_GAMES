@@ -41,7 +41,7 @@ var is_moving: bool = false
 var is_dead: bool = false
 
 func _ready() -> void:
-	#nav_agent.max_speed = speeds[_state] # DANGER: the nav_agent max_speed= is a security limit, doint this break the security
+	nav_agent.max_speed = speeds[_state] # DANGER: the nav_agent max_speed= is a security limit, doint this break the security
 	attack_timer.wait_time = attack_cooldown
 	if animation_tree:
 		animation_tree.set("parameters/idle/blend_position", facing_direction)
@@ -183,6 +183,9 @@ func change_state(new_state: EnemyState) -> void:
 		
 
 func _on_nav_agent_velocity_computed(safe_velocity: Vector2) -> void:
+	if is_dead:
+		return
+		
 	global_position += safe_velocity * _last_delta
 	if safe_velocity.length() > 0.01:
 		is_moving = true
@@ -199,6 +202,11 @@ func _on_attack_timer_timeout() -> void:
 	print(attack_timer.wait_time)
 
 func deactivate_guard() -> void:
+	
+	is_moving = false
+
+	if nav_agent:
+		nav_agent.set_velocity(Vector2.ZERO)
 	if hitbox_collision_shape:
 		hitbox_collision_shape.set_deferred(&"disabled", true)
 	if collision_shape_2d:
@@ -209,7 +217,9 @@ func deactivate_guard() -> void:
 		vision_cone.hide.call_deferred()
 
 
-func dead() -> void:
+func die() -> void:
+	print("guard trying to be killed")
+	
 	if is_dead:
 		return
 

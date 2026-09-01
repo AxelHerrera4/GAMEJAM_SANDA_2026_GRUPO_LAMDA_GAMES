@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dig7b3coloxw3" path="res://scenes/player/player.gd" id="1_dovo2"]
 [ext_resource type="Texture2D" uid="uid://djdg3jgpmpnbc" path="res://assets/Player.png" id="2_player_tex"]
 [ext_resource type="Texture2D" uid="uid://yu1nwsqbcxgv" path="res://assets/for_test/images/lights/shape_a.png" id="3_gmlin"]
+[ext_resource type="AudioStream" uid="uid://cev42jumwilsg" path="res://assets/for_test/sounds/sfx_sounds_powerup8.wav" id="4_lvxji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wo5yb"]
 
@@ -307,8 +308,8 @@ states/move/node = SubResource("AnimationNodeBlendSpace2D_move")
 states/move/position = Vector2(545, 94)
 transitions = ["idle", "move", SubResource("AnimationNodeStateMachineTransition_75vfm"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_0owmy"), "idle", "hurt", SubResource("AnimationNodeStateMachineTransition_qek5x"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_5gtgg"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_gmlin"), "hurt", "move", SubResource("AnimationNodeStateMachineTransition_lvxji"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_p47bc")]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mjdfx"]
-radius = 37.01351
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esew8"]
+size = Vector2(32.80803, 29.5831)
 
 [node name="Player" type="CharacterBody2D" unique_id=1768624832 groups=["player"]]
 scale = Vector2(1.745, 1.745)
@@ -372,12 +373,21 @@ parameters/move/blend_position = Vector2(0, 0)
 one_shot = true
 
 [node name="MeleeArea" type="Area2D" parent="." unique_id=2141435769]
+position = Vector2(0, 24.641832)
 collision_layer = 64
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea" unique_id=1784100936]
-position = Vector2(0, 8)
-shape = SubResource("CircleShape2D_mjdfx")
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_esew8")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=2104346964]
+wait_time = 2.0
+one_shot = true
+
+[node name="AttackSound" type="AudioStreamPlayer" parent="." unique_id=1314712925]
+stream = ExtResource("4_lvxji")
+volume_db = -10.0
 
 [connection signal="area_entered" from="InteractZone" to="." method="_on_interact_zone_area_entered"]
 [connection signal="area_exited" from="InteractZone" to="." method="_on_interact_zone_area_exited"]
@@ -385,3 +395,4 @@ shape = SubResource("CircleShape2D_mjdfx")
 [connection signal="body_exited" from="InteractZone" to="." method="_on_interact_zone_body_exited"]
 [connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]
 [connection signal="timeout" from="StaminaRegenTimer" to="." method="_on_stamina_regen_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

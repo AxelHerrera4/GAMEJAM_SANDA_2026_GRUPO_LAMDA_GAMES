@@ -1,8 +1,18 @@
 extends PatrolGuard
 
 @onready var melee_hitbox: Area2D = $MeleeHitbox
+@onready var melee_collision: CollisionShape2D = $MeleeHitbox/MeleeCollision
 
 var _can_attack: bool = true
+
+func _physics_process(delta: float) -> void:
+	super(delta)
+	orient_melee_hitbox()
+	
+func orient_melee_hitbox() -> void:
+	var v : bool = (_state != EnemyState.Chasing or is_dead)
+	melee_collision.set_deferred("disabled", v)
+	melee_hitbox.rotation = facing_direction.angle()
 
 func attack() -> void:
 	if not is_instance_valid(_player_ref): return
