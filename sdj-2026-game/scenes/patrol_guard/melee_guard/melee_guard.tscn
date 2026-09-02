@@ -4,24 +4,27 @@
 [ext_resource type="Script" uid="uid://dv14rxxrmv471" path="res://scenes/patrol_guard/melee_guard/melee_guard.gd" id="2_wo5yb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjdfx"]
-size = Vector2(89, 49)
+size = Vector2(20.147053, 30.588226)
 
 [node name="MeleeGuard" unique_id=1290929920 instance=ExtResource("1_roiwv")]
 script = ExtResource("2_wo5yb")
 speeds = Dictionary[int, float]({
 0: 200.0,
-1: 250.0,
-2: 310.0
+1: 280.0,
+2: 400.0
 })
 damage = 50
 knockback_force = 450.0
 attack_cooldown = 1.5
 
 [node name="MeleeHitbox" type="Area2D" parent="." index="7" unique_id=869682246]
+position = Vector2(0, 20)
 collision_layer = 128
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeHitbox" index="0" unique_id=639239795]
+[node name="MeleeCollision" type="CollisionShape2D" parent="MeleeHitbox" index="0" unique_id=639239795]
+position = Vector2(25, 0)
+scale = Vector2(1.0000002, 1.0000002)
 shape = SubResource("RectangleShape2D_mjdfx")
 
 [connection signal="area_entered" from="MeleeHitbox" to="." method="_on_melee_hitbox_area_entered"]

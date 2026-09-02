@@ -7,9 +7,9 @@
 [node name="PatrolGuard" unique_id=1290929920 instance=ExtResource("1_2f6u4")]
 script = ExtResource("2_uhu6p")
 speeds = Dictionary[int, float]({
-0: 170.0,
-1: 200.0,
-2: 300.0
+0: 150.0,
+1: 240.0,
+2: 360.0
 })
 angles_of_view = Dictionary[int, float]({
 0: 120.0,
