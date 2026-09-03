@@ -16,12 +16,14 @@ color = Color(0.5866749, 0.5866749, 0.5866749, 1)
 navigation_polygon = SubResource("NavigationPolygon_0c06q")
 
 [node name="Tiles" type="Node2D" parent="." unique_id=213452734]
+y_sort_enabled = true
 
 [node name="Floor" type="TileMapLayer" parent="Tiles" unique_id=1690041257]
 
 [node name="Walls" type="TileMapLayer" parent="Tiles" unique_id=321007397 groups=["physic"]]
 
 [node name="Furniture" type="TileMapLayer" parent="Tiles" unique_id=1546801700 groups=["physic"]]
+y_sort_enabled = true
 
 [node name="Collectibles" type="Node2D" parent="." unique_id=550994344]
 
@@ -30,8 +32,10 @@ navigation_polygon = SubResource("NavigationPolygon_0c06q")
 [node name="Doors" type="Node2D" parent="." unique_id=1126311124]
 
 [node name="MeleeGuards" type="Node2D" parent="." unique_id=455768581]
+y_sort_enabled = true
 
 [node name="PistolGuards" type="Node2D" parent="." unique_id=83598530]
+y_sort_enabled = true
 
 [node name="LightPoints" type="Node2D" parent="." unique_id=762074607]
 
