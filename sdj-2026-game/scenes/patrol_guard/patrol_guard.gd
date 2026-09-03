@@ -1,6 +1,8 @@
 class_name PatrolGuard
 extends Area2D
 
+signal died(guard: PatrolGuard)
+
 enum EnemyState {Patrolling, Searching, Chasing}
 
 @export var speeds: Dictionary[EnemyState, float] = {
@@ -227,4 +229,5 @@ func die() -> void:
 		GameManager.fade_in_out(func():
 			is_dead = true
 			deactivate_guard()
+			died.emit(self)
 		)

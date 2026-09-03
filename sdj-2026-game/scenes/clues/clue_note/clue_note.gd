@@ -7,7 +7,7 @@ extends Clue
 @export var reward_fragment: StringName = &"hack"
 
 func show_clue(first_time: bool) -> void:
-	if first_time and not timeline_path.is_empty() and is_instance_valid(Dialogic):
+	if first_time and timeline_path != null and is_instance_valid(Dialogic):
 		await _show_with_dialogic()
 		return
 
