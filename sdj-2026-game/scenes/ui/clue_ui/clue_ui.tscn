@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ppme5ug1gp15" path="res://scenes/ui/hack_minigame/hack_minigame.tscn" id="3_miaaq"]
 [ext_resource type="PackedScene" uid="uid://c4rivblkkgs0u" path="res://scenes/ui/precision_minigame/precision_minigame.tscn" id="4_ehmdd"]
 [ext_resource type="AudioStream" uid="uid://ckwooe6vtewic" path="res://assets/SFX/MoveMenu/TakePaper.ogg" id="4_yks4t"]
-[ext_resource type="AudioStream" uid="uid://dx26xmks4lalk" path="res://assets/SFX/Interfaces/brokenGlass.ogg" id="5_smtmn"]
+[ext_resource type="PackedScene" uid="uid://4quuxrj2j5p" path="res://scenes/ui/fragment_cutscene/fragment_cutscene.tscn" id="6_ehmdd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toast"]
 bg_color = Color(0.07450981, 0.07450981, 0.06666667, 0.9607843)
@@ -235,7 +235,6 @@ color = Color(0, 0, 0, 0)
 [node name="PaperSfx" type="AudioStreamPlayer" parent="." unique_id=818408698]
 stream = ExtResource("4_yks4t")
 
-[node name="GlassSfx" type="AudioStreamPlayer" parent="." unique_id=1179879360]
-stream = ExtResource("5_smtmn")
+[node name="FragmentCutscene" parent="." unique_id=2067486215 instance=ExtResource("6_ehmdd")]
 
 [connection signal="pressed" from="PhotoPanel/Margin/VBox/CloseButton" to="." method="_on_close_button_pressed"]

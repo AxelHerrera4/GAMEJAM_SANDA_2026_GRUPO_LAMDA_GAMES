@@ -5,7 +5,7 @@ extends Clue
 @export_multiline var caption: String = ""
 
 @export_group("Dialogic")
-@export_file("*.dtl") var first_time_timeline: String = ""
+@export var first_time_timeline: DialogicTimeline
 
 
 func show_clue(first_time: bool) -> void:

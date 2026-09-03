@@ -2,11 +2,11 @@ extends Node
 
 
 signal interactable_changed(interactable: Node)
-signal clues_progress(found: int, total: int)
-signal all_clues_inspected
+signal clues_progress(found: int, total: int) # now used on jail
+signal all_clues_inspected # now, now used on jail  #maybe for the future for show a clue counter
 signal photo_requested(title: String, texture: Texture2D, caption: String)
 signal ui_closed
-signal shatter_requested
+signal shatter_requested(anim_name: StringName)
 signal shatter_finished
 signal player_control_blocked(blocked: bool)
 signal pause_menu_toggled(open: bool)
@@ -35,8 +35,8 @@ func emit_on_photo_requested(title: String, texture: Texture2D, caption: String)
 func emit_on_ui_closed() -> void:
 	ui_closed.emit()
 
-func emit_on_shatter_requested() -> void:
-	shatter_requested.emit()
+func emit_on_shatter_requested(anim_name: StringName = &"shatter") -> void:
+	shatter_requested.emit(anim_name)
 
 func emit_on_shatter_finished() -> void:
 	shatter_finished.emit()
