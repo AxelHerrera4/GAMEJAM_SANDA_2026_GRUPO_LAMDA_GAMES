@@ -1,5 +1,5 @@
 patient: Esto ya lo había visto...
 patient: ¡Ahhh!
-[signal arg="shatter"]
+[signal arg="shatter_left_up"]
 patient: Espera... ¿Soy un hacker?
 patient: Tal vez por eso me encerraron

@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://da7dw48nnk4cw" path="res://scenes/clues/clue_note/clue_note.tscn" id="10_x5f4m"]
 [ext_resource type="Script" uid="uid://dmud040qi3r5o" path="res://scenes/room/jail/level_jail.gd" id="11_rr37k"]
 [ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="12_music"]
+[ext_resource type="Resource" uid="uid://xk3od2s16l6u" path="res://dialogues/1th_time/jail/memorie_photo.dtl" id="15_jj3dn"]
+[ext_resource type="Resource" uid="uid://cxqh22447h5r6" path="res://dialogues/1th_time/jail/wall_writing.dtl" id="17_jf2ap"]
 
 [node name="Jail" unique_id=69708080 instance=ExtResource("1_c70yw")]
 script = ExtResource("11_rr37k")
@@ -76,12 +78,12 @@ offset_right = 2.0
 position = Vector2(576, 22)
 photo = ExtResource("5_vsvih")
 caption = "Foto"
-first_time_timeline = "uid://xk3od2s16l6u"
+first_time_timeline = ExtResource("15_jj3dn")
 clue_id = &"foto_chica"
 clue_title = "Foto"
 
 [node name="Clue_WallWriting" parent="Clues" index="1" unique_id=1642929999 instance=ExtResource("10_x5f4m")]
 position = Vector2(155, 28)
-timeline_path = "uid://cxqh22447h5r6"
+timeline_path = ExtResource("17_jf2ap")
 clue_id = &"escrito_pared"
 clue_title = "Escrito en la pared"

@@ -2,9 +2,6 @@ extends CanvasLayer
 
 
 const TOAST_TIME: float = 3.5
-const BLACKOUT_IN: float = 0.28
-const BLACKOUT_HOLD: float = 0.7
-const BLACKOUT_OUT: float = 0.55
 
 @onready var interact_prompt: Label = $InteractPrompt
 @onready var photo_panel: Panel = $PhotoPanel
@@ -17,9 +14,8 @@ const BLACKOUT_OUT: float = 0.55
 ]
 @onready var fragment_toast: Panel = $FragmentToast
 @onready var toast_name: Label = $FragmentToast/Margin/VBox/ToastName
-@onready var blackout: ColorRect = $Blackout
 @onready var paper_sfx: AudioStreamPlayer = $PaperSfx
-@onready var glass_sfx: AudioStreamPlayer = $GlassSfx
+@onready var fragment_cutscene: FragmentCutscene = $FragmentCutscene
 
 var _input_guard: bool = false
 var _current_interactable: Node = null
@@ -33,8 +29,6 @@ func _ready() -> void:
 		mg.finished.connect(_on_hack_minigame_finished)
 	fragment_toast.hide()
 	interact_prompt.hide()
-	blackout.hide()
-	blackout.color = Color(0.0, 0.0, 0.0, 0.0)
 
 	SignalHub.interactable_changed.connect(_on_interactable_changed)
 	SignalHub.photo_requested.connect(_on_photo_requested)
@@ -55,7 +49,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not _input_guard and event.is_action_pressed("interact"):
 		get_viewport().set_input_as_handled()
 		close_ui()
-
 
 
 func is_ui_open() -> bool:
@@ -92,14 +85,12 @@ func _on_photo_requested(title: String, texture: Texture2D, caption: String) -> 
 	_open_ui(true)
 
 
-
 func _on_hack_requested() -> void:
 	photo_panel.hide()
 	_active_minigame = minigames[randi() % minigames.size()]
 	_active_minigame.start()
 	_active_minigame.show()
 	_open_ui(false)
-
 
 
 func _on_hack_minigame_finished(success: bool) -> void:
@@ -109,7 +100,6 @@ func _on_hack_minigame_finished(success: bool) -> void:
 	SignalHub.emit_on_player_control_blocked(false)
 	_refresh_prompt()
 	SignalHub.emit_on_hack_finished(success)
-
 
 
 func _on_close_button_pressed() -> void:
@@ -144,8 +134,9 @@ func _on_game_over(_won: bool) -> void:
 	interact_prompt.hide()
 
 
-func _on_shatter_requested() -> void:
-	await play_shatter()
+func _on_shatter_requested(anim_name: StringName = &"shatter") -> void:
+	if fragment_cutscene != null:
+		await fragment_cutscene.play_cutscene(anim_name)
 	SignalHub.emit_on_shatter_finished()
 
 
@@ -156,26 +147,3 @@ func _on_fragment_granted(fragment_id: StringName) -> void:
 	toast_name.text = FragmentManager.get_display_name(fragment_id)
 	fragment_toast.show()
 	get_tree().create_timer(TOAST_TIME, true).timeout.connect(fragment_toast.hide)
-
-
-func play_shatter() -> void:
-	get_tree().paused = true
-	blackout.color = Color(0.0, 0.0, 0.0, 0.0)
-	blackout.show()
-
-	var fade_in: Tween = create_tween()
-	fade_in.tween_property(blackout, "color:a", 1.0, BLACKOUT_IN)
-	await fade_in.finished
-
-	if glass_sfx.stream != null:
-		glass_sfx.play()
-
-	await get_tree().create_timer(BLACKOUT_HOLD, true).timeout
-
-	var fade_out: Tween = create_tween()
-	fade_out.tween_property(blackout, "color:a", 0.0, BLACKOUT_OUT)
-	await fade_out.finished
-
-	blackout.hide()
-	get_tree().paused = false
-	SignalHub.emit_on_player_control_blocked(false)
