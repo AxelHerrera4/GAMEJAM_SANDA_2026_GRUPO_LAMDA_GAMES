@@ -43,7 +43,6 @@ scale = Vector2(1.705, 1.705)
 color = Color(0.25565878, 0.25565878, 0.25565878, 1)
 
 [node name="NavigationRegion2D" parent="." index="1" unique_id=1215749446]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_8lak0")
 
 [node name="Tiles" parent="." index="2" unique_id=213452734]

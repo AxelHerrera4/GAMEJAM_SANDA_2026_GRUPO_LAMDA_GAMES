@@ -42,6 +42,8 @@ directories/dtl_directory={
 "exit": "res://dialogues/1th_time/office/exit.dtl",
 "exit_hall_locked": "res://dialogues/1th_time/hallway/doors/exit_hall_locked.dtl",
 "exit_hall_opened": "res://dialogues/1th_time/hallway/doors/exit_hall_opened.dtl",
+"exit_locked": "res://dialogues/1th_time/security_hub/exit_locked.dtl",
+"exit_opened": "res://dialogues/1th_time/security_hub/exit_opened.dtl",
 "memorie_photo": "res://dialogues/1th_time/jail/memorie_photo.dtl",
 "point_secured": "res://dialogues/1th_time/hallway/hack_points/point_secured.dtl",
 "wall_writing": "res://dialogues/1th_time/jail/wall_writing.dtl"

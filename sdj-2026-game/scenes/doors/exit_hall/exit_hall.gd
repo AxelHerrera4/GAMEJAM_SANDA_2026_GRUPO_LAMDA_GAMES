@@ -9,6 +9,9 @@ extends Area2D
 @export var locked_timeline:DialogicTimeline
 @export var opened_timeline: DialogicTimeline
 
+@export_group("Reward")
+@export var reward_fragment: StringName = &""
+
 var _done: int = 0
 var _total: int = 0
 
@@ -35,11 +38,17 @@ func interact(_player: Node) -> void:
 			SignalHub.emit_on_player_control_blocked(false)
 		return
 
-	if opened_timeline != null and is_instance_valid(Dialogic):
+	var already_rewarded: bool = not reward_fragment.is_empty() and FragmentManager.has_fragment(reward_fragment)
+
+	if opened_timeline != null and is_instance_valid(Dialogic) and not already_rewarded:
 		SignalHub.emit_on_player_control_blocked(true)
 		Dialogic.start(opened_timeline)
 		await Dialogic.timeline_ended
+		if not reward_fragment.is_empty():
+			FragmentManager.grant(reward_fragment)
 		SignalHub.emit_on_player_control_blocked(false)
+	elif not reward_fragment.is_empty() and not already_rewarded:
+		FragmentManager.grant(reward_fragment)
 
 	if not next_scene_path.is_empty():
 		GameManager.change_scene(next_scene_path)

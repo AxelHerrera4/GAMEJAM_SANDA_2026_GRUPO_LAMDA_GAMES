@@ -374,11 +374,11 @@ parameters/move/blend_position = Vector2(0, 0)
 one_shot = true
 
 [node name="MeleeArea" type="Area2D" parent="." unique_id=2141435769]
-position = Vector2(0, 24.641832)
 collision_layer = 64
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea" unique_id=1784100936]
+position = Vector2(24.641832, 0)
 scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_esew8")
 

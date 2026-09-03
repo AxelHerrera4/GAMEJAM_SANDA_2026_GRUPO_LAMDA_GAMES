@@ -34,6 +34,7 @@ timeline_path = ExtResource("5_ee5rl")
 [node name="Exit" parent="Doors" parent_id_path=PackedInt32Array(1126311124) index="0" unique_id=1172061543 instance=ExtResource("6_ee5rl")]
 position = Vector2(142, 392)
 next_scene_path = "res://scenes/room/jail/jail.tscn"
+required_fragment = &"attack"
 timeline_path = ExtResource("6_2r2d0")
 
 [node name="PlayerPos" parent="." index="9" unique_id=1605110160]

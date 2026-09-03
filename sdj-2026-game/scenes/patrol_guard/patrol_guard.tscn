@@ -376,6 +376,7 @@ monitoring = false
 
 [node name="hitbox_collision_shape" type="CollisionShape2D" parent="Hitbox" unique_id=1841420385]
 position = Vector2(0, 8)
+scale = Vector2(2.57, 2.57)
 shape = SubResource("CapsuleShape2D_kjgb1")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="." unique_id=1306274218]

@@ -4,6 +4,7 @@ extends Area2D
 @export_file("*.tscn") var next_scene_path: String = ""
 @export var next_scene: PackedScene
 @export var prompt_text: String = "Salir"
+@export var required_fragment: StringName = &""
 @export_group("Dialogic")
 @export var timeline_path: DialogicTimeline
 
@@ -14,13 +15,19 @@ var _is_active: bool = false
 
 func _ready() -> void:
 	add_to_group("interactable")
-	
-	if FragmentManager.get_owned().size() >= FragmentManager.CATALOG.size() and FragmentManager.CATALOG.size() > 0:
+
+	if _requirement_met():
 		_activate()
 	else:
 		_deactivate()
-	
-	SignalHub.all_fragments_collected.connect(_on_all_fragments_collected)
+
+	FragmentManager.fragment_granted.connect(_on_fragment_granted)
+
+
+func _requirement_met() -> bool:
+	if not required_fragment.is_empty():
+		return FragmentManager.has_fragment(required_fragment)
+	return FragmentManager.get_owned().size() >= FragmentManager.CATALOG.size() and FragmentManager.CATALOG.size() > 0
 
 
 func _activate() -> void:
@@ -41,8 +48,9 @@ func _deactivate() -> void:
 		collision_shape_2d.set_deferred("disabled", true)
 
 
-func _on_all_fragments_collected() -> void:
-	_activate()
+func _on_fragment_granted(_fragment_id: StringName) -> void:
+	if _requirement_met():
+		_activate()
 
 
 func get_prompt_text() -> String:

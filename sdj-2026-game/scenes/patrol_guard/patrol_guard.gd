@@ -221,7 +221,7 @@ func deactivate_guard() -> void:
 
 func die() -> void:
 	print("guard trying to be killed")
-	
+
 	if is_dead:
 		return
 

@@ -220,11 +220,10 @@ func _on_interact_zone_body_exited(body: Node2D) -> void:
 	_remove_interactable(body)
 
 func perform_attack() -> void:
-	print("perform_attack")
 	is_attacking = true
 	_can_attack = false
 	attack_timer.start()
-	
+
 	for area in melee_area.get_overlapping_areas():
 		_try_hit_target(area)
 	
