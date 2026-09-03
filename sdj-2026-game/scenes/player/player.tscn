@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://dig7b3coloxw3" path="res://scenes/player/player.gd" id="1_dovo2"]
 [ext_resource type="Texture2D" uid="uid://djdg3jgpmpnbc" path="res://assets/Player.png" id="2_player_tex"]
 [ext_resource type="Texture2D" uid="uid://yu1nwsqbcxgv" path="res://assets/for_test/images/lights/shape_a.png" id="3_gmlin"]
-[ext_resource type="AudioStream" uid="uid://cev42jumwilsg" path="res://assets/for_test/sounds/sfx_sounds_powerup8.wav" id="4_lvxji"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wo5yb"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_dmgpo"]
+radius = 12.543327
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player_hurtbox"]
 radius = 14.0
@@ -312,12 +312,14 @@ transitions = ["idle", "move", SubResource("AnimationNodeStateMachineTransition_
 size = Vector2(32.80803, 29.5831)
 
 [node name="Player" type="CharacterBody2D" unique_id=1768624832 groups=["player"]]
-position = Vector2(0, -64)
+y_sort_enabled = true
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_dovo2")
 speed = 300.0
+health = 10000
+max_health = 10000
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2117098846]
 scale = Vector2(2, 2)
@@ -328,7 +330,7 @@ vframes = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=456192581]
 position = Vector2(0, 24.000002)
 scale = Vector2(1, 0.95999986)
-shape = SubResource("RectangleShape2D_wo5yb")
+shape = SubResource("CircleShape2D_dmgpo")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=987654321]
 collision_layer = 8
@@ -387,7 +389,6 @@ wait_time = 2.0
 one_shot = true
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="." unique_id=1314712925]
-stream = ExtResource("4_lvxji")
 volume_db = -10.0
 
 [connection signal="area_entered" from="InteractZone" to="." method="_on_interact_zone_area_entered"]
