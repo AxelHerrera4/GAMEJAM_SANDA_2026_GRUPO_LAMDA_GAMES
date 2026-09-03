@@ -343,7 +343,8 @@ states/move/position = Vector2(422, 100)
 transitions = ["idle", "move", SubResource("AnimTransition_tomove"), "move", "idle", SubResource("AnimTransition_toidle"), "idle", "dead", SubResource("AnimationNodeStateMachineTransition_javjj"), "move", "dead", SubResource("AnimationNodeStateMachineTransition_1s1ds"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_ey0lc")]
 
 [node name="PatrolGuard" type="Area2D" unique_id=1290929920]
-scale = Vector2(1.7, 1.7)
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_kjgb1")

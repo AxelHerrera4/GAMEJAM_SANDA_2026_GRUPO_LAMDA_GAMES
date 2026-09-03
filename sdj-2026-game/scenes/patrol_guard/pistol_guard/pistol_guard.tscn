@@ -5,6 +5,9 @@
 [ext_resource type="AudioStream" uid="uid://cywnvtlwvhgrn" path="res://assets/for_test/sounds/sfx_wpn_laser2.wav" id="3_mgs33"]
 
 [node name="PatrolGuard" unique_id=1290929920 instance=ExtResource("1_2f6u4")]
+y_sort_enabled = true
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
 script = ExtResource("2_uhu6p")
 speeds = Dictionary[int, float]({
 0: 150.0,

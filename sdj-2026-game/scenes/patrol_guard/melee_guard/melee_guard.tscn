@@ -7,6 +7,8 @@
 size = Vector2(20.147053, 30.588226)
 
 [node name="MeleeGuard" unique_id=1290929920 instance=ExtResource("1_roiwv")]
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
 script = ExtResource("2_wo5yb")
 speeds = Dictionary[int, float]({
 0: 200.0,

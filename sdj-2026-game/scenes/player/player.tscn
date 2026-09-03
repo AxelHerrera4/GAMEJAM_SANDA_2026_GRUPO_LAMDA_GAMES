@@ -312,7 +312,8 @@ transitions = ["idle", "move", SubResource("AnimationNodeStateMachineTransition_
 size = Vector2(32.80803, 29.5831)
 
 [node name="Player" type="CharacterBody2D" unique_id=1768624832 groups=["player"]]
-scale = Vector2(1.745, 1.745)
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_dovo2")

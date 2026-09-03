@@ -107,18 +107,18 @@ theme_override_font_sizes/font_size = 18
 text = "Fragmentos: 0/2"
 
 [node name="FaceUi1" type="Sprite2D" parent="MC" unique_id=1993717807]
-position = Vector2(-36.190002, 36.809998)
-scale = Vector2(1.71, 1.71)
+position = Vector2(-36, 48)
+scale = Vector2(2, 2)
 texture = ExtResource("5_3hirk")
 
 [node name="FaceUi2" type="Sprite2D" parent="MC" unique_id=1150444555]
-position = Vector2(-35.190002, 36.809998)
-scale = Vector2(1.71, 1.71)
+position = Vector2(-36, 48)
+scale = Vector2(2, 2)
 texture = ExtResource("6_7qc2a")
 
 [node name="FaceUi3" type="Sprite2D" parent="MC" unique_id=804491004]
-position = Vector2(-34.190002, 36.809998)
-scale = Vector2(1.71, 1.71)
+position = Vector2(-36, 48)
+scale = Vector2(2, 2)
 texture = ExtResource("7_r5rb7")
 
 [node name="ClueUI" parent="." unique_id=1765662989 instance=ExtResource("2_aiwwf")]
