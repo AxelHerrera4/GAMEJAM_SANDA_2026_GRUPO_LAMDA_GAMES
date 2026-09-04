@@ -4,6 +4,7 @@ extends CanvasLayer
 const TOAST_TIME: float = 3.5
 
 @onready var interact_prompt: Label = $InteractPrompt
+@onready var kill_prompt: Label = $KillPrompt
 @onready var photo_panel: Panel = $PhotoPanel
 @onready var photo_title: Label = $PhotoPanel/Margin/VBox/PhotoTitle
 @onready var photo_image: TextureRect = $PhotoPanel/Margin/VBox/PhotoFrame/PhotoImage
@@ -19,6 +20,7 @@ const TOAST_TIME: float = 3.5
 
 var _input_guard: bool = false
 var _current_interactable: Node = null
+var _assassination_available: bool = false
 var _pause_menu_open: bool = false
 var _active_minigame: Node = null
 
@@ -29,8 +31,10 @@ func _ready() -> void:
 		mg.finished.connect(_on_hack_minigame_finished)
 	fragment_toast.hide()
 	interact_prompt.hide()
+	kill_prompt.hide()
 
 	SignalHub.interactable_changed.connect(_on_interactable_changed)
+	SignalHub.assassination_available.connect(_on_assassination_available)
 	SignalHub.photo_requested.connect(_on_photo_requested)
 	SignalHub.hack_requested.connect(_on_hack_requested)
 	SignalHub.shatter_requested.connect(_on_shatter_requested)
@@ -68,6 +72,7 @@ func close_ui() -> void:
 func _open_ui(freeze_world: bool) -> void:
 	_input_guard = true
 	interact_prompt.hide()
+	kill_prompt.hide()
 	SignalHub.emit_on_player_control_blocked(true)
 	if freeze_world:
 		get_tree().paused = true
@@ -111,7 +116,19 @@ func _on_interactable_changed(interactable: Node) -> void:
 	_refresh_prompt()
 
 
+func _on_assassination_available(available: bool) -> void:
+	_assassination_available = available
+	_refresh_kill_prompt()
+
+
+## El [E] solo tiene sentido mientras el jugador controla al personaje: con un
+## minijuego, una foto o el menu de pausa abiertos, el ataque no llega.
+func _refresh_kill_prompt() -> void:
+	kill_prompt.visible = _assassination_available and not is_ui_open() and not _pause_menu_open
+
+
 func _refresh_prompt() -> void:
+	_refresh_kill_prompt()
 	if _current_interactable == null or not is_instance_valid(_current_interactable) or is_ui_open():
 		interact_prompt.hide()
 		return
@@ -125,6 +142,7 @@ func _refresh_prompt() -> void:
 
 func _on_pause_menu_toggled(open: bool) -> void:
 	_pause_menu_open = open
+	_refresh_kill_prompt()
 
 
 func _on_game_over(_won: bool) -> void:
@@ -132,6 +150,7 @@ func _on_game_over(_won: bool) -> void:
 		_active_minigame.force_close()
 	photo_panel.hide()
 	interact_prompt.hide()
+	kill_prompt.hide()
 
 
 func _on_shatter_requested(anim_name: StringName = &"shatter") -> void:

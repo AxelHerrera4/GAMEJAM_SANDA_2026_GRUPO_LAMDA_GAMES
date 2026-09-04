@@ -2,6 +2,7 @@ extends PatrolGuard
 
 @onready var melee_hitbox: Area2D = $MeleeHitbox
 @onready var melee_collision: CollisionShape2D = $MeleeHitbox/MeleeCollision
+@onready var punch_sound: AudioStreamPlayer2D = $PunchSound
 
 var _can_attack: bool = true
 
@@ -18,6 +19,7 @@ func attack() -> void:
 	if not is_instance_valid(_player_ref): return
 	_can_attack = false
 	attack_timer.start() #using the timer defined by the randf or the @export
+	punch_sound.play()
 	# Hace daño al jugador
 	_player_ref.take_damage(damage, knockback_force, global_position)
 	print("MeleeGuard asestó un golpe al jugador!")

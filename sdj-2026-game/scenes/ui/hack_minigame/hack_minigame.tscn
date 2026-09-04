@@ -3,10 +3,18 @@
 [ext_resource type="Script" uid="uid://byiurvte77ju5" path="res://scenes/ui/hack_minigame/hack_minigame.gd" id="1_ul7mi"]
 [ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="2_npo8o"]
 [ext_resource type="Script" uid="uid://dwu5emrwq3oey" path="res://scenes/ui/hack_minigame/hack_board.gd" id="3_xtewg"]
-[ext_resource type="AudioStream" uid="uid://d2l0gr6q17wvg" path="res://assets/SFX/Interfaces/ShowHack.mp3" id="4_4qf1k"]
-[ext_resource type="AudioStream" uid="uid://csa55v7hdu765" path="res://assets/SFX/Interfaces/Hacker.ogg" id="5_06bx3"]
-[ext_resource type="AudioStream" uid="uid://bys7h0g07xfj3" path="res://assets/SFX/Interfaces/SolveHack.ogg" id="6_hc1m0"]
+[ext_resource type="AudioStream" uid="uid://chsnwhrmlalek" path="res://assets/SFX/newSFX/hack/hacking.ogg" id="7_loop"]
+[ext_resource type="AudioStream" uid="uid://bce2j7375cxp" path="res://assets/SFX/newSFX/hack/success_hack.ogg" id="7_solve"]
+[ext_resource type="AudioStream" uid="uid://bbwcui4spcdvu" path="res://assets/SFX/newSFX/hack/fail_hack.ogg" id="7_fail1"]
+[ext_resource type="AudioStream" uid="uid://g6o4hooxva1o" path="res://assets/SFX/newSFX/hack/fail_hack-2.ogg" id="7_fail2"]
 [ext_resource type="Texture2D" uid="uid://dwgptpkgj7a8b" path="res://assets/tilesets/Things/PanelHack.png" id="7_panel"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fail"]
+streams_count = 2
+stream_0/stream = ExtResource("7_fail1")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("7_fail2")
+stream_1/weight = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hackpanel"]
 bg_color = Color(0.06666667, 0.07058824, 0.07058824, 0.972549)
@@ -141,13 +149,18 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_hackbtn_hover")
 text = "Abortar"
 
 [node name="ShowSfx" type="AudioStreamPlayer" parent="." unique_id=335756856]
-stream = ExtResource("4_4qf1k")
+stream = ExtResource("7_solve")
 
 [node name="LoopSfx" type="AudioStreamPlayer" parent="." unique_id=594068153]
-stream = ExtResource("5_06bx3")
-volume_db = -6.0
+stream = ExtResource("7_loop")
+volume_db = 0.0
 
 [node name="SolveSfx" type="AudioStreamPlayer" parent="." unique_id=1021708719]
-stream = ExtResource("6_hc1m0")
+stream = ExtResource("7_solve")
+volume_db = 6.0
+
+[node name="FailSfx" type="AudioStreamPlayer" parent="." unique_id=1021708720]
+stream = SubResource("AudioStreamRandomizer_fail")
+volume_db = 6.0
 
 [connection signal="pressed" from="Margin/VBox/CancelButton" to="." method="_on_cancel_button_pressed"]

@@ -6,9 +6,13 @@ extends Area2D
 @export_file("*.tscn") var next_scene_path: String = ""
 @export var next_scene: PackedScene
 
-@export_group("All Fragments Collected")
-@export_file("*.tscn") var next_scene_path_all_fragments: String = ""
-@export var next_scene_all_fragments: PackedScene
+@export_group("Alternate Destination")
+@export var alt_required_fragment: StringName = &""
+@export_file("*.tscn") var next_scene_path_alt: String = ""
+@export var next_scene_alt: PackedScene
+
+@export_group("Ending")
+@export var ending_required_fragment: StringName = &""
 
 @export_group("Dialogic Timelines")
 @export var locked_timeline: DialogicTimeline
@@ -53,17 +57,22 @@ func interact(_player: Node) -> void:
 			await Dialogic.timeline_ended
 			SignalHub.emit_on_player_control_blocked(false)
 
+	GameManager.play_door_handle()
+
+	if not ending_required_fragment.is_empty() and FragmentManager.has_fragment(ending_required_fragment):
+		SignalHub.emit_on_ending_requested()
+		return
+
 	var target_path: String = next_scene_path
 	var target_scene: PackedScene = next_scene
 
-	var all_fragments_collected: bool = FragmentManager.get_owned().size() >= FragmentManager.CATALOG.size() and FragmentManager.CATALOG.size() > 0
-	if all_fragments_collected:
-		if not next_scene_path_all_fragments.is_empty():
-			target_path = next_scene_path_all_fragments
+	if not alt_required_fragment.is_empty() and FragmentManager.has_fragment(alt_required_fragment):
+		if not next_scene_path_alt.is_empty():
+			target_path = next_scene_path_alt
 			target_scene = null
-		elif next_scene_all_fragments != null:
+		elif next_scene_alt != null:
 			target_path = ""
-			target_scene = next_scene_all_fragments
+			target_scene = next_scene_alt
 
 	if not target_path.is_empty():
 		GameManager.change_scene(target_path)

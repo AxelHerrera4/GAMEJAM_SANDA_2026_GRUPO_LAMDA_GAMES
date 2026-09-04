@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dehtibkxxvwjx" path="res://scenes/patrol_guard/patrol_guard.tscn" id="1_2f6u4"]
 [ext_resource type="Script" uid="uid://c87w5h6tr2yg1" path="res://scenes/patrol_guard/pistol_guard/pistol_guard.gd" id="2_uhu6p"]
+[ext_resource type="AudioStream" uid="uid://bfe4t4f16r72p" path="res://assets/SFX/newSFX/attack/pistol_shoot.ogg" id="3_shoot"]
 
 [node name="PatrolGuard" unique_id=1290929920 instance=ExtResource("1_2f6u4")]
 y_sort_enabled = true
@@ -24,6 +25,9 @@ knockback_force = 200.0
 attack_cooldown = 1.0
 
 [node name="LaserSound" type="AudioStreamPlayer2D" parent="." index="6" unique_id=1191295834]
+stream = ExtResource("3_shoot")
+volume_db = 8.0
+max_distance = 900.0
 
 [node name="AttackTimer" parent="." index="8" unique_id=739967964]
 wait_time = 2.0

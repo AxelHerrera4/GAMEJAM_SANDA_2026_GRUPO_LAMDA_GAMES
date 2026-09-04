@@ -40,7 +40,9 @@ tile_set = ExtResource("2_7tmjv")
 [node name="Door" parent="Doors" parent_id_path=PackedInt32Array(1126311124) index="0" unique_id=760215513 instance=ExtResource("3_as8ea")]
 position = Vector2(386, 28)
 next_scene_path = "res://scenes/room/hallway/hallway.tscn"
-next_scene_path_all_fragments = "res://scenes/room/security_hub/security_hub.tscn"
+alt_required_fragment = &"attack"
+next_scene_path_alt = "res://scenes/room/security_hub/security_hub.tscn"
+ending_required_fragment = &"camouflage"
 locked_timeline = ExtResource("6_ui3gy")
 hack_timeline = ExtResource("7_jj3dn")
 

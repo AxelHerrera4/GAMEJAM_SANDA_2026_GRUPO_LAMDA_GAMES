@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://comrm12bl1mkl" path="res://assets/for_test/images/bulletRed_outline.png" id="1_7c8un"]
 [ext_resource type="Script" uid="uid://bvh4glxtbiowf" path="res://scenes/bullet/bullet.gd" id="1_83itf"]
+[ext_resource type="AudioStream" uid="uid://n377fgsd735b" path="res://assets/SFX/newSFX/attack/crossbow.ogg" id="3_impact"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mjdfx"]
 radius = 3.0
@@ -23,6 +24,11 @@ shape = SubResource("CapsuleShape2D_mjdfx")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=741265826]
 rect = Rect2(-5, -3, 10, 6)
+
+[node name="ImpactSound" type="AudioStreamPlayer2D" parent="." unique_id=741265827]
+stream = ExtResource("3_impact")
+volume_db = 8.0
+max_distance = 900.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

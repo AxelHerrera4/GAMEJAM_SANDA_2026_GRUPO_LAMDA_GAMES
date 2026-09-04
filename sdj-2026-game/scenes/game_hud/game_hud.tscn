@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b4tfodgnih6ni" path="res://assets/UI/ResourceBars/StaminaBar.png" id="5_qnih7"]
 [ext_resource type="Texture2D" uid="uid://byfj5x3b03r86" path="res://assets/UI/FaceUI2.png" id="6_7qc2a"]
 [ext_resource type="Texture2D" uid="uid://dhnxtm81h56so" path="res://assets/UI/FaceUI3.png" id="7_r5rb7"]
+[ext_resource type="Texture2D" uid="uid://dx7k1r3qacay3" path="res://assets/UI/FaceUI6.png" id="8_7qc2a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_stamina"]
 atlas = ExtResource("4_energy")
@@ -136,5 +137,10 @@ texture = ExtResource("6_7qc2a")
 position = Vector2(-36, 48)
 scale = Vector2(2, 2)
 texture = ExtResource("7_r5rb7")
+
+[node name="FaceUi4" type="Sprite2D" parent="MC" unique_id=804491005]
+position = Vector2(-36, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("8_7qc2a")
 
 [node name="ClueUI" parent="." unique_id=1765662989 instance=ExtResource("2_aiwwf")]

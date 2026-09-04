@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dprovxrrja4qr" path="res://assets/UI/FragmentObtaining/PlayerGetFragmentPortrait.png" id="1_a3vwu"]
 [ext_resource type="Script" uid="uid://pthx6tpqpkf2" path="res://scenes/ui/fragment_cutscene/fragment_cutscene.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://ckj518e5d8rpx" path="res://assets/UI/FragmentObtaining/ShatterAnim.png" id="2_734sr"]
-[ext_resource type="AudioStream" uid="uid://dx26xmks4lalk" path="res://assets/SFX/Interfaces/brokenGlass.ogg" id="3_sfx"]
+[ext_resource type="AudioStream" uid="uid://b15nlh2lbs5bb" path="res://assets/SFX/newSFX/various/break_glass.ogg" id="3_sfx"]
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -138,6 +138,157 @@ tracks/10/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_0lx0t"]
+resource_name = "shatter_left_down"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DarkBackground:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0.04, 0.04, 0.08, 0.88), Color(0.04, 0.04, 0.08, 0.88), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Player:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16, 0.22, 0.36, 1.5, 1.96),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1.8, 1.8, 2, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/Player:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.18, 0.24, 0.34, 0.8, 1.16, 1.34, 1.4, 1.5),
+"transitions": PackedFloat32Array(0.5, 1, 2, 1, 1, 0.5, 1, 2, 1),
+"update": 0,
+"values": [Vector2(1.7, 1.7), Vector2(2, 2), Vector2(2.1, 2.1), Vector2(2, 2), Vector2(2.3, 2.3), Vector2(1.7, 1.7), Vector2(2, 2), Vector2(2.1, 2.1), Vector2(2.3, 2.3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/Player:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.46, 0.52, 0.6, 0.8, 1.16, 1.36, 1.4, 1.44, 1.48, 1.52, 1.56, 1.62, 1.68, 1.76),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(576, 324), Vector2(576, 324), Vector2(584, 318), Vector2(568, 330), Vector2(582, 328), Vector2(570, 320), Vector2(579, 326), Vector2(574, 323), Vector2(577, 325), Vector2(576, 324), Vector2(576, 324), Vector2(576, 324), Vector2(576, 324), Vector2(584, 318), Vector2(568, 330), Vector2(582, 328), Vector2(570, 320), Vector2(579, 326), Vector2(574, 323), Vector2(577, 325), Vector2(576, 324)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control/BreakGlass:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Control/BreakGlass:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2, 0.7, 1.2, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Control/BreakGlass:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.2, 0.26, 1.16, 1.56),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.8), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BreakSFX")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Control/Player:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Control/BreakGlass:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(864.61, 478.33)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Control/BreakGlass:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.8, 1.8)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Control/BreakGlass:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-3.141592653589793]
 }
 
 [sub_resource type="Animation" id="Animation_shatter"]
@@ -289,6 +440,157 @@ tracks/11/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_epbdt"]
+resource_name = "shatter_right_down"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DarkBackground:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0.04, 0.04, 0.08, 0.88), Color(0.04, 0.04, 0.08, 0.88), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Player:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16, 0.22, 0.36, 1.5, 1.96),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1.8, 1.8, 2, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/Player:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.18, 0.24, 0.34, 0.8, 1.16, 1.34, 1.4, 1.5),
+"transitions": PackedFloat32Array(0.5, 1, 2, 1, 1, 0.5, 1, 2, 1),
+"update": 0,
+"values": [Vector2(1.7, 1.7), Vector2(2, 2), Vector2(2.1, 2.1), Vector2(2, 2), Vector2(2.3, 2.3), Vector2(1.7, 1.7), Vector2(2, 2), Vector2(2.1, 2.1), Vector2(2.3, 2.3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/Player:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.46, 0.52, 0.6, 0.8, 1.16, 1.36, 1.4, 1.44, 1.48, 1.52, 1.56, 1.62, 1.68, 1.76),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(576, 324), Vector2(576, 324), Vector2(584, 318), Vector2(568, 330), Vector2(582, 328), Vector2(570, 320), Vector2(579, 326), Vector2(574, 323), Vector2(577, 325), Vector2(576, 324), Vector2(576, 324), Vector2(576, 324), Vector2(576, 324), Vector2(584, 318), Vector2(568, 330), Vector2(582, 328), Vector2(570, 320), Vector2(579, 326), Vector2(574, 323), Vector2(577, 325), Vector2(576, 324)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control/BreakGlass:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Control/BreakGlass:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2, 0.7, 1.2, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Control/BreakGlass:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.2, 0.26, 1.16, 1.56),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.8), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BreakSFX")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Control/Player:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Control/BreakGlass:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(291.53, 478.645)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Control/BreakGlass:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.8, -1.8)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Control/BreakGlass:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [6.2831853]
 }
 
 [sub_resource type="Animation" id="Animation_shatter_2"]
@@ -445,7 +747,9 @@ tracks/11/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cutscene"]
 _data = {
 &"RESET": SubResource("Animation_reset"),
+&"shatter_left_down": SubResource("Animation_0lx0t"),
 &"shatter_left_up": SubResource("Animation_shatter"),
+&"shatter_right_down": SubResource("Animation_epbdt"),
 &"shatter_right_up": SubResource("Animation_shatter_2")
 }
 
@@ -467,6 +771,9 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -487,6 +794,7 @@ hframes = 2
 
 [node name="BreakSFX" type="AudioStreamPlayer" parent="." unique_id=1905883725]
 stream = ExtResource("3_sfx")
+volume_db = 6.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1222571608]
 libraries/ = SubResource("AnimationLibrary_cutscene")

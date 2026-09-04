@@ -2,9 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://dehtibkxxvwjx" path="res://scenes/patrol_guard/patrol_guard.tscn" id="1_roiwv"]
 [ext_resource type="Script" uid="uid://dv14rxxrmv471" path="res://scenes/patrol_guard/melee_guard/melee_guard.gd" id="2_wo5yb"]
+[ext_resource type="AudioStream" uid="uid://c65wuimu0t1dg" path="res://assets/SFX/newSFX/attack/attack_punch1.ogg" id="3_punch1"]
+[ext_resource type="AudioStream" uid="uid://b15hnssa3qc0w" path="res://assets/SFX/newSFX/attack/attack_punch2.ogg" id="4_punch2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjdfx"]
 size = Vector2(20.147053, 30.588226)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_punch"]
+streams_count = 2
+stream_0/stream = ExtResource("3_punch1")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_punch2")
+stream_1/weight = 1.0
 
 [node name="MeleeGuard" unique_id=1290929920 instance=ExtResource("1_roiwv")]
 position = Vector2(0, -64)
@@ -28,6 +37,11 @@ collision_mask = 8
 position = Vector2(25, 0)
 scale = Vector2(1.0000002, 1.0000002)
 shape = SubResource("RectangleShape2D_mjdfx")
+
+[node name="PunchSound" type="AudioStreamPlayer2D" parent="." unique_id=869682247]
+stream = SubResource("AudioStreamRandomizer_punch")
+volume_db = 8.0
+max_distance = 700.0
 
 [connection signal="area_entered" from="MeleeHitbox" to="." method="_on_melee_hitbox_area_entered"]
 [connection signal="body_entered" from="MeleeHitbox" to="." method="_on_melee_hitbox_body_entered"]

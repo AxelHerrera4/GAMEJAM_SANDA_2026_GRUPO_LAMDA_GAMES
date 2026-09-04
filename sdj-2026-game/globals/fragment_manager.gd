@@ -3,6 +3,7 @@ extends Node
 
 const HACK: StringName = &"hack"
 const ATTACK: StringName = &"attack"
+const CAMOUFLAGE: StringName = &"camouflage"
 
 const CATALOG: Dictionary = {
 	HACK: {
@@ -12,6 +13,10 @@ const CATALOG: Dictionary = {
 	ATTACK: {
 		"name": "Fragmento de Ataque",
 		"description": "Código de combate desbloqueado. Ahora puedes defenderte.",
+	},
+	CAMOUFLAGE: {
+		"name": "Fragmento de Camuflaje",
+		"description": "Un patrón capaz de doblar la luz a tu alrededor.",
 	},
 }
 

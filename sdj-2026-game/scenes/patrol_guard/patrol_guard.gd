@@ -10,6 +10,9 @@ enum EnemyState {Patrolling, Searching, Chasing}
 	EnemyState.Searching: 170.0,
 	EnemyState.Chasing: 200.0
 }
+## Apertura TOTAL del cono de vision en grados, no el medio angulo: 120 = el
+## guardia ve 60 grados a cada lado. Es el mismo numero que dibuja la luz, asi
+## que lo que se ve iluminado es exactamente lo que detecta.
 @export var angles_of_view: Dictionary[EnemyState, float] = {
 	EnemyState.Patrolling: 70.0,
 	EnemyState.Searching: 90.0,
@@ -27,6 +30,7 @@ enum EnemyState {Patrolling, Searching, Chasing}
 @onready var player_detect: RayCast2D = $PlayerDetect
 @onready var debug_label: Label = $DebugLabel
 @onready var gasp_sound: AudioStreamPlayer2D = $GaspSound
+@onready var steps_sound: AudioStreamPlayer2D = $StepsSound
 @onready var attack_timer: Timer = $AttackTimer
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var vision_cone: VisionCone = $VisionCone
@@ -58,6 +62,29 @@ func _ready() -> void:
 
 	_player_ref = get_tree().get_first_node_in_group("player") as Player
 	_sync_vision_cone_shape()
+	_make_loopable(steps_sound.stream)
+
+
+## Los pasos son un bucle continuo mientras el guardia camina, asi que hay que
+## marcar el .ogg como loopable en runtime (el import viene con loop = false).
+func _make_loopable(stream: AudioStream) -> void:
+	if stream is AudioStreamOggVorbis:
+		(stream as AudioStreamOggVorbis).loop = true
+	elif stream is AudioStreamMP3:
+		(stream as AudioStreamMP3).loop = true
+	elif stream is AudioStreamWAV:
+		(stream as AudioStreamWAV).loop_mode = AudioStreamWAV.LOOP_FORWARD
+
+
+## Arranca o corta los pasos segun si el guardia se esta moviendo de verdad.
+func _update_steps_sound() -> void:
+	if steps_sound == null or steps_sound.stream == null:
+		return
+	var should_play: bool = is_moving and not is_dead
+	if should_play and not steps_sound.playing:
+		steps_sound.play()
+	elif not should_play and steps_sound.playing:
+		steps_sound.stop()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("set_target"):
@@ -97,9 +124,7 @@ func update_vision_cone() -> void:
 	vision_cone.rotation = facing_direction.angle()
 
 
-## Ajusta apertura/alcance/color del cono para que coincida con la deteccion real.
-## OJO: can_see_player() usa abs(fov_angle()) < angles_of_view, o sea que
-## angles_of_view es MEDIO cono -> la apertura visual es el doble.
+## Ajusta apertura/alcance del cono para que coincida con la deteccion real.
 func _sync_vision_cone_shape() -> void:
 	if not is_instance_valid(vision_cone):
 		return
@@ -107,7 +132,7 @@ func _sync_vision_cone_shape() -> void:
 	# largo del cono es LOCAL y el guardia tiene scale 1.7 -> hay que dividir,
 	# si no el cono se dibuja 1.7x mas largo de lo que el guardia ve de verdad.
 	var world_scale: float = maxf(vision_cone.global_scale.x, 0.001)
-	vision_cone.configure(angles_of_view[_state] * 2.0, view_distance / world_scale)
+	vision_cone.configure(angles_of_view[_state], view_distance / world_scale)
 
 
 func can_see_player() -> bool:
@@ -118,7 +143,7 @@ func can_see_player() -> bool:
 		return false
 	var collider: Object = player_detect.get_collider()
 	var is_player_hit: bool = collider is Player or (collider is Node and (collider.get_parent() is Player or collider.owner is Player))
-	return is_player_hit and abs(fov_angle()) < angles_of_view[_state]
+	return is_player_hit and absf(fov_angle()) < angles_of_view[_state] * 0.5
 
 func fov_angle() -> float:
 	if not is_instance_valid(_player_ref):
@@ -197,6 +222,7 @@ func _on_nav_agent_velocity_computed(safe_velocity: Vector2) -> void:
 			animation_tree.set("parameters/move/blend_position", facing_direction)
 	else:
 		is_moving = false
+	_update_steps_sound()
 
 
 func _on_attack_timer_timeout() -> void:
@@ -206,6 +232,7 @@ func _on_attack_timer_timeout() -> void:
 func deactivate_guard() -> void:
 	
 	is_moving = false
+	_update_steps_sound()
 
 	if nav_agent:
 		nav_agent.set_velocity(Vector2.ZERO)
@@ -221,7 +248,7 @@ func deactivate_guard() -> void:
 
 func die() -> void:
 	print("guard trying to be killed")
-	
+
 	if is_dead:
 		return
 
