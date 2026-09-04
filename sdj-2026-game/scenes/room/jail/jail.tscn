@@ -7,13 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://ct7ncev44u1hw" path="res://scenes/light_ceiling/light_ceiling.tscn" id="5_k2hrs"]
 [ext_resource type="Texture2D" uid="uid://sqhreikxrnxh" path="res://assets/UI/Photo/Photo.png" id="5_vsvih"]
 [ext_resource type="Resource" uid="uid://5tne4xtfh2jw" path="res://dialogues/1th_time/jail/door/door_locked.dtl" id="6_ui3gy"]
-[ext_resource type="Texture2D" uid="uid://dwgptpkgj7a8b" path="res://assets/tilesets/Things/PanelHack.png" id="6_w0oy4"]
 [ext_resource type="Resource" uid="uid://cv34ueg0rt2qq" path="res://dialogues/1th_time/jail/door/door_hacked.dtl" id="7_jj3dn"]
 [ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="7_ui3gy"]
 [ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="8_jj3dn"]
 [ext_resource type="PackedScene" path="res://scenes/clues/clue_photo/clue_photo.tscn" id="9_jf2ap"]
+[ext_resource type="Texture2D" uid="uid://bn6tumybknfpd" path="res://assets/PhotoClue.png" id="10_jf2ap"]
 [ext_resource type="PackedScene" uid="uid://da7dw48nnk4cw" path="res://scenes/clues/clue_note/clue_note.tscn" id="10_x5f4m"]
 [ext_resource type="Script" uid="uid://dmud040qi3r5o" path="res://scenes/room/jail/level_jail.gd" id="11_rr37k"]
+[ext_resource type="Texture2D" uid="uid://dk1ul5hs7blj7" path="res://assets/HackClue.png" id="11_x5f4m"]
 [ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="12_music"]
 [ext_resource type="Resource" uid="uid://xk3od2s16l6u" path="res://dialogues/1th_time/jail/memorie_photo.dtl" id="15_jj3dn"]
 [ext_resource type="Resource" uid="uid://cxqh22447h5r6" path="res://dialogues/1th_time/jail/wall_writing.dtl" id="17_jf2ap"]
@@ -22,6 +23,9 @@
 y_sort_enabled = true
 script = ExtResource("11_rr37k")
 awakening_timeline = ExtResource("3_vsvih")
+
+[node name="NavigationRegion2D" parent="." index="1" unique_id=1215749446]
+visible = false
 
 [node name="Floor" parent="Tiles" parent_id_path=PackedInt32Array(213452734) index="0" unique_id=1690041257]
 z_index = -2
@@ -59,13 +63,12 @@ volume_db = -12.0
 
 [node name="Photo" type="Sprite2D" parent="." index="11" unique_id=607867912]
 position = Vector2(575, -21)
-scale = Vector2(0.21484375, 0.22121212)
-texture = ExtResource("5_vsvih")
+scale = Vector2(0.973, 1)
+texture = ExtResource("10_jf2ap")
 
 [node name="Circuit" type="Sprite2D" parent="." index="12" unique_id=752141735]
-position = Vector2(155, -22)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_w0oy4")
+position = Vector2(192, -62)
+texture = ExtResource("11_x5f4m")
 
 [node name="Player" parent="." index="13" unique_id=1768624832 instance=ExtResource("7_ui3gy")]
 position = Vector2(576, 328)
@@ -87,7 +90,7 @@ clue_id = &"foto_chica"
 clue_title = "Foto"
 
 [node name="Clue_WallWriting" parent="Clues" index="1" unique_id=1642929999 instance=ExtResource("10_x5f4m")]
-position = Vector2(155, 28)
+position = Vector2(192, 14)
 timeline_path = ExtResource("17_jf2ap")
 clue_id = &"escrito_pared"
 clue_title = "Escrito en la pared"
