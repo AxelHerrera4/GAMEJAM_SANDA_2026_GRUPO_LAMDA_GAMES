@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d2uvgfgi7v1oo" path="res://scenes/hack_point/hack_point.gd" id="1_hackpoint"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hackpoint"]
-size = Vector2(48, 48)
+size = Vector2(28, 19)
 
 [sub_resource type="Gradient" id="Gradient_datwq"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -21,6 +21,7 @@ monitoring = false
 script = ExtResource("1_hackpoint")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1023280070]
+position = Vector2(0, 14.5)
 shape = SubResource("RectangleShape2D_hackpoint")
 
 [node name="StatusLight" type="PointLight2D" parent="." unique_id=1004288642]

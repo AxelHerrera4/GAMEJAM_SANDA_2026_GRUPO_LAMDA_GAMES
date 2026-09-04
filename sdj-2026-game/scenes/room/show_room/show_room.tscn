@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://8vgvlayj4dpd"]
+
+[ext_resource type="Script" uid="uid://bpdknt5c7yhli" path="res://scenes/room/show_room/show_room.gd" id="1_3d8dm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvkim"]
+size = Vector2(125, 123)
+
+[node name="ShowRoom" type="Node2D" unique_id=2133279872]
+script = ExtResource("1_3d8dm")
+
+[node name="TriggerArea" type="Area2D" parent="." unique_id=985872274]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" unique_id=435545795]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_lvkim")
+
+[connection signal="body_entered" from="TriggerArea" to="." method="_on_trigger_area_body_entered"]
+[connection signal="body_exited" from="TriggerArea" to="." method="_on_trigger_area_body_exited"]
