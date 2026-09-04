@@ -344,7 +344,6 @@ states/move/position = Vector2(422, 100)
 transitions = ["idle", "move", SubResource("AnimTransition_tomove"), "move", "idle", SubResource("AnimTransition_toidle"), "idle", "dead", SubResource("AnimationNodeStateMachineTransition_javjj"), "move", "dead", SubResource("AnimationNodeStateMachineTransition_1s1ds"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_ey0lc")]
 
 [node name="PatrolGuard" type="Area2D" unique_id=1290929920]
-position = Vector2(1, -4)
 scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 3
@@ -415,14 +414,13 @@ parameters/move/blend_position = Vector2(0, 0)
 
 [node name="VisionCone" type="PointLight2D" parent="." unique_id=1477203311]
 position = Vector2(13.45866, 7.2740393)
-scale = Vector2(0.5413484, 0.7259621)
+scale = Vector2(1, 1)
 color = Color(1, 0.95, 0.78, 1)
 script = ExtResource("6_vcone")
 aperture_degrees = 60.0
 
 [node name="StepsSound" type="AudioStreamPlayer2D" parent="." unique_id=1693627126]
 stream = ExtResource("10_steps")
-volume_db = 0.0
 max_distance = 600.0
 
 [connection signal="velocity_computed" from="NavAgent" to="." method="_on_nav_agent_velocity_computed"]

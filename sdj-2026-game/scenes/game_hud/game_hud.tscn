@@ -4,17 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://dlst0gn0wbwu5" path="res://assets/UI/ResourceBars/HPFrame.png" id="2_3hirk"]
 [ext_resource type="PackedScene" uid="uid://sf4mivq05c3g" path="res://scenes/ui/clue_ui/clue_ui.tscn" id="2_aiwwf"]
 [ext_resource type="Texture2D" uid="uid://drxroxqaru02c" path="res://assets/UI/ResourceBars/HPBar.png" id="3_7qc2a"]
-[ext_resource type="Texture2D" uid="uid://dph2s01u11kcv" path="res://assets/for_test/ui_bar/energy_bar_3_modes.png" id="4_energy"]
 [ext_resource type="Texture2D" uid="uid://utdm0aynga2g" path="res://assets/UI/ResourceBars/StaminaFrame.png" id="4_r5rb7"]
 [ext_resource type="Texture2D" uid="uid://c5itoipko4nsg" path="res://assets/UI/FaceUI1.png" id="5_3hirk"]
 [ext_resource type="Texture2D" uid="uid://b4tfodgnih6ni" path="res://assets/UI/ResourceBars/StaminaBar.png" id="5_qnih7"]
 [ext_resource type="Texture2D" uid="uid://byfj5x3b03r86" path="res://assets/UI/FaceUI2.png" id="6_7qc2a"]
 [ext_resource type="Texture2D" uid="uid://dhnxtm81h56so" path="res://assets/UI/FaceUI3.png" id="7_r5rb7"]
 [ext_resource type="Texture2D" uid="uid://dx7k1r3qacay3" path="res://assets/UI/FaceUI6.png" id="8_7qc2a"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_stamina"]
-atlas = ExtResource("4_energy")
-region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_q8iyx"]
 
@@ -103,7 +98,6 @@ size_flags_vertical = 0
 offset_transform_enabled = true
 offset_transform_position = Vector2(75, 20)
 offset_transform_scale = Vector2(5, 2)
-texture = SubResource("AtlasTexture_stamina")
 stretch_mode = 2
 
 [node name="Fragment" type="TextureRect" parent="MC" unique_id=1870068704]

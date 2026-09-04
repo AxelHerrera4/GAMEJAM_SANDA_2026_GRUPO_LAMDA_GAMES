@@ -42,7 +42,8 @@ extends PointLight2D
 		if is_equal_approx(aperture_degrees, value):
 			return
 		aperture_degrees = value
-		_rebuild()
+		if not _is_configuring:
+			_rebuild()
 
 ## Largo del cono en pixeles LOCALES
 @export_range(16.0, 2000.0, 1.0) var reach: float = 400.0:
@@ -50,7 +51,8 @@ extends PointLight2D
 		if is_equal_approx(reach, value):
 			return
 		reach = value
-		_rebuild()
+		if not _is_configuring:
+			_update_reach()
 
 ## Que tan difuminado esta el borde lateral del cono (0 = filo duro).
 @export_range(0.0, 1.0, 0.01) var edge_softness: float = 0.20:
@@ -105,6 +107,7 @@ extends PointLight2D
 static var _fallback_gradient: Gradient
 
 var _cone: Polygon2D
+var _is_configuring: bool = false
 
 
 func _ready() -> void:
@@ -134,17 +137,36 @@ func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: PackedStringArray = []
 	if not is_equal_approx(scale.x, scale.y):
 		warnings.append("La escala del cono no es uniforme (%.2f, %.2f): el cono se vera deformado y dejara de coincidir con lo que el guardia detecta. Ponla en (1, 1) y usa 'view_distance' del PatrolGuard para el largo." % [scale.x, scale.y])
-	if light_gradient == null:
-		warnings.append("Light Gradient esta vacio: se usa el degradado por defecto (blanco opaco -> transparente). Solo crea uno si quieres cambiarlo.")
-	elif _is_dark_gradient(light_gradient):
+	if light_gradient != null and _is_dark_gradient(light_gradient):
 		warnings.append("El gradiente esta casi todo en negro o transparente: la luz no se vera. Un Gradient nuevo del inspector viene negro->blanco con alpha 1; cambialo a blanco opaco -> blanco transparente.")
 	return warnings
 
 
 ## Cambia apertura y largo
 func configure(new_aperture_degrees: float, new_reach: float) -> void:
+	new_aperture_degrees = clampf(new_aperture_degrees, 5.0, 360.0)
+	var aperture_changed: bool = not is_equal_approx(aperture_degrees, new_aperture_degrees)
+	var reach_changed: bool = not is_equal_approx(reach, new_reach)
+	if not aperture_changed and not reach_changed:
+		return
+
+	_is_configuring = true
 	aperture_degrees = new_aperture_degrees
 	reach = new_reach
+	_is_configuring = false
+
+	if aperture_changed:
+		_rebuild()
+	elif reach_changed:
+		_update_reach()
+
+
+func _update_reach() -> void:
+	var center: float = float(texture_resolution) * 0.5
+	texture_scale = reach / center
+	var cone: Polygon2D = _cone_node()
+	if cone != null and cone_overlay:
+		_rebuild_cone(cone, _active_gradient())
 
 
 ## Blanco opaco en la punta -> transparente al final.
@@ -209,7 +231,17 @@ func _rebuild_light(gradient: Gradient) -> void:
 			c.a = clampf(c.a * edge, 0.0, 1.0)
 			img.set_pixel(x, y, c)
 
-	texture = ImageTexture.create_from_image(img)
+	if texture is ImageTexture:
+		var itex: ImageTexture = texture as ImageTexture
+		if itex.get_width() == n and itex.get_height() == n:
+			itex.update(img)
+		else:
+			itex.set_image(img)
+	else:
+		var old_tex: Texture2D = texture
+		texture = ImageTexture.create_from_image(img)
+		old_tex = null
+
 	texture_scale = reach / center
 	# Por si quedo apagada de cuando el cono era solo geometria.
 	enabled = true

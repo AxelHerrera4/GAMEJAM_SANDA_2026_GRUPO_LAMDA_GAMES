@@ -35,6 +35,8 @@ directories/dch_directory={
 directories/dtl_directory={
 "already_done": "res://dialogues/1th_time/hallway/hack_points/already_done.dtl",
 "awakening": "res://dialogues/1th_time/jail/awakening.dtl",
+"awakening_2": "res://dialogues/2th_time/jail/awakening_2.dtl",
+"awakening_3": "res://dialogues/3th_time/jail/awakening_3.dtl",
 "blocked_door": "res://dialogues/1th_time/hallway/doors/blocked_door.dtl",
 "computer_memory": "res://dialogues/1th_time/office/computer_memory.dtl",
 "door_hacked": "res://dialogues/1th_time/jail/door/door_hacked.dtl",
@@ -42,11 +44,18 @@ directories/dtl_directory={
 "exit": "res://dialogues/1th_time/office/exit.dtl",
 "exit_hall_locked": "res://dialogues/1th_time/hallway/doors/exit_hall_locked.dtl",
 "exit_hall_opened": "res://dialogues/1th_time/hallway/doors/exit_hall_opened.dtl",
-"exit_locked": "res://dialogues/1th_time/security_hub/exit_locked.dtl",
-"exit_opened": "res://dialogues/1th_time/security_hub/exit_opened.dtl",
+"exit_locked": "res://dialogues/2th_time/security_hub/exit_locked.dtl",
+"exit_opened": "res://dialogues/2th_time/security_hub/exit_opened.dtl",
+"intro_hallway": "res://dialogues/1th_time/hallway/intro_hallway.dtl",
+"intro_security_hub": "res://dialogues/2th_time/security_hub/intro.dtl",
 "memorie_photo": "res://dialogues/1th_time/jail/memorie_photo.dtl",
+"memorie_photo_2": "res://dialogues/2th_time/jail/memorie_photo_2.dtl",
+"memorie_photo_3": "res://dialogues/3th_time/jail/memorie_photo_3.dtl",
 "point_secured": "res://dialogues/1th_time/hallway/hack_points/point_secured.dtl",
-"wall_writing": "res://dialogues/1th_time/jail/wall_writing.dtl"
+"wall_writing": "res://dialogues/1th_time/jail/wall_writing.dtl",
+"wall_writing_2": "res://dialogues/2th_time/jail/wall_writing_2.dtl",
+"wall_writing_3": "res://dialogues/3th_time/jail/wall_writing_3.dtl",
+"wall_writing_repeat": "res://dialogues/1th_time/jail/wall_writing_repeat.dtl"
 }
 layout/default_style="res://resources/speaker_textbox_style.tres"
 layout/style_directory={
