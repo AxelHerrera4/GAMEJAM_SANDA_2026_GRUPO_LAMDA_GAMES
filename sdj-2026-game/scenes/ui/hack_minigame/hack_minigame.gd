@@ -16,6 +16,7 @@ const HINT_TEXT: String = "Conecta cada cable con su terminal."
 @onready var show_sfx: AudioStreamPlayer = $ShowSfx
 @onready var loop_sfx: AudioStreamPlayer = $LoopSfx
 @onready var solve_sfx: AudioStreamPlayer = $SolveSfx
+@onready var fail_sfx: AudioStreamPlayer = $FailSfx
 
 var _rest_y: float = 0.0
 
@@ -74,6 +75,7 @@ func _on_wire_connected(connected: int, total: int) -> void:
 
 func _on_wire_failed() -> void:
 	status.text = "Ese cable no encaja ahi."
+	fail_sfx.play()
 
 
 func _on_solved() -> void:

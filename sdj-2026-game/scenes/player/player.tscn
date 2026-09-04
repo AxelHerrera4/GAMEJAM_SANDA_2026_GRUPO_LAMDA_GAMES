@@ -2,7 +2,16 @@
 
 [ext_resource type="Script" uid="uid://dig7b3coloxw3" path="res://scenes/player/player.gd" id="1_dovo2"]
 [ext_resource type="Texture2D" uid="uid://djdg3jgpmpnbc" path="res://assets/Player.png" id="2_player_tex"]
-[ext_resource type="Texture2D" uid="uid://yu1nwsqbcxgv" path="res://assets/for_test/images/lights/shape_a.png" id="3_gmlin"]
+[ext_resource type="AudioStream" uid="uid://cnjf3i7mj0bqc" path="res://assets/SFX/newSFX/attack/knife_1.ogg" id="3_knife1"]
+[ext_resource type="AudioStream" uid="uid://bwakbdvakawgt" path="res://assets/SFX/newSFX/attack/knife_2.ogg" id="4_knife2"]
+[ext_resource type="AudioStream" uid="uid://dh0d053pwdsh5" path="res://assets/SFX/newSFX/move/steps_on_socks.ogg" id="5_steps"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_knife"]
+streams_count = 2
+stream_0/stream = ExtResource("3_knife1")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_knife2")
+stream_1/weight = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dmgpo"]
 radius = 12.543327
@@ -352,12 +361,6 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone" unique_id=118344202]
 shape = SubResource("CircleShape2D_intr1")
 
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=176177808]
-visible = false
-shadow_enabled = true
-texture = ExtResource("3_gmlin")
-texture_scale = 1.8
-
 [node name="HurtTimer" type="Timer" parent="." unique_id=434758332]
 wait_time = 0.3
 one_shot = true
@@ -389,7 +392,12 @@ wait_time = 2.0
 one_shot = true
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="." unique_id=1314712925]
-volume_db = -10.0
+stream = SubResource("AudioStreamRandomizer_knife")
+volume_db = 2.0
+
+[node name="StepsSound" type="AudioStreamPlayer" parent="." unique_id=1314712926]
+stream = ExtResource("5_steps")
+volume_db = -2.0
 
 [connection signal="area_entered" from="InteractZone" to="." method="_on_interact_zone_area_entered"]
 [connection signal="area_exited" from="InteractZone" to="." method="_on_interact_zone_area_exited"]

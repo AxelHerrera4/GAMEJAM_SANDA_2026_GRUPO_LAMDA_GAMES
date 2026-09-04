@@ -38,6 +38,8 @@ func interact(_player: Node) -> void:
 			SignalHub.emit_on_player_control_blocked(false)
 		return
 
+	GameManager.play_door_handle()
+
 	var already_rewarded: bool = not reward_fragment.is_empty() and FragmentManager.has_fragment(reward_fragment)
 
 	if opened_timeline != null and is_instance_valid(Dialogic) and not already_rewarded:

@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://bsx1cri7nx4p5" path="res://scenes/patrol_guard/patrol_guard.gd" id="1_kjgb1"]
 [ext_resource type="Texture2D" uid="uid://bnp1xqdv0gyjr" path="res://assets/Guard.png" id="2_guard_tex"]
 [ext_resource type="Script" uid="uid://i58a6d6b6bk1" path="res://scenes/patrol_guard/vision_cone.gd" id="6_vcone"]
+[ext_resource type="AudioStream" uid="uid://t0jxoeyox1f6" path="res://assets/SFX/newSFX/Gasp/gasp1.ogg" id="7_gasp1"]
+[ext_resource type="AudioStream" uid="uid://dddyknpjxcrv" path="res://assets/SFX/newSFX/Gasp/gasp2.ogg" id="8_gasp2"]
+[ext_resource type="AudioStream" uid="uid://vha5xfjdgmsv" path="res://assets/SFX/newSFX/Gasp/gasp3.ogg" id="9_gasp3"]
+[ext_resource type="AudioStream" uid="uid://cfe5oygdomtf7" path="res://assets/SFX/newSFX/move/steps_on_shoes.ogg" id="10_steps"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2vina"]
 radius = 12.0415945
@@ -13,6 +17,9 @@ height = 48.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dpyoa"]
 streams_count = 3
+stream_0/stream = ExtResource("7_gasp1")
+stream_1/stream = ExtResource("8_gasp2")
+stream_2/stream = ExtResource("9_gasp3")
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -337,6 +344,7 @@ states/move/position = Vector2(422, 100)
 transitions = ["idle", "move", SubResource("AnimTransition_tomove"), "move", "idle", SubResource("AnimTransition_toidle"), "idle", "dead", SubResource("AnimationNodeStateMachineTransition_javjj"), "move", "dead", SubResource("AnimationNodeStateMachineTransition_1s1ds"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_ey0lc")]
 
 [node name="PatrolGuard" type="Area2D" unique_id=1290929920]
+position = Vector2(1, -4)
 scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 3
@@ -391,6 +399,7 @@ text = "wdaddadawd"
 
 [node name="GaspSound" type="AudioStreamPlayer2D" parent="." unique_id=1693627125]
 stream = SubResource("AudioStreamRandomizer_dpyoa")
+volume_db = 6.0
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=739967964]
 
@@ -405,13 +414,16 @@ parameters/idle/blend_position = Vector2(0, 0)
 parameters/move/blend_position = Vector2(0, 0)
 
 [node name="VisionCone" type="PointLight2D" parent="." unique_id=1477203311]
-position = Vector2(14.705882, 5.2941175)
+position = Vector2(13.45866, 7.2740393)
+scale = Vector2(0.5413484, 0.7259621)
 color = Color(1, 0.95, 0.78, 1)
-energy = 0.9
-shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 3.0
 script = ExtResource("6_vcone")
+aperture_degrees = 60.0
+
+[node name="StepsSound" type="AudioStreamPlayer2D" parent="." unique_id=1693627126]
+stream = ExtResource("10_steps")
+volume_db = 0.0
+max_distance = 600.0
 
 [connection signal="velocity_computed" from="NavAgent" to="." method="_on_nav_agent_velocity_computed"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

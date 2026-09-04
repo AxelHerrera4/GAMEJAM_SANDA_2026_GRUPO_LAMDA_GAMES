@@ -21,7 +21,7 @@ func _on_button_hovered():
 func _on_button_play_pressed():
 	FragmentManager.clear_all()
 	get_tree().paused = false
-	GameManager.change_scene(jail)
+	GameManager.change_scene(jail, false)
 
 func _on_button_options_pressed():
 	panel_options.show()

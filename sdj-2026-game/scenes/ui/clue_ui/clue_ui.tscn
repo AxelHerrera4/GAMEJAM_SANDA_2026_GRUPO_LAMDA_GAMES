@@ -102,6 +102,28 @@ text = "[F] Interactuar"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="KillPrompt" type="Label" parent="." unique_id=1743346961]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -116.0
+offset_right = 260.0
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.9019608, 0.42352942, 0.36862746, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.8)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_ehmdd")
+theme_override_font_sizes/font_size = 18
+text = "[E] Asesinar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="FragmentToast" type="Panel" parent="." unique_id=925516734]
 visible = false
 anchors_preset = 5

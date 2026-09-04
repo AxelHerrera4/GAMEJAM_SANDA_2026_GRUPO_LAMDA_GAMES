@@ -42,5 +42,6 @@ y_sort_enabled = true
 [node name="PlayerPos" type="Marker2D" parent="." unique_id=1605110160]
 
 [node name="AmbientMusic" type="AudioStreamPlayer" parent="." unique_id=1575166514]
+volume_db = -10.0
 autoplay = true
 bus = &"Music"

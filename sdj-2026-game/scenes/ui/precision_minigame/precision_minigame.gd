@@ -16,6 +16,7 @@ const HINT_TEXT: String = "Pulsa [ESPACIO] cuando el cursor pase por la zona ver
 @onready var show_sfx: AudioStreamPlayer = $ShowSfx
 @onready var loop_sfx: AudioStreamPlayer = $LoopSfx
 @onready var solve_sfx: AudioStreamPlayer = $SolveSfx
+@onready var fail_sfx: AudioStreamPlayer = $FailSfx
 
 var _rest_y: float = 0.0
 
@@ -75,12 +76,14 @@ func _on_hit(count: int, required: int) -> void:
 
 func _on_missed(remaining: int) -> void:
 	status.text = "Fallaste. Intentos restantes: %d" % remaining
+	fail_sfx.play()
 
 
 func _on_failed() -> void:
 	status.text = "Cerradura bloqueada."
 	cancel_button.disabled = true
 	loop_sfx.stop()
+	fail_sfx.play()
 	await get_tree().create_timer(SOLVED_DELAY, true).timeout
 	await _play_outro()
 	finished.emit(false)

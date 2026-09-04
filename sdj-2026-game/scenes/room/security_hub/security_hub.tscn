@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://mdbl1n7hcs7h" path="res://scenes/patrol_guard/melee_guard/melee_guard.tscn" id="4_melee"]
 [ext_resource type="PackedScene" uid="uid://b4bhqbxy04qd5" path="res://scenes/patrol_guard/pistol_guard/pistol_guard.tscn" id="5_pistol"]
 [ext_resource type="PackedScene" uid="uid://bk7nwyjx4q2pa" path="res://scenes/doors/exit_hall/exit_hall.tscn" id="6_exit"]
-[ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="7_music"]
+[ext_resource type="AudioStream" uid="uid://biadqeqhss34j" path="res://assets/Music/Track 2 (psycho).ogg" id="7_music"]
 [ext_resource type="Resource" uid="uid://b13xpkeqb2xhg" path="res://dialogues/1th_time/security_hub/exit_locked.dtl" id="8_locked"]
 [ext_resource type="Resource" uid="uid://cojxk0m6pee3f" path="res://dialogues/1th_time/security_hub/exit_opened.dtl" id="9_opened"]
 [ext_resource type="Script" uid="uid://cex123wyjhlma" path="res://scenes/lighting/flicker_light.gd" id="10_wgv2m"]

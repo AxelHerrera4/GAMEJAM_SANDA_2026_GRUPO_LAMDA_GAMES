@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dprovxrrja4qr" path="res://assets/UI/FragmentObtaining/PlayerGetFragmentPortrait.png" id="1_a3vwu"]
 [ext_resource type="Script" uid="uid://pthx6tpqpkf2" path="res://scenes/ui/fragment_cutscene/fragment_cutscene.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://ckj518e5d8rpx" path="res://assets/UI/FragmentObtaining/ShatterAnim.png" id="2_734sr"]
-[ext_resource type="AudioStream" uid="uid://dx26xmks4lalk" path="res://assets/SFX/Interfaces/brokenGlass.ogg" id="3_sfx"]
+[ext_resource type="AudioStream" uid="uid://b15nlh2lbs5bb" path="res://assets/SFX/newSFX/various/break_glass.ogg" id="3_sfx"]
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -794,6 +794,7 @@ hframes = 2
 
 [node name="BreakSFX" type="AudioStreamPlayer" parent="." unique_id=1905883725]
 stream = ExtResource("3_sfx")
+volume_db = 6.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1222571608]
 libraries/ = SubResource("AnimationLibrary_cutscene")

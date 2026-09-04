@@ -2,6 +2,8 @@ extends Node
 
 
 signal interactable_changed(interactable: Node)
+## Se emite solo cuando cambia si hay o no un guardia asesinable delante.
+signal assassination_available(available: bool)
 signal clues_progress(found: int, total: int) # now used on jail
 signal all_clues_inspected # now, now used on jail  #maybe for the future for show a clue counter
 signal photo_requested(title: String, texture: Texture2D, caption: String)
@@ -22,6 +24,9 @@ signal all_fragments_collected
 
 func emit_on_interactable_changed(interactable: Node) -> void:
 	interactable_changed.emit(interactable)
+
+func emit_on_assassination_available(available: bool) -> void:
+	assassination_available.emit(available)
 
 func emit_on_clues_progress(found: int, total: int) -> void:
 	clues_progress.emit(found, total)

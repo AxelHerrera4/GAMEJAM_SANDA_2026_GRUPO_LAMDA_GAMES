@@ -57,6 +57,8 @@ func interact(_player: Node) -> void:
 			await Dialogic.timeline_ended
 			SignalHub.emit_on_player_control_blocked(false)
 
+	GameManager.play_door_handle()
+
 	if not ending_required_fragment.is_empty() and FragmentManager.has_fragment(ending_required_fragment):
 		SignalHub.emit_on_ending_requested()
 		return

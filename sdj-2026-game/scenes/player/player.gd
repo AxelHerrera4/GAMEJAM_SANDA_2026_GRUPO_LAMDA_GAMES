@@ -23,6 +23,7 @@ extends CharacterBody2D
 @onready var attack_timer: Timer = $AttackTimer
 @onready var melee_area: Area2D = $MeleeArea
 @onready var attack_sound: AudioStreamPlayer = $AttackSound
+@onready var steps_sound: AudioStreamPlayer = $StepsSound
 
 var facing_direction: Vector2 = Vector2.DOWN
 
@@ -36,6 +37,7 @@ var _is_hurt: bool = false
 var _knockback_velocity: Vector2 = Vector2.ZERO
 var _control_blocked: bool = false
 var _has_attack_fragment: bool = false
+var _assassination_available: bool = false
 var _can_attack: bool = true
 
 var is_hurt: bool:
@@ -58,10 +60,36 @@ func _ready() -> void:
 	SignalHub.emit_on_player_health_changed(health, max_health)
 	SignalHub.emit_on_player_stamina_changed(stamina, max_stamina)
 	SignalHub.player_control_blocked.connect(_on_control_blocked)
+	_make_loopable(steps_sound.stream)
 	_has_attack_fragment = FragmentManager.has_fragment(FragmentManager.ATTACK)
 	#_has_attack_fragment = true #DANGER For test
 	_can_attack = _has_attack_fragment
 	FragmentManager.fragment_granted.connect(_on_fragment_granted)
+
+## Los pasos son un bucle continuo mientras el jugador camina, asi que hay que
+## marcar el .ogg como loopable en runtime (el import viene con loop = false).
+func _make_loopable(stream: AudioStream) -> void:
+	if stream is AudioStreamOggVorbis:
+		(stream as AudioStreamOggVorbis).loop = true
+	elif stream is AudioStreamMP3:
+		(stream as AudioStreamMP3).loop = true
+	elif stream is AudioStreamWAV:
+		(stream as AudioStreamWAV).loop_mode = AudioStreamWAV.LOOP_FORWARD
+
+
+## Arranca o corta los pasos segun si el jugador se esta desplazando. Al correr
+## suben un poco de tono para que acompañen a la velocidad.
+func _update_steps_sound(input: Vector2) -> void:
+	if steps_sound == null or steps_sound.stream == null:
+		return
+	var should_play: bool = input != Vector2.ZERO and health > 0
+	if should_play:
+		steps_sound.pitch_scale = 1.25 if _is_sprinting else 1.0
+		if not steps_sound.playing:
+			steps_sound.play()
+	elif steps_sound.playing:
+		steps_sound.stop()
+
 
 func _setup_spawn_position() -> void:
 	var spawn: Node2D = get_parent().get_node_or_null("PlayerPos") if get_parent() else null
@@ -137,6 +165,8 @@ func take_damage(amount: int, knockback_force: float, source_position: Vector2) 
 
 
 func die() -> void:
+	if steps_sound:
+		steps_sound.stop()
 	hide()
 	get_tree().paused = true
 	SignalHub.emit_on_game_over(false)
@@ -165,7 +195,9 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = (input * current_speed) + _knockback_velocity
 	move_and_slide()
+	_update_steps_sound(input)
 	_update_current_interactable()
+	_update_assassination_prompt()
 
 func try_interact() -> void:
 	if _current_interactable == null:
@@ -227,15 +259,48 @@ func perform_attack() -> void:
 	for area in melee_area.get_overlapping_areas():
 		_try_hit_target(area)
 	
-	attack_sound.play()
 	await get_tree().create_timer(0.25).timeout
 	is_attacking = false
 
 func _on_attack_timer_timeout() -> void:
 	_can_attack = true
 	
+## Guardia al que un ataque AHORA MISMO mataria, o null. Son las mismas
+## condiciones que _try_hit_target() mas las de PatrolGuard.die(): hace falta el
+## fragmento de ataque, que el guardia este dentro del area de melee, vivo, y
+## que no te vea (o sea, por la espalda o fuera de su cono).
+func get_assassination_target() -> PatrolGuard:
+	if not _has_attack_fragment:
+		return null
+	for area in melee_area.get_overlapping_areas():
+		var guard: PatrolGuard = _guard_from_area(area)
+		if guard != null and not guard.is_dead and not guard.can_see_player():
+			return guard
+	return null
+
+
+## El area solapada puede ser el propio guardia (es un Area2D) o su Hitbox.
+func _guard_from_area(area: Area2D) -> PatrolGuard:
+	if area is PatrolGuard:
+		return area as PatrolGuard
+	return area.get_parent() as PatrolGuard
+
+
+func _update_assassination_prompt() -> void:
+	var available: bool = get_assassination_target() != null
+	if available == _assassination_available:
+		return
+	_assassination_available = available
+	SignalHub.emit_on_assassination_available(available)
+
+
 func _try_hit_target(area: Area2D) -> void:
 	print("_try_hit_target")
 	if is_attacking and area.get_parent() is PatrolGuard:
 		print("area parent was patrol guard")
-		area.get_parent().die()
+		var guard: PatrolGuard = area.get_parent() as PatrolGuard
+		if guard.is_dead:
+			return
+		# El cuchillo solo suena cuando la hoja llega de verdad a un guardia.
+		attack_sound.play()
+		guard.die()
