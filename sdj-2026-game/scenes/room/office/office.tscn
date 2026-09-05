@@ -8,9 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://blfwseil357xg" path="res://scenes/doors/exit/exit.tscn" id="6_ee5rl"]
 [ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="7_music"]
 [ext_resource type="PackedScene" uid="uid://ct7ncev44u1hw" path="res://scenes/light_ceiling/light_ceiling.tscn" id="8_idga6"]
+[ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="9_ri5ts"]
+[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="10_74o4q"]
 
 [node name="Office" unique_id=69708080 instance=ExtResource("1_27onf")]
-y_sort_enabled = true
 
 [node name="NavigationRegion2D" parent="." index="1" unique_id=1215749446]
 visible = false
@@ -56,3 +57,13 @@ volume_db = -12.0
 [node name="Light_Ceiling" parent="LightPoints2" index="0" unique_id=39666186 instance=ExtResource("8_idga6")]
 position = Vector2(636, 266)
 scale = Vector2(16.71875, 13.906249)
+
+[node name="Player" parent="." index="12" unique_id=1768624832 instance=ExtResource("9_ri5ts")]
+position = Vector2(363, -516.00006)
+motion_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="13" unique_id=444756935]
+
+[node name="GameHud" parent="CanvasLayer" index="0" unique_id=155175906 instance=ExtResource("10_74o4q")]
+offset_left = 2.0
+offset_right = 2.0
