@@ -26,7 +26,6 @@ script = ExtResource("2_script")
 intro_timeline = ExtResource("3_foh41")
 
 [node name="Obscure" parent="." index="0" unique_id=2072011277]
-visible = false
 color = Color(0.3032327, 0.30323288, 0.30323276, 1)
 
 [node name="Floor" parent="Tiles" parent_id_path=PackedInt32Array(213452734) index="0" unique_id=1690041257]
@@ -42,6 +41,7 @@ tile_map_data = PackedByteArray("AAAOAAcAAQACAAAAAAApAAcAAQACAAAAAADv/yMAAQACAAA
 tile_set = ExtResource("3_tileset")
 
 [node name="Hackpoints" type="TileMapLayer" parent="Tiles" parent_id_path=PackedInt32Array(213452734) index="3" unique_id=1761682757]
+y_sort_enabled = true
 tile_map_data = PackedByteArray("AADv/yMAAQAAAAAAAADx/yMAAQAHAAMAAAAOAAcAAQAAAAAAAAApAAcAAQAAAAAAAAA=")
 tile_set = ExtResource("3_tileset")
 
