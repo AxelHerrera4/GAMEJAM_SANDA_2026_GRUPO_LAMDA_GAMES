@@ -1,13 +1,11 @@
 extends CanvasLayer
 
-const FADE_TIME: float = 0.9
-const TITLE_HOLD: float = 2.4
-const CREDITS_HOLD: float = 1.2
-
 @onready var backdrop: ColorRect = $Backdrop
+@onready var newspaper: TextureRect = $NewspaperGirl
 @onready var title: Label = $ToBeContinued
 @onready var credits: Label = $Credits
 @onready var hint: Label = $Hint
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var _playing: bool = false
 
@@ -31,14 +29,10 @@ func play() -> void:
 	visible = true
 	get_tree().paused = true
 
-	await _fade(backdrop, "color:a", 1.0, FADE_TIME)
-	await _fade(title, "modulate:a", 1.0, FADE_TIME)
-	await get_tree().create_timer(TITLE_HOLD, true).timeout
-	await _fade(title, "modulate:a", 0.0, FADE_TIME)
+	if newspaper and newspaper.size != Vector2.ZERO:
+		newspaper.pivot_offset = newspaper.size / 2.0
 
-	await _fade(credits, "modulate:a", 1.0, FADE_TIME)
-	await get_tree().create_timer(CREDITS_HOLD, true).timeout
-	await _fade(hint, "modulate:a", 1.0, 0.6)
+	animation_player.play("ending")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -48,7 +42,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	get_viewport().set_input_as_handled()
-	if hint.modulate.a >= 0.9:
+	# Permitir salir al menú cuando se hayan mostrado los créditos/hint
+	if hint.modulate.a >= 0.8 or not animation_player.is_playing():
 		_finish()
 
 
@@ -62,13 +57,5 @@ func _finish() -> void:
 
 func _reset() -> void:
 	visible = false
-	backdrop.color = Color(0.0, 0.0, 0.0, 0.0)
-	title.modulate.a = 0.0
-	credits.modulate.a = 0.0
-	hint.modulate.a = 0.0
-
-
-func _fade(node: CanvasItem, property: String, value: float, time: float) -> void:
-	var tween: Tween = create_tween()
-	tween.tween_property(node, property, value, time)
-	await tween.finished
+	if animation_player:
+		animation_player.play("RESET")

@@ -2,14 +2,11 @@
 
 [ext_resource type="FontFile" uid="uid://dogoki6v34m2c" path="res://assets/font/TitanOne-Regular.ttf" id="1_hyk8p"]
 [ext_resource type="Script" uid="uid://ddrcf57lumi6m" path="res://scenes/main/main.gd" id="1_k2fmo"]
-[ext_resource type="Texture2D" uid="uid://oi0hre241mgu" path="res://assets/MainMenu.png" id="2_6q06x"]
 [ext_resource type="PackedScene" uid="uid://b6ooi2re1h8i" path="res://scenes/room/jail/jail.tscn" id="2_ow5a4"]
+[ext_resource type="Texture2D" uid="uid://dbkt0pctt4la2" path="res://assets/UI/MainMenu2.png" id="3_hujxm"]
 [ext_resource type="AudioStream" uid="uid://tho7m3b1cod4" path="res://assets/Music/MenuTheme.ogg" id="4_6q06x"]
-[ext_resource type="AudioStream" uid="uid://bbrppterd3xn7" path="res://assets/SFX/MoveMenu/stepsGlass.ogg" id="5_6q06x"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_ln6rh"]
-font = ExtResource("1_hyk8p")
-font_size = 48
+[ext_resource type="Texture2D" uid="uid://be88q4excg6y0" path="res://assets/UI/Logo.png" id="4_yyfjg"]
+[ext_resource type="AudioStream" uid="uid://b15nlh2lbs5bb" path="res://assets/SFX/newSFX/various/break_glass.ogg" id="7_hujxm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_q8iyx"]
 font = ExtResource("1_hyk8p")
@@ -37,23 +34,22 @@ layout_mode = 0
 offset_right = 2816.0
 offset_bottom = 1578.0488
 scale = Vector2(0.41, 0.41)
-texture = ExtResource("2_6q06x")
+texture = ExtResource("3_hujxm")
 
-[node name="title" type="Label" parent="." unique_id=981542302]
+[node name="title" type="TextureRect" parent="." unique_id=395330708]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -104.0
-offset_top = -299.0
-offset_right = 89.0
-offset_bottom = -243.0
+offset_left = -142.0
+offset_top = -242.0
+offset_right = 128.0
+offset_bottom = -180.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "I Am...?"
-label_settings = SubResource("LabelSettings_ln6rh")
+texture = ExtResource("4_yyfjg")
 
 [node name="Button_Play" type="Button" parent="." unique_id=1334373781]
 layout_mode = 0
@@ -174,7 +170,7 @@ step = 0.05
 value = 1.0
 
 [node name="Audio_Hover" type="AudioStreamPlayer" parent="." unique_id=2124302440]
-stream = ExtResource("5_6q06x")
+stream = ExtResource("7_hujxm")
 
 [connection signal="mouse_entered" from="Button_Play" to="." method="_on_button_hovered"]
 [connection signal="pressed" from="Button_Play" to="." method="_on_button_play_pressed"]

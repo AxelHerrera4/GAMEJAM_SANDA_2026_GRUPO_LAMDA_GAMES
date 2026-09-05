@@ -21,6 +21,7 @@
 [ext_resource type="Resource" uid="uid://dndacc6s5kedb" path="res://dialogues/1th_time/jail/wall_writing_repeat.dtl" id="18_ww_rep"]
 [ext_resource type="Resource" uid="uid://com8mm4j1ndka" path="res://dialogues/2th_time/jail/awakening_2.dtl" id="19_awake2"]
 [ext_resource type="Resource" uid="uid://buq1uj4tcwnrx" path="res://dialogues/2th_time/jail/memorie_photo_2.dtl" id="20_photo2"]
+[ext_resource type="Texture2D" uid="uid://bw1ce0rusyyru" path="res://assets/UI/Photo/Newspaper.png" id="21_mqo4e"]
 [ext_resource type="Resource" uid="uid://cv5tf7uhaq4gv" path="res://dialogues/2th_time/jail/wall_writing_2.dtl" id="21_ww2"]
 [ext_resource type="Resource" uid="uid://bv5pbglanjk72" path="res://dialogues/3th_time/jail/awakening_3.dtl" id="22_awake3"]
 [ext_resource type="Resource" uid="uid://cfqau8mib5ewf" path="res://dialogues/3th_time/jail/memorie_photo_3.dtl" id="23_photo3"]
@@ -96,7 +97,9 @@ photo = ExtResource("5_vsvih")
 caption = "Foto"
 first_time_timeline = ExtResource("15_jj3dn")
 timeline_attack = ExtResource("20_photo2")
+photo_attack = ExtResource("5_vsvih")
 timeline_camouflage = ExtResource("23_photo3")
+photo_camouflage = ExtResource("21_mqo4e")
 clue_id = &"foto_chica"
 clue_title = "Foto"
 
