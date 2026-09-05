@@ -6,13 +6,6 @@
 [ext_resource type="AudioStream" uid="uid://bwakbdvakawgt" path="res://assets/SFX/newSFX/attack/knife_2.ogg" id="4_knife2"]
 [ext_resource type="AudioStream" uid="uid://dh0d053pwdsh5" path="res://assets/SFX/newSFX/move/steps_on_socks.ogg" id="5_steps"]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_knife"]
-streams_count = 2
-stream_0/stream = ExtResource("3_knife1")
-stream_0/weight = 1.0
-stream_1/stream = ExtResource("4_knife2")
-stream_1/weight = 1.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_dmgpo"]
 radius = 12.543327
 
@@ -320,16 +313,19 @@ transitions = ["idle", "move", SubResource("AnimationNodeStateMachineTransition_
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_esew8"]
 size = Vector2(32.80803, 29.5831)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_knife"]
+streams_count = 2
+stream_0/stream = ExtResource("3_knife1")
+stream_1/stream = ExtResource("4_knife2")
+
 [node name="Player" type="CharacterBody2D" unique_id=1768624832 groups=["player"]]
 y_sort_enabled = true
 scale = Vector2(2, 2)
-motion_mode = 1
 collision_layer = 2
 collision_mask = 5
+motion_mode = 1
 script = ExtResource("1_dovo2")
 speed = 300.0
-health = 10000
-max_health = 10000
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2117098846]
 scale = Vector2(2, 2)
