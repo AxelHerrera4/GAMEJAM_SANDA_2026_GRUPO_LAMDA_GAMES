@@ -91,6 +91,7 @@ position = Vector2(36.5, -285)
 shape = SubResource("RectangleShape2D_q06lr")
 
 [node name="Room" type="Node2D" parent="Rooms/ShowRoom" index="1" unique_id=756119356]
+visible = false
 y_sort_enabled = true
 position = Vector2(-1792, 449)
 
@@ -124,6 +125,7 @@ position = Vector2(-9, 86.5)
 shape = SubResource("RectangleShape2D_35reb")
 
 [node name="Room" type="Node2D" parent="Rooms/ShowRoom2" index="1" unique_id=1848246552]
+visible = false
 y_sort_enabled = true
 position = Vector2(-2344, -258)
 
