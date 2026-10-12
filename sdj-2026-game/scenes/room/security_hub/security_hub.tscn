@@ -43,6 +43,7 @@ tile_map_data = PackedByteArray("AAAOAAcAAQACAAAAAAApAAcAAQACAAAAAADv/yMAAQACAAA
 tile_set = ExtResource("3_tileset")
 
 [node name="Hackpoints" type="TileMapLayer" parent="Tiles" parent_id_path=PackedInt32Array(213452734) index="3" unique_id=1761682757]
+y_sort_enabled = true
 tile_map_data = PackedByteArray("AADv/yMAAQAAAAAAAADx/yMAAQAHAAMAAAAOAAcAAQAAAAAAAAApAAcAAQAAAAAAAAA=")
 tile_set = ExtResource("3_tileset")
 
