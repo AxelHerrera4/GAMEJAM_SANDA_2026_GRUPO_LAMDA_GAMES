@@ -1,0 +1,256 @@
+{
+	"nodes": [
+		{
+			"id": "g_b2_esc1",
+			"x": -600,
+			"y": -350,
+			"width": 380,
+			"height": 450,
+			"type": "group",
+			"label": "Escena 1: Celda — El Segundo Despertar"
+		},
+		{
+			"id": "b2_n1_nar",
+			"x": -560,
+			"y": -300,
+			"width": 300,
+			"height": 90,
+			"type": "text",
+			"color": "3",
+			"text": "📜 **[NARRADOR / AMBIENTE]**\nJadeo violento. El protagonista abre los ojos de golpe en el frío suelo."
+		},
+		{
+			"id": "b2_n1_gp",
+			"x": -560,
+			"y": -180,
+			"width": 300,
+			"height": 90,
+			"type": "text",
+			"color": "5",
+			"text": "🎮 **[GAMEPLAY]**\nEl paciente se levanta. Retiene recuerdos y fragmentos previos (#174)."
+		},
+		{
+			"id": "b2_n1_dlg",
+			"x": -560,
+			"y": -60,
+			"width": 300,
+			"height": 100,
+			"type": "text",
+			"color": "1",
+			"text": "💬 **[DIALOGIC: awakening_2.dtl]**\n`Paciente #174:`\n\"¿De vuelta en la celda? Juraría que ya había escapado...\""
+		},
+
+		{
+			"id": "g_b2_esc2",
+			"x": -150,
+			"y": -350,
+			"width": 380,
+			"height": 300,
+			"type": "group",
+			"label": "Escena 2: Reafirmación y Salida"
+		},
+		{
+			"id": "b2_n2_gp",
+			"x": -110,
+			"y": -300,
+			"width": 300,
+			"height": 110,
+			"type": "text",
+			"color": "5",
+			"text": "🎮 **[GAMEPLAY]**\nAbre la celda rápido con Hacking. Movimiento y stamina responden más ágiles."
+		},
+		{
+			"id": "b2_n2_fx",
+			"x": -110,
+			"y": -160,
+			"width": 300,
+			"height": 80,
+			"type": "text",
+			"color": "4",
+			"text": "🚪 **[TRANSICIÓN]**\nCruza el pasillo hacia la puerta del Security Hub."
+		},
+
+		{
+			"id": "g_b2_esc3",
+			"x": 300,
+			"y": -350,
+			"width": 420,
+			"height": 330,
+			"type": "group",
+			"label": "Escena 3: Ingreso a Security Hub"
+		},
+		{
+			"id": "b2_n3_gp",
+			"x": 340,
+			"y": -300,
+			"width": 340,
+			"height": 80,
+			"type": "text",
+			"color": "5",
+			"text": "🎮 **[GAMEPLAY]**\nEntra al Centro de Seguridad. Área amplia con columnas y múltiples patrullas."
+		},
+		{
+			"id": "b2_n3_dlg",
+			"x": 340,
+			"y": -190,
+			"width": 340,
+			"height": 110,
+			"type": "text",
+			"color": "1",
+			"text": "💬 **[DIALOGIC: intro.dtl]**\n`Paciente #174:`\n\"Escucho demasiados pasos... Pero ahora puedo silenciarlos a todos por la espalda.\""
+		},
+
+		{
+			"id": "g_b2_esc4",
+			"x": 300,
+			"y": 50,
+			"width": 420,
+			"height": 320,
+			"type": "group",
+			"label": "Escena 4: Cacería Silenciosa (Combate)"
+		},
+		{
+			"id": "b2_n4_gp1",
+			"x": 340,
+			"y": 100,
+			"width": 340,
+			"height": 100,
+			"type": "text",
+			"color": "5",
+			"text": "🎮 **[GAMEPLAY: Sigilo]**\nEsconderse tras columnas. Flanquear a espaldas del cono de visión."
+		},
+		{
+			"id": "b2_n4_gp2",
+			"x": 340,
+			"y": 230,
+			"width": 340,
+			"height": 110,
+			"type": "text",
+			"color": "5",
+			"text": "🗡️ **[GAMEPLAY: Asesinato]**\n`[Click / E]` -> Ejecución cuerpo a cuerpo letal. Limpiar custodios y tiradores."
+		},
+
+		{
+			"id": "g_b2_esc5",
+			"x": -250,
+			"y": 50,
+			"width": 480,
+			"height": 450,
+			"type": "group",
+			"label": "Escena 5: Consola Maestra, Camuflaje y Alarma"
+		},
+		{
+			"id": "b2_n5_gp",
+			"x": -210,
+			"y": 100,
+			"width": 400,
+			"height": 90,
+			"type": "text",
+			"color": "5",
+			"text": "🎮 **[GAMEPLAY]**\nInteractúa con consola maestra [F]. Resuelve minijuego de precisión (barra verde)."
+		},
+		{
+			"id": "b2_n5_dlg",
+			"x": -210,
+			"y": 220,
+			"width": 400,
+			"height": 110,
+			"type": "text",
+			"color": "1",
+			"text": "💬 **[DIALOGIC / DESBLOQUEO]**\n✨ Grant: CAMOUFLAGE (distorsión de luz)\n`Paciente #174:` \"La salida al patio exterior está abierta.\""
+		},
+		{
+			"id": "b2_n5_fade",
+			"x": -210,
+			"y": 360,
+			"width": 400,
+			"height": 100,
+			"type": "text",
+			"color": "4",
+			"text": "⚡ **[EFECTO / FIN DE BUCLE]**\nSirenas de alarma lejanas. Parpadeo de luces rojas. Colapso psicótico hacia el Bucle 3."
+		}
+	],
+	"edges": [
+		{
+			"id": "b2_e_1_nar_gp",
+			"fromNode": "b2_n1_nar",
+			"fromSide": "bottom",
+			"toNode": "b2_n1_gp",
+			"toSide": "top"
+		},
+		{
+			"id": "b2_e_1_gp_dlg",
+			"fromNode": "b2_n1_gp",
+			"fromSide": "bottom",
+			"toNode": "b2_n1_dlg",
+			"toSide": "top"
+		},
+		{
+			"id": "b2_e_esc1_esc2",
+			"fromNode": "b2_n1_dlg",
+			"fromSide": "right",
+			"toNode": "b2_n2_gp",
+			"toSide": "left",
+			"label": "salir de celda"
+		},
+		{
+			"id": "b2_e_2_gp_fx",
+			"fromNode": "b2_n2_gp",
+			"fromSide": "bottom",
+			"toNode": "b2_n2_fx",
+			"toSide": "top"
+		},
+		{
+			"id": "b2_e_esc2_esc3",
+			"fromNode": "b2_n2_fx",
+			"fromSide": "right",
+			"toNode": "b2_n3_gp",
+			"toSide": "left",
+			"label": "entrar a Security Hub"
+		},
+		{
+			"id": "b2_e_3_gp_dlg",
+			"fromNode": "b2_n3_gp",
+			"fromSide": "bottom",
+			"toNode": "b2_n3_dlg",
+			"toSide": "top"
+		},
+		{
+			"id": "b2_e_esc3_esc4",
+			"fromNode": "b2_n3_dlg",
+			"fromSide": "bottom",
+			"toNode": "b2_n4_gp1",
+			"toSide": "top",
+			"label": "iniciar sigilo"
+		},
+		{
+			"id": "b2_e_4_gp1_gp2",
+			"fromNode": "b2_n4_gp1",
+			"fromSide": "bottom",
+			"toNode": "b2_n4_gp2",
+			"toSide": "top"
+		},
+		{
+			"id": "b2_e_esc4_esc5",
+			"fromNode": "b2_n4_gp2",
+			"fromSide": "left",
+			"toNode": "b2_n5_gp",
+			"toSide": "right",
+			"label": "llegar a consola central"
+		},
+		{
+			"id": "b2_e_5_gp_dlg",
+			"fromNode": "b2_n5_gp",
+			"fromSide": "bottom",
+			"toNode": "b2_n5_dlg",
+			"toSide": "top"
+		},
+		{
+			"id": "b2_e_5_dlg_fade",
+			"fromNode": "b2_n5_dlg",
+			"fromSide": "bottom",
+			"toNode": "b2_n5_fade",
+			"toSide": "top"
+		}
+	]
+}

@@ -1,0 +1,9 @@
+{
+	"nodes":[
+		{"id":"node_char_player","x":-500,"y":-300,"width":300,"height":80,"type":"text","text":"### 1. Paciente 6174 (Protagonista)\n`Player.png` / `player.tscn`"},
+		{"id":"node_char_melee","x":-500,"y":-100,"width":300,"height":80,"type":"text","text":"### 2. Guardia de Seguridad Melee\n`melee_guard.tscn`"},
+		{"id":"node_char_pistol","x":-500,"y":100,"width":300,"height":80,"type":"text","text":"### 3. Guardia Armado con Pistola\n`pistol_guard.tscn`"},
+		{"id":"node_char_woman","x":-500,"y":300,"width":300,"height":80,"type":"text","text":"### 4. La Mujer de la Fotografía\n`Photo.png` / `Newspaper.png`"}
+	],
+	"edges":[]
+}

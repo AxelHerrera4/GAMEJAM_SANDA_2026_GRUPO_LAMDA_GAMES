@@ -1,0 +1,41 @@
+{
+	"nodes":[
+		{"id":"g_escena6","type":"group","x":150,"y":200,"width":480,"height":450,"label":"Escena 6: Oficina — El Recuerdo Militar y Fade"},
+		{"id":"g_escena1","type":"group","x":-680,"y":-350,"width":380,"height":450,"label":"Escena 1: Celda — El Despertar"},
+		{"id":"g_escena3","type":"group","x":300,"y":-350,"width":380,"height":450,"label":"Escena 3: Inscripción y Shatter"},
+		{"id":"g_escena2","type":"group","x":-200,"y":-350,"width":380,"height":340,"label":"Escena 2: Fotografía de la Mujer"},
+		{"id":"g_escena4","type":"group","x":750,"y":-350,"width":380,"height":340,"label":"Escena 4: Puerta y Minijuego"},
+		{"id":"g_escena5","type":"group","x":750,"y":200,"width":380,"height":340,"label":"Escena 5: Pasillo Principal (Sigilo)"},
+		{"id":"node_3_gp","type":"text","text":"🎮 **[GAMEPLAY]**\nInspecciona pared con símbolos y diagramas de circuitos [F].","x":340,"y":-300,"width":300,"height":80,"color":"5"},
+		{"id":"node_3_dlg1","type":"text","text":"💬 **[DIALOGIC: wall_writing.dtl]**\n`Paciente #1##:`\n\"Esto ya lo había visto... ¡Ahhh!\"\n💥 `shatter_left_up` -> Grant: HACK","x":340,"y":-190,"width":300,"height":110,"color":"1"},
+		{"id":"node_3_dlg2","type":"text","text":"💬 **[DIALOGIC]**\n`Paciente #1##:`\n\"¿Soy un hacker? Tal vez por eso me encerraron.\"","x":340,"y":-50,"width":300,"height":90,"color":"1"},
+		{"id":"node_4_gp","type":"text","text":"🎮 **[GAMEPLAY]**\nInteractúa con cerradura. Resuelve minijuego de unir cables por color.","x":790,"y":-300,"width":300,"height":90,"color":"5"},
+		{"id":"node_4_dlg","type":"text","text":"💬 **[DIALOGIC: door_hacked.dtl]**\n`Paciente #1##:`\n\"Tengo que salir y descubrir qué me está pasando.\"","x":790,"y":-180,"width":300,"height":90,"color":"1"},
+		{"id":"node_5_dlg","type":"text","text":"💬 **[DIALOGIC: intro_hallway.dtl]**\n`Paciente #1##:`\n\"Hay guardias en este pasillo... No puedo dejar que me vean.\"","x":790,"y":250,"width":300,"height":90,"color":"1"},
+		{"id":"node_5_gp","type":"text","text":"🎮 **[GAMEPLAY]**\nEvitar conos amarillos de guardias. Esperar rutas y esprintar hacia la Oficina.","x":790,"y":370,"width":300,"height":110,"color":"5"},
+		{"id":"node_6_gp","type":"text","text":"🎮 **[GAMEPLAY]**\nEntra a la oficina. Interactúa con la computadora de escritorio [F].","x":190,"y":250,"width":400,"height":80,"color":"5"},
+		{"id":"node_6_dlg","type":"text","text":"💬 **[DIALOGIC: computer_memory.dtl]**\n`Paciente #1##:` \"¿Un capitán de las FFAA?...\"\n💥 `shatter_right_down` -> Grant: ATTACK\n`Paciente #1##:` \"Muerte... Mujer... ##74... Atrás de los guardias puedo acabar con ellos.\"","x":190,"y":360,"width":400,"height":130,"color":"1"},
+		{"id":"node_6_fade","type":"text","text":"⚡ **[EFECTO / FIN DE BUCLE]**\nSobrecarga psíquica. Pantalla a negro. Colapso hacia el Bucle 2.","x":190,"y":520,"width":400,"height":80,"color":"4"},
+		{"id":"node_1_nar","type":"text","text":"📜 **[NARRADOR / AMBIENTE]**\nLuz fluorescente titila sobre concreto manchado. Silencio denso.","x":-640,"y":-300,"width":300,"height":90,"color":"3"},
+		{"id":"node_1_gp","type":"text","text":"🎮 **[GAMEPLAY]**\nJugador despierta. Movimiento restringido por aturdimiento.","x":-640,"y":-180,"width":300,"height":80,"color":"5"},
+		{"id":"node_1_dlg","type":"text","text":"💬 **[DIALOGIC: awakening.dtl]**\n`Paciente #1##:`\n\"¿Qué pasó? ¿Dónde estoy?\"","x":-640,"y":-70,"width":300,"height":90,"color":"1"},
+		{"id":"node_2_gp","type":"text","text":"🎮 **[GAMEPLAY]**\nExplora la celda con WASD. Interactúa [F] con foto en el suelo.","x":-160,"y":-300,"width":300,"height":90,"color":"5"},
+		{"id":"node_2_dlg","type":"text","text":"💬 **[DIALOGIC: memorie_photo.dtl]**\n`Paciente #1##:`\n\"No sé quién eres... pero esos ojos los veo al cerrar los míos. Tengo que encontrarte.\"","x":-160,"y":-180,"width":300,"height":110,"color":"1"}
+	],
+	"edges":[
+		{"id":"e_1_nar_gp","fromNode":"node_1_nar","fromSide":"bottom","toNode":"node_1_gp","toSide":"top"},
+		{"id":"e_1_gp_dlg","fromNode":"node_1_gp","fromSide":"bottom","toNode":"node_1_dlg","toSide":"top"},
+		{"id":"e_esc1_esc2","fromNode":"node_1_dlg","fromSide":"right","toNode":"node_2_gp","toSide":"left","label":"explorar celda"},
+		{"id":"e_2_gp_dlg","fromNode":"node_2_gp","fromSide":"bottom","toNode":"node_2_dlg","toSide":"top"},
+		{"id":"e_esc2_esc3","fromNode":"node_2_dlg","fromSide":"right","toNode":"node_3_gp","toSide":"left","label":"revisar pared"},
+		{"id":"e_3_gp_dlg1","fromNode":"node_3_gp","fromSide":"bottom","toNode":"node_3_dlg1","toSide":"top"},
+		{"id":"e_3_dlg1_dlg2","fromNode":"node_3_dlg1","fromSide":"bottom","toNode":"node_3_dlg2","toSide":"top"},
+		{"id":"e_esc3_esc4","fromNode":"node_3_dlg2","fromSide":"right","toNode":"node_4_gp","toSide":"left","label":"ir a la puerta"},
+		{"id":"e_4_gp_dlg","fromNode":"node_4_gp","fromSide":"bottom","toNode":"node_4_dlg","toSide":"top"},
+		{"id":"e_esc4_esc5","fromNode":"node_4_dlg","fromSide":"bottom","toNode":"node_5_dlg","toSide":"top","label":"abrir puerta / salir"},
+		{"id":"e_5_dlg_gp","fromNode":"node_5_dlg","fromSide":"bottom","toNode":"node_5_gp","toSide":"top"},
+		{"id":"e_esc5_esc6","fromNode":"node_5_gp","fromSide":"left","toNode":"node_6_gp","toSide":"right","label":"infiltrarse a oficina"},
+		{"id":"e_6_gp_dlg","fromNode":"node_6_gp","fromSide":"bottom","toNode":"node_6_dlg","toSide":"top"},
+		{"id":"e_6_dlg_fade","fromNode":"node_6_dlg","fromSide":"bottom","toNode":"node_6_fade","toSide":"top"}
+	]
+}

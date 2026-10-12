@@ -1,0 +1,9 @@
+{
+	"nodes":[
+		{"id":"node_mock_menu","x":-500,"y":-300,"width":300,"height":80,"type":"text","text":"### 1. Menú Principal\n`MainMenu.tscn`"},
+		{"id":"node_mock_hud","x":-500,"y":-100,"width":300,"height":80,"type":"text","text":"### 2. HUD en Partida\n`GameHud.tscn`"},
+		{"id":"node_mock_hack","x":-500,"y":100,"width":300,"height":80,"type":"text","text":"### 3. Minijuego de Hackeo\n`HackMinigame.tscn`"},
+		{"id":"node_mock_ending","x":-500,"y":300,"width":300,"height":80,"type":"text","text":"### 4. Pantalla de Desenlace\n`EndingScreen.tscn`"}
+	],
+	"edges":[]
+}

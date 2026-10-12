@@ -1,0 +1,10 @@
+{
+	"nodes":[
+		{"id":"node_bg01","type":"text","text":"### BG-01 — Celda de Aislamiento\n`Room1` / `Jail.tscn`","x":-500,"y":-400,"width":300,"height":80},
+		{"id":"node_bg02","type":"text","text":"### BG-02 — Pasillo Central del Asilo\n`Room2` / `Hallway.tscn`","x":-500,"y":-200,"width":300,"height":80},
+		{"id":"node_bg03","type":"text","text":"### BG-03 — Oficina de Dirección y Archivo\n`Room3` / `Office.tscn`","x":-500,"y":0,"width":300,"height":80},
+		{"id":"node_bg04","type":"text","text":"### BG-04 — Centro de Seguridad y Vigilancia\n`SecurityHub.tscn`","x":-500,"y":200,"width":300,"height":80},
+		{"id":"node_light","type":"text","text":"### Iluminación Cenital","x":-500,"y":400,"width":300,"height":80}
+	],
+	"edges":[]
+}
