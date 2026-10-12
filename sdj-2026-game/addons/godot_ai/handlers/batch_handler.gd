@@ -1,5 +1,5 @@
 @tool
-extends RefCounted
+extends "res://addons/godot_ai/handlers/command_handler.gd"
 
 const ErrorCodes := preload("res://addons/godot_ai/utils/error_codes.gd")
 
@@ -10,6 +10,8 @@ const ErrorCodes := preload("res://addons/godot_ai/utils/error_codes.gd")
 ## Commands that cannot run as batch sub-commands, each with the reason a batch
 ## can't host it.
 ## - batch_execute: would recurse.
+## - reload_plugin: schedules teardown; later batch operations could pump
+##   its callback while the batch handler is still executing.
 ## - run_tests: a batch executes synchronously inside one dispatcher tick with
 ##   NO transport servicing, so a full suite starves the WebSocket heartbeat
 ##   (the exact disconnect the serviced test_run path exists to prevent) and
@@ -21,6 +23,7 @@ const ErrorCodes := preload("res://addons/godot_ai/utils/error_codes.gd")
 ##   no completion channel and hang or lose its reply. input_sequence made this
 ##   concrete (#814); the whole game_command surface shares the deferred path.
 const FORBIDDEN_SUBCOMMANDS := {
+	"reload_plugin": "reload_plugin must be called directly so no batch continues during reload",
 	"batch_execute": "batch_execute cannot be nested inside another batch",
 	"run_tests":
 		"run_tests is not allowed as a sub-command — a batch runs synchronously "
@@ -28,6 +31,12 @@ const FORBIDDEN_SUBCOMMANDS := {
 	"game_command":
 		"game_command ops are deferred (their reply arrives out-of-band) and "
 		+ "have no completion channel inside a batch — run them as their own tool call",
+	"configure_client":
+		"configure_client is deferred and has no completion channel inside a batch — "
+		+ "run it as its own tool call",
+	"remove_client":
+		"remove_client is deferred and has no completion channel inside a batch — "
+		+ "run it as its own tool call",
 }
 
 ## The whole batch executes synchronously inside one dispatcher tick,

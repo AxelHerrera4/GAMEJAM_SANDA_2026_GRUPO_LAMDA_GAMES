@@ -1,5 +1,5 @@
 @tool
-extends RefCounted
+extends "res://addons/godot_ai/handlers/command_handler.gd"
 
 const ErrorCodes := preload("res://addons/godot_ai/utils/error_codes.gd")
 const ScriptHandler := preload("res://addons/godot_ai/handlers/script_handler.gd")
@@ -261,6 +261,14 @@ static func _finish_scan_deferred(
 	request_id: String,
 	efs: EditorFileSystem,
 ) -> void:
+	var work := ScriptWork.begin("scan_filesystem")
+	await _settle_scan(connection, request_id, efs)
+	ScriptWork.finish(work)
+
+
+static func _settle_scan(
+	connection: McpConnection, request_id: String, efs: EditorFileSystem,
+) -> void:
 	if not is_instance_valid(connection):
 		return
 	var tree := connection.get_tree()
@@ -310,3 +318,19 @@ static func _finish_scan_deferred(
 			"reason": "Filesystem scan is an editor operation",
 		}
 	})
+
+
+## Resource-group mutations use read-only deferred discovery before disk effects.
+const Mutation := preload("res://addons/godot_ai/handlers/filesystem_mutation.gd")
+
+
+func move_file(params: Dictionary) -> Dictionary:
+	return Mutation.start(_connection, params, "move")
+
+
+func rename_file(params: Dictionary) -> Dictionary:
+	return Mutation.start(_connection, params, "rename")
+
+
+func remove_file(params: Dictionary) -> Dictionary:
+	return Mutation.start(_connection, params, "remove")

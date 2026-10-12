@@ -1,0 +1,245 @@
+{
+  "main": {
+    "id": "a6ab76ce6d8d0be6",
+    "type": "split",
+    "children": [
+      {
+        "id": "6474f0c6f57df45f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8640a288a8d12366",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ce9b05537586ba0c",
+    "type": "split",
+    "children": [
+      {
+        "id": "ae2df772b7a4d3ea",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5e625ec27074d745",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "7f1085aae1e2f48f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "5d7f40822dab2156",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "adb01c5e3ec0977e",
+    "type": "split",
+    "children": [
+      {
+        "id": "249ee3e9ad1ab8e2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1d5bb02e831d3c88",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/MiniGDD/CoreGameplayDesign/Game modes.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "fcd27be39d0a3bd4",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "docs/MiniGDD/CoreGameplayDesign/Game modes.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "5baaf0e325cf637d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "dbb1c94d2d9d0904",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "0d112b7a4bdf62a6",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "docs/MiniGDD/CoreGameplayDesign/Game modes.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "5e625ec27074d745",
+  "lastOpenFiles": [
+    "sdj-2026-game/scenes/room/show_room/show_room.gd-4Nnoun",
+    "sdj-2026-game/scenes/room/hallway/hallway.tscn-JqtT7r",
+    "docs/Narrative/Personajes_Overview.md",
+    "docs/delete.canvas",
+    "Pasted image 20261012130404.png",
+    "sdj-2026-game/scenes/room/hallway/hallway.tscn-Iqr6zB",
+    "sdj-2026-game/project.godot-irn4gP",
+    "sdj-2026-game/scenes/room/hallway/hallway.tscn-k1vVtx",
+    "sdj-2026-game/resources/visual_novel_textbox_style.tres-H9KWxo",
+    "sdj-2026-game/resources/speaker_textbox_style.tres-MbOtlH",
+    "sdj-2026-game/resources/tile_level.tres-buDqtI",
+    "sdj-2026-game/scenes/room/hallway/hallway.tscn-ah6mH1",
+    "sdj-2026-game/project.godot-W0u17W",
+    "sdj-2026-game/project.godot-EnF3DW",
+    "Pasted image 20261012130246.png",
+    "docs/Narrative/Capitulos/Bucle_02_Seguridad_y_el_Ataque.md",
+    "docs/Narrative/Capitulos/Bucle_03_Camuflaje_y_Escape.md",
+    "docs/Narrative/Capitulos/--HowItWorks--.md",
+    "docs/Narrative/Capitulos/Bucle_01_El_Despertar_y_el_Hacking.md",
+    "docs/Narrative/Capitulos/Bucle_01_El_Despertar_y_el_Hacking.canvas",
+    "docs/Narrative/Capitulos/--HowItWorks--.canvas",
+    "docs/Narrative/Capitulos/Bucle_03_Camuflaje_y_Escape.canvas",
+    "docs/Narrative/Capitulos/Bucle_02_Seguridad_y_el_Ataque.canvas",
+    "docs/MiniGDD/CoreGameplayDesign/Concept.md",
+    "docs/MiniGDD/CoreGameplayDesign/Base Mechanics and Controls.md",
+    "docs/MiniGDD/CoreGameplayDesign/Actions (player verbs).md",
+    "docs/Narrative/Characters/Paciente_6174.md",
+    "docs/Narrative/Characters/La_Mujer_de_la_Foto.md",
+    "docs/Narrative/Characters/Guardias_de_Seguridad.md",
+    "docs/Narrative/Mundo_y_Premisa.md",
+    "docs/MiniGDD/References Games/Art/Art References.md",
+    "docs/MiniGDD/References Games/Music References.md",
+    "docs/MiniGDD/References Games/Mechanics References.md",
+    "docs/MiniGDD/Wireframe/characters/Characters Assets Definition.canvas",
+    "docs/MiniGDD/Wireframe/Mockup.canvas",
+    "docs/MiniGDD/Wireframe/Level Design.canvas",
+    "docs/MiniGDD/Wireframe/Backgrounds.canvas",
+    "docs/MiniGDD/References Games/Art/Img/1.png",
+    "docs/MiniGDD/Wireframe/Test.canvas",
+    "docs/MiniGDD/Wireframe/Mockup.md",
+    "docs/MiniGDD/Wireframe/Level Design.md",
+    "docs/MiniGDD/Wireframe/Backgrounds.md",
+    "docs/MiniGDD/Wireframe/characters/Characters Assets Definition.md",
+    "docs/MiniGDD/Exploration/Overview.md",
+    "docs/MiniGDD/CoreGameplayDesign/Secundary Mechanics.md",
+    "docs/MiniGDD/CoreGameplayDesign/Game modes.md",
+    "docs/MiniGDD/CoreGameplayDesign/CoreGameLoop.md",
+    "docs/MiniGDD/CoreGameplayDesign/--HowItWorks--.md",
+    "docs/MiniGDD/CoreGameplayDesign/Default Mapping.md",
+    "docs/MiniGDD/References Games/Art/Img/3.png",
+    "docs/MiniGDD/References Games/Art/Img/7.png",
+    "docs/MiniGDD/References Games/Art/Img/6.png",
+    "docs/MiniGDD/References Games/Art/Img/5.png",
+    "docs/MiniGDD/References Games/Art/Img/4.png",
+    "docs/MiniGDD/References Games/Art/Img/2.png"
+  ]
+}

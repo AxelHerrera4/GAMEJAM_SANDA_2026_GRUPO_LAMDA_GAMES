@@ -3,6 +3,13 @@ extends Node2D
 
 @onready var room: Node2D = $Room
 
+func _ready() -> void:
+	if room != null:
+		room.hide()
+		var room_wall: TileMapLayer = room.get_node_or_null("Walls")
+		if room_wall != null:
+			room_wall.collision_enabled = false
+
 func _on_trigger_area_body_entered(body: Node2D) -> void:
 	if(body.is_in_group('player')):
 		if room != null:
