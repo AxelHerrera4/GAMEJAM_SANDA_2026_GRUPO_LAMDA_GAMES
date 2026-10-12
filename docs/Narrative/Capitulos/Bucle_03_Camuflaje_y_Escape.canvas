@@ -1,0 +1,34 @@
+{
+	"nodes":[
+		{"id":"g_b3_esc1","x":-600,"y":-350,"width":380,"height":450,"type":"group","label":"Escena 1: Celda — La Furia del Bucle"},
+		{"id":"b3_n1_nar","x":-560,"y":-300,"width":300,"height":90,"type":"text","color":"3","text":"📜 **[NARRADOR / AMBIENTE]**\nMisma celda y bombilla. El protagonista se levanta con los puños cerrados y rabia."},
+		{"id":"b3_n1_dlg","x":-560,"y":-180,"width":300,"height":100,"type":"text","color":"1","text":"💬 **[DIALOGIC: awakening_3.dtl]**\n`Paciente 6174:`\n\"¡Maldita sea! ¿Otra vez aquí? ¿Esto es un bucle sin fin?\""},
+		{"id":"b3_n1_gp","x":-560,"y":-50,"width":300,"height":110,"type":"text","color":"5","text":"🎮 **[GAMEPLAY]**\nTodos los fragmentos activos (HACK, ATTACK, CAMOUFLAGE). Abre y avanza sin dudar."},
+		{"id":"g_b3_esc2","x":-150,"y":-350,"width":420,"height":340,"type":"group","label":"Escena 2: Infiltración Definitiva (Camuflaje)"},
+		{"id":"b3_n2_gp1","x":-110,"y":-300,"width":340,"height":100,"type":"text","color":"5","text":"🎮 **[GAMEPLAY: Sigilo Avanzado]**\nUso del Camuflaje entre sombras. Eludir conos de visión estrechos y guardias con pistolas."},
+		{"id":"b3_n2_gp2","x":-110,"y":-170,"width":340,"height":110,"type":"text","color":"5","text":"🗡️ **[GAMEPLAY: Ejecución Quirúrgica]**\nNeutralizar por la espalda a custodios que bloquean accesos sin margen de error."},
+		{"id":"g_b3_esc3","x":350,"y":-350,"width":400,"height":340,"type":"group","label":"Escena 3: Puerta de Salida Exterior"},
+		{"id":"b3_n3_gp","x":390,"y":-300,"width":320,"height":90,"type":"text","color":"5","text":"🎮 **[GAMEPLAY]**\nLlega a la compuerta blindada final (`EndingDoor.tscn`). Pulsa [F] para interactuar."},
+		{"id":"b3_n3_fx","x":390,"y":-180,"width":320,"height":110,"type":"text","color":"4","text":"🚪 **[EFECTO / SFX]**\nSonido metálico de pestillo (`door_handle`). La puerta cede a la luz exterior.\nSignal: `ending_requested`"},
+		{"id":"g_b3_esc4","x":100,"y":60,"width":650,"height":450,"type":"group","label":"Escena 4: Cinemática del Periódico y Desenlace (EndingScreen)"},
+		{"id":"b3_n4_cine1","x":140,"y":110,"width":270,"height":120,"type":"text","color":"4","text":"🎬 **[CINEMÁTICA: Periódico]**\nFade a negro. Recorte giratorio en pantalla (`NewspaperGirl`).\nFoto de la mujer y noticia de la tragedia del paciente."},
+		{"id":"b3_n4_sfx","x":440,"y":110,"width":270,"height":120,"type":"text","color":"1","text":"🔊 **[AUDIO / CLÍMAX]**\nGrito de frustración (`frustrated_1.wav`).\nMúsica melancólica entra (`MenuTheme.ogg`)."},
+		{"id":"b3_n4_title","x":140,"y":260,"width":270,"height":100,"type":"text","color":"3","text":"📜 **[TEXTO EN PANTALLA]**\n*\"To be continued...\"*\nEl encierro no era físico, sino mental."},
+		{"id":"b3_n4_cred","x":440,"y":260,"width":270,"height":100,"type":"text","color":"5","text":"👥 **[CRÉDITOS]**\nLamda Games\n(Wyes_Lje, AXELDOGE, DELIOS, JACSMITH, ANDY)"},
+		{"id":"b3_n4_exit","x":290,"y":390,"width":270,"height":80,"type":"text","color":"4","text":"🔄 **[LOOP / MENÚ]**\n`[F]` -> `FragmentManager.clear_all()` y retorno al Menú Principal."}
+	],
+	"edges":[
+		{"id":"b3_e_1_nar_dlg","fromNode":"b3_n1_nar","fromSide":"bottom","toNode":"b3_n1_dlg","toSide":"top"},
+		{"id":"b3_e_1_dlg_gp","fromNode":"b3_n1_dlg","fromSide":"bottom","toNode":"b3_n1_gp","toSide":"top"},
+		{"id":"b3_e_esc1_esc2","fromNode":"b3_n1_gp","fromSide":"right","toNode":"b3_n2_gp1","toSide":"left","label":"salir con Camuflaje"},
+		{"id":"b3_e_2_gp1_gp2","fromNode":"b3_n2_gp1","fromSide":"bottom","toNode":"b3_n2_gp2","toSide":"top"},
+		{"id":"b3_e_esc2_esc3","fromNode":"b3_n2_gp2","fromSide":"right","toNode":"b3_n3_gp","toSide":"left","label":"llegar a compuerta"},
+		{"id":"b3_e_3_gp_fx","fromNode":"b3_n3_gp","fromSide":"bottom","toNode":"b3_n3_fx","toSide":"top"},
+		{"id":"b3_e_esc3_esc4","fromNode":"b3_n3_fx","fromSide":"bottom","toNode":"b3_n4_cine1","toSide":"top","label":"abrir puerta final"},
+		{"id":"b3_e_4_cine_sfx","fromNode":"b3_n4_cine1","fromSide":"right","toNode":"b3_n4_sfx","toSide":"left"},
+		{"id":"b3_e_4_cine_title","fromNode":"b3_n4_cine1","fromSide":"bottom","toNode":"b3_n4_title","toSide":"top"},
+		{"id":"b3_e_4_sfx_cred","fromNode":"b3_n4_sfx","fromSide":"bottom","toNode":"b3_n4_cred","toSide":"top"},
+		{"id":"b3_e_4_title_exit","fromNode":"b3_n4_title","fromSide":"bottom","toNode":"b3_n4_exit","toSide":"left"},
+		{"id":"b3_e_4_cred_exit","fromNode":"b3_n4_cred","fromSide":"bottom","toNode":"b3_n4_exit","toSide":"right"}
+	]
+}

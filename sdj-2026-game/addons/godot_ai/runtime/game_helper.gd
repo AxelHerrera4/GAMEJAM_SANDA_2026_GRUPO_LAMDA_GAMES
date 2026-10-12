@@ -85,6 +85,8 @@ var _eval_token_counter: int = 0
 ## _handle_take_screenshot (running inside that capture) detects the freeze
 ## synchronously. -1 until the first tick.
 var _last_loop_tick_msec: int = -1
+var _mcp_runtime_process_ticks: int = 0
+var _last_debug_status_reply: Dictionary = {}
 ## Rendering-freeze beacon for the Windows-minimize state (#794 smoke, 1b):
 ## the frames_drawn value last observed in _process, and when it last
 ## advanced. -1 until the first observed advance, so a booting or
@@ -135,6 +137,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	_mcp_runtime_process_ticks += 1
 	## #777: liveness beacon for _handle_take_screenshot's stalled-loop check.
 	## Recorded before the early returns below so the signal stays truthful
 	## even when the logger or debugger channel is unavailable.
@@ -153,8 +156,13 @@ func _process(_delta: float) -> void:
 	## through the debugger packet path in a single tick. Surplus stays in
 	## `_pending_outbound` and bleeds out across subsequent frames.
 	if not _logger_attached or _logger == null:
+		_pending_outbound.clear()
 		return
 	if not EngineDebugger.is_active():
+		## No remote can consume these lines. Drop current and already-drained
+		## batches so a detached/headless run cannot retain logs indefinitely (#1123).
+		_logger.clear()
+		_pending_outbound.clear()
 		return
 	if _pending_outbound.is_empty():
 		if not _logger.has_pending():
@@ -188,6 +196,9 @@ func _on_debug_message(message: String, data: Array) -> bool:
 		"eval_liveness":
 			_reply_eval_liveness(data)
 			return true
+		"debug_status":
+			_reply_debug_status(data)
+			return true
 		"eval":
 			_handle_eval(data)
 			return true
@@ -209,6 +220,35 @@ func _reply_eval_liveness(data: Array) -> void:
 	_last_eval_liveness_reply = {"request_id": request_id, "loop_live": loop_live}
 	if EngineDebugger.is_active():
 		EngineDebugger.send_message("mcp:eval_liveness_response", [request_id, loop_live])
+
+
+func _debug_status_snapshot() -> Dictionary:
+	var inside_tree := is_inside_tree()
+	var tree := get_tree() if inside_tree else null
+	return {
+		"probe_version": 1,
+		"helper_found": true,
+		## GameHelper is PROCESS_MODE_ALWAYS, so pause does not stop it; native
+		## SceneTree suspension does. This exposes Godot's debugger-owned suspend
+		## bit through Node::can_process() without conflating it with pause/time scale.
+		"suspended": inside_tree and not can_process(),
+		"loop_live": not _main_loop_appears_stalled(),
+		"loop_tick_msec": _last_loop_tick_msec,
+		"process_ticks": _mcp_runtime_process_ticks,
+		"tree_paused": tree.paused if tree != null else false,
+		"frames_drawn": Engine.get_frames_drawn(),
+		"process_frames": Engine.get_process_frames(),
+		"physics_frames": Engine.get_physics_frames(),
+		"time_scale": Engine.time_scale,
+	}
+
+
+func _reply_debug_status(data: Array) -> void:
+	var request_id: String = data[0] if data.size() > 0 else ""
+	var state := _debug_status_snapshot()
+	_last_debug_status_reply = {"request_id": request_id, "state": state.duplicate(true)}
+	if EngineDebugger.is_active():
+		EngineDebugger.send_message("mcp:debug_status_response", [request_id, state])
 
 
 func _handle_take_screenshot(data: Array) -> void:
@@ -308,7 +348,7 @@ func _capture_and_reply(
 		_reply_error(request_id, "Captured an empty image from game viewport")
 		return
 
-	var encoded: Dictionary = ScreenshotEncode.downscale_and_encode(image, max_resolution)
+	var encoded: Dictionary = ScreenshotEncode.downscale_and_encode(image, max_resolution, viewport.use_hdr_2d)
 	var frames_drawn := Engine.get_frames_drawn()
 	var stale := frames_drawn <= frames_at_request
 
@@ -989,13 +1029,7 @@ func _handle_eval(data: Array) -> void:
 	_eval_token_counter += 1
 	var token := str(_eval_token_counter)
 	var run_fn := "_mcp_run_%s" % token
-	var script_source := (
-		"extends Node\n"
-		+ "func execute():\n"
-		+ "\treturn await %s()\n\n" % run_fn
-		+ "func %s():\n" % run_fn
-		+ _indent_eval_code(code)
-	)
+	var script_source := _build_eval_script_source(run_fn, code)
 
 	## Snapshot the logger's script-error seq BEFORE running so we only attribute
 	## errors raised by this eval. In a debug build a parse error aborts reload()
@@ -1192,7 +1226,23 @@ func _handle_eval_check(data: Array) -> void:
 	_try_report_eval_runtime_error(request_id)
 
 
-func _indent_eval_code(code: String) -> String:
+## `execute()` always returns, so it carries a return type. The inner function
+## holds caller code that need not return on every path; a declared return type
+## there makes Godot reject it with "Not all code paths return a value". It
+## stays untyped and suppresses `untyped_declaration` on its own declaration
+## instead (#1119). The annotation shares the `func` line so the line numbers
+## reported for caller code do not move.
+static func _build_eval_script_source(run_fn: String, code: String) -> String:
+	return (
+		"extends Node\n"
+		+ "func execute() -> Variant:\n"
+		+ "\treturn await %s()\n\n" % run_fn
+		+ "@warning_ignore(\"untyped_declaration\") func %s():\n" % run_fn
+		+ _indent_eval_code(code)
+	)
+
+
+static func _indent_eval_code(code: String) -> String:
 	var lines: PackedStringArray = code.split("\n")
 	var out := ""
 	for line in lines:

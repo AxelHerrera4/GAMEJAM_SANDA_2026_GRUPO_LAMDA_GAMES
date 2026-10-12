@@ -8,6 +8,7 @@ source_geometry_mode = 2
 source_geometry_group_name = &"physic"
 
 [node name="Room" type="Node2D" unique_id=69708080]
+y_sort_enabled = true
 
 [node name="Obscure" type="CanvasModulate" parent="." unique_id=2072011277]
 color = Color(0.5866749, 0.5866749, 0.5866749, 1)

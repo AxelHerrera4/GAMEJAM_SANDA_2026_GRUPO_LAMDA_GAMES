@@ -28,7 +28,6 @@
 [ext_resource type="Resource" uid="uid://d3pnvut4fai6m" path="res://dialogues/3th_time/jail/wall_writing_3.dtl" id="24_ww3"]
 
 [node name="Jail" unique_id=69708080 instance=ExtResource("1_c70yw")]
-y_sort_enabled = true
 script = ExtResource("11_rr37k")
 awakening_timeline = ExtResource("3_vsvih")
 awakening_timeline_2 = ExtResource("19_awake2")

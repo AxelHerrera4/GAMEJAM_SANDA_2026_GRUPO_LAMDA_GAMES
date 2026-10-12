@@ -51,6 +51,17 @@ static func configured_message(client: McpClient, server_url: String) -> String:
 var id: String = ""                              ## stable key, e.g. "cursor"
 var display_name: String = ""                    ## "Cursor"
 var config_type: String = ""                     ## "json" | "toml" | "yaml" | "cli" | "dsh"
+## False when the client's settings format cannot be round-tripped safely by
+## the matching strategy. Status checks remain read-only; Configure and Remove
+## return the existing manual instructions without touching the file.
+var automatic_config_edits: bool = true
+
+## True when the config file is JSONC (Zed ships a `//` header). Honored by the
+## JSON strategy's reads only — comments are stripped from a throwaway parse
+## copy, so the row shows a real status instead of a permanent parse error
+## (#914). Requires `automatic_config_edits = false`; the strategy ignores it
+## otherwise rather than let a re-serializing Configure drop the comments.
+var config_allows_comments: bool = false
 
 # JSON / TOML clients ------------------------------------------------------
 ## {"darwin": "~/...", "windows": "$APPDATA/...", "linux": "$XDG_CONFIG_HOME/..."}
@@ -68,25 +79,75 @@ var path_template: Dictionary = {}
 ##      a fallback path that may become invisible after copy-on-write. When
 ##      that private leaf is new, Configure seeds it from the first later
 ##      existing candidate so read-through content is not shadowed.
-##   2. If no file or wildcard package match exists, the first non-wildcard
-##      template is the deterministic create target.
+##   2. If no file or wildcard package match exists, the create target is the
+##      non-wildcard template whose own directories already exist, because the
+##      client has run from there (`_evident_create_path` gives the order),
+##      and otherwise the first non-wildcard template. This is what sends a
+##      Flatpak-only IDE's entry to `~/.var/app/<id>/config/...` instead of a
+##      `~/.config` it never reads.
 ##   3. Multiple matches within any wildcard group are ambiguous and fail
 ##      closed instead of choosing an arbitrary package.
+##   4. A template inside another Flatpak app's `~/.var/app/<id>` is never a
+##      create target while this editor's own Flatpak sandbox hides that
+##      directory (`McpPathTemplate.hidden_flatpak_app_dir`). When rule 2 then
+##      finds no existing directory among the rest, the resolution carries
+##      `create_error` and the unseen `hidden_paths`: status still reads the
+##      first template, and Configure refuses rather than create a file the
+##      client may never read.
 ##
 ## Exact-file and config-home environment overrides still have higher
 ## priority. When this map has no entry for the current platform,
 ## `path_template` remains the fallback.
 var config_path_candidates: Dictionary = {}
 
-## Optional global JSON config files merged by the client from lowest to highest
-## precedence. Unlike `config_path_candidates`, every existing file participates;
-## Configure updates the effective last definition, status verifies it, and
-## Remove clears every global definition transactionally.
+## Optional global JSON config files merged by the client. Unlike
+## `config_path_candidates`, every existing file participates. By default the
+## client keeps the LAST definition: Configure updates the effective last
+## definition, status verifies it, and Remove clears every global definition
+## transactionally. Clients that keep the FIRST definition instead set
+## `config_merge_first_wins` and declare tiers in the client's read order;
+## the folds then target the first tier defining the server, so a write
+## updates the file that is already effective and a fresh entry lands on
+## tiers[0] — the client's own primary file.
 var config_merge_path_templates: Dictionary = {}
 ## Project-relative tiers that may override the global files. Their root is the
 ## external client's working directory, which the Godot process cannot know.
 ## The strategy checks plausible roots and fails closed instead of mutating them.
 var config_merge_project_paths: PackedStringArray = PackedStringArray()
+
+## True when the client keeps the FIRST definition of a duplicated server and
+## ignores later ones (omp-native: project `.omp/mcp.json` precedes
+## `.omp/.mcp.json`, then the user scope's `mcp.json` precedes `.mcp.json`).
+## Flips every merge-tier fold — Configure target, status verification, and
+## the manual/Open-Reveal target resolution — from last-definition-wins to
+## first. With tiers declared in read order, Configure updates the tier that
+## already owns the server instead of creating a higher-priority entry that
+## shadows a lower tier's user state (#1085).
+var config_merge_first_wins: bool = false
+
+## Directory-glob templates whose matches make the user-scope config
+## destination unknowable from the editor (omp: `~/.omp/profiles/*`). One `*`
+## per directory segment, expanded by `McpPathTemplate.expand_path_candidates`.
+## Any existing match means a named profile may own the user scope: the active
+## profile is chosen per client launch and never persisted where the editor can
+## read it, so Configure and Remove fail closed with the matched paths and
+## status reports the ambiguity instead of green-lighting the default file.
+var config_scope_globs: PackedStringArray = PackedStringArray()
+
+## Environment names that make the effective config destination unknown.
+## Configure, Remove and status refuse while any is set; values are not reported.
+var config_scope_envs: PackedStringArray = PackedStringArray()
+
+## Top-level server-name denylist in the first declared merge tier (the default
+## primary file), independent of which tier owns the entry. Configure and status
+## refuse a suppressed name; Remove preserves this user state. Empty disables it.
+var config_denylist_key: String = ""
+
+## Effective-entry enable toggle and primary force-enable list. Boolean false
+## and strings "false"/"0" suppress the entry unless the allowlist names it.
+## The denylist still wins. Empty keys disable these checks.
+var config_enabled_key: String = ""
+var config_allowlist_key: String = ""
 
 ## De-duplicate persistent path-ambiguity warnings across recurring status
 ## refreshes. The actionable message still returns on every resolution; only
@@ -154,12 +215,6 @@ var entry_initial_fields: Dictionary = {}
 ## reintroducing the descriptor Callable race from #229.
 enum CommandShape { NONE, FLAT, TYPED_FLAT, COMMAND_ARRAY, NESTED_COMMAND }
 var command_shape: CommandShape = CommandShape.NONE
-
-## Whether manual instructions may offer the client's native URL transport as
-## an alternative to its command shape. This is capability metadata, not a
-## consequence of `command_shape`: Codex supports a URL block, while Claude
-## Desktop's local `claude_desktop_config.json` entries are stdio-only.
-var command_supports_url_fallback: bool = false
 
 ## Optional discriminator required by a client's command transport shape
 ## (for example `type = "stdio"`). Empty means command+args are sufficient.
@@ -287,6 +342,57 @@ func resolved_config_path_details() -> Dictionary:
 	return {"path": "", "error": unresolved_config_path_error(display_name, path)}
 
 
+## Why Configure and Remove must leave this client's resolved file alone; ""
+## when they may write it. See `unshared_flatpak_config_error`.
+func config_write_error() -> String:
+	var path := resolved_config_path()
+	return "" if path.is_empty() else unshared_flatpak_config_error(display_name, path)
+
+
+## Why Configure and Remove must leave the file at `path` alone when this
+## editor runs in a Flatpak sandbox that does not share it read-write with the
+## host; "" when it does, and outside Flatpak. A file written there is read
+## back and verified by this editor and never seen by the client.
+##
+## Every strategy asks this before it writes, ahead of `create_error`: where a
+## Flatpak build of the client keeps its settings is beside the point until
+## the sandbox can write the ordinary location at all. Status does not ask.
+## It keeps reading the path, and under a read-only grant that is the
+## client's real file.
+static func unshared_flatpak_config_error(client_name: String, path: String) -> String:
+	var block := McpPathTemplate.flatpak_write_block(path)
+	if block.is_empty():
+		return ""
+	var refused := (
+		"Godot runs in a Flatpak sandbox that cannot write %s where %s reads "
+		+ "it, so nothing was changed."
+	) % [path, client_name]
+	var by_hand := "or edit that file by hand (docs/steam-capability-directory.md)."
+	if block.has("unmounted"):
+		return refused + (
+			" Flatpak was asked to share %s but mounted nothing there, which "
+			+ "is what it does when the directory does not exist as Godot "
+			+ "starts. Create it, restart Godot, and try again, %s"
+		) % [block["unmounted"], by_hand]
+	if block.has("hidden"):
+		return refused + (
+			" Flatpak hides %s from this sandbox, as a --nofilesystem rule "
+			+ "does. Remove that rule, restart Godot, and try again, %s"
+		) % [block["hidden"], by_hand]
+	if block.has("read_only"):
+		return refused + (
+			" %s is mounted read-only. Make it writable, restart Godot, and "
+			+ "try again, %s"
+		) % [block["read_only"], by_hand]
+	var app_id := McpPathTemplate.flatpak_app_id()
+	return refused + (
+		" Run `flatpak override --user --filesystem=%s %s`, restart Godot, "
+		+ "and try again, or edit that file by hand: "
+		+ "docs/steam-capability-directory.md covers a sandbox without that "
+		+ "grant."
+	) % [block["needs"], app_id if not app_id.is_empty() else "<Godot's Flatpak ID>"]
+
+
 ## Shared wording for a path template `McpPathTemplate.expand` could not fully
 ## resolve. Used by the guard above and by the merge-tier loader in
 ## `_json_strategy.gd`, which resolves its own templates and never passes
@@ -360,7 +466,11 @@ func _resolve_ordered_config_path_candidates(templates: Variant) -> Dictionary:
 	var ordered_templates: Array = []
 	for template_variant in templates:
 		ordered_templates.append(str(template_variant))
-	var fallback_create_path := ""
+	## Candidates whose file does not exist yet and that Configure could create.
+	var create_templates := PackedStringArray()
+	var create_paths := PackedStringArray()
+	var hidden_app_dirs := PackedStringArray()
+	var hidden_paths := PackedStringArray()
 	for index in range(ordered_templates.size()):
 		var template := str(ordered_templates[index])
 		var expanded_template := McpPathTemplate.expand(template)
@@ -400,10 +510,113 @@ func _resolve_ordered_config_path_candidates(templates: Variant) -> Dictionary:
 				return {"path": "", "error": seed["error"]}
 			_clear_config_path_warning()
 			return {"path": path, "error": "", "seed_path": seed.get("path", "")}
-		if fallback_create_path.is_empty():
-			fallback_create_path = path
+		# Creating below a directory the sandbox hides would land on its
+		# private tmpfs and vanish with the editor, so a hidden candidate can
+		# be neither evidence nor a create target.
+		var hidden_app_dir := McpPathTemplate.hidden_flatpak_app_dir(path)
+		if not hidden_app_dir.is_empty():
+			hidden_paths.append(path)
+			if not hidden_app_dirs.has(hidden_app_dir):
+				hidden_app_dirs.append(hidden_app_dir)
+			continue
+		create_templates.append(template)
+		create_paths.append(path)
 	_clear_config_path_warning()
-	return {"path": fallback_create_path, "error": ""}
+	var evident_create_path := _evident_create_path(create_templates, create_paths)
+	if not evident_create_path.is_empty():
+		return {"path": evident_create_path, "error": ""}
+	var fallback_create_path := "" if create_paths.is_empty() else create_paths[0]
+	if hidden_app_dirs.is_empty():
+		return {"path": fallback_create_path, "error": ""}
+	var hidden_error := hidden_flatpak_config_error(
+		display_name, fallback_create_path.get_base_dir(), hidden_app_dirs
+	)
+	if fallback_create_path.is_empty():
+		return {"path": "", "error": hidden_error}
+	return {
+		"path": fallback_create_path,
+		"error": "",
+		"create_error": hidden_error,
+		"hidden_paths": hidden_paths,
+	}
+
+
+## The location the client has demonstrably run from, among candidates with no
+## config file yet; "" when nothing says. Candidates are compared level by
+## level, from the directory that would hold the file upward, and the first
+## level at which one of those directories exists decides, in descriptor order.
+## A client nested in its host app's settings (a VS Code extension) therefore
+## follows the host app when the extension's own directory exists nowhere,
+## instead of creating a second, unread copy of the host's settings tree.
+##
+## Only directories the templates name below their shared root are compared,
+## and only as many levels as the shortest template has. Those belong to the
+## client; a container such as ~/.config exists whether or not the client does.
+static func _evident_create_path(templates: PackedStringArray, paths: PackedStringArray) -> String:
+	if paths.is_empty():
+		return ""
+	var shared := _shared_root_length(templates)
+	var levels := -1
+	for template in templates:
+		var own_directories := template.split("/").size() - 1 - shared
+		levels = own_directories if levels < 0 else mini(levels, own_directories)
+	var directories := PackedStringArray()
+	for path in paths:
+		directories.append(path.get_base_dir())
+	for _level in range(maxi(levels, 0)):
+		for index in range(directories.size()):
+			if DirAccess.dir_exists_absolute(directories[index]):
+				return paths[index]
+		for index in range(directories.size()):
+			directories[index] = directories[index].get_base_dir()
+	return ""
+
+
+## How many leading path elements every template shares, counting the root
+## element (`$XDG_CONFIG_HOME`, `~`, a drive) and never the file name. At least
+## one: the root is never the client's own directory.
+static func _shared_root_length(templates: PackedStringArray) -> int:
+	if templates.size() < 2:
+		return 1
+	var first := templates[0].split("/")
+	var shared := first.size() - 1
+	for index in range(1, templates.size()):
+		var other := templates[index].split("/")
+		var limit := mini(shared, other.size() - 1)
+		var same := 0
+		while same < limit and first[same] == other[same]:
+			same += 1
+		shared = same
+	return maxi(shared, 1)
+
+
+## Why Configure will not create a client's settings file from inside a
+## Flatpak editor: nothing shows the client runs from the ordinary location,
+## and the location a Flatpak build of it uses cannot be inspected. Names the
+## one grant that lets this editor see it.
+static func hidden_flatpak_config_error(
+	client_name: String, settings_dir: String, hidden_app_dirs: PackedStringArray
+) -> String:
+	var app_id := McpPathTemplate.flatpak_app_id()
+	var grants := PackedStringArray()
+	for app_dir in hidden_app_dirs:
+		grants.append("--filesystem=%s" % app_dir)
+	var missing := (
+		"%s does not exist" % settings_dir
+		if not settings_dir.is_empty()
+		else "it has no settings location outside Flatpak"
+	)
+	return (
+		"Could not find where %s keeps its settings: %s, and a Flatpak build "
+		+ "keeps them under %s, which Godot's own Flatpak sandbox cannot see. "
+		+ "If you use the Flatpak build, run `flatpak override --user %s %s`, "
+		+ "restart Godot, and configure again. If it is installed outside "
+		+ "Flatpak, start it once so it creates its settings, then configure "
+		+ "again."
+	) % [
+		client_name, missing, ", ".join(hidden_app_dirs),
+		" ".join(grants), app_id if not app_id.is_empty() else "<Godot's Flatpak ID>",
+	]
 
 
 ## Find a readable seed for a newly-created authoritative wildcard target.
@@ -526,3 +739,48 @@ static func _packed_slice(packed: PackedStringArray, from: int, to: int) -> Pack
 	for i in range(from, to):
 		out.append(packed[i])
 	return out
+
+
+## Whether an existing entry's launch text launches Godot AI: an executable
+## named `godot-ai`, a `godot-ai==<version>` package pin, the bare `godot-ai`
+## console-script argument, or the `godot_ai` module. Tokens are matched
+## exactly, so a URL or path that merely contains the name (a docs link, a
+## project directory) does not count. The post-update major migration
+## rewrites only such entries; anything else is the user's own server.
+static func launch_mentions_godot_ai(text: String) -> bool:
+	## Free text (a CLI probe's output) is split on spaces; structured launch
+	## values should go through `launch_values_mention_godot_ai` unsplit.
+	return launch_values_mention_godot_ai(PackedStringArray(text.split(" ", false)))
+
+
+## Each value is one command, argument or URL. A URI never names an
+## executable, and Windows separators are normalized before the basename
+## check so `C:\Program Files\Godot AI\godot-ai.exe` is recognized whole.
+static func launch_values_mention_godot_ai(values: PackedStringArray) -> bool:
+	for raw_value in values:
+		var value := raw_value.strip_edges().lstrip("\"'[{(").rstrip("\"'])},")
+		if value.is_empty() or value.contains("://"):
+			continue
+		if value == "godot-ai" or value == "godot_ai" or value.begins_with("godot-ai=="):
+			return true
+		var base := value.replace("\\", "/").get_file()
+		if base == "godot-ai" or base == "godot-ai.exe":
+			return true
+	return false
+
+
+## The launch-bearing fields of an entry, one value each, for the check
+## above. The entry sits under our server name, so the name itself must not
+## count.
+static func entry_launch_values(entry: Dictionary) -> PackedStringArray:
+	var values := PackedStringArray()
+	for key in ["command", "args", "url"]:
+		if not entry.has(key):
+			continue
+		var value: Variant = entry[key]
+		if value is Array:
+			for item in value:
+				values.append(str(item))
+		else:
+			values.append(str(value))
+	return values

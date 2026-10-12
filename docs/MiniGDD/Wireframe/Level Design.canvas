@@ -1,0 +1,9 @@
+{
+	"nodes":[
+		{"id":"node_ld_jail","x":-500,"y":-400,"width":300,"height":80,"type":"text","text":"### Nivel 1 — Celda de Inicio\n(Bucle 1, 2, 3 / Pistas iniciales)"},
+		{"id":"node_ld_hallway","x":-500,"y":-200,"width":300,"height":80,"type":"text","text":"### Nivel 2 — Pasillos y Puntos de Hackeo\n(Patrullas de guardias y cerraduras)"},
+		{"id":"node_ld_office","x":-500,"y":0,"width":300,"height":80,"type":"text","text":"### Nivel 3 — Oficina Administrativa\n(Computadora / Revelación de Memoria)"},
+		{"id":"node_ld_security","x":-500,"y":200,"width":300,"height":80,"type":"text","text":"### Nivel 4 — Security Hub\n(Centro de monitoreo y salida)"}
+	],
+	"edges":[]
+}
