@@ -25,7 +25,6 @@ PauseMenu="*res://scenes/ui/pause_menu/pause_menu.tscn"
 Ending="*res://scenes/ui/ending_screen/ending_screen.tscn"
 Dialogic="*uid://ds2q0uclmolvu"
 DialogicBridge="*res://globals/dialogic_bridge.gd"
-_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 
 [dialogic]
 
@@ -107,7 +106,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/godot_ai/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
 
 [input]
 

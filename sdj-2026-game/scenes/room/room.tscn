@@ -20,8 +20,10 @@ navigation_polygon = SubResource("NavigationPolygon_0c06q")
 y_sort_enabled = true
 
 [node name="Floor" type="TileMapLayer" parent="Tiles" unique_id=1690041257]
+z_index = -2
 
 [node name="Walls" type="TileMapLayer" parent="Tiles" unique_id=321007397 groups=["physic"]]
+z_index = -1
 
 [node name="Furniture" type="TileMapLayer" parent="Tiles" unique_id=1546801700 groups=["physic"]]
 y_sort_enabled = true
