@@ -57,6 +57,7 @@ func _ready() -> void:
 	if animation_tree:
 		animation_tree.set("parameters/idle/blend_position", facing_direction)
 		animation_tree.set("parameters/move/blend_position", facing_direction)
+		animation_tree.set("parameters/attack/blend_position", facing_direction)
 	SignalHub.emit_on_player_health_changed(health, max_health)
 	SignalHub.emit_on_player_stamina_changed(stamina, max_stamina)
 	SignalHub.player_control_blocked.connect(_on_control_blocked)
@@ -190,6 +191,7 @@ func _physics_process(delta: float) -> void:
 		if animation_tree:
 			animation_tree.set("parameters/idle/blend_position", facing_direction)
 			animation_tree.set("parameters/move/blend_position", facing_direction)
+			animation_tree.set("parameters/attack/blend_position", facing_direction)
 		
 	var current_speed: float = _handle_stamina(delta)
 	
@@ -259,7 +261,7 @@ func perform_attack() -> void:
 	for area in melee_area.get_overlapping_areas():
 		_try_hit_target(area)
 	
-	await get_tree().create_timer(0.25).timeout
+	await get_tree().create_timer(0.64).timeout
 	is_attacking = false
 
 func _on_attack_timer_timeout() -> void:
