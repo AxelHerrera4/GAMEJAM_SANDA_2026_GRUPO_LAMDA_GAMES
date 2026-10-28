@@ -8,15 +8,15 @@ const CAMOUFLAGE: StringName = &"camouflage"
 const CATALOG: Dictionary = {
 	HACK: {
 		"name": "Fragmento de Hackeo",
-		"description": "Un retazo de código capaz de forzar cerraduras electrónicas.",
+		"description": "Permite forzar cerraduras electrónicas y terminales usando {interact}.",
 	},
 	ATTACK: {
 		"name": "Fragmento de Ataque",
-		"description": "Código de combate desbloqueado. Ahora puedes defenderte.",
+		"description": "Acércate a un guardia por la espalda (fuera de su cono de visión) y presiona {attack} para eliminarlo.",
 	},
 	CAMOUFLAGE: {
 		"name": "Fragmento de Camuflaje",
-		"description": "Un patrón capaz de doblar la luz a tu alrededor.",
+		"description": "Reduce el cono de detección de los guardias un 30%.",
 	},
 }
 
@@ -54,10 +54,43 @@ func get_display_name(fragment_id: StringName) -> String:
 	return String(fragment_id)
 
 
+## Lee las teclas/botones asignados a una acción en ProjectSettings -> Input Map.
+## Ejemplo: para "attack" devuelve "[Click Izq] o [E]", para "interact" devuelve "[F]".
+func get_action_shortcut_text(action_name: StringName) -> String:
+	if not InputMap.has_action(action_name):
+		return ""
+	var parts: Array[String] = []
+	for event in InputMap.action_get_events(action_name):
+		if event is InputEventKey:
+			var code: int = event.physical_keycode if event.physical_keycode != 0 else event.keycode
+			if code != 0:
+				var key_name: String = OS.get_keycode_string(code)
+				var formatted: String = "[%s]" % key_name
+				if not parts.has(formatted):
+					parts.append(formatted)
+		elif event is InputEventMouseButton:
+			var btn_name: String = ""
+			match event.button_index:
+				MOUSE_BUTTON_LEFT: btn_name = "Click Izq"
+				MOUSE_BUTTON_RIGHT: btn_name = "Click Der"
+				MOUSE_BUTTON_MIDDLE: btn_name = "Click Central"
+				_: btn_name = "Mouse %d" % event.button_index
+			var formatted: String = "[%s]" % btn_name
+			if not parts.has(formatted):
+				parts.append(formatted)
+	return " o ".join(parts)
+
+
 func get_description(fragment_id: StringName) -> String:
-	if CATALOG.has(fragment_id):
-		return CATALOG[fragment_id]["description"]
-	return ""
+	if not CATALOG.has(fragment_id):
+		return ""
+	var raw_desc: String = CATALOG[fragment_id].get("description", "")
+	var interact_shortcut: String = get_action_shortcut_text(&"interact")
+	var attack_shortcut: String = get_action_shortcut_text(&"attack")
+	return raw_desc.format({
+		"interact": interact_shortcut if not interact_shortcut.is_empty() else "[F]",
+		"attack": attack_shortcut if not attack_shortcut.is_empty() else "[E o Click Izq]"
+	})
 
 
 func clear_all() -> void:

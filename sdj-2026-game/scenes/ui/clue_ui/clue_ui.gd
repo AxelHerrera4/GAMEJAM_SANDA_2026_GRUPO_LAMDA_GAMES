@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 
-const TOAST_TIME: float = 3.5
+const TOAST_TIME: float = 5.0
 
 @onready var interact_prompt: Label = $InteractPrompt
 @onready var kill_prompt: Label = $KillPrompt
@@ -15,6 +15,7 @@ const TOAST_TIME: float = 3.5
 ]
 @onready var fragment_toast: Panel = $FragmentToast
 @onready var toast_name: Label = $FragmentToast/Margin/VBox/ToastName
+@onready var toast_description: Label = $FragmentToast/Margin/VBox/ToastDescription
 @onready var paper_sfx: AudioStreamPlayer = $PaperSfx
 @onready var fragment_cutscene: FragmentCutscene = $FragmentCutscene
 
@@ -164,5 +165,7 @@ func _on_fragment_granted(fragment_id: StringName) -> void:
 		await SignalHub.ui_closed
 
 	toast_name.text = FragmentManager.get_display_name(fragment_id)
+	if toast_description != null:
+		toast_description.text = FragmentManager.get_description(fragment_id)
 	fragment_toast.show()
 	get_tree().create_timer(TOAST_TIME, true).timeout.connect(fragment_toast.hide)

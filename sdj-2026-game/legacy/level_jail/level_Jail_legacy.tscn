@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://c2fu6diu3b6rw" path="res://scenes/light_ceiling/light_ceiling.gd" id="5_yf6c1"]
 [ext_resource type="PackedScene" path="res://scenes/clues/clue_photo/clue_photo.tscn" id="6_hebvn"]
 [ext_resource type="Texture2D" uid="uid://sqhreikxrnxh" path="res://assets/UI/Photo/Photo.png" id="7_8poyf"]
-[ext_resource type="PackedScene" path="res://scenes/clues/clue_note/clue_note.tscn" id="8_fu3cq"]
+[ext_resource type="PackedScene" uid="uid://da7dw48nnk4cw" path="res://scenes/clues/clue_note/clue_note.tscn" id="8_fu3cq"]
 [ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="9_7ghec"]
-[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="10_wpw2c"]
+[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/ui/game_hud/game_hud.tscn" id="10_wpw2c"]
 [ext_resource type="Texture2D" uid="uid://dwgptpkgj7a8b" path="res://assets/tilesets/Things/PanelHack.png" id="11_t87hp"]
 
 [sub_resource type="Gradient" id="Gradient_nbsab"]

@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://cojxk0m6pee3f" path="res://dialogues/2th_time/security_hub/exit_opened.dtl" id="9_opened"]
 [ext_resource type="Script" uid="uid://cex123wyjhlma" path="res://scenes/lighting/flicker_light.gd" id="10_wgv2m"]
 [ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="12_g58oj"]
-[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="13_0513f"]
+[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/ui/game_hud/game_hud.tscn" id="13_0513f"]
 
 [sub_resource type="Gradient" id="Gradient_2d8y1"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)

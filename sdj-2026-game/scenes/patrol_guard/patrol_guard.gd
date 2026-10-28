@@ -24,6 +24,11 @@ enum EnemyState {Patrolling, Searching, Chasing}
 @export var damage: int = 20 # per bullet or per mer melee atack or per catch
 @export var knockback_force: float = 250.0
 @export var attack_cooldown: float = 1.2 # Segundos entre ataque
+@export var target_chase_distance: float = 45.0
+@export var target_patrol_distance: float = 25.0
+@export var search_duration: float = 3.0
+@export var search_scan_angle: float = 45.0
+@export var search_scan_speed: float = 3.0
 
 
 @onready var nav_agent: NavigationAgent2D = $NavAgent
@@ -46,9 +51,22 @@ var facing_direction: Vector2 = Vector2.DOWN
 var is_moving: bool = false
 var is_dead: bool = false
 
+var last_known_player_position: Vector2 = Vector2.ZERO
+var _search_timer: Timer
+var _is_inspecting: bool = false
+var _inspect_base_angle: float = 0.0
+var _inspect_time_elapsed: float = 0.0
+
 func _ready() -> void:
 	nav_agent.max_speed = speeds[_state] # DANGER: the nav_agent max_speed= is a security limit, doint this break the security
+	nav_agent.target_desired_distance = target_patrol_distance
 	attack_timer.wait_time = attack_cooldown
+	
+	_search_timer = Timer.new()
+	_search_timer.name = "SearchTimer"
+	_search_timer.one_shot = true
+	_search_timer.timeout.connect(_on_search_timer_timeout)
+	add_child(_search_timer)
 	if animation_tree:
 		animation_tree.set("parameters/idle/blend_position", facing_direction)
 		animation_tree.set("parameters/move/blend_position", facing_direction)
@@ -100,7 +118,7 @@ func _physics_process(delta: float) -> void:
 
 	update_raycast()
 	detect_player()
-	process_behavior()
+	process_behavior(delta)
 	update_movement(delta)
 	update_vision_cone()
 	if debug_label:
@@ -110,6 +128,9 @@ func _physics_process(delta: float) -> void:
 
 func update_movement(delta: float) -> void:
 	_last_delta = delta
+	if _is_inspecting:
+		nav_agent.set_velocity(Vector2.ZERO)
+		return
 	if nav_agent.is_navigation_finished():
 		nav_agent.set_velocity(Vector2.ZERO)
 		return
@@ -154,7 +175,9 @@ func fov_angle() -> float:
 
 func detect_player() -> void:
 	if can_see_player():
-		change_state(EnemyState.Chasing)
+		last_known_player_position = _player_ref.global_position
+		if _state != EnemyState.Chasing:
+			change_state(EnemyState.Chasing)
 	elif _state == EnemyState.Chasing:
 		change_state(EnemyState.Searching)
 
@@ -165,6 +188,18 @@ func update_raycast() -> void:
 	player_detect.target_position = Vector2(view_distance, 0)
 	player_detect.force_raycast_update()
 
+func _find_closest_patrol_point_index() -> int:
+	if _patrol_points.is_empty():
+		return 0
+	var closest_idx: int = 0
+	var min_dist: float = INF
+	for i in range(_patrol_points.size()):
+		var d: float = global_position.distance_to(_patrol_points[i])
+		if d < min_dist:
+			min_dist = d
+			closest_idx = i
+	return closest_idx
+
 func navigate_to_patrol_point() -> void:
 	if _patrol_points.size() == 0: return
 	nav_agent.target_position = _patrol_points[_patrol_idx]
@@ -174,8 +209,24 @@ func process_patrolling() -> void:
 	if nav_agent.is_navigation_finished():
 		navigate_to_patrol_point()
 
-func process_searching() -> void:
-	if nav_agent.is_navigation_finished():
+func process_searching(delta: float) -> void:
+	if not _is_inspecting:
+		if nav_agent.is_navigation_finished():
+			_is_inspecting = true
+			_inspect_base_angle = facing_direction.angle()
+			_inspect_time_elapsed = 0.0
+			nav_agent.set_velocity(Vector2.ZERO)
+			_search_timer.start(search_duration)
+	else:
+		_inspect_time_elapsed += delta
+		var sweep_offset: float = sin(_inspect_time_elapsed * search_scan_speed) * deg_to_rad(search_scan_angle)
+		facing_direction = Vector2.from_angle(_inspect_base_angle + sweep_offset)
+		if animation_tree:
+			animation_tree.set("parameters/idle/blend_position", facing_direction)
+			animation_tree.set("parameters/move/blend_position", facing_direction)
+
+func _on_search_timer_timeout() -> void:
+	if _state == EnemyState.Searching:
 		change_state(EnemyState.Patrolling)
 
 func process_chasing() -> void:
@@ -184,12 +235,12 @@ func process_chasing() -> void:
 		return
 	nav_agent.target_position = _player_ref.global_position
 
-func process_behavior() -> void:
+func process_behavior(delta: float) -> void:
 	match _state:
 		EnemyState.Patrolling:
 			process_patrolling()
 		EnemyState.Searching:
-			process_searching()
+			process_searching(delta)
 		EnemyState.Chasing:
 			process_chasing()
 
@@ -199,15 +250,28 @@ func change_state(new_state: EnemyState) -> void:
 	_sync_vision_cone_shape()
 	
 	if _state == EnemyState.Chasing:
+		_is_inspecting = false
+		if _search_timer and not _search_timer.is_stopped():
+			_search_timer.stop()
+		nav_agent.target_desired_distance = target_chase_distance
 		gasp_sound.play()
 		attack_timer.start(attack_cooldown)
 	else:
 		attack_timer.stop()
-	if _state == EnemyState.Patrolling:
-		return
+		nav_agent.target_desired_distance = target_patrol_distance
+
 	if _state == EnemyState.Searching:
-		return
-		
+		_is_inspecting = false
+		_inspect_time_elapsed = 0.0
+		if last_known_player_position != Vector2.ZERO:
+			nav_agent.target_position = last_known_player_position
+
+	if _state == EnemyState.Patrolling:
+		_is_inspecting = false
+		if _search_timer and not _search_timer.is_stopped():
+			_search_timer.stop()
+		_patrol_idx = _find_closest_patrol_point_index()
+		navigate_to_patrol_point()
 
 func _on_nav_agent_velocity_computed(safe_velocity: Vector2) -> void:
 	if is_dead:
@@ -216,12 +280,22 @@ func _on_nav_agent_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position += safe_velocity * _last_delta
 	if safe_velocity.length() > 0.01:
 		is_moving = true
+	else:
+		is_moving = false
+
+	if _state == EnemyState.Chasing and is_instance_valid(_player_ref):
+		var dir_to_target: Vector2 = global_position.direction_to(_player_ref.global_position)
+		if dir_to_target != Vector2.ZERO:
+			facing_direction = dir_to_target
+			if animation_tree:
+				animation_tree.set("parameters/idle/blend_position", facing_direction)
+				animation_tree.set("parameters/move/blend_position", facing_direction)
+	elif not _is_inspecting and is_moving:
 		facing_direction = safe_velocity.normalized()
 		if animation_tree:
 			animation_tree.set("parameters/idle/blend_position", facing_direction)
 			animation_tree.set("parameters/move/blend_position", facing_direction)
-	else:
-		is_moving = false
+
 	_update_steps_sound()
 
 
@@ -234,6 +308,8 @@ func deactivate_guard() -> void:
 	is_moving = false
 	_update_steps_sound()
 
+	if _search_timer:
+		_search_timer.stop.call_deferred()
 	if nav_agent:
 		nav_agent.set_velocity(Vector2.ZERO)
 	if hitbox_collision_shape:

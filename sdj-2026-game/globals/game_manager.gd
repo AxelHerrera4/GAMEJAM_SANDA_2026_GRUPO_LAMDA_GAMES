@@ -3,8 +3,8 @@ extends Node
 const FADER = preload("res://scenes/fader/fader.tscn")
 const LEVEL_BASE = null
 const MAIN = preload("uid://5b7hnaeeb4ni")
-const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
-const GAME_HUD_SCENE: PackedScene = preload("res://scenes/game_hud/game_hud.tscn")
+const PLAYER_SCENE: PackedScene = preload("uid://bkaufvbfwdl8i")
+const GAME_HUD_SCENE: PackedScene = preload("uid://bn0gw2ttnvs75")
 
 ## Sonidos de puerta. Cada entrada es una lista porque varias tienen variantes
 ## y se reproducen con un AudioStreamRandomizer para que no suene siempre igual.

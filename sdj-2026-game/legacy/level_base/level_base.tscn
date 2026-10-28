@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://dfv3el8yufriw"]
 
-[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="1_myc1q"]
+[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/ui/game_hud/game_hud.tscn" id="1_myc1q"]
 [ext_resource type="TileSet" uid="uid://up3vmhes72bi" path="res://resources/tile_level.tres" id="2_u6jkd"]
 [ext_resource type="PackedScene" uid="uid://mdbl1n7hcs7h" path="res://scenes/patrol_guard/melee_guard/melee_guard.tscn" id="4_kr674"]
 [ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="4_ncu3c"]

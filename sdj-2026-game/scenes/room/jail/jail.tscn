@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://5tne4xtfh2jw" path="res://dialogues/1th_time/jail/door/door_locked.dtl" id="6_ui3gy"]
 [ext_resource type="Resource" uid="uid://cv34ueg0rt2qq" path="res://dialogues/1th_time/jail/door/door_hacked.dtl" id="7_jj3dn"]
 [ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="7_ui3gy"]
-[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="8_jj3dn"]
+[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/ui/game_hud/game_hud.tscn" id="8_jj3dn"]
 [ext_resource type="PackedScene" path="res://scenes/clues/clue_photo/clue_photo.tscn" id="9_jf2ap"]
 [ext_resource type="Texture2D" uid="uid://bn6tumybknfpd" path="res://assets/PhotoClue.png" id="10_jf2ap"]
 [ext_resource type="PackedScene" uid="uid://da7dw48nnk4cw" path="res://scenes/clues/clue_note/clue_note.tscn" id="10_x5f4m"]

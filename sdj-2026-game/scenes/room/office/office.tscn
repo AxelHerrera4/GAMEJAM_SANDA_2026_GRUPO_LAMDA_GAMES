@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://dxwbwk223i1wa" path="res://assets/Music/Rooms.ogg" id="7_music"]
 [ext_resource type="PackedScene" uid="uid://ct7ncev44u1hw" path="res://scenes/light_ceiling/light_ceiling.tscn" id="8_idga6"]
 [ext_resource type="PackedScene" uid="uid://bkaufvbfwdl8i" path="res://scenes/player/player.tscn" id="9_ri5ts"]
-[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/game_hud/game_hud.tscn" id="10_74o4q"]
+[ext_resource type="PackedScene" uid="uid://bn0gw2ttnvs75" path="res://scenes/ui/game_hud/game_hud.tscn" id="10_74o4q"]
 
 [node name="Office" unique_id=69708080 instance=ExtResource("1_27onf")]
 

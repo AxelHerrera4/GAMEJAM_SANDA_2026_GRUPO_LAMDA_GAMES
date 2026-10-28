@@ -667,34 +667,78 @@ func _game_input_key(params: Dictionary) -> Dictionary:
 	return {"sent": true, "key": key_name, "pressed": ev.pressed}
 
 
+const MOUSE_BUTTONS := {
+	"left": MOUSE_BUTTON_LEFT,
+	"right": MOUSE_BUTTON_RIGHT,
+	"middle": MOUSE_BUTTON_MIDDLE,
+	"wheel_up": MOUSE_BUTTON_WHEEL_UP,
+	"wheel_down": MOUSE_BUTTON_WHEEL_DOWN,
+}
+## Buttons that stay held between events. A wheel step is an impulse with no
+## held state, so it never joins the held set or a motion mask.
+const HELD_MOUSE_BUTTONS: Array[String] = ["left", "right", "middle"]
+
+## Buttons held through input_mouse button events. Motion carries them as its
+## button_mask, as a physical drag does: GUI drag-and-drop and _gui_input
+## handlers read the mask from the motion event itself, not from Input.
+var _mouse_button_mask := 0
+var _last_mouse_position: Variant = null
+
+
 func _game_input_mouse(params: Dictionary) -> Dictionary:
+	var built := _build_mouse_event(params)
+	if built.has("input"):
+		Input.parse_input_event(built.input)
+	return built.reply
+
+
+## Build the event input_mouse sends and update the held-button and last
+## position state; returns {input: InputEvent, reply} or {reply} on error.
+## Split from sending so editor tests can check events without injecting them.
+func _build_mouse_event(params: Dictionary) -> Dictionary:
 	var event := str(params.get("event", "button"))
 	var pos_result := _resolve_mouse_position(params.get("position"))
 	if pos_result.has("error"):
-		return {"sent": false, "event": event, "error": pos_result.error}
+		return {"reply": {"sent": false, "event": event, "error": pos_result.error}}
 	var pos: Vector2 = pos_result.position
 	match event:
 		"motion":
+			var mask_result := _resolve_button_mask(params.get("buttons"))
+			if mask_result.has("error"):
+				return {"reply": {"sent": false, "event": event, "error": mask_result.error}}
 			var motion := InputEventMouseMotion.new()
 			motion.position = pos
 			motion.global_position = pos
-			Input.parse_input_event(motion)
-			return {"sent": true, "event": "motion", "position": _variant_to_json(pos)}
+			motion.relative = pos - _last_mouse_position if _last_mouse_position != null else Vector2.ZERO
+			motion.button_mask = mask_result.mask
+			_last_mouse_position = pos
+			return {"input": motion, "reply": {
+				"sent": true,
+				"event": "motion",
+				"position": _variant_to_json(pos),
+				"buttons": _mouse_mask_names(motion.button_mask),
+			}}
 		"button":
 			var button_event := InputEventMouseButton.new()
 			button_event.position = pos
 			button_event.global_position = pos
 			button_event.button_index = _mouse_button_index(str(params.get("button", "left")))
 			button_event.pressed = bool(params.get("pressed", true))
-			Input.parse_input_event(button_event)
-			return {
+			var bit := 1 << (button_event.button_index - 1)
+			var event_mask := _mouse_button_mask | bit if button_event.pressed else _mouse_button_mask & ~bit
+			button_event.button_mask = event_mask
+			if button_event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_MIDDLE]:
+				_mouse_button_mask = event_mask
+			_last_mouse_position = pos
+			return {"input": button_event, "reply": {
 				"sent": true,
 				"event": "button",
 				"button": params.get("button", "left"),
 				"pressed": button_event.pressed,
 				"position": _variant_to_json(pos),
-			}
-	return {"sent": false, "error": "Invalid mouse event: %s" % event}
+				"buttons": _mouse_mask_names(_mouse_button_mask),
+			}}
+	return {"reply": {"sent": false, "error": "Invalid mouse event: %s" % event}}
 
 
 func _game_input_gamepad(params: Dictionary) -> Dictionary:
@@ -972,16 +1016,31 @@ func _is_number(v: Variant) -> bool:
 
 
 func _mouse_button_index(name: String) -> int:
-	match name:
-		"right":
-			return MOUSE_BUTTON_RIGHT
-		"middle":
-			return MOUSE_BUTTON_MIDDLE
-		"wheel_up":
-			return MOUSE_BUTTON_WHEEL_UP
-		"wheel_down":
-			return MOUSE_BUTTON_WHEEL_DOWN
-	return MOUSE_BUTTON_LEFT
+	return MOUSE_BUTTONS.get(name, MOUSE_BUTTON_LEFT)
+
+
+## Resolve the motion `buttons` param. Absent (null) uses the buttons held
+## through earlier input_mouse button events; a list of button names replaces
+## them for this event. Unknown names are rejected rather than ignored.
+func _resolve_button_mask(value: Variant) -> Dictionary:
+	if value == null:
+		return {"mask": _mouse_button_mask}
+	if not value is Array:
+		return {"error": "buttons must be a list of button names (got %s)" % type_string(typeof(value))}
+	var mask := 0
+	for name: Variant in value:
+		if str(name) not in HELD_MOUSE_BUTTONS:
+			return {"error": "Unknown mouse button in buttons: %s (expected one of %s)" % [str(name), str(HELD_MOUSE_BUTTONS)]}
+		mask |= 1 << (int(MOUSE_BUTTONS[str(name)]) - 1)
+	return {"mask": mask}
+
+
+func _mouse_mask_names(mask: int) -> Array[String]:
+	var names: Array[String] = []
+	for name: String in HELD_MOUSE_BUTTONS:
+		if mask & (1 << (int(MOUSE_BUTTONS[name]) - 1)):
+			names.append(name)
+	return names
 
 
 ## --- game_eval: execute arbitrary GDScript in the running game ---

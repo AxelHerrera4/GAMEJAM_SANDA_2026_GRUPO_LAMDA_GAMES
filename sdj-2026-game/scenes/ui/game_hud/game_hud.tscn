@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bn0gw2ttnvs75"]
 
-[ext_resource type="Script" uid="uid://bm3prtrdcq5xk" path="res://scenes/game_hud/game_hud.gd" id="1_7s1mr"]
+[ext_resource type="Script" uid="uid://bm3prtrdcq5xk" path="res://scenes/ui/game_hud/game_hud.gd" id="1_7s1mr"]
 [ext_resource type="Texture2D" uid="uid://dlst0gn0wbwu5" path="res://assets/UI/ResourceBars/HPFrame.png" id="2_3hirk"]
 [ext_resource type="PackedScene" uid="uid://sf4mivq05c3g" path="res://scenes/ui/clue_ui/clue_ui.tscn" id="2_aiwwf"]
 [ext_resource type="Texture2D" uid="uid://drxroxqaru02c" path="res://assets/UI/ResourceBars/HPBar.png" id="3_7qc2a"]
