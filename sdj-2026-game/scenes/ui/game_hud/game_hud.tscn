@@ -77,7 +77,7 @@ texture_under = ExtResource("2_3hirk")
 texture_over = ExtResource("2_3hirk")
 texture_progress = ExtResource("3_7qc2a")
 
-[node name="StaminaBar2" type="TextureProgressBar" parent="MC" unique_id=857916637]
+[node name="StaminaBar" type="TextureProgressBar" parent="MC" unique_id=857916637]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -89,16 +89,6 @@ texture_under = ExtResource("4_r5rb7")
 texture_over = ExtResource("4_r5rb7")
 texture_progress = ExtResource("5_qnih7")
 tint_progress = Color(0.43137255, 0.78431374, 0.43529412, 1)
-
-[node name="StaminaBar" type="TextureRect" parent="MC" unique_id=1284920195]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-offset_transform_enabled = true
-offset_transform_position = Vector2(75, 20)
-offset_transform_scale = Vector2(5, 2)
-stretch_mode = 2
 
 [node name="Fragment" type="TextureRect" parent="MC" unique_id=1870068704]
 layout_mode = 2

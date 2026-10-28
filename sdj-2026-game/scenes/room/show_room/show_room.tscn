@@ -10,11 +10,13 @@ script = ExtResource("1_3d8dm")
 
 [node name="TriggerArea" type="Area2D" parent="." unique_id=985872274]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" unique_id=435545795]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_lvkim")
 
+[connection signal="area_entered" from="TriggerArea" to="." method="_on_trigger_area_area_entered"]
+[connection signal="area_exited" from="TriggerArea" to="." method="_on_trigger_area_area_exited"]
 [connection signal="body_entered" from="TriggerArea" to="." method="_on_trigger_area_body_entered"]
 [connection signal="body_exited" from="TriggerArea" to="." method="_on_trigger_area_body_exited"]

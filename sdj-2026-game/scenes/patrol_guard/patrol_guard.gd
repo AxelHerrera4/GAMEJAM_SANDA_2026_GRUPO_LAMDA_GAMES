@@ -41,6 +41,7 @@ enum EnemyState {Patrolling, Searching, Chasing}
 @onready var vision_cone: VisionCone = $VisionCone
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/hitbox_collision_shape
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 var _patrol_points: Array[Vector2]
 var _state: EnemyState = EnemyState.Patrolling
@@ -50,6 +51,7 @@ var _player_ref: Player
 var facing_direction: Vector2 = Vector2.DOWN
 var is_moving: bool = false
 var is_dead: bool = false
+var is_exterior_hidden: bool = false
 
 var last_known_player_position: Vector2 = Vector2.ZERO
 var _search_timer: Timer
@@ -81,6 +83,7 @@ func _ready() -> void:
 	_player_ref = get_tree().get_first_node_in_group("player") as Player
 	_sync_vision_cone_shape()
 	_make_loopable(steps_sound.stream)
+	_update_exterior_visibility()
 
 
 ## Los pasos son un bucle continuo mientras el guardia camina, asi que hay que
@@ -273,6 +276,31 @@ func change_state(new_state: EnemyState) -> void:
 		_patrol_idx = _find_closest_patrol_point_index()
 		navigate_to_patrol_point()
 
+	_update_exterior_visibility()
+
+func set_exterior_hidden(hidden: bool) -> void:
+	is_exterior_hidden = hidden
+	_update_exterior_visibility()
+
+func _update_exterior_visibility() -> void:
+	if not is_inside_tree() or sprite_2d == null:
+		return
+	if is_dead:
+		sprite_2d.visible = true
+		if vision_cone:
+			vision_cone.visible = false
+		return
+
+	if is_exterior_hidden:
+		sprite_2d.visible = false
+		if vision_cone:
+			# Si el guardia esta persiguiendo o buscando al jugador, la linterna se mantiene visible
+			vision_cone.visible = (_state == EnemyState.Chasing or _state == EnemyState.Searching)
+	else:
+		sprite_2d.visible = true
+		if vision_cone:
+			vision_cone.visible = true
+
 func _on_nav_agent_velocity_computed(safe_velocity: Vector2) -> void:
 	if is_dead:
 		return
@@ -320,6 +348,7 @@ func deactivate_guard() -> void:
 		attack_timer.stop.call_deferred()
 	if vision_cone:
 		vision_cone.hide.call_deferred()
+	_update_exterior_visibility()
 
 
 func die() -> void:
