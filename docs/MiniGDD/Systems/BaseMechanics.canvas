@@ -1,0 +1,80 @@
+{
+  "nodes": [
+    {
+      "id": "bm_header",
+      "type": "text",
+      "color": "6",
+      "x": -980,
+      "y": -460,
+      "width": 1940,
+      "height": 110,
+      "text": "# 🕹️ 1. Mecánicas Base, Controles & Atributos del Paciente\n\nDefinición matemática de movimiento, administración de energía (estamina), integridad física y verbos de acción en `I Am...?`."
+    },
+    {
+      "id": "bm_controls",
+      "type": "text",
+      "color": "4",
+      "x": -980,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### 🎮 Tabla de Controles & Mapeo de Inputs\n\n| Acción | Tecla / Input | Especificación Técnica |\n| :--- | :--- | :--- |\n| **Moverse (Caminar)** | `W` `A` `S` `D` / Flechas | Desplazamiento normal en 8 direcciones. |\n| **Correr (Sprint)** | `Espacio` | Aumenta velocidad a 1.6x, consume Estamina. |\n| **Interactuar / Inspeccionar** | `F` | Inspección de fotos, notas y apertura de consolas. |\n| **Atacar / Asesinar** | `E` / `Click Izquierdo` | Asesinato letal por la espalda (requiere fragmento). |\n| **Pausa / Cancelar** | `Esc` | Menú de pausa o cerrar interfaz emergente. |\n\n* **Física:** `CharacterBody2D` con `move_and_slide()` y fricción de frenado inmediata para máximo control en curvas de pasillo."
+    },
+    {
+      "id": "bm_stamina",
+      "type": "text",
+      "color": "3",
+      "x": -480,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### ⚡ Sistema de Resistencia (Estamina) & Sprint\n\n* **Capacidad Máxima:** 100 puntos.\n* **Consumo de Carrera:** 25 pts por segundo (máximo 4 segundos continuos de sprint a 1.6x de velocidad base).\n* **Regeneración Automática:**\n  * Requiere **1.0 segundo de inactividad** tras dejar de correr para iniciar recarga.\n  * Tasa de recuperación: 30 pts por segundo (se llena por completo en ~3.3 segundos).\n* **Fatiga Extrema (0 Estamina):**\n  * Si la barra llega a 0, el paciente jadea, no puede esprintar durante 2 segundos y emite un sonido de respiración agitada que puede alertar a guardias cercanos."
+    },
+    {
+      "id": "bm_health",
+      "type": "text",
+      "color": "1",
+      "x": 20,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### ❤️ Salud (100 HP), Daño & Reinicio del Bucle\n\n* **Salud Total:** 100 HP.\n* **Fuentes de Daño:**\n  * Golpe de Guardia Melee (porrazo): -35 HP + empuje de retroceso (*knockback*).\n  * Disparo de Guardia Armado (pistola): -50 HP (dos impactos significan muerte segura).\n* **Estado de Muerte (HP <= 0):**\n  * La pantalla se quiebra en esquirlas rojas (efecto shatter).\n  * Breve desvanecimiento a negro con sonido de fallo cardíaco / jadeo.\n  * **Reinicio Inmediato:** El paciente despierta nuevamente en la cama de la celda, conservando el conocimiento y fragmentos ya asimilados."
+    },
+    {
+      "id": "bm_verbs",
+      "type": "text",
+      "color": "5",
+      "x": 520,
+      "y": -320,
+      "width": 440,
+      "height": 450,
+      "text": "### 🔄 Verbos del Jugador (Flujo de Causa-Efecto)\n\n* **Control Directo ➔ Consecuencia en Entorno:**\n  * `Caminar`: Seguro, silencioso en sombras.\n  * `Correr`: Rápido, permite evadir disparos, pero consume estamina y hace ruido leve.\n  * `Interactuar`: Activa minijuegos de terminales o detona recuerdos al tocar fotos/notas.\n  * `Atacar`: Elimina permanentemente al guardia si se ejecuta desde su espalda a quemarropa.\n* **Filosofía de Juego:** Alta letalidad recíproca: un error cuesta caro, pero emboscar con precisión elimina cualquier amenaza de 1 solo golpe."
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_bm1",
+      "fromNode": "bm_controls",
+      "fromSide": "right",
+      "toNode": "bm_stamina",
+      "toSide": "left",
+      "label": "consume en carrera"
+    },
+    {
+      "id": "e_bm2",
+      "fromNode": "bm_stamina",
+      "fromSide": "right",
+      "toNode": "bm_health",
+      "toSide": "left",
+      "label": "afecta supervivencia"
+    },
+    {
+      "id": "e_bm3",
+      "fromNode": "bm_health",
+      "fromSide": "right",
+      "toNode": "bm_verbs",
+      "toSide": "left",
+      "label": "define consecuencias"
+    }
+  ]
+}

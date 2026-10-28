@@ -1,0 +1,80 @@
+{
+  "nodes": [
+    {
+      "id": "sv_header",
+      "type": "text",
+      "color": "6",
+      "x": -980,
+      "y": -460,
+      "width": 1940,
+      "height": 110,
+      "text": "# 👁️ 2. Sistema de Sigilo, Conos de Visión & Letalidad\n\nReglas de visibilidad, patrones de patrulla predecibles y ejecución silenciosa inspiradas en *Mark of the Ninja* y *Hotline Miami*."
+    },
+    {
+      "id": "sv_vision",
+      "type": "text",
+      "color": "4",
+      "x": -980,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### 🔦 Cono de Visión Frontal & Ceguera por la Espalda\n\n* **Proyección Visual:** Cada guardia emite un cono de luz frontal visible para el jugador:\n  * Apertura angular: **90 grados** hacia el frente.\n  * Alcance de visión: **250 píxeles** (reducido a 175 px con el *Fragmento de Camuflaje*).\n* **Ceguera Absoluta Trasera:**\n  * Los 180° posteriores del guardia son completamente ciegos.\n  * El jugador puede caminar o correr a su espalda sin ser detectado, siempre que no cruce el cono frontal.\n* **Lectura Inequívoca:** El cono de luz cambia de color según el estado:\n  * 🟡 Amarillo traslúcido: Patrulla normal / Calma.\n  * 🔴 Rojo intenso: Alerta / Persecución activa."
+    },
+    {
+      "id": "sv_kill",
+      "type": "text",
+      "color": "1",
+      "x": -480,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### 🗡️ Asesinato Instantáneo por la Retaguardia\n\n* **Condición de Activación:**\n  1. Estar a una distancia <= 40 px de la espalda del guardia.\n  2. El guardia no debe estar en estado de alerta hacia el jugador.\n  3. El paciente debe tener desbloqueado el **Fragmento de Ataque** (`_can_attack == true`).\n* **Input:** Presionar `E` o `Click Izquierdo`.\n* **Resultado:**\n  * Ejecución letal instantánea (One-Hit Kill).\n  * Animación de derribo sordo y sonido de golpe contundente.\n  * El guardia pasa a estado inerte y desaparece o queda en el suelo sin activar alarmas."
+    },
+    {
+      "id": "sv_ai",
+      "type": "text",
+      "color": "3",
+      "x": 20,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### 🚨 Máquina de Estados de IA de Guardias\n\n* **1. PATROL (Patrulla):** El guardia sigue una ruta de waypoints predeterminada a paso regular. Gira 90° o 180° en los extremos con una breve pausa de 1.5s.\n* **2. ALERT (Sospecha / Detección):** Si el paciente roza el borde del cono de visión, el guardia se detiene 0.5s con signo de interrogación `?`.\n* **3. CHASE (Persecución):** Detección plena. El cono se vuelve rojo, suena alarma y el guardia persigue al paciente a velocidad acelerada (1.3x).\n* **4. ATTACK (Ataque):**\n  * `melee_guard`: Golpea al alcanzar distancia cuerpo a cuerpo.\n  * `pistol_guard`: Se planta, apunta durante 0.5s con un láser rojo y efectúa un disparo mortal."
+    },
+    {
+      "id": "sv_balance",
+      "type": "text",
+      "color": "5",
+      "x": 520,
+      "y": -320,
+      "width": 440,
+      "height": 450,
+      "text": "### ⚖️ Mitigación de Frustración (Exploration Overview)\n\n* **Decisión de Diseño 1:** ¿Guardias omniscientes que siempre persiguen? ➔ **NO**. Sería injusto y frustrante.\n* **Decisión de Diseño 2:** Conos visuales claros y patrones predecibles ➔ **SÍ**. Permite planificar emboscadas tácticas y recompensar la observación.\n* **Decisión de Diseño 3:** Posibilidad de escape mediante Sprint. Si el paciente dobla una esquina y sale del rango de visión durante 3 segundos, los guardias regresan a su ruta original."
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_sv1",
+      "fromNode": "sv_vision",
+      "fromSide": "right",
+      "toNode": "sv_kill",
+      "toSide": "left",
+      "label": "aprovecha ceguera"
+    },
+    {
+      "id": "e_sv2",
+      "fromNode": "sv_kill",
+      "fromSide": "right",
+      "toNode": "sv_ai",
+      "toSide": "left",
+      "label": "interrumpe ciclo de IA"
+    },
+    {
+      "id": "e_sv3",
+      "fromNode": "sv_ai",
+      "fromSide": "right",
+      "toNode": "sv_balance",
+      "toSide": "left",
+      "label": "balancea dificultad"
+    }
+  ]
+}

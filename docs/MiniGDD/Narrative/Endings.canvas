@@ -1,0 +1,80 @@
+{
+  "nodes": [
+    {
+      "id": "end_header",
+      "type": "text",
+      "color": "6",
+      "x": -980,
+      "y": -460,
+      "width": 1940,
+      "height": 110,
+      "text": "# 🏆 3. Clímax, Desenlace & Recorte de Periódico\n\nResolución de la campaña de la Jam: el escape del asilo, la cinemática del titular periodístico y el epílogo abierto."
+    },
+    {
+      "id": "end_climax",
+      "type": "text",
+      "color": "4",
+      "x": -980,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### 🚪 Fase 1: El Cruce de la Puerta Exterior\n\n* **Locación:** Sala terminal del Security Hub.\n* **Acción:** Tras neutralizar o burlar a los guardias finales y hackear el cerrojo maestro con camuflaje activo, el paciente empuja las pesadas compuertas de salida.\n* **Transición:** El chirrido del metal oxidado cede ante el sonido de la lluvia exterior o viento de noche. La pantalla realiza un fundido a negro súbito."
+    },
+    {
+      "id": "end_paper",
+      "type": "text",
+      "color": "1",
+      "x": -480,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### 📰 Fase 2: Cinemática del Recorte de Periódico Giratorio\n\n* **Visual:** Sobre la oscuridad absoluta, una textura de periódico desgastado en tonos sepia/grises rota hacia la cámara con efecto de acercamiento clásico dramático.\n* **El Titular:** Letras en negrita revelan el suceso trágico: el accidente o incidente que destruyó la vida de la mujer de la foto.\n* **El Giro:** El protagonista no era un enfermo mental cualquiera, sino la figura involucrada directamente en aquel desastre."
+    },
+    {
+      "id": "end_revelation",
+      "type": "text",
+      "color": "2",
+      "x": 20,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### 💔 Fase 3: Ruptura de la Ilusión\n\n* **Epifanía:** El asilo, los guardias y los bucles no eran un cautiverio físico, sino una prisión mental autoimpuesta para evadir el duelo y la responsabilidad del evento traumático.\n* **El Silencio:** La música estridente cesa. Solo queda el sonido tenue de gotas de lluvia y el suspiro del paciente al asimilar la verdad."
+    },
+    {
+      "id": "end_credits",
+      "type": "text",
+      "color": "5",
+      "x": 520,
+      "y": -320,
+      "width": 440,
+      "height": 450,
+      "text": "### 🎬 Fase 4: To Be Continued... & Créditos\n\n* **Pantalla Final (`EndingScreen.tscn`):**\n  * Texto con tipografía desgastada: *\"To Be Continued...\"*\n  * Créditos del equipo: **Grupo Lamda Games**.\n  * Mención al evento: **Game Jam SANDA 2026**.\n  * Botón para volver al Menú Principal o reiniciar bucle."
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_en1",
+      "fromNode": "end_climax",
+      "fromSide": "right",
+      "toNode": "end_paper",
+      "toSide": "left",
+      "label": "detona cinemática"
+    },
+    {
+      "id": "e_en2",
+      "fromNode": "end_paper",
+      "fromSide": "right",
+      "toNode": "end_revelation",
+      "toSide": "left",
+      "label": "revela verdad"
+    },
+    {
+      "id": "e_en3",
+      "fromNode": "end_revelation",
+      "fromSide": "right",
+      "toNode": "end_credits",
+      "toSide": "left",
+      "label": "cierra experiencia"
+    }
+  ]
+}

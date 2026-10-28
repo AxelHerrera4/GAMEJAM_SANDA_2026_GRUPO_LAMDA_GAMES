@@ -1,0 +1,44 @@
+{
+  "nodes": [
+    {
+      "id": "wm_header",
+      "type": "text",
+      "color": "6",
+      "x": -700,
+      "y": -400,
+      "width": 800,
+      "height": 140,
+      "text": "# 🎮 Wireframe: Menú Principal (`MainMenu.tscn`)\n\nPantalla de inicio del juego. Establece el tono de misterio y psicosis desde el primer segundo."
+    },
+    {
+      "id": "wm_layout",
+      "type": "text",
+      "color": "5",
+      "x": -700,
+      "y": -220,
+      "width": 460,
+      "height": 420,
+      "text": "### 📺 Distribución de Pantalla (1920x1080 / 16:9)\n\n* **Fondo:** Silueta oscura del paciente sentado en la cama de la celda con parpadeo leve de luz cenital.\n* **Título Principal:** Logo *\"I Am...?\"* en tipografía desgastada y fragmentada, con efecto shader de glitch sutil.\n* **Botones de Menú (Alineación Izquierda):**\n  * `[ INICIAR BUCLE ]` ➔ Comienza en `Jail.tscn`.\n  * `[ CONFIGURACIÓN ]` ➔ Volumen Maestro, Música y SFX.\n  * `[ CRÉDITOS ]` ➔ Mención al Grupo Lamda Games y SANDA 2026.\n  * `[ SALIR ]` ➔ Cierra el juego."
+    },
+    {
+      "id": "wm_audio",
+      "type": "text",
+      "color": "2",
+      "x": -200,
+      "y": -220,
+      "width": 440,
+      "height": 420,
+      "text": "### 🎵 Audio & Interacción\n\n* **BGM:** Zumbido sordo de baja frecuencia (*drone*) acompañado de gotas de agua lejanas y un pitido estático tenue.\n* **Hover de Botones:** Sonido sutil de interferencia eléctrica y distorsión leve de la tipografía.\n* **Click de Inicio:** Corte seco de sonido y golpe fuerte de puerta cerrándose antes del fundido a negro."
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_wm1",
+      "fromNode": "wm_layout",
+      "fromSide": "right",
+      "toNode": "wm_audio",
+      "toSide": "left",
+      "label": "ambientación"
+    }
+  ]
+}

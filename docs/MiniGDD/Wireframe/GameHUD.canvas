@@ -1,0 +1,44 @@
+{
+  "nodes": [
+    {
+      "id": "wh_header",
+      "type": "text",
+      "color": "6",
+      "x": -700,
+      "y": -400,
+      "width": 800,
+      "height": 140,
+      "text": "# 🕹️ Wireframe: HUD en Partida (`GameHud.tscn`)\n\nInterfaz minimalista no invasiva para preservar la inmersión y la tensión de sigilo cenital."
+    },
+    {
+      "id": "wh_layout",
+      "type": "text",
+      "color": "5",
+      "x": -700,
+      "y": -220,
+      "width": 460,
+      "height": 420,
+      "text": "### 📐 Componentes del HUD en Pantalla\n\n* **Esquina Superior Izquierda (Estado Vital):**\n  * **Barra de Salud (HP):** Segmentada en 100 puntos. Se ilumina en rojo al recibir daño.\n  * **Barra de Estamina:** Se muestra bajo la salud sólo cuando se corre o se regenera (HUD dinámico para evitar ruido visual).\n* **Esquina Superior Derecha (Fragmentos Activos):**\n  * Iconos en miniatura de habilidades desbloqueadas (`Hack`, `Attack`, `Camouflage`).\n* **Centro / Contextual (Prompt de Acción):**\n  * Ícono flotante emergente `[F] Interactuar` al aproximarse a terminales, puertas o pistas."
+    },
+    {
+      "id": "wh_feedback",
+      "type": "text",
+      "color": "1",
+      "x": -200,
+      "y": -220,
+      "width": 440,
+      "height": 420,
+      "text": "### 🚨 Feedback de Peligro & Detección\n\n* **Viñeta de Pantalla:**\n  * Al estar en el cono de un guardia, los bordes de la pantalla se tiñen de un rojo pulsante.\n* **Indicador de Alerta:** Flecha indicadora si un enemigo fuera de cámara escucha pasos al correr.\n* **Poca Vida (< 25 HP):** Efecto de latido cardíaco sonoro y desaturación del color del juego."
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_wh1",
+      "fromNode": "wh_layout",
+      "fromSide": "right",
+      "toNode": "wh_feedback",
+      "toSide": "left",
+      "label": "reactividad de UI"
+    }
+  ]
+}

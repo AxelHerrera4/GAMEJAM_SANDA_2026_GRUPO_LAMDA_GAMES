@@ -1,0 +1,249 @@
+{
+  "main": {
+    "id": "80175c279272ca25",
+    "type": "split",
+    "children": [
+      {
+        "id": "9f33a6c697d712d2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ac26e9601b606b02",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Narrative/Personajes_Overview.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Personajes_Overview"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "69d4d30d884c5831",
+    "type": "split",
+    "children": [
+      {
+        "id": "18da20c7bdfa3e43",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b6cd38d3fb4c1e1b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "357bae8f82823f24",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "6fe360b4c8ef6ed2",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d75f182b13d039a4",
+    "type": "split",
+    "children": [
+      {
+        "id": "dfad4cbd07edc973",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b42f4283f8828810",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "MiniGDD/CoreGameplayDesign/Secundary Mechanics.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "cdf407a2467006ee",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "MiniGDD/CoreGameplayDesign/Secundary Mechanics.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "e596ee5e82c619c5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "e29c57cd11473696",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "3d0018b8a7ebc591",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "MiniGDD/CoreGameplayDesign/Secundary Mechanics.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "ac26e9601b606b02",
+  "lastOpenFiles": [
+    "Narrative/Capitulos/Bucle_03_Camuflaje_y_Escape.canvas",
+    "Narrative/Capitulos/Bucle_02_Seguridad_y_el_Ataque.canvas",
+    "Narrative/Capitulos/Bucle_01_El_Despertar_y_el_Hacking.canvas",
+    "Narrative/Characters/Paciente_6174.md",
+    "Narrative/GemeralStructure",
+    "Narrative/Characters/La_Mujer_de_la_Foto.md",
+    "Narrative/Characters/Guardias_de_Seguridad.md",
+    "Narrative/Capitulos/--HowItWorks--.canvas",
+    "MiniGDD/MiniGDD.canvas",
+    "MiniGDD/Wireframe/EndingScreen.canvas",
+    "MiniGDD/ArtAndMusic.canvas",
+    "MiniGDD/Minigames/PrecisionBar.canvas",
+    "MiniGDD/Minigames/HackCables.canvas",
+    "MiniGDD/CoreGameplayDesign/Secundary Mechanics.md",
+    "MiniGDD/Wireframe/HackInterface.canvas",
+    "MiniGDD/_archive_md/References Games/Art/Img/2.png",
+    "MiniGDD/_archive_md/References Games/Art/Img/7.png",
+    "MiniGDD/_archive_md/References Games/Art/Img/6.png",
+    "MiniGDD/_archive_md/References Games/Art/Img/5.png",
+    "MiniGDD/_archive_md/References Games/Art/Img/4.png",
+    "MiniGDD/_archive_md/References Games/Art/Img/1.png",
+    "MiniGDD/_archive_md/References Games/Art/Img",
+    "MiniGDD/_archive_md/References Games/Art/Art References.md",
+    "MiniGDD/_archive_md/References Games/Music References.md",
+    "MiniGDD/_archive_md/References Games/Mechanics References.md",
+    "MiniGDD/_archive_md/References Games/Art",
+    "MiniGDD/_archive_md/References Games",
+    "MiniGDD/_archive_md/Exploration/Overview.md",
+    "MiniGDD/_archive_md/Exploration",
+    "MiniGDD/_archive_md/CoreGameplayDesign/CoreGameLoop.md",
+    "MiniGDD/_archive_md/CoreGameplayDesign/Base Mechanics and Controls.md",
+    "MiniGDD/_archive_md/CoreGameplayDesign/Concept.md",
+    "MiniGDD/_archive_md/CoreGameplayDesign/Secundary Mechanics.md",
+    "MiniGDD/_archive_md/CoreGameplayDesign/Game modes.md",
+    "MiniGDD/_archive_md/CoreGameplayDesign/--HowItWorks--.md",
+    "MiniGDD/_archive_md/CoreGameplayDesign/Actions (player verbs).md",
+    "MiniGDD/_archive_md/CoreGameplayDesign",
+    "MiniGDD/Systems",
+    "MiniGDD/Narrative",
+    "MiniGDD/Minigames",
+    "MiniGDD/img/7.png",
+    "MiniGDD/img/6.png",
+    "MiniGDD/img/5.png",
+    "MiniGDD/img/4.png",
+    "MiniGDD/img",
+    "MiniGDD/CoreGameplayDesign/Game modes.md",
+    "MiniGDD/CoreGameplayDesign/CoreGameLoop.md",
+    "MiniGDD/CoreGameplayDesign/Concept.md",
+    "MiniGDD/CoreGameplayDesign/Base Mechanics and Controls.md",
+    "MiniGDD/CoreGameplayDesign/Actions (player verbs).md",
+    "MiniGDD/CoreGameplayDesign/--HowItWorks--.md",
+    "MiniGDD/Exploration/Overview.md",
+    "MiniGDD/References Games/Art/Art References.md",
+    "MiniGDD/References Games/Mechanics References.md",
+    "MiniGDD/References Games/Music References.md"
+  ]
+}

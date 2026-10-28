@@ -1,0 +1,62 @@
+{
+  "nodes": [
+    {
+      "id": "i_header",
+      "type": "text",
+      "color": "6",
+      "x": -720,
+      "y": -450,
+      "width": 1420,
+      "height": 110,
+      "text": "# 🎬 1. Premisa Narrativa, Celda y la Fotografía\n\nPrólogo del juego, génesis del misterio psicológico y detonante emocional del escape del Paciente 6174."
+    },
+    {
+      "id": "i_scene1",
+      "type": "text",
+      "color": "4",
+      "x": -720,
+      "y": -310,
+      "width": 440,
+      "height": 450,
+      "text": "### 🛏️ Escena 1: El Despertar Amnésico (`Jail.tscn`)\n\n* **Ambiente:** Habitación fría, penumbra cenital tenue, cama de metal rústica y paredes acolchadas sucias.\n* **El Paciente:** Despierta con dolor de cabeza punzante y amnesia absoluta.\n* **Primeros Pensamientos:**\n  * No recuerda su nombre, su rango ni cuánto tiempo lleva encerrado.\n  * En el suelo encuentra una bata blanca con el número **6174** estampado en tinta descolorida.\n* **Obstáculo Inmediato:** La puerta de metal está cerrada electrónicamente por una terminal con cables expuestos."
+    },
+    {
+      "id": "i_photo",
+      "type": "text",
+      "color": "2",
+      "x": -250,
+      "y": -310,
+      "width": 460,
+      "height": 450,
+      "text": "### 📷 Escena 2: La Fotografía Desgastada\n\n* **El Hallazgo:** Sobre la mesilla o el suelo reposa una fotografía arrugada de bordes quemados.\n* **Contenido:** La imagen muestra a una mujer joven con expresión serena y una leve sonrisa.\n* **Interacción (`F`):** Al inspeccionarla, el paciente siente una descarga de nostalgia y desesperación.\n* **Monólogo Interno:**\n  > *\"¿Quién es ella? ¿Por qué verla me oprime el pecho de esta manera?... Tengo que salir de aquí. Ella me está esperando... o yo le debo algo.\"*"
+    },
+    {
+      "id": "i_mystery",
+      "type": "text",
+      "color": "5",
+      "x": 240,
+      "y": -310,
+      "width": 460,
+      "height": 450,
+      "text": "### ❓ Escena 3: El Dilema Psicológico Central\n\n* **La Tesis:** El asilo no es simplemente un centro médico; es un complejo de máxima seguridad diseñado para silenciar o experimentar con sujetos inestables.\n* **El Contraste:** ¿El paciente es una víctima inocente perseguida por una conspiración, o su mente fragmentó el recuerdo para bloquear una culpa atroz?\n* **El Motor:** La fotografía se convierte en el ancla que impide la rendición y justifica el avance a través de pasillos fuertemente custodiados."
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_in1",
+      "fromNode": "i_scene1",
+      "fromSide": "right",
+      "toNode": "i_photo",
+      "toSide": "left",
+      "label": "inspecciona entorno"
+    },
+    {
+      "id": "e_in2",
+      "fromNode": "i_photo",
+      "fromSide": "right",
+      "toNode": "i_mystery",
+      "toSide": "left",
+      "label": "detona la búsqueda"
+    }
+  ]
+}

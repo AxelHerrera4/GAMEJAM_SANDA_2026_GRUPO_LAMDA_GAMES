@@ -1,0 +1,80 @@
+{
+  "nodes": [
+    {
+      "id": "loop_header",
+      "type": "text",
+      "color": "6",
+      "x": -980,
+      "y": -460,
+      "width": 1940,
+      "height": 110,
+      "text": "# 🔄 4. Progresión por Bucles Psicológicos (`1th_time` a `3th_time`)\n\nEstructura de campaña en bucle temporal, donde cada despertar en la celda conserva habilidades y modifica las líneas de diálogo en Dialogic."
+    },
+    {
+      "id": "loop_b1",
+      "type": "text",
+      "color": "4",
+      "x": -980,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### 🚪 Bucle 1: El Despertar y el Hacking (`1th_time`)\n\n* **Fase:** Amnesia total y confusión.\n* **Despertar:** El paciente se levanta en la celda sin saber su nombre ni por qué está encerrado. Descubre la fotografía desgastada.\n* **Objetivo:** Forzar la cerradura electrónica de la celda resolviendo el minijuego de cables.\n* **Ruta:** Infiltración sigilosa por el pasillo esquivando al guardia melee.\n* **Clímax del Bucle:** Accede a la oficina administrativa, interactúa con la terminal, sufre el efecto shatter y desbloquea el recuerdo de combate (Fragmento `attack`)."
+    },
+    {
+      "id": "loop_b2",
+      "type": "text",
+      "color": "3",
+      "x": -480,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### ⚔️ Bucle 2: Seguridad y el Ataque (`2th_time`)\n\n* **Fase:** Conciencia del ciclo y defensa armada.\n* **Despertar:** Diálogo `awakening_2.dtl`. El paciente ya sabe que la celda es una prisión recurrente.\n* **Mecánica Nueva:** Puede eliminar guardias melee por la espalda usando `E` / `Click`.\n* **Amenaza Nueva:** Aparece el guardia armado con pistola (`pistol_guard.tscn`), forzando al jugador a sincronizar sombras y coberturas.\n* **Clímax del Bucle:** Acceso al panel secundario de energía; desbloqueo del Fragmento `camouflage`."
+    },
+    {
+      "id": "loop_b3",
+      "type": "text",
+      "color": "1",
+      "x": 20,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### 🌫️ Bucle 3: Camuflaje y Escape (`3th_time`)\n\n* **Fase:** Furia lúcida y confrontación final.\n* **Despertar:** Diálogo `awakening_3.dtl`. Determinación absoluta de romper el asilo.\n* **Habilidad Activa:** El cono de detección de los guardias se reduce un 30% gracias al camuflaje óptico.\n* **Desafío:** Llegar al **Security Hub** custodiado por múltiples guardias y sortear la terminal de precisión.\n* **Clímax:** Cruce de la puerta de escape exterior que detona la cinemática del periódico y la revelación de la mujer."
+    },
+    {
+      "id": "loop_dialogic",
+      "type": "text",
+      "color": "5",
+      "x": 520,
+      "y": -320,
+      "width": 440,
+      "height": 450,
+      "text": "### 💬 Integración Técnica con Dialogic 2\n\n* **Timelines Vinculados:**\n  * `awakening.dtl` ➔ Primer despertar: miedo y desorientación.\n  * `awakening_2.dtl` ➔ Segundo despertar: reconocimiento de las marcas en la pared.\n  * `awakening_3.dtl` ➔ Tercer despertar: furia decidida y foco en la salida.\n* **Gestión de Variables:**\n  * `Dialogic.VAR.loop_count` incrementa tras cada ciclo.\n  * La lógica de las puertas verifica si los minijuegos ya fueron resueltos previamente para permitir paso fluido."
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_lp1",
+      "fromNode": "loop_b1",
+      "fromSide": "right",
+      "toNode": "loop_b2",
+      "toSide": "left",
+      "label": "avanza tras revelar ataque"
+    },
+    {
+      "id": "e_lp2",
+      "fromNode": "loop_b2",
+      "fromSide": "right",
+      "toNode": "loop_b3",
+      "toSide": "left",
+      "label": "avanza tras revelar camuflaje"
+    },
+    {
+      "id": "e_lp3",
+      "fromNode": "loop_b3",
+      "fromSide": "right",
+      "toNode": "loop_dialogic",
+      "toSide": "left",
+      "label": "controla timelines"
+    }
+  ]
+}

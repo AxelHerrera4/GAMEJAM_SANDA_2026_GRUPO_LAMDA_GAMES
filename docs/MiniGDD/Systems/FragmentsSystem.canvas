@@ -1,0 +1,80 @@
+{
+  "nodes": [
+    {
+      "id": "frag_header",
+      "type": "text",
+      "color": "6",
+      "x": -980,
+      "y": -460,
+      "width": 1940,
+      "height": 110,
+      "text": "# 🧩 3. Sistema de Fragmentos de Memoria & Shatter Effect\n\nMotor de habilidades progresivas implementado en el autoload `FragmentManager.gd`. Conecta la narrativa de traumas pasados con el desbloqueo de capacidades mecánicas."
+    },
+    {
+      "id": "frag_manager",
+      "type": "text",
+      "color": "4",
+      "x": -980,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### 🧠 `FragmentManager.gd` (Autoload / Singleton)\n\n* **Rol del Módulo:** Administra el estado global de la memoria del Paciente 6174 a través de los bucles temporales.\n* **Estructura de Datos:**\n  ```gdscript\n  var unlocked_fragments: Dictionary = {\n      \"hack\": false,\n      \"attack\": false,\n      \"camouflage\": false\n  }\n  ```\n* **Persistencia entre Muertes:**\n  * Al morir y reiniciar el bucle en la celda, los fragmentos obtenidos **NO se pierden**.\n  * Permite al jugador abrir atajos y avanzar mucho más rápido en cada nueva iteración."
+    },
+    {
+      "id": "frag_types",
+      "type": "text",
+      "color": "3",
+      "x": -480,
+      "y": -320,
+      "width": 480,
+      "height": 450,
+      "text": "### 📑 Catálogo de Fragmentos de Memoria\n\n1. **`hack` — Fragmento de Hackeo:**\n   * *Narrativa:* \"Un retazo de código capaz de forzar cerraduras electrónicas.\"\n   * *Impacto:* Desbloquea la interacción con paneles de puertas y consolas mediante el minijuego de cables.\n\n2. **`attack` — Fragmento de Ataque:**\n   * *Narrativa:* \"Código de combate desbloqueado. Ahora puedes defenderte.\"\n   * *Impacto:* Habilita el flag `_can_attack = true`, permitiendo asesinar guardias por la espalda.\n\n3. **`camouflage` — Fragmento de Camuflaje:**\n   * *Narrativa:* \"Un patrón capaz de doblar la luz a tu alrededor.\"\n   * *Impacto:* Habilita el despertar del 3er bucle y reduce en un 30% el cono de detección enemigo."
+    },
+    {
+      "id": "frag_shatter",
+      "type": "text",
+      "color": "1",
+      "x": 40,
+      "y": -320,
+      "width": 440,
+      "height": 450,
+      "text": "### 💥 Efecto de Ruptura Mental (*Shatter Effect*)\n\n* **Detonación:** Ocurre al interactuar con computadoras clave (ej. oficina de archivos) o al tocar la fotografía en momentos de clímax.\n* **Comportamiento Técnico:**\n  * **Shader de Fractura de Pantalla:** Divide la imagen del juego en polígonos triangulares que vibran y se desalinean.\n  * **Freeze Frame:** Pausa momentánea de 0.3s que congela la acción.\n  * **Flash Visual & Aberración Cromática:** Destello blanco con desfase de canales RGB.\n  * **Audio:** Sonido de vidrio grueso estallando con eco largo y reverberación sorda."
+    },
+    {
+      "id": "frag_integration",
+      "type": "text",
+      "color": "5",
+      "x": 520,
+      "y": -320,
+      "width": 440,
+      "height": 450,
+      "text": "### 🔗 Integración Narrativa & Psicológica\n\n* **Metroidvania Mental:** Los fragmentos no son simples llaves físicas; son recuerdos traumáticos reprimidos que el paciente desbloquea a medida que confronta su propia verdad.\n* **Revelación de Identidad:** La recuperación del Fragmento de Ataque revela su pasado de entrenamiento táctico (¿ex-militar o agente de seguridad?), sembrando la duda de si está recluido como enfermo o como prisionero de guerra."
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_fg1",
+      "fromNode": "frag_manager",
+      "fromSide": "right",
+      "toNode": "frag_types",
+      "toSide": "left",
+      "label": "almacena y activa"
+    },
+    {
+      "id": "e_fg2",
+      "fromNode": "frag_types",
+      "fromSide": "right",
+      "toNode": "frag_shatter",
+      "toSide": "left",
+      "label": "detona al asimilar"
+    },
+    {
+      "id": "e_fg3",
+      "fromNode": "frag_shatter",
+      "fromSide": "right",
+      "toNode": "frag_integration",
+      "toSide": "left",
+      "label": "conecta con la trama"
+    }
+  ]
+}

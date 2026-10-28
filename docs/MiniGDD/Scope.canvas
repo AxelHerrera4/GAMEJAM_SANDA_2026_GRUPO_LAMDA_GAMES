@@ -1,0 +1,90 @@
+{
+  "nodes": [
+    {
+      "id": "sc_header",
+      "type": "text",
+      "color": "6",
+      "x": -720,
+      "y": -450,
+      "width": 1340,
+      "height": 120,
+      "text": "# 📊 Alcance (Scope) & Roadmap de Producción — I Am...?\n\n* **Equipo:** **Grupo Lamda Games** | **Evento:** Game Jam SANDA 2026\n* **Motor:** Godot Engine 4.x | **Tema de la Jam:** *\"Fragmentos\"*"
+    },
+    {
+      "id": "sc_min",
+      "type": "text",
+      "color": "4",
+      "x": -720,
+      "y": -300,
+      "width": 420,
+      "height": 440,
+      "text": "### 🟢 Escenario Mínimo (Prototipo Jam Core)\n\n* **Objetivo:** Entregar un vertical slice jugable y tenso que demuestre el núcleo de sigilo y puzle.\n* **Contenido Núcleo:**\n  * **Bucle 1 Completo:** Despertar en Celda (`Jail.tscn`) ➔ Pasillo con patrulla ➔ Oficina de revelación.\n  * **1 Minijuego de Hackeo (`HackMinigame.gd`):** Conexión de bornes de cables por color para forzar cerraduras.\n  * **1 Tipo de Enemigo:** Guardia de seguridad cuerpo a cuerpo (`melee_guard.tscn`) con cono de visión y espalda ciega.\n  * **Sistema de Sigilo:** Movimiento seguro en sombras, asesinato por la espalda de un golpe y detección visual.\n  * **Atributos:** Salud (100 HP) y Barra de Resistencia / Estamina (100 pts) con consumo al correr.\n  * **Reinicio de Bucle:** Muerte devuelve al paciente a la cama de la celda."
+    },
+    {
+      "id": "sc_ideal",
+      "type": "text",
+      "color": "3",
+      "x": -260,
+      "y": -300,
+      "width": 420,
+      "height": 440,
+      "text": "### 🟡 Escenario Ideal (Versión Jam Entregable)\n\n* **Objetivo:** Experiencia narrativa completa de suspenso con variedad mecánica y clímax dramático.\n* **Contenido Expandido:**\n  * **3 Bucles Progresivos:** `1th_time` (Hacking), `2th_time` (Ataque militar), `3th_time` (Camuflaje y Escape).\n  * **2 Tipos de Guardias:** Guardia Melee (porra) y Guardia Armado con Pistola (`pistol_guard.tscn`, disparo letal a distancia).\n  * **2 Minijuegos:** Hackeo de cables + Minijuego de Precisión y Reflejos (`PrecisionBoard.gd`) con zona verde.\n  * **3 Fragmentos de Memoria (`FragmentManager.gd`):** `hack`, `attack` y `camouflage`.\n  * **Efecto Shatter:** Shaders de pantalla fragmentada y distorsión sonora al asimilar traumas.\n  * **Cinemática de Desenlace:** Recorte de periódico giratorio y revelación del misterio de la fotografía."
+    },
+    {
+      "id": "sc_max",
+      "type": "text",
+      "color": "1",
+      "x": 200,
+      "y": -300,
+      "width": 420,
+      "height": 440,
+      "text": "### 🔴 Escenario Máximo (Roadmap Post-Jam / Comercial)\n\n* **Objetivo:** Versión comercial ampliada en Steam / itch.io con profundidad sistémica.\n* **Visión a Largo Plazo:**\n  * **Diseño de Niveles No Lineal:** Múltiples rutas de escape (conductos de ventilación, salas de caldera, patios).\n  * **IA de Guardias Reactiva:** Guardias alertan a compañeros por radio, siguen rastros de sangre y revisan escondites.\n  * **Árbol de Finales Múltiples:** ¿Es el paciente un héroe traumatizado, un convicto peligroso o todo ocurre en un coma irreversible?\n  * **Mecánica de Cordura / Psicosis Dinámica:** Alucinaciones auditivas, sombras que se mueven solas y distorsión de HUD al permanecer mucho tiempo en la oscuridad."
+    },
+    {
+      "id": "sc_roadmap",
+      "type": "text",
+      "color": "6",
+      "x": -720,
+      "y": 170,
+      "width": 880,
+      "height": 260,
+      "text": "### 🗺️ Fases de Desarrollo (Jam SANDA 2026)\n\n* **Fase 1 (Día 1 - Core Loop Base):** Movimiento en 8 direcciones, sprint con consumo de estamina, cono de visión de guardia y reinicio en celda al morir.\n* **Fase 2 (Día 2 - Puzles & Combate):** Interfaz de hackeo de cables (`HackMinigame.tscn`), fragmento de ataque por la espalda y detección de interacción contextual (`F`).\n* **Fase 3 (Día 3 - Bucles & Narrativa):** Diálogos progresivos en Dialogic (`awakening_1/2/3`), integración de `pistol_guard`, 2do minijuego de precisión y cinemática del periódico.\n* **Fase 4 (Día 4 - Pulido Audiovisual):** SFX de chispas, alarmas, pasos, shaders de ruptura (shatter) y balance de dificultad en pasillos."
+    },
+    {
+      "id": "sc_team",
+      "type": "text",
+      "color": "5",
+      "x": 200,
+      "y": 170,
+      "width": 420,
+      "height": 260,
+      "text": "### 🛡️ Ficha Técnica del Proyecto\n\n* **Nombre del Juego:** *I Am...?*\n* **Equipo Creador:** Grupo Lamda Games\n* **Género:** Sigilo cenital 2D / Aventura de Puzles Psicológica\n* **Perspectiva:** Cenital Top-Down 2D\n* **Duración Promedio:** 12 a 18 minutos por partida completa\n* **Target:** Jugadores de PC amantes del misterio, la tensión y el sigilo táctico."
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_s1",
+      "fromNode": "sc_min",
+      "fromSide": "right",
+      "toNode": "sc_ideal",
+      "toSide": "left",
+      "label": "expande a"
+    },
+    {
+      "id": "e_s2",
+      "fromNode": "sc_ideal",
+      "fromSide": "right",
+      "toNode": "sc_max",
+      "toSide": "left",
+      "label": "escala a visión comercial"
+    },
+    {
+      "id": "e_s3",
+      "fromNode": "sc_min",
+      "fromSide": "bottom",
+      "toNode": "sc_roadmap",
+      "toSide": "top",
+      "label": "plan de trabajo"
+    }
+  ]
+}

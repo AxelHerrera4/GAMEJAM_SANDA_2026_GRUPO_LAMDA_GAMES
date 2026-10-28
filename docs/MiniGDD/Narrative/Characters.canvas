@@ -1,0 +1,80 @@
+{
+  "nodes": [
+    {
+      "id": "ch_header",
+      "type": "text",
+      "color": "6",
+      "x": -980,
+      "y": -460,
+      "width": 1940,
+      "height": 110,
+      "text": "# 👥 2. Galería de Personajes, Roles & Arcos Psicológicos\n\nEl elenco de *I Am...?:* el sujeto experimental, las fuerzas de seguridad y el recuerdo catalizador."
+    },
+    {
+      "id": "ch_p",
+      "type": "text",
+      "color": "4",
+      "x": -980,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### 👤 Paciente 6174 (El Protagonista)\n\n* **Aspecto:** Bata blanca de recluso psiquiátrico, silueta desgarbada pero con movimientos ágiles y precisos.\n* **Estado Mental:** Trastorno disociativo severo provocado por trauma extremo; bucles de memoria recurrentes.\n* **Habilidades Latentes:** Instintos tácticos de combate militar, capacidad de infiltración sigilosa y manipulación de cableado electrónico.\n* **Evolución:** Pasa del desconcierto amnésico (Bucle 1) a una determinación fría y calculadora (Bucle 3)."
+    },
+    {
+      "id": "ch_guards",
+      "type": "text",
+      "color": "1",
+      "x": -480,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### 🛡️ Guardias de Seguridad (Fuerzas de Contención)\n\n1. **Guardia Melee (`melee_guard.tscn`):**\n   * Equipamiento: Porra eléctrica y linterna frontal.\n   * Rol: Patrulla básica en pasillos. Letal en corto alcance; completamente vulnerable a ataques por la espalda.\n\n2. **Guardia Armado (`pistol_guard.tscn`):**\n   * Equipamiento: Pistola reglamentaria y puntero láser.\n   * Rol: Custodia puntos críticos (Oficina y Security Hub). Dispara letalmente al fijar al paciente en su cono de visión."
+    },
+    {
+      "id": "ch_woman",
+      "type": "text",
+      "color": "2",
+      "x": 20,
+      "y": -320,
+      "width": 460,
+      "height": 450,
+      "text": "### 👩 La Mujer de la Fotografía\n\n* **Identidad:** No se pronuncia su nombre hasta los compases finales. Figura femenina vestida de civil.\n* **Naturaleza:** Presencia espectral y emocional. Aparece en recuerdos fugaces y en el recorte del periódico.\n* **Tragedia:** Representa el anhelo de redención del protagonista y la clave detrás del colapso psíquico que originó la internación en el asilo."
+    },
+    {
+      "id": "ch_narrator",
+      "type": "text",
+      "color": "5",
+      "x": 520,
+      "y": -320,
+      "width": 440,
+      "height": 450,
+      "text": "### 📜 La Voz Interior / Psicosis Ambiental\n\n* **Rol:** Monólogo interno y descripciones ambientales estilo *noir psicológico* que aparecen en subtítulos o timeline de Dialogic.\n* **Efecto en el Jugador:** Genera paranoia continua. La voz advierte peligros pero a veces contradice lo que el jugador ve, simulando la pérdida gradual de conexión con la realidad objetiva."
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_ch1",
+      "fromNode": "ch_p",
+      "fromSide": "right",
+      "toNode": "ch_guards",
+      "toSide": "left",
+      "label": "evade y elimina"
+    },
+    {
+      "id": "e_ch2",
+      "fromNode": "ch_p",
+      "fromSide": "right",
+      "toNode": "ch_woman",
+      "toSide": "left",
+      "label": "busca recordar"
+    },
+    {
+      "id": "e_ch3",
+      "fromNode": "ch_guards",
+      "fromSide": "right",
+      "toNode": "ch_narrator",
+      "toSide": "left",
+      "label": "contextualiza"
+    }
+  ]
+}

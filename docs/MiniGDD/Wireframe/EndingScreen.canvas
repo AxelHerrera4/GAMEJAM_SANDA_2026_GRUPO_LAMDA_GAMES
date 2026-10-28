@@ -1,0 +1,10 @@
+{
+	"nodes":[
+		{"id":"we_header","type":"text","color":"6","x":-700,"y":-400,"width":800,"height":140,"text":"# 📰 Wireframe: Pantalla de Desenlace (`EndingScreen.tscn`)\n\nEscena final tras cruzar la salida del Security Hub."},
+		{"id":"we_layout","type":"text","color":"5","x":-700,"y":-220,"width":460,"height":420,"text":"### 📐 Composición Visual del Epílogo\n\n* **Fondo:** Negro absoluto con partículas sutiles de polvo o lluvia en suspensión.\n* **Elemento Central (Periódico):** Sprite 2D de recorte periodístico envejecido con titular legible sobre el accidente.\n* **Tipografía Inferior:**\n  * *\"To be continued...\"* con fade in suave.\n  * Créditos del equipo: **Grupo Lamda Games**.\n  * Evento: **Game Jam SANDA 2026**.\n* **Botones de Navegación:**\n  * `[ REINTENTAR BUCLE ]` / `[ MENÚ PRINCIPAL ]`."},
+		{"id":"we_audio","type":"text","color":"2","x":-200,"y":-220,"width":440,"height":420,"text":"### 🎵 Dirección Sonora de Desenlace\n\n* **Música:** Melodía minimalista de piano melancólico que reemplaza el zumbido tenso del juego.\n* **Ambiente:** Sonido constante de lluvia exterior.\n* **Voz en Off / Texto Typewriter:** Última reflexión del Paciente 6174 antes de que la pantalla se desvanezca por completo."}
+	],
+	"edges":[
+		{"id":"e_we1","fromNode":"we_layout","fromSide":"right","toNode":"we_audio","toSide":"left","label":"atmósfera de cierre"}
+	]
+}

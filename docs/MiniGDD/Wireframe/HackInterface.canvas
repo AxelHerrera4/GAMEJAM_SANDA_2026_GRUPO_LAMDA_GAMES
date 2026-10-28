@@ -1,0 +1,44 @@
+{
+  "nodes": [
+    {
+      "id": "whi_header",
+      "type": "text",
+      "color": "6",
+      "x": -700,
+      "y": -400,
+      "width": 800,
+      "height": 140,
+      "text": "# 🔌 Wireframe: Panel de Hackeo (`HackBoard.tscn`)\n\nInterfaz superpuesta para resolver el minijuego de conexión de cables."
+    },
+    {
+      "id": "whi_layout",
+      "type": "text",
+      "color": "5",
+      "x": -700,
+      "y": -220,
+      "width": 460,
+      "height": 420,
+      "text": "### 📐 Estructura del Panel de Cables\n\n* **Ventana Central:** Marco metálico con textura de óxido (800x600 px).\n* **Columna Izquierda (Orígenes):** 4 terminales circulares con cables de colores (Rojo, Azul, Amarillo, Verde).\n* **Columna Derecha (Destinos):** 4 terminales receptoras con indicador LED desordenadas aleatoriamente.\n* **Botón Inferior:** `[ ESC / SALIR ]` para cancelar y reanudar el control del paciente rápidamente ante la llegada de una patrulla."
+    },
+    {
+      "id": "whi_rules",
+      "type": "text",
+      "color": "4",
+      "x": -200,
+      "y": -220,
+      "width": 440,
+      "height": 420,
+      "text": "### ⚡ Feedback Interactivo\n\n* **Arrastre:** Curva dinámica `Line2D` que une el borne con la posición del mouse.\n* **Conexión Exitosa:** El LED del borne receptor cambia a verde fijo y se escucha un `clic`.\n* **Conexión Errónea:** El cable regresa a su posición inicial con chisporroteo y sonido de error.\n* **Cierre Automático:** Al conectar los 4 bornes, el panel emite un destello verde y se cierra automáticamente en 0.5s."
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_whi1",
+      "fromNode": "whi_layout",
+      "fromSide": "right",
+      "toNode": "whi_rules",
+      "toSide": "left",
+      "label": "interacción"
+    }
+  ]
+}
